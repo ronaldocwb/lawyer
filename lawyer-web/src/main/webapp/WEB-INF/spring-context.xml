@@ -14,16 +14,17 @@
     	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
 	  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-	<context:component-scan base-package="com.exchange" />
-	<jpa:repositories base-package="com.exchange.repository" />
-	<mvc:resources mapping="/js/**" location="/exchange/js/" />
-	<mvc:resources mapping="/assets/**" location="/exchange/assets/" />
-	<mvc:resources mapping="/lib/**" location="/exchange/lib/" />
-	<mvc:resources mapping="/partials/**" location="/exchange/partials/" />
-	
-	<mvc:annotation-driven />
-	<mvc:default-servlet-handler />
-	<beans:bean id="emf"
+    <mvc:resources mapping="/assets/**" location="/lawyer/build/assets/" />
+    <mvc:resources mapping="/app/**" location="/lawyer/build/app/" />
+    <mvc:resources mapping="/vendor/**" location="/lawyer/build/vendor/" />
+    <mvc:resources mapping="/*" location="/lawyer/build/" />
+
+    <context:component-scan base-package="br.com.lawyer.web" />
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+    <jpa:repositories base-package="br.com.lawyer.web.repository" />
+
+    <beans:bean id="emf"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<beans:property name="loadTimeWeaver">
 			<beans:bean
@@ -41,7 +42,7 @@
 
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/exchange/" />
+		<beans:property name="prefix" value="/lawyer/build" />
 		<beans:property name="suffix" value=".html" />
 	</beans:bean>
 
