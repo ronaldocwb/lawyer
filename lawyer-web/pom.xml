@@ -11,7 +11,7 @@
     <properties>
         <org.springframework.version>3.2.2.RELEASE</org.springframework.version>
     </properties>
-
+    <packaging>war</packaging>
 
     <artifactId>lawyer-web</artifactId>
 
@@ -152,6 +152,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <outputDirectory>deployments</outputDirectory>
+                    <warName>lawyer-web</warName>
+                </configuration>
+            </plugin>
             <plugin>
                 <!-- rodar "mvn hibernate3:hbm2ddl" para gerar o schema da base -->
                 <groupId>org.codehaus.mojo</groupId>

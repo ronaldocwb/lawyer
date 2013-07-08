@@ -14,42 +14,43 @@
     	http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
 	">
 
-    <mvc:resources mapping="/assets/**" location="/lawyer/build/assets/" />
-    <mvc:resources mapping="/app/**" location="/lawyer/build/app/" />
-    <mvc:resources mapping="/vendor/**" location="/lawyer/build/vendor/" />
-    <mvc:resources mapping="/*" location="/lawyer/build/" />
+    <mvc:resources mapping="/assets/**" location="/lawyer/assets/" />
+    <mvc:resources mapping="/src/**" location="/lawyer/src/" />
+    <mvc:resources mapping="/vendor/**" location="/lawyer/vendor/" />
 
     <context:component-scan base-package="br.com.lawyer.web" />
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />
-    <jpa:repositories base-package="br.com.lawyer.web.repository" />
 
-    <beans:bean id="emf"
+    <!--jpa:repositories base-package="br.com.lawyer.web.repository" /-->
+    <!--beans:bean id="emf"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<beans:property name="loadTimeWeaver">
 			<beans:bean
 				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
 		</beans:property>
 	</beans:bean>
-	
+
 	<beans:bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 		<beans:property name="entityManagerFactory" ref="emf" />
 	</beans:bean>
 
-	<!-- Use @Transaction annotations for managing transactions -->
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:jta-transaction-manager  /-->
 
-	<beans:bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/lawyer/build" />
-		<beans:property name="suffix" value=".html" />
-	</beans:bean>
 
-	<beans:bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<beans:property name="useDefaultSuffixPattern" value="false" />
-	</beans:bean>
+    <beans:bean id="viewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/lawyer/" />
+        <beans:property name="suffix" value=".html" />
+    </beans:bean>
+
+    <beans:bean
+            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <beans:property name="useDefaultSuffixPattern" value="false" />
+    </beans:bean>
 	
 
 </beans:beans>

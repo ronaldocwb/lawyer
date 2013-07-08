@@ -1,12 +1,16 @@
 {
-  "author": "OCC Technologies",
-  "name": "lawyer",
-  "version": "0.0.1",
-  "homepage": "http://occtechnologies.com.br",
-  "bugs": "https://github.com/cavarzan/lawyer/issues",
+  "author": "Josh David Miller",
+  "name": "ng-boilerplate",
+  "version": "0.3.0",
+  "homepage": "http://bit.ly/ng-boilerplate",
+  "licenses": {
+    "type": "MIT",
+    "url": "https://raw.github.com/joshdmiller/ng-boilerplate/master/LICENSE"
+  },
+  "bugs": "https://github.com/joshdmiller/ng-boilerplate/issues",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cavarzan/lawyer.git"
+    "url": "git@github.com:joshdmiller/ng-boilerplate.git"
   },
   "dependencies": {},
   "devDependencies": {

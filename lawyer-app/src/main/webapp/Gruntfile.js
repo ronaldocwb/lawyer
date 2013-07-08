@@ -309,7 +309,7 @@ module.exports = function ( grunt ) {
           base: 'src/app'
         },
         src: [ '<%= app_files.atpl %>' ],
-        dest: '<%= build_dir %>/templates-app.js'
+        dest: '<%= build_dir %>/templates/templates-app.js'
       },
 
       /**
@@ -320,7 +320,7 @@ module.exports = function ( grunt ) {
           base: 'src/common'
         },
         src: [ '<%= app_files.ctpl %>' ],
-        dest: '<%= build_dir %>/templates-common.js'
+        dest: '<%= build_dir %>/templates/templates-common.js'
       }
     },
 

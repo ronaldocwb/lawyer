@@ -20,6 +20,12 @@ local.properties
 *.iml
 *.idea/
 *.idea
+*.target
+*.target/
+
+*target
+*target/
+
 
 # External tool builders
 .externalToolBuilders/
