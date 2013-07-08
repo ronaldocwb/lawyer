@@ -15,12 +15,21 @@ $ cd ng-boilerplate
 $ sudo npm -g install grunt-cli karma bower
 $ npm install
 $ bower install
-$ grunt watch
+$ grunt watch --force
 ```
 
 Finally, open `build/index.html` in your browser.
 
 Happy hacking!
+
+INSTALAR NODE.EXE
+
+Também entrar na pasta do projeto web e executar:
+```sh
+$ node.exe node-server.js
+```
+
+
 
 ## Purpose
 
