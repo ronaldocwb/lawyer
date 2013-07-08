@@ -14,7 +14,7 @@ angular.module("about/about.tpl.html", []).run(["$templateCache", function($temp
     "    have everything you need to get started out of the box; of course it has\n" +
     "    slick styles and icons, but it also has a best practice directory structure\n" +
     "    to ensure maximum code reuse. And it's all tied together with a robust\n" +
-    "    build system chock-full of some time-saving goodness.\n" +
+    "    build ssystem chock-full of some time-saving goodness.\n" +
     "  </p>\n" +
     "\n" +
     "  <h2>Why?</h2>\n" +

@@ -3,14 +3,14 @@ module.exports = function ( karma ) {
     /** 
      * From where to look for files, starting with the location of this file.
      */
-    basePath: '../',
+    basePath: '../lawyer/',
 
     /**
      * This is the list of file patterns to load into the browser during testing.
      */
     files: [
-      'vendor/angular/angular.js',
-      'vendor/angular-resource/angular-resource.js',
+      'vendor/angular-unstable/angular.js',
+      'vendor/angular-resource-unstable/angular-resource.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
@@ -20,7 +20,8 @@ module.exports = function ( karma ) {
       'vendor/angular-mocks/angular-mocks.js',
       
       'src/**/*.js',
-      'src/**/*.coffee',
+      'templates/**/*.js',
+
     ],
 
     frameworks: [ 'jasmine' ],
