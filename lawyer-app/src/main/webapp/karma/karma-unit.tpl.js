@@ -3,7 +3,7 @@ module.exports = function ( karma ) {
     /** 
      * From where to look for files, starting with the location of this file.
      */
-    basePath: '../',
+    basePath: '../lawyer/',
 
     /**
      * This is the list of file patterns to load into the browser during testing.
@@ -12,7 +12,8 @@ module.exports = function ( karma ) {
       <% scripts.forEach( function ( file ) { %>'<%= file %>',
       <% }); %>
       'src/**/*.js',
-      'src/**/*.coffee',
+      'templates/**/*.js',
+
     ],
 
     frameworks: [ 'jasmine' ],
