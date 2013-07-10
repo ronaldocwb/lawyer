@@ -20,6 +20,7 @@
     <mvc:resources mapping="/vendor/**" location="/lawyer/vendor/" />
 
     <context:component-scan base-package="br.com.lawyer.web.controller" />
+    <context:component-scan base-package="br.com.lawyer.web.authentication" />
     <context:component-scan base-package="br.com.lawyer.web.service" />
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />

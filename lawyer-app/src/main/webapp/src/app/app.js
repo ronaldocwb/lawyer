@@ -1,8 +1,8 @@
-angular.module( 'ngBoilerplate', [
+angular.module( 'lawyer', [
   'templates-app',
   'templates-common',
-  'ngBoilerplate.home',
-  'ngBoilerplate.about',
+  'lawyer.home',
+  'lawyer.about',
   'ui.state',
   'ui.route'
 ])
@@ -12,10 +12,10 @@ angular.module( 'ngBoilerplate', [
 })
 
 .run( function run ( titleService ) {
-  titleService.setSuffix( ' | ngBoilerplate' );
+  titleService.setSuffix( ' | Sua advocacia de forma fácil.' );
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+.controller( 'LawyerController', function AppCtrl ( $scope, $location ) {
 })
 
 ;

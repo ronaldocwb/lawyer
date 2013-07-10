@@ -3,7 +3,7 @@ package br.com.lawyer.web.util;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Implementação da StringUtils com metodos proprios
+ * Implementação da StringUtils com metodos adicionais proprios.
  */
 public class LawyerStringUtils extends StringUtils {
 

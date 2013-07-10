@@ -1,4 +1,4 @@
-angular.module( 'ngBoilerplate.about', [
+angular.module( 'lawyer.about', [
   'ui.state',
   'placeholders',
   'ui.bootstrap',
