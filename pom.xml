@@ -11,6 +11,7 @@
         <module>lawyer-app</module>
         <module>lawyer-core</module>
         <module>lawyer-web</module>
+        <module>lawyer-admin</module>
     </modules>
     <packaging>pom</packaging>
     
