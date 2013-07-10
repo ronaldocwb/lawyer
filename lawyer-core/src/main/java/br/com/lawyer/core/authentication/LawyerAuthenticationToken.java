@@ -1,4 +1,4 @@
-package br.com.lawyer.web.authentication;
+package br.com.lawyer.core.authentication;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

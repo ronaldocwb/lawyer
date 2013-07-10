@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lawyer-app</module>
+        <module>lawyer-core</module>
+        <module>lawyer-web</module>
     </modules>
     <packaging>pom</packaging>
     

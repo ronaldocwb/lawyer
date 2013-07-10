@@ -1,4 +1,4 @@
-package br.com.lawyer.web.entity;
+package br.com.lawyer.core.entity;
 
 import org.apache.commons.lang.StringUtils;
 

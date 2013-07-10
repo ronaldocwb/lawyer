@@ -1,4 +1,4 @@
-package br.com.lawyer.web.util;
+package br.com.lawyer.core.util;
 
 import org.apache.commons.lang.StringUtils;
 

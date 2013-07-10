@@ -1,5 +1,6 @@
 package br.com.lawyer.web.authentication;
 
+import br.com.lawyer.core.authentication.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Autowired
-    private IAuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
 
     /**
      * Realiza a autenticacao e atualiza o objeto Authetication

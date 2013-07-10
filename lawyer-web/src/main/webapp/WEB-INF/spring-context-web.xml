@@ -3,17 +3,12 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-       	http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
-	">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <beans:import resource="classpath:spring-context-core" />
+    <beans:import resource="spring-context-security.xml" />
 
     <mvc:resources mapping="/assets/**" location="/lawyer/assets/" />
     <mvc:resources mapping="/src/**" location="/lawyer/src/" />
@@ -21,28 +16,9 @@
 
     <context:component-scan base-package="br.com.lawyer.web.controller" />
     <context:component-scan base-package="br.com.lawyer.web.authentication" />
-    <context:component-scan base-package="br.com.lawyer.web.service" />
+
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />
-    <context:annotation-config />
-
-
-    <beans:bean id="emf"
-                class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <beans:property name="loadTimeWeaver">
-            <beans:bean
-                    class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
-        </beans:property>
-    </beans:bean>
-
-    <beans:bean id="transactionManager"
-                class="org.springframework.orm.jpa.JpaTransactionManager">
-        <beans:property name="entityManagerFactory" ref="emf" />
-    </beans:bean>
-
-    <!-- Use @Transaction annotations for managing transactions -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
-
 
     <beans:bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -50,12 +26,9 @@
         <beans:property name="suffix" value=".html" />
     </beans:bean>
 
-    <jpa:repositories base-package="br.com.lawyer.web.repository" />
-
     <beans:bean
             class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <beans:property name="useDefaultSuffixPattern" value="false" />
     </beans:bean>
-	
 
 </beans:beans>

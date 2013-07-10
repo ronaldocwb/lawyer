@@ -1,4 +1,4 @@
-package br.com.lawyer.web.exception;
+package br.com.lawyer.core.exception;
 
 public class BusinessException extends Exception {
 

@@ -1,7 +1,7 @@
 package br.com.lawyer.web.controller.rest;
 
-import br.com.lawyer.web.entity.EntidadeTeste;
-import br.com.lawyer.web.repository.EntidadeTesteRepository;
+import br.com.lawyer.core.entity.EntidadeTeste;
+import br.com.lawyer.core.repository.EntidadeTesteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

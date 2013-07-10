@@ -1,6 +1,6 @@
 package br.com.lawyer.web.controller;
 
-import br.com.lawyer.web.exception.BusinessException;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.exception.RestException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
