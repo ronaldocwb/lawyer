@@ -1,4 +1,4 @@
-package br.com.lawyer.web.controller.rest;
+package br.com.lawyer.web.api;
 
 import br.com.lawyer.core.entity.EntidadeTeste;
 import br.com.lawyer.core.repository.EntidadeTesteRepository;

@@ -20,9 +20,4 @@ public class EntryPointController {
         return "index";
     }
 
-    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
-    public String page(@PathVariable("page") String page) {
-        return page == null ? "index" : page;
-    }
-
 }

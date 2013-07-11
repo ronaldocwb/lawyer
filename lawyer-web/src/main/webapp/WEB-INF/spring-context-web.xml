@@ -7,12 +7,14 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+
     <beans:import resource="classpath:spring-context-core" />
     <beans:import resource="spring-context-security.xml" />
 
     <mvc:resources mapping="/assets/**" location="/lawyer/assets/" />
     <mvc:resources mapping="/src/**" location="/lawyer/src/" />
     <mvc:resources mapping="/vendor/**" location="/lawyer/vendor/" />
+    <mvc:resources mapping="/errors/js/**" location="/errors/js/" />
 
     <context:component-scan base-package="br.com.lawyer.web.controller" />
     <context:component-scan base-package="br.com.lawyer.web.authentication" />
@@ -22,13 +24,12 @@
 
     <beans:bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/lawyer/" />
+        <beans:property name="prefix" value="/" />
         <beans:property name="suffix" value=".html" />
     </beans:bean>
 
     <beans:bean
-            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <beans:property name="useDefaultSuffixPattern" value="false" />
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
     </beans:bean>
 
 </beans:beans>

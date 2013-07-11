@@ -1,42 +1,55 @@
 package br.com.lawyer.web.controller;
 
-import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.exception.RestException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
-/**
- * @author Deividi Cavarzan
- * Classe responsável por capturar qualquer exception lançada pelos controller e convertê-las em uma resposta JSON amigável.
- */
-@ControllerAdvice
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Controller
+@RequestMapping(value = "/errors")
 public class ExceptionController {
 
-    @ExceptionHandler(Exception.class)
-    public @ResponseBody RestException handleException(Exception e) {
-        RestException restException = new RestException();
+    @RequestMapping(value = "/redirect/{status}", method = RequestMethod.GET)
+    public void errorRedirect(HttpServletRequest request, HttpServletResponse response, @PathVariable("status") String status) throws ServletException, IOException {
 
-        restException.setClazz(e.getClass().getSimpleName());
-        restException.setCause(e.getCause().toString());
-        restException.setInfo(e.getLocalizedMessage());
-        restException.setMessage(e.getMessage());
+        String uri = (String)request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE);
 
-        return restException;
+        String forwardUri = null;
+        if (StringUtils.contains(uri, "/api/")) {
+            forwardUri = "/errors/json/" + status;
+        } else {
+            forwardUri = "/errors/pages/" + status;
+        }
 
+        request.getRequestDispatcher(forwardUri).forward(request, response);
     }
 
-    @ExceptionHandler(BusinessException.class)
-    public @ResponseBody RestException handleBusinessException(Exception e) {
+    @RequestMapping(value = "/json/{status}", method = RequestMethod.GET)
+    @ResponseBody public ResponseEntity<RestException> jsonError(@PathVariable("status") String status) {
 
-        RestException restException = new RestException();
+        RestException exception = new RestException();
+        exception.setCause(status);
+        exception.setMessage("O servidor encontrou o seguinte erro na sua chamada:" + status);
+        exception.setClazz(RestException.class.toString());
 
-        restException.setClazz(e.getClass().getSimpleName());
-        restException.setCause(e.getCause().toString());
-        restException.setInfo("Business Exception - " + e.getLocalizedMessage());
-        restException.setMessage(e.getMessage());
+        HttpStatus http = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        return restException;
+        return new ResponseEntity<RestException>(exception, http);
+    }
 
+    @RequestMapping(value = "/pages/{status}", method = RequestMethod.GET)
+    public String pageError(@PathVariable("status") String status) {
+        return "errors/" + status;
     }
 }

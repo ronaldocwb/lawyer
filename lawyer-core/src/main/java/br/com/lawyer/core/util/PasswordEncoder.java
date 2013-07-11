@@ -1,6 +1,7 @@
 package br.com.lawyer.core.util;
 
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import java.util.UUID;
 
@@ -20,7 +21,8 @@ public class PasswordEncoder {
      * @return Senha criptografada.
      */
     public static String encodePassword(String password, String login) {
-        return new ShaPasswordEncoder(256).encodePassword(password, salt+login);
+        StandardPasswordEncoder standardPasswordEncoder = new StandardPasswordEncoder(salt+login);
+        return standardPasswordEncoder.encode(password);
     }
 
     /**

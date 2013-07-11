@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-             xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:context="http://www.springframework.org/schema/context"
-             xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
-    </beans:beans>
+
+    <security:global-method-security jsr250-annotations="enabled" pre-post-annotations="enabled" secured-annotations="enabled" />
+
+    <security:http use-expressions="true">
+        <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
+        <security:intercept-url pattern="/auth/*" access="isAnonymous()" />
+        <security:form-login login-page="/auth"
+                             authentication-failure-url="/auth" />
+        <security:logout logout-success-url="/" delete-cookies="JSESSIONID"/>
+        <!--security:remember-me /-->
+        <security:session-management invalid-session-url="/">
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </security:session-management>
+    </security:http>
+
+    <security:authentication-manager alias="myAuthenticationManagerImpl" />
+
+    </beans>
