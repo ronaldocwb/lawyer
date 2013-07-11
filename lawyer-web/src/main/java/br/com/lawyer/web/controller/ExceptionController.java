@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Retorna os erros HTTP padrões.
+ * Se a chamada for de uma URL comum, retorna uma pagina de erro.
+ * Se for uma chamada para URL de servicos REST, retorna um JSON.
+ */
 @Controller
 @RequestMapping(value = "/errors")
 public class ExceptionController {
@@ -36,7 +41,7 @@ public class ExceptionController {
     }
 
     @RequestMapping(value = "/json/{status}", method = RequestMethod.GET)
-    @ResponseBody public ResponseEntity<RestException> jsonError(@PathVariable("status") String status) {
+    public @ResponseBody ResponseEntity<RestException> jsonError(@PathVariable("status") String status) {
 
         RestException exception = new RestException();
         exception.setCause(status);
@@ -50,6 +55,7 @@ public class ExceptionController {
 
     @RequestMapping(value = "/pages/{status}", method = RequestMethod.GET)
     public String pageError(@PathVariable("status") String status) {
-        return "errors/" + status;
+        return "/errors/" + status;
     }
+
 }
