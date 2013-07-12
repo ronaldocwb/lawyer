@@ -18,6 +18,7 @@
 
     <context:component-scan base-package="br.com.lawyer.web.controller" />
     <context:component-scan base-package="br.com.lawyer.web.authentication" />
+    <context:component-scan base-package="br.com.lawyer.web.api" />
 
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />
