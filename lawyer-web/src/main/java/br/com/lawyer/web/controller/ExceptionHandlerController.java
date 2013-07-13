@@ -45,7 +45,7 @@ public class ExceptionHandlerController {
     /**
      *
      * Método que captura qualquer exceção do tipo {BusinessException} que os métodos dos controllers lançam.
-     * @param {BusinessException}
+     * @param {@link BusinessException}
      * @return JSON para a requisição.
      */
     @ExceptionHandler(BusinessException.class)

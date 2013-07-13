@@ -24,6 +24,11 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>de.plushnikov.lombok-intellij-plugin</groupId>
+            <artifactId>lombok-plugin</artifactId>
+            <version>0.5</version>
+        </dependency>
         <!-- Fim Java EE 6 -->
 
         <!-- Apache Commons -->

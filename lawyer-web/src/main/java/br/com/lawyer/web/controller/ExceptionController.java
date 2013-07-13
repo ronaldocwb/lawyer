@@ -27,7 +27,7 @@ public class ExceptionController {
 
     /***
      * Esse é o método que recebe as chamadas para os erros HTTP comuns da aplicação, como 404, 403, 500.... etc.
-     * Redireciona para o serviço que retorna uma página de erro ou um {@ResponseBody} JSON caso for um erro no contexto da API
+     * Redireciona para o serviço que retorna uma página de erro ou um {@link ResponseBody} JSON caso for um erro no contexto da API
      * @param request
      * @param response
      * @param status
@@ -52,7 +52,7 @@ public class ExceptionController {
     /**
      * Retona o JSON para exceções ocorridas no contexto da API.
      * @param status
-     * @return {RestException}
+     * @return {@link RestException}
      */
     @RequestMapping(value = "/json/{status}", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<RestException> jsonError(@PathVariable("status") String status) {

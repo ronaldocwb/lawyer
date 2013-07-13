@@ -1,5 +1,9 @@
 package br.com.lawyer.web.exception;
 
+/**
+ * Objeto de exceção que é lançada para as requisições REST.
+ * @author Deividi
+ */
 public class RestException {
 
     private String clazz;

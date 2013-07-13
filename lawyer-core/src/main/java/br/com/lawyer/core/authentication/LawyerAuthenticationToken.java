@@ -23,7 +23,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
 
     /**
      * This constructor can be safely used by any code that wishes to create a
-     * <code>SinditoolsAuthenticationToken</code>, as the {@link
+     * <code>{@link LawyerAuthenticationToken}</code>, as the {@link
      * #isAuthenticated()} will return <code>false</code>.
      *
      */

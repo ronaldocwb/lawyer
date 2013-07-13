@@ -1,4 +1,4 @@
-angular.module('ngBoilerplate.home', [
+angular.module('lawyer.home', [
   'ui.state',
   'titleService',
   'plusOne'
@@ -9,13 +9,13 @@ angular.module('ngBoilerplate.home', [
       url: '/home',
       views: {
         'main': {
-          controller: 'HomeCtrl',
+          controller: 'HomeController',
           templateUrl: 'home/home.tpl.html'
         }
       }
     });
   }
-]).controller('HomeCtrl', [
+]).controller('HomeController', [
   '$scope',
   'titleService',
   function HomeController($scope, titleService) {
