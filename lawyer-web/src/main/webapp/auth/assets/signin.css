@@ -47,6 +47,7 @@ html {
 }
 
 .login-wrapper .box input[type="text"],
+.login-wrapper .box input[type="email"],
 .login-wrapper .box input[type="password"] {
     font-size: 15px;
     height: 40px;
