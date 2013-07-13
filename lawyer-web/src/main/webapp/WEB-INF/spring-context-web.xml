@@ -8,27 +8,35 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 
+    <!-- Inclui os arquivos de configuração do core e do spring security -->
     <beans:import resource="classpath:spring-context-core" />
     <beans:import resource="spring-context-security.xml" />
 
+    <!-- Mapeamento dos arquivos estáticos da aplicação. JS, CSS, Imagens, etc. -->
     <mvc:resources mapping="/assets/**" location="/lawyer/assets/" />
     <mvc:resources mapping="/src/**" location="/lawyer/src/" />
     <mvc:resources mapping="/vendor/**" location="/lawyer/vendor/" />
     <mvc:resources mapping="/errors/js/**" location="/errors/js/" />
 
-    <context:component-scan base-package="br.com.lawyer.web.controller" />
-    <context:component-scan base-package="br.com.lawyer.web.authentication" />
+    <!-- Define os pacotes que o spring vai procurar por controllers e services. Eu prefiro separá-los ao invés de deixar a raiz
+     Em casos do projeto ter um package com repositories, pode haver o carreegamento incorreto dos beans -->
+    <context:component-scan base-package="br.com.lawyer.web.annotation" />
     <context:component-scan base-package="br.com.lawyer.web.api" />
+    <context:component-scan base-package="br.com.lawyer.web.authentication" />
+    <context:component-scan base-package="br.com.lawyer.web.controller" />
 
+    <!-- Define o scan do Spring -->
     <mvc:annotation-driven />
     <mvc:default-servlet-handler />
 
+    <!-- View resolver para saber qual diretório e qual extensão procurar quando uma página e retornada -->
     <beans:bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/" />
         <beans:property name="suffix" value=".html" />
     </beans:bean>
 
+    <!-- Define o mapeamento de URLs padrão do Spring -->
     <beans:bean
             class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
     </beans:bean>

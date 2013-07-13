@@ -23,6 +23,12 @@ import java.util.Map;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
+    /**
+     *
+     * Método que captura qualquer exceção do tipo {Exception} que os métodos dos controllers lançam.
+     * @param {Exception}
+     * @return JSON para a requisição.
+     */
     @ExceptionHandler(Exception.class)
     public @ResponseBody RestException handleException(Exception e) {
         RestException restException = new RestException();
@@ -36,6 +42,12 @@ public class ExceptionHandlerController {
 
     }
 
+    /**
+     *
+     * Método que captura qualquer exceção do tipo {BusinessException} que os métodos dos controllers lançam.
+     * @param {BusinessException}
+     * @return JSON para a requisição.
+     */
     @ExceptionHandler(BusinessException.class)
     public @ResponseBody RestException handleBusinessException(Exception e) {
 

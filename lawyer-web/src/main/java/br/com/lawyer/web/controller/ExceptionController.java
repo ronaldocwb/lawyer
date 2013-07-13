@@ -25,6 +25,15 @@ import java.io.IOException;
 @RequestMapping(value = "/errors")
 public class ExceptionController {
 
+    /***
+     * Esse é o método que recebe as chamadas para os erros HTTP comuns da aplicação, como 404, 403, 500.... etc.
+     * Redireciona para o serviço que retorna uma página de erro ou um {@ResponseBody} JSON caso for um erro no contexto da API
+     * @param request
+     * @param response
+     * @param status
+     * @throws ServletException
+     * @throws IOException
+     */
     @RequestMapping(value = "/redirect/{status}", method = RequestMethod.GET)
     public void errorRedirect(HttpServletRequest request, HttpServletResponse response, @PathVariable("status") String status) throws ServletException, IOException {
 
@@ -40,6 +49,11 @@ public class ExceptionController {
         request.getRequestDispatcher(forwardUri).forward(request, response);
     }
 
+    /**
+     * Retona o JSON para exceções ocorridas no contexto da API.
+     * @param status
+     * @return {RestException}
+     */
     @RequestMapping(value = "/json/{status}", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<RestException> jsonError(@PathVariable("status") String status) {
 
@@ -53,6 +67,11 @@ public class ExceptionController {
         return new ResponseEntity<RestException>(exception, http);
     }
 
+    /**
+     * Retona uma view (.html) para exceções ocorridas no contexto da aplicação.
+     * @param status
+     * @return {String} pagina
+     */
     @RequestMapping(value = "/pages/{status}", method = RequestMethod.GET)
     public String pageError(@PathVariable("status") String status) {
         return "/errors/" + status;

@@ -17,6 +17,10 @@ import sun.util.resources.LocaleNames_lt;
 @Controller
 public class EntryPointController {
 
+    /**
+     * Retona a página inicial da aplicação.
+     * @return {String} pagina inicial
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "index";

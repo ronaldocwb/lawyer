@@ -5,9 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
-
+    <!-- Ativa as anotações em classes e métodos. -->
     <security:global-method-security jsr250-annotations="enabled" pre-post-annotations="enabled" secured-annotations="enabled" />
 
+    <!-- Define os contextos que o security vai atuar e quais são os entrypoints da aplicação -->
     <security:http use-expressions="true">
         <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
         <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
@@ -15,12 +16,16 @@
         <security:form-login login-page="/auth"
                              authentication-failure-url="/auth" />
         <security:logout logout-success-url="/" delete-cookies="JSESSIONID"/>
+
+        <!-- O remeber me precisa de outras configurações, ver isso depois -->
         <!--security:remember-me /-->
+
         <security:session-management invalid-session-url="/">
             <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
         </security:session-management>
     </security:http>
 
+    <!-- Define qual é o service que vai autenticar o usuário -->
     <security:authentication-manager alias="myAuthenticationManagerImpl" />
 
     </beans>

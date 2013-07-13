@@ -13,23 +13,27 @@
        	     http://www.springframework.org/schema/data/jpa
              http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 
+    <!-- Mapeamento dos services do projeto -->
     <context:component-scan base-package="br.com.lawyer.core.authentication" />
     <context:component-scan base-package="br.com.lawyer.core.service" />
     <context:annotation-config />
 
+    <!-- Definição para o tipo de EMF da aplicação -->
     <beans:bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <beans:property name="loadTimeWeaver">
             <beans:bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
         </beans:property>
     </beans:bean>
 
+
     <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <beans:property name="entityManagerFactory" ref="emf" />
     </beans:bean>
 
-    <!-- Use @Transaction annotations for managing transactions -->
+    <!-- Define o uso de @Transaction para controle transacional -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
+    <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
     <jpa:repositories base-package="br.com.lawyer.core.repository" />
 
 </beans:beans>
