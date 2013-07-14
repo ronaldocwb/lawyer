@@ -6,7 +6,9 @@
                   transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:jboss/postgresDS</jta-data-source>
-    <class>br.com.lawyer.core.entity.EntidadeTeste</class>
+    <class>br.com.lawyer.core.entity.Usuario</class>
+    <class>br.com.lawyer.core.entity.Permissao</class>
+    <class>br.com.lawyer.core.entity.PermissaoUsuario</class>
     <properties>
         <property name="hibernate.hbm2ddl.auto" value="update" />
         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

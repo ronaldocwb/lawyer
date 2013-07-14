@@ -9,7 +9,7 @@
 
 
     <!-- Inclui os arquivos de configuração do core e do spring security -->
-    <beans:import resource="classpath:spring-context-core" />
+    <beans:import resource="classpath:spring-context-core.xml" />
     <beans:import resource="spring-context-security.xml" />
 
     <!-- Mapeamento dos arquivos estáticos da aplicação. JS, CSS, Imagens, etc. -->

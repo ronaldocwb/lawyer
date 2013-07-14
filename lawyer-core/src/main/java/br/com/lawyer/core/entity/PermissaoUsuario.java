@@ -13,7 +13,7 @@ public class PermissaoUsuario implements Serializable {
     @Id
     private String uuid;
 
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated
     private Permissao permissao;
 
     public Permissao getPermissao() {
