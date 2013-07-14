@@ -1,5 +1,6 @@
 package br.com.lawyer.core.authentication;
 
+import br.com.lawyer.core.entity.Usuario;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -19,7 +20,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
     private String token;
 
     // TODO Implementar Objeto de autenticacao proprio.
-    private Object usuario;
+    private Usuario usuario;
 
     //~ Constructors ===================================================================================================
 
@@ -52,7 +53,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Object user, Collection<? extends GrantedAuthority> authorities) {
+    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -60,7 +61,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Object user, Object details, Collection<? extends GrantedAuthority> authorities) {
+    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -69,7 +70,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Object user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
+    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -88,7 +89,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         return this.principal;
     }
 
-    public Object getUsuario() {
+    public Usuario getUsuario() {
         return this.usuario;
     }
 
