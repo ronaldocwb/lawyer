@@ -2,11 +2,10 @@ package br.com.lawyer.core.entity;
 
 import org.apache.commons.lang.StringUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +16,10 @@ public class Usuario implements Serializable {
 
     private String email;
 
-    private String senhaCriptografada;
+    private String senha;
+
+    @ManyToMany
+    private List<PermissaoUsuario> permissoes;
 
     @PrePersist
     private void generateUuid() {
@@ -34,12 +36,12 @@ public class Usuario implements Serializable {
         return uuid;
     }
 
-    public String getSenhaCriptografada() {
-        return senhaCriptografada;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setSenhaCriptografada(String senhaCriptografada) {
-        this.senhaCriptografada = senhaCriptografada;
+    public void setSenha(String senhaCriptografada) {
+        this.senha = senhaCriptografada;
     }
 
     public String getEmail() {
@@ -50,6 +52,13 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
+    public List<PermissaoUsuario> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<PermissaoUsuario> permissoes) {
+        this.permissoes = permissoes;
+    }
 
 
 }

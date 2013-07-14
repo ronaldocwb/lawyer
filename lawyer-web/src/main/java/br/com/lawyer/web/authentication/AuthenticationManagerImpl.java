@@ -1,7 +1,11 @@
 package br.com.lawyer.web.authentication;
 
 import br.com.lawyer.core.authentication.AuthenticationService;
+import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
+import br.com.lawyer.core.entity.Permissao;
+import br.com.lawyer.core.entity.PermissaoUsuario;
 import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
@@ -49,24 +54,25 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         try {
             usuario = authenticationService.getUsuarioParaAutenticacao(authentication.getName());
-        } catch (Exception e) {
+        } catch (BusinessException e) {
             return authentication;
         }
 
+        // Usuário não foi encontrado na base.
         if (usuario == null) {
-            return authentication;
+            throw new BadCredentialsException("Usuário não encontrado na base de dados.");
         }
 
-        if (!usuario.getSenhaCriptografada().equals(authentication.getCredentials().toString())) {
+        if (!usuario.getSenha().equals(authentication.getCredentials().toString())) {
             throw new BadCredentialsException("Usuário / Senha inválidos.");
         }
 
+        // Informações como IP e sessão ficam no WebAuthenticationDetails para monitoramento ou log.
         WebAuthenticationDetails webDetails =  (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
 
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
-        // TODO fazer a implementacao abaixo
-        //return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
-        return null;
+
+        return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
     }
 
     /**
@@ -74,13 +80,13 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      * @param permissoes
      * @return List<GrantedAuthority>
      */
-    public Collection<? extends GrantedAuthority> getAuthorities(List<Object> permissoes) {
+    public Collection<? extends GrantedAuthority> getAuthorities(List<PermissaoUsuario> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
-       /* for (PermissoesUsuario permissao : permissoes) {
+        for (PermissaoUsuario permissao : permissoes) {
             Permissao p = permissao.getPermissao();
             authList.add(new SimpleGrantedAuthority(p.toString()));
-        }*/
+        }
 
         return authList;
     }
