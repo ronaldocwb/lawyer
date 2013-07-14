@@ -1,5 +1,8 @@
 package br.com.lawyer.core.authentication;
 
+import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +11,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+
+    @Autowired
+    private UsuarioRepository repository;
+
+    /**
+     * Recupera o usuário da base através de um e-mail informado.
+     * @param email
+     * @return {@link Usuario}
+     */
+    @Override
+    public Usuario getUsuarioParaAutenticacao(String email) {
+        return repository.findByEmail(email);
+    }
 }

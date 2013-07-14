@@ -1,6 +1,8 @@
 package br.com.lawyer.web.authentication;
 
 import br.com.lawyer.core.authentication.AuthenticationService;
+import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,7 +33,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      */
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        Object usuario = null;
+        Usuario usuario = null;
 
         if (authentication.getName().equals(authentication.getCredentials())) {
             throw new BadCredentialsException("Usuário / Senha inválidos.");
@@ -46,8 +48,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         }
 
         try {
-            // TODO criar service de authenticacao
-            //usuario = authenticationService.getUsuarioParaAutenticar(authentication.getName());
+            usuario = authenticationService.getUsuarioParaAutenticacao(authentication.getName());
         } catch (Exception e) {
             return authentication;
         }
@@ -56,15 +57,15 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             return authentication;
         }
 
-        // TODO fazer a validacao abaixo
-        /*if (!usuario.getSenha().equals(authentication.getCredentials().toString())) {
+        if (!usuario.getSenhaCriptografada().equals(authentication.getCredentials().toString())) {
             throw new BadCredentialsException("Usuário / Senha inválidos.");
-        }*/
+        }
 
         WebAuthenticationDetails webDetails =  (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
 
+        String token = PasswordEncoder.generateRandomToken(authentication.getName());
         // TODO fazer a implementacao abaixo
-        //return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()));
+        //return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
         return null;
     }
 

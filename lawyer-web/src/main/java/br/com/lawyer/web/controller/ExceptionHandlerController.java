@@ -3,6 +3,9 @@ package br.com.lawyer.web.controller;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.exception.RestException;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +52,7 @@ public class ExceptionHandlerController {
      * @return JSON para a requisição.
      */
     @ExceptionHandler(BusinessException.class)
-    public @ResponseBody RestException handleBusinessException(Exception e) {
+    public @ResponseBody RestException handleBusinessException(BusinessException e) {
 
         RestException restException = new RestException();
 
@@ -59,6 +62,26 @@ public class ExceptionHandlerController {
         restException.setMessage(e.getMessage());
 
         return restException;
+
+    }
+
+    /**
+     *
+     * Método que captura exceções de autenticação.
+     * @param {@link BadCredentialsException}
+     * @return JSON para a requisição não autorizada, com {@link HttpStatus} <code>UNAUTHORIZED</code> - 401.
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<RestException> handleBadCredentialsException(BadCredentialsException e) {
+
+        RestException restException = new RestException();
+
+        restException.setClazz(e.getClass().getSimpleName());
+        restException.setCause(e.getCause().toString());
+        restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
+        restException.setMessage(e.getMessage());
+
+        return new ResponseEntity<RestException>(restException, HttpStatus.UNAUTHORIZED);
 
     }
 

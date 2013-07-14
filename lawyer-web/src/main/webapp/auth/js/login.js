@@ -1,6 +1,6 @@
-angular.module('lawyer-login', ['ngResource'])
+angular.module('lawyer-login', ['ngResource', 'ngCookies'])
 
-.controller('LoginController', ['$scope', '$resource', '$window', function ($scope, $resource, $window) {
+.controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', function ($scope, $resource, $window, $cookieStore) {
 
      $scope.processing = false;
      $scope.user = {
@@ -13,15 +13,18 @@ angular.module('lawyer-login', ['ngResource'])
          $scope.processing = true;
 
          var Auth = $resource('http://localhost:8080/lawyer/auth/authenticate', {});
-         Auth.save($scope.user, function () {
+         Auth.save($scope.user, function (userVO) {
              $window.location = '/secure/';
-
+             $cookieStore.put(userVO.login);
+             $cookieStore.put(userVO.token);
          }, function () {
              $scope.fail = true;
              $scope.processing = false;
              angular.element('body').css('cursor', 'auto');
              $scope.user.password = '';
-         });
+
+
+});
 
      }
 }]);

@@ -29,7 +29,7 @@ public class PasswordEncoder {
      * @param login
      * @return Token para gerar a nova senha.
      */
-    public static String generateTokenForPassword(String login) {
+    public static String generateRandomToken(String login) {
         return new ShaPasswordEncoder(256).encodePassword(UUID.randomUUID().toString(), salt+login);
     }
 

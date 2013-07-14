@@ -6,12 +6,14 @@ import br.com.lawyer.core.util.LawyerStringUtils;
 import br.com.lawyer.core.util.PasswordEncoder;
 import br.com.lawyer.web.exception.RestException;
 import br.com.lawyer.web.vo.AuthenticationVO;
+import br.com.lawyer.web.vo.UsuarioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * @author Deividi Cavarzan
@@ -44,13 +48,15 @@ public class AuthenticationController {
 
     /**
      * Realiza a autenticação na pagina de login
-     * @return {@link ResponseEntity} com o status HTTP
+     * @return {@link ResponseEntity} {@link UsuarioVO} com o status HTTP.
      */
     @RequestMapping(value = "/auth/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<String> authenticate(@RequestBody AuthenticationVO authenticationVO) {
+    public ResponseEntity<UsuarioVO> authenticate(@RequestBody AuthenticationVO authenticationVO) {
 
         // Retorna 401 se der erro na autenticação.
         HttpStatus http = HttpStatus.UNAUTHORIZED;
+
+        UsuarioVO usuario = null;
 
         if (!LawyerStringUtils.containStringBlank(authenticationVO.getEmail(), authenticationVO.getSenha())) {
 
@@ -65,10 +71,18 @@ public class AuthenticationController {
                 // Insere nosso token na sessão para ficar disponpivel para consulta.
                 SecurityContextHolder.getContext().setAuthentication(auth);
                 http = HttpStatus.OK;
+
+                LawyerAuthenticationToken lawyerAuth = (LawyerAuthenticationToken) auth;
+
+                // UsuarioVO para manter no cookie ou localStorage do browser. O AngularJS irá acessá-lo para criar o serviço de autenticação e permissões.
+                usuario = new UsuarioVO();
+                usuario.setEmail(lawyerAuth.getName());
+                usuario.setToken(lawyerAuth.getToken());
+                usuario.setAuthorities((List<GrantedAuthority>) lawyerAuth.getAuthorities());
             }
         }
 
-        return new ResponseEntity<String>(http);
+        return new ResponseEntity<UsuarioVO>(usuario, http);
     }
 
 

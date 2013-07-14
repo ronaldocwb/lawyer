@@ -15,6 +15,7 @@ module.exports = function ( karma ) {
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
+      'vendor/angular-cookies/angular-cookies.min.js',
       '../../../../lawyer-web/src/main/webapp/lawyer/templates/templates-app.js',
       '../../../../lawyer-web/src/main/webapp/lawyer/templates/templates-common.js',
       'vendor/angular-mocks/angular-mocks.js',

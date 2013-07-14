@@ -16,6 +16,8 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
     private Object credentials;
 
+    private String token;
+
     // TODO Implementar Objeto de autenticacao proprio.
     private Object usuario;
 
@@ -67,6 +69,16 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
+    public LawyerAuthenticationToken(Object principal, Object credentials, Object user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
+        super(authorities);
+        this.principal = principal;
+        this.credentials = credentials;
+        this.usuario = user;
+        this.token = token;
+        this.setDetails(details);
+        super.setAuthenticated(true); // must use super, as we override
+    }
+
 
     public Object getCredentials() {
         return this.credentials;
@@ -95,5 +107,10 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.eraseCredentials();
         credentials = null;
     }
+
+    public String getToken() {
+        return token;
+    }
+
 
 }
