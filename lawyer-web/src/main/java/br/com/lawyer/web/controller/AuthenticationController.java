@@ -41,9 +41,9 @@ public class AuthenticationController {
      * Foi criado esse mapeamento para a URL fica amigável, /auth, ao invés de /auth/login.html
      * @return {String} pagina de login
      */
-    @RequestMapping(value = "/auth", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth/**", method = RequestMethod.GET)
     public String auth() {
-        return "auth/login";
+        return "/auth/login";
     }
 
     /**

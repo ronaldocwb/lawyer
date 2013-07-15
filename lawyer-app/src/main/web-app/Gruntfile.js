@@ -43,9 +43,11 @@ module.exports = function ( grunt ) {
     meta: {
       banner: 
         '/**\n' +
-        ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
+        ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        ' * <%= pkg.homepage %>\n' +
         ' *\n' +
         ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+        ' * Licensed <%= pkg.licenses.type %> <<%= pkg.licenses.url %>>\n' +
         ' */\n'
     },
 
@@ -100,7 +102,7 @@ module.exports = function ( grunt ) {
         files: [
           { 
             src: [ '**' ],
-            dest: ['<%= build_dir %>/assets/'],
+            dest: '<%= build_dir %>/assets/',
             cwd: 'src/assets',
             expand: true
           }
@@ -307,7 +309,7 @@ module.exports = function ( grunt ) {
           base: 'src/app'
         },
         src: [ '<%= app_files.atpl %>' ],
-        dest: '<%= build_dir %>/templates/templates-app.js'
+        dest: '<%= build_dir %>/templates-app.js'
       },
 
       /**
@@ -318,7 +320,7 @@ module.exports = function ( grunt ) {
           base: 'src/common'
         },
         src: [ '<%= app_files.ctpl %>' ],
-        dest: '<%= build_dir %>/templates/templates-common.js'
+        dest: '<%= build_dir %>/templates-common.js'
       }
     },
 

@@ -1,9 +1,9 @@
 module.exports = function ( karma ) {
   karma.configure({
-    /**
+    /** 
      * From where to look for files, starting with the location of this file.
      */
-    basePath: '../lawyer/',
+    basePath: '../',
 
     /**
      * This is the list of file patterns to load into the browser during testing.
@@ -12,11 +12,11 @@ module.exports = function ( karma ) {
       <% scripts.forEach( function ( file ) { %>'<%= file %>',
       <% }); %>
       'src/**/*.js',
-      'templates/**/*.js',
+      'src/**/*.coffee',
     ],
 
     frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-firefox-launcher', 'karma-chrome-launcher', 'karma-coffee-preprocessor' ],
+    plugins: [ 'karma-jasmine', 'karma-chrome-launcher', 'karma-coffee-preprocessor' ],
     preprocessors: {
       '**/*.coffee': 'coffee',
     },
@@ -34,7 +34,7 @@ module.exports = function ( karma ) {
     runnerPort: 9100,
     urlRoot: '/',
 
-    /**
+    /** 
      * Disable file watching by default.
      */
     autoWatch: false,
