@@ -6,10 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 import org.springframework.web.util.WebUtils;
 
@@ -32,17 +29,15 @@ public class ExceptionHandlerController {
      * @param {Exception}
      * @return JSON para a requisição.
      */
+    @ResponseStatus(value=HttpStatus.BAD_REQUEST)
     @ExceptionHandler(Exception.class)
     public @ResponseBody RestException handleException(Exception e) {
         RestException restException = new RestException();
 
-        restException.setClazz(e.getClass().getSimpleName());
-        restException.setCause(e.getCause().toString());
         restException.setInfo(e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
         return restException;
-
     }
 
     /**
@@ -73,6 +68,25 @@ public class ExceptionHandlerController {
      */
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<RestException> handleBadCredentialsException(BadCredentialsException e) {
+
+        RestException restException = new RestException();
+
+        restException.setClazz("BadCredentialsException");
+        restException.setMessage("Usuário ou senha incorretos.");
+        restException.setInfo("BadCredentialsException");
+
+        return new ResponseEntity<RestException>(restException, HttpStatus.UNAUTHORIZED);
+
+    }
+
+    /**
+     *
+     * Método que captura exceções de autenticação.
+     * @param {@link BadCredentialsException}
+     * @return JSON para a requisição não autorizada, com {@link HttpStatus} <code>UNAUTHORIZED</code> - 401.
+     */
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<RestException> handleNullPointerException(NullPointerException e) {
 
         RestException restException = new RestException();
 

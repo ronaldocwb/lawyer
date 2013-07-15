@@ -12,7 +12,7 @@
     <security:http use-expressions="true">
         <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
         <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
-        <security:intercept-url pattern="/auth/*" access="isAnonymous()" />
+        <security:intercept-url pattern="/auth/*/**" access="isAnonymous()" />
         <security:form-login login-page="/auth"
                              authentication-failure-url="/auth" />
         <security:logout logout-success-url="/" delete-cookies="JSESSIONID"/>
