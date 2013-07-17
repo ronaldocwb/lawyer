@@ -7,8 +7,8 @@ module.exports = {
    * development and the `compile_dir` folder is where our app resides once it's
    * completely built.
    */
-  build_dir: '../../../../lawyer-web/src/main/webapp/auth',
-  compile_dir: '../../../../lawyer-web/src/main/webapp/auth/bin',
+  build_dir: 'build',
+  compile_dir: '../../../../lawyer-web/src/main/webapp/authentication',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
@@ -50,11 +50,14 @@ module.exports = {
   vendor_files: {
     js: [
         'vendor/jquery/jquery.min.js',
-        'vendor/angular-unstable/angular.js',
-      'vendor/angular-resource-unstable/angular-resource.js',
-      'vendor/angular-resource-unstable/angular-resource.js',
-      'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/angular-cookies/angular-cookies.min.js'
+        'vendor/angular-unstable/angular.min.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-resource-unstable/angular-resource.min.js',
+        'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/angular-cookies/angular-cookies.min.js',
+        'vendor/theme/theme.js'
     ],
     css: [
     ]

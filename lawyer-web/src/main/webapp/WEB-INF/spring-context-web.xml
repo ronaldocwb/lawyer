@@ -13,9 +13,10 @@
     <beans:import resource="spring-context-security.xml" />
 
     <!-- Mapeamento dos arquivos estáticos da aplicação. JS, CSS, Imagens, etc. -->
-    <mvc:resources mapping="/assets/**" location="/lawyer/assets/" />
-    <mvc:resources mapping="/src/**" location="/lawyer/src/" />
-    <mvc:resources mapping="/vendor/**" location="/lawyer/vendor/" />
+    <mvc:resources mapping="/assets/**" location="/secure/assets/" />
+    <mvc:resources mapping="/assets-login/**" location="/authentication/assets-login/" />
+    <mvc:resources mapping="/src/**" location="/secure/src/" />
+    <mvc:resources mapping="/vendor/**" location="/secure/vendor/" />
     <mvc:resources mapping="/errors/js/**" location="/errors/js/" />
 
     <!-- Define os pacotes que o spring vai procurar por controllers e services. Eu prefiro separá-los ao invés de deixar a raiz

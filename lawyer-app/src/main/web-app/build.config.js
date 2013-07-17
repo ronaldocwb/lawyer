@@ -7,8 +7,14 @@ module.exports = {
    * development and the `compile_dir` folder is where our app resides once it's
    * completely built.
    */
-  build_dir: 'build',
-  compile_dir: 'bin',
+
+
+    /**
+     * NÂO ALETRAR A PASTA BIN
+     * A PASTA BUILT È O CAMINHO DO WAR EXPLODED.
+     */
+  build_dir: '../../../../lawyer-web/target/lawyer.war/secure',
+  compile_dir: '../../../../lawyer-web/src/main/webapp/secure',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
@@ -50,8 +56,8 @@ module.exports = {
   vendor_files: {
     js: [
         'vendor/angular-unstable/angular.min.js',
-        'vendor/angular-resource-unstable/angular-resource.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-resource-unstable/angular-resource.min.js',
         'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
         'vendor/angular-ui-utils/modules/route/route.js',

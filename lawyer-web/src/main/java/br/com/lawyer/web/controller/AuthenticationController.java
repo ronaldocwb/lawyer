@@ -43,7 +43,7 @@ public class AuthenticationController {
      */
     @RequestMapping(value = "/auth/**", method = RequestMethod.GET)
     public String auth() {
-        return "/auth/login";
+        return "authentication/index";
     }
 
     /**

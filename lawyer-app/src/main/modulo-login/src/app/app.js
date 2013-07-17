@@ -12,11 +12,13 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
             angular.element('body').css('cursor', 'wait');
             $scope.processing = true;
 
-            var Auth = $resource('authenticate', {});
+            var Auth = $resource('auth/authenticate', {});
             Auth.save($scope.user, function success(userVO) {
                 console.log(userVO);
                 alert(userVO);
-                $window.location = '/laywer/secure/';
+                if (userVO && userVO.login) {
+                    $window.location = '/laywer/secure/';
+                }
                 $cookieStore.put(userVO.login);
                 $cookieStore.put(userVO.token);
             }, function fail() {
