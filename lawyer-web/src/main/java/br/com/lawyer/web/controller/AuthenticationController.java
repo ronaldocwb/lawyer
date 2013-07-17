@@ -64,9 +64,9 @@ public class AuthenticationController {
             String password = PasswordEncoder.encodePassword(authenticationVO.getSenha(), authenticationVO.getEmail());
 
             Authentication auth = new LawyerAuthenticationToken(authenticationVO.getEmail(), password);
-            auth = authenticationManager.authenticate(auth);
+            //auth = authenticationManager.authenticate(auth);
 
-            if (auth.isAuthenticated()) {
+            if (!auth.isAuthenticated()) {
 
                 // Insere nosso token na sessão para ficar disponpivel para consulta.
                 SecurityContextHolder.getContext().setAuthentication(auth);

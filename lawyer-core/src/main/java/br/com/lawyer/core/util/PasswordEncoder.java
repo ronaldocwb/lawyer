@@ -21,8 +21,7 @@ public class PasswordEncoder {
      * @return Senha criptografada.
      */
     public static String encodePassword(String password, String login) {
-        StandardPasswordEncoder standardPasswordEncoder = new StandardPasswordEncoder(salt+login);
-        return standardPasswordEncoder.encode(password);
+        return new ShaPasswordEncoder(256).encodePassword(password, salt+login);
     }
 
     /**

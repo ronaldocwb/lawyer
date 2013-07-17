@@ -2,6 +2,10 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
 
     .controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', function ($scope, $resource, $window, $cookieStore) {
 
+        $cookieStore.remove('JSESSIONID');
+        $cookieStore.remove('lawyer.email');
+        $cookieStore.remove('lawyer.token');
+
         $scope.processing = false;
         $scope.user = {
             email : 'developer@lawyer.com.br',
@@ -15,12 +19,13 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
             var Auth = $resource('auth/authenticate', {});
             Auth.save($scope.user, function success(userVO) {
                 console.log(userVO);
-                alert(userVO);
-                if (userVO && userVO.login) {
+                if (userVO && userVO.email) {
                     $window.location = '/laywer/secure/';
+                    $cookieStore.put('lawyer.login', userVO.login);
+                    $cookieStore.put('lawyer.token', userVO.token);
                 }
-                $cookieStore.put(userVO.login);
-                $cookieStore.put(userVO.token);
+                angular.element('body').css('cursor', 'auto');
+
             }, function fail() {
                 $scope.fail = true;
                 $scope.processing = false;
