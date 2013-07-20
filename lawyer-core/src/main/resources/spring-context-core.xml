@@ -26,12 +26,16 @@
     </beans:bean>
 
 
-    <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <beans:bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
         <beans:property name="entityManagerFactory" ref="emf" />
     </beans:bean>
 
-    <!-- Define o uso de @Transaction para controle transacional -->
+    <!-- Use @Transaction annotations for managing transactions -->
     <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:jta-transaction-manager/>
+
+    <context:annotation-config />
 
     <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
     <jpa:repositories base-package="br.com.lawyer.core.repository" />

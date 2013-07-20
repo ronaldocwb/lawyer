@@ -84,10 +84,10 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     public Collection<? extends GrantedAuthority> getAuthorities(List<PermissaoUsuario> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
-//        for (PermissaoUsuario permissao : permissoes) {
-//            Permissao p = permissao.getPermissao();
-//            authList.add(new SimpleGrantedAuthority(p.toString()));
-//        }
+        for (PermissaoUsuario permissao : permissoes) {
+            Permissao p = permissao.getPermissao();
+            authList.add(new SimpleGrantedAuthority(p.toString()));
+        }
         authList.add(new SimpleGrantedAuthority("ROLE_USER"));
         authList.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
 

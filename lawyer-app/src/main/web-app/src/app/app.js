@@ -1,22 +1,40 @@
-angular.module( 'ngBoilerplate', [
-  'templates-app',
-  'templates-common',
-  'ngBoilerplate.home',
-  'ngBoilerplate.about',
-  'ui.state',
-  'ui.route'
-])
+angular.module('lawyer', [
+        'templates-app',
+        'templates-common',
+        'lawyer.home',
+        'ui.state',
+        'ui.route'
+    ])
+    .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
+        $urlRouterProvider.otherwise('/home');
+        var interceptor = ['$location', '$q', function ($location, $q) {
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-  $urlRouterProvider.otherwise( '/home' );
-})
+            function success(response) {
+                return response;
+            }
+            function error(response) {
 
-.run( function run ( titleService ) {
-  titleService.setSuffix( ' | ngBoilerplate' );
-})
+                if (response.status === 401) {
+                    $location.path('/login');
+                    return $q.reject(response);
+                }
+                else {
+                    return $q.reject(response);
+                }
+            }
+            return function (promise) {
+                return promise.then(success, error);
+            };
+        }];
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-})
+        $httpProvider.responseInterceptors.push(interceptor);
+    }])
 
-;
+    .run(function run() {
+        // TODO implementar version control aqui.
+    })
+
+    .controller('AppCtrl', ['$scope', '$location', function AppCtrl($scope, $location) {
+
+    }]);
 
