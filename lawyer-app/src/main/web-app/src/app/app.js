@@ -4,6 +4,7 @@ angular.module('lawyer', [
         'lawyer.home',
         'ui.state',
         'ui.route',
+        'lawyer.offline',
         'ConnectionStatus'
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {

@@ -1,9 +1,10 @@
 angular.module('ConnectionStatus', [])
 
 /**
- * Verifica se a conexão musa de status.
- * Caso mudar, temos que implementar uma solução que avise o usuário para ele não navegar offline sem preenchimento de dados e sem saber o que ocorreu.
- * É igual ao Gmail.
+ * Verifica se a conexao muda de status.
+ * Caso mudar, temos que implementar uma solucao que avise o usuario para ele na1o navegar
+ * offline (e vai navegar!!!) sem preenchimento de dados que vem do server e sem saber o que ocorreu.
+ * Eh igual ao Gmail.
  */
 .factory('ConnectionStatus', ['$rootScope', '$window', function ($rootScope, $window) {
 
@@ -13,12 +14,12 @@ angular.module('ConnectionStatus', [])
         handle : function() {
             _online = navigator.onLine;
             $window.addEventListener("offline", function () {
-                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
                 _online = false;
+                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
             }, false);
             $window.addEventListener("online", function () {
-                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
                 _online = true;
+                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
             }, false);
         },
 
