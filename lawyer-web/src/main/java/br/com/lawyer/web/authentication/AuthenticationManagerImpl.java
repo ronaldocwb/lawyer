@@ -3,7 +3,6 @@ package br.com.lawyer.web.authentication;
 import br.com.lawyer.core.authentication.AuthenticationService;
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.entity.Permissao;
-import br.com.lawyer.core.entity.PermissaoUsuario;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.util.PasswordEncoder;
@@ -72,8 +71,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
 
-        //return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
-        return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(null), token);
+        return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
     }
 
     /**
@@ -81,16 +79,12 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      * @param permissoes
      * @return List<GrantedAuthority>
      */
-    public Collection<? extends GrantedAuthority> getAuthorities(List<PermissaoUsuario> permissoes) {
+    public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
-        /*for (PermissaoUsuario permissao : permissoes) {
-            Permissao p = permissao.getPermissao();
-            authList.add(new SimpleGrantedAuthority(p.toString()));
-        }*/
-        authList.add(new SimpleGrantedAuthority("ROLE_USER"));
-        authList.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
-
+        for (Permissao permissao : permissoes) {
+            authList.add(new SimpleGrantedAuthority(permissao.toString()));
+        }
         return authList;
     }
 

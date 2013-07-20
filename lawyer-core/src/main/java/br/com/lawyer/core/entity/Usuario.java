@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,8 +17,9 @@ public class Usuario implements Serializable {
 
     private String senha;
 
-    @ManyToMany
-    private List<PermissaoUsuario> permissoes;
+    @ElementCollection
+    @Enumerated
+    private List<Permissao> permissoes;
 
     @PrePersist
     private void generateUuid() {
@@ -52,13 +52,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public List<PermissaoUsuario> getPermissoes() {
+    public List<Permissao> getPermissoes () {
         return permissoes;
     }
 
-    public void setPermissoes(List<PermissaoUsuario> permissoes) {
+    public void setPermissoes (List<Permissao> permissoes) {
         this.permissoes = permissoes;
     }
-
-
 }

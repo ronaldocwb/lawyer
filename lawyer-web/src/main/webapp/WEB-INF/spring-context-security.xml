@@ -10,8 +10,8 @@
 
     <!-- Define os contextos que o security vai atuar e quais são os entrypoints da aplicação -->
     <security:http use-expressions="true">
-        <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
-        <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
+        <security:intercept-url pattern="/secure/**" access="hasAnyRole('USER', 'MANAGER')" />
+        <security:intercept-url pattern="/api/**" access="hasAnyRole('USER', 'MANAGER')" />
         <security:intercept-url pattern="/auth/*/**" access="isAnonymous()" />
         <security:form-login login-page="/auth"
                              authentication-failure-url="/auth" />
