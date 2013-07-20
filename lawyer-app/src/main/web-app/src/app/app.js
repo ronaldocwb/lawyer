@@ -3,7 +3,8 @@ angular.module('lawyer', [
         'templates-common',
         'lawyer.home',
         'ui.state',
-        'ui.route'
+        'ui.route',
+        'ConnectionStatus'
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/home');
@@ -30,8 +31,8 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(function run() {
-        // TODO implementar version control aqui.
+    .run(function run(ConnectionStatus) {
+        ConnectionStatus.handle();
     })
 
     .controller('AppCtrl', ['$scope', '$location', function AppCtrl($scope, $location) {
