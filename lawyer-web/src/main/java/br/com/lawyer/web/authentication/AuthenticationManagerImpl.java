@@ -88,7 +88,4 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         return authList;
     }
 
-
-
-
 }

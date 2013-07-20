@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AppController {
 
-    @RequestMapping(value = "/secure", method = RequestMethod.GET)
+    @RequestMapping(value = "/secure/**", method = RequestMethod.GET)
     public String app() {
-        return "/secure/index";
+        return "/lawyer/index";
     }
 }
