@@ -40,4 +40,15 @@
     <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
     <jpa:repositories base-package="br.com.lawyer.core.repository" />
 
+
+    <!--<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <beans:property name="entityManagerFactory" ref="emf" />
+    </beans:bean>
+
+    &lt;!&ndash; Define o uso de @Transaction para controle transacional &ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    &lt;!&ndash; Define o package para scan de classes de repositórios do Spring data JPA &ndash;&gt;
+    <jpa:repositories base-package="br.com.lawyer.core.repository" />-->
+
 </beans:beans>
