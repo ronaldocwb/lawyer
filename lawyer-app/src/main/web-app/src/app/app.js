@@ -4,8 +4,11 @@ angular.module('lawyer', [
         'lawyer.home',
         'ui.state',
         'ui.route',
+        'ui.bootstrap',
         'lawyer.offline',
         'ConnectionStatus'
+
+
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/home');
@@ -14,6 +17,7 @@ angular.module('lawyer', [
             function success(response) {
                 return response;
             }
+
             function error(response) {
 
                 if (response.status === 401) {
@@ -24,6 +28,7 @@ angular.module('lawyer', [
                     return $q.reject(response);
                 }
             }
+
             return function (promise) {
                 return promise.then(success, error);
             };
@@ -37,6 +42,23 @@ angular.module('lawyer', [
     })
 
     .controller('AppCtrl', ['$scope', '$location', function AppCtrl($scope, $location) {
+        $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
+            if (status === true) {
+                $scope.shouldBeOpen = false;
+            } else {
+                $scope.shouldBeOpen = true;
+            }
+            $scope.$apply();
+
+        });
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade: true,
+            keyboard: false,
+            backdropClick: false
+        };
 
     }]);
+
 
