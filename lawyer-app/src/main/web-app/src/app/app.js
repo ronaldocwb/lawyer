@@ -41,23 +41,25 @@ angular.module('lawyer', [
         ConnectionStatus.handle();
     })
 
-    .controller('AppCtrl', ['$scope', '$location', function AppCtrl($scope, $location) {
+    .controller('AppCtrl', ['$scope', '$dialog', function AppCtrl($scope, $dialog) {
+        var offlineDialog = null;
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
-            if (status === true) {
-                $scope.shouldBeOpen = false;
-            } else {
-                $scope.shouldBeOpen = true;
-            }
-            $scope.$apply();
+            $scope.$apply(function () {
+                if (status === false && !offlineDialog) {
+                    offlineDialog = $dialog.dialog({
+                        backdropFade: true,
+                        dialogFade: true,
+                        keyboard: false,
+                        backdropClick: false
+                    });
+                    offlineDialog.open('templates/modal-offline/modal-offline.tpl.html');
+                } else if (offlineDialog) {
+                    offlineDialog.close();
+                    offlineDialog = null;
+                }
+            });
 
         });
-
-        $scope.opts = {
-            backdropFade: true,
-            dialogFade: true,
-            keyboard: false,
-            backdropClick: false
-        };
 
     }]);
 
