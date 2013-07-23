@@ -7,15 +7,13 @@ module.exports = {
      * A PASTA BUILT È O CAMINHO DO WAR EXPLODED.
      */
   //build_dir: 'build',
-  build_dir: '../../../../lawyer-web/target/lawyer.war/secure',
+  build_dir: 'build',
+  war_dir: '../../../../lawyer-web/target/lawyer.war/secure',
   compile_dir: '../../../../lawyer-web/src/main/webapp/secure',
 
  app_files: {
     js: [ 'src/**/*.js', '!src/**/*.spec.js' ],
     jsunit: [ 'src/**/*.spec.js' ],
-    
-    coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
-    coffeeunit: [ 'src/**/*.spec.coffee' ],
 
     atpl: [ 'src/app/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],

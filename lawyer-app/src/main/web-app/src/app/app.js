@@ -5,9 +5,7 @@ angular.module('lawyer', [
         'ui.state',
         'ui.route',
         'ui.bootstrap',
-        'lawyer.offline',
         'ConnectionStatus'
-
 
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
@@ -41,7 +39,7 @@ angular.module('lawyer', [
         ConnectionStatus.handle();
     })
 
-    .controller('AppCtrl', ['$scope', '$dialog', function AppCtrl($scope, $dialog) {
+    .controller('AppCtrl', ['$scope', '$dialog', function ($scope, $dialog) {
         var offlineDialog = null;
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
             $scope.$apply(function () {
@@ -53,12 +51,11 @@ angular.module('lawyer', [
                         backdropClick: false
                     });
                     offlineDialog.open('templates/modal-offline/modal-offline.tpl.html');
-                } else if (offlineDialog) {
+                } else if (status === true && offlineDialog) {
                     offlineDialog.close();
                     offlineDialog = null;
                 }
             });
-
         });
 
     }]);
