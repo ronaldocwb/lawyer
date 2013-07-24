@@ -54,6 +54,9 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         try {
             usuario = authenticationService.getUsuarioParaAutenticacao(authentication.getName());
         } catch (BusinessException e) {
+            System.out.println(e);
+            e.printStackTrace();
+            
             return authentication;
         }
 
@@ -67,7 +70,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         }
 
         // Informações como IP e sessão ficam no WebAuthenticationDetails para monitoramento ou log.
-        WebAuthenticationDetails webDetails =  (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        WebAuthenticationDetails webDetails = (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
 
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
 
@@ -82,7 +85,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
-        for (Permissao permissao : permissoes) {
+            for (Permissao permissao : permissoes) {
             authList.add(new SimpleGrantedAuthority(permissao.toString()));
         }
         return authList;
