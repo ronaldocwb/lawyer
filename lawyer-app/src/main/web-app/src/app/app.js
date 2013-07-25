@@ -5,7 +5,8 @@ angular.module('lawyer', [
         'ui.state',
         'ui.route',
         'ui.bootstrap',
-        'ConnectionStatus'
+        'ConnectionStatus',
+        'Auth'
 
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {

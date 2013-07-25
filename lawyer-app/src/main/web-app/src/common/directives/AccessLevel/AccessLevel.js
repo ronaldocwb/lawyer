@@ -1,4 +1,4 @@
-angular.module('lawyer.access-level', [])
+angular.module('AccessLevel', [])
 
     .directive('accessLevel', ['$rootScope', 'Auth', function ($rootScope, Auth) {
 
