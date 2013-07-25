@@ -13,6 +13,7 @@ angular.module('Auth', [
                 _user.authorities = $cookieStore.get('lawyer.authorities');
                 _user.token = $cookieStore.get('lawyer.token');
                 _user.email = $cookieStore.get('lawyer.email');
+                console.log(_user);
                 $cookieStore.put('lawyer.user', _user);
             },
             get: function () {

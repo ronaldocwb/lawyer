@@ -15,7 +15,7 @@ angular.module('lawyer.home', [
     }])
 
     .controller('HomeController', ['$scope', function ($scope) {
-        console.log('teste');
+        console.log('HomeController');
     }])
 
 ;

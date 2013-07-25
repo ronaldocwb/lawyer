@@ -4,7 +4,7 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
         var l = 'lawyer';
         var e = 'email';
         var t = 'token';
-        var p = 'permissoes';
+        var p = 'authorities';
 
         $cookieStore.remove('JSESSIONID');
         $cookieStore.remove(l+'.'+e);
