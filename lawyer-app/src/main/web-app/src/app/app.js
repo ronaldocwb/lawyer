@@ -35,9 +35,10 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(function run(ConnectionStatus) {
+    .run(['ConnectionStatus', 'Auth', function run(ConnectionStatus, Auth) {
         ConnectionStatus.handle();
-    })
+        Auth.set();
+    }])
 
     .controller('AppCtrl', ['$scope', '$dialog', function ($scope, $dialog) {
         var offlineDialog = null;

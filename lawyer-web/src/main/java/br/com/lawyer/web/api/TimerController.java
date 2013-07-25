@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TimerController {
 
     @RequestMapping(value = "/timers/{uuid}", method = RequestMethod.POST)
-    public @ResponseBody int inicializarTemporarizador(@PathVariable("uuid") String uuid) {
+    public @ResponseBody int initTimerCount(@PathVariable("uuid") String uuid) {
         return 400;
     }
 }

@@ -30,13 +30,12 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
                 }
                 angular.element('body').css('cursor', 'auto');
 
-            }, function fail() {
+            }, function fail(error) {
+                console.log(error);
                 $scope.fail = true;
                 $scope.processing = false;
                 angular.element('body').css('cursor', 'auto');
                 $scope.user.senha = '';
-
-
             });
 
         };

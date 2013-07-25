@@ -1,25 +1,34 @@
 angular.module('Auth', [
         'ngCookies'
-])
-    /**
-     * Insere um usuário no cookie ou recupera ele.
-     */
-    .factory('Auth', ['$cookieStore', '$location', '$q', function ($cookieStore, $location, $q) {
+    ])
+/**
+ * Insere um usuário no cookie ou recupera ele.
+ */
+    .factory('Auth', ['$cookieStore', '$location', '$rootScope', function ($cookieStore, $location, $rootScope) {
 
-        var _user;
+        var _user = {};
 
         return {
-            set : function (user) {
-                $cookieStore.remove('lawyer.com.br.user');
-                $cookieStore.put('lawyer.com.br.user', user);
-                _user = user;
+            set: function () {
+                _user.authorities = $cookieStore.get('lawyer.authorities');
+                _user.token = $cookieStore.get('lawyer.token');
+                _user.email = $cookieStore.get('lawyer.email');
+                $cookieStore.put('lawyer.user', _user);
             },
-            get : function () {
-                if (_user === null || _user === undefined) {
-                    _user = $cookieStore.get('lawyer.com.br.user');
+            get: function () {
+                if (typeof _user === 'undefined' || _user === null) {
+                    _user = $cookieStore.get('lawyer.user');
                 }
                 return _user;
+            },
+            authorize: function (accessLevel, role) {
+                if (role === undefined) {
+                    // validar a lista de authorities, e nao como um objeto
+                    role = _user.authorities;
+                }
+                return accessLevel & role;
             }
+
         };
     }])
 ;
