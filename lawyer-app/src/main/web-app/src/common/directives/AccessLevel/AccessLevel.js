@@ -1,22 +1,37 @@
-angular.module('AccessLevel', [])
+angular.module('AccessLevel', ['Auth'])
 
-    .directive('accessLevel', ['$rootScope', 'Auth', function ($rootScope, Auth) {
+    /**
+    * Directive para esconder elementos no HTML que sejam de alguma permissao especifica e que o usuario nao tenha ela.
+     * Essa validacao devera ser realizada no server tambem, por motivos obvios
+    */
+    .directive('accessLevel', ['Auth', function (Auth) {
 
         return {
             restrict: 'A',
-            replace: true,
-            link: function (scope, element, attrs) {
+            link: function ($scope, element, attrs) {
+
                 var prevDisp = element.css('display');
-                $rootScope.$watch('user.role', function () {
-                    if (!Auth.authorize(attrs.accessLevel)) {
-                        element.css('display', 'none');
-                    } else {
-                        element.css('display', prevDisp);
+                var accessLevel = '';
+
+                attrs.$observe('accessLevel', function (al) {
+                    if (al) {
+                        accessLevel = al;
                     }
+                    updateCSS();
                 });
+
+                /**
+                 * Talvez de para melhorar isso...
+                 */
+                function updateCSS() {
+                    if (accessLevel) {
+                        if (!Auth.authorize(accessLevel)) {
+                            element.css('display', 'none');
+                        } else {
+                            element.css('display', prevDisp);
+                        }
+                    }
+                }
             }
         };
-
-    }])
-;
-
+    }]);

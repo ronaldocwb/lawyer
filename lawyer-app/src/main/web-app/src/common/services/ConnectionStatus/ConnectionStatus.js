@@ -6,27 +6,32 @@ angular.module('ConnectionStatus', [])
  * offline (e vai navegar!!!) sem preenchimento de dados que vem do server e sem saber o que ocorreu.
  * Eh igual ao Gmail.
  */
-.factory('ConnectionStatus', ['$rootScope', '$window', function ($rootScope, $window) {
+    .factory('ConnectionStatus', ['$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout) {
 
-    var _online = true;
-
-    return {
-        handle : function() {
-            _online = navigator.onLine;
-            $window.addEventListener("offline", function () {
-                _online = false;
-                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
-            }, false);
-            $window.addEventListener("online", function () {
-                _online = true;
-                $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
-            }, false);
-        },
-
-        get : function () {
-            return _online;
+        function emit(_online) {
+            $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);
         }
-    };
-}])
+
+        return {
+            handle: function () {
+                $timeout(function () {
+                    if (!navigator.onLine) {
+                        if (!$rootScope.$$phase) {
+                            emit(false);
+                        }
+                    }
+                }, 500);
+
+                $window.addEventListener("offline", function () {
+                    emit(false);
+                }, false);
+
+                $window.addEventListener("online", function () {
+                    emit(true);
+                }, false);
+            }
+        };
+
+    }])
 ;
 

@@ -3,33 +3,30 @@ angular.module('Auth', [
     ])
 /**
  * Insere um usuário no cookie ou recupera ele.
+ * Com base nas permissões, autoriza ou nao um acesso.
  */
-    .factory('Auth', ['$cookieStore', '$location', '$rootScope', function ($cookieStore, $location, $rootScope) {
+    .factory('Auth', ['$cookieStore', function ($cookieStore) {
 
         var _user = {};
 
         return {
+
+            user : _user,
+
             set: function () {
-                _user.authorities = $cookieStore.get('lawyer.authorities');
-                _user.token = $cookieStore.get('lawyer.token');
-                _user.email = $cookieStore.get('lawyer.email');
-                console.log(_user);
+                _user = $cookieStore.get('lawyer.user') || {email : '', token : '', authorities : []};
                 $cookieStore.put('lawyer.user', _user);
             },
-            get: function () {
-                if (typeof _user === 'undefined' || _user === null) {
-                    _user = $cookieStore.get('lawyer.user');
-                }
-                return _user;
-            },
-            authorize: function (accessLevel, role) {
-                if (role === undefined) {
-                    // validar a lista de authorities, e nao como um objeto
-                    role = _user.authorities;
-                }
-                return accessLevel & role;
-            }
 
+            authorize: function (accessLevel) {
+                var _authorized = false;
+                angular.forEach(_user.authorities, function (value) {
+                    if (value.authority && value.authority === accessLevel) {
+                        _authorized = true;
+                    }
+                });
+                return _authorized;
+            }
         };
     }])
 ;

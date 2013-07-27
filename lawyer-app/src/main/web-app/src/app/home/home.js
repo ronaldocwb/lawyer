@@ -1,5 +1,6 @@
 angular.module('lawyer.home', [
-        'ui.state'
+        'ui.state',
+        'AccessLevel'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -15,7 +16,6 @@ angular.module('lawyer.home', [
     }])
 
     .controller('HomeController', ['$scope', function ($scope) {
-        console.log('HomeController');
     }])
 
 ;

@@ -6,7 +6,9 @@ angular.module('lawyer', [
         'ui.route',
         'ui.bootstrap',
         'ConnectionStatus',
-        'Auth'
+        'Auth',
+        'AccessLevel'
+
 
     ])
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
@@ -36,13 +38,15 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(['ConnectionStatus', 'Auth', function run(ConnectionStatus, Auth) {
-        ConnectionStatus.handle();
+    .run(['Auth', function run(Auth) {
         Auth.set();
     }])
 
-    .controller('AppCtrl', ['$scope', '$dialog', function ($scope, $dialog) {
+    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', '$timeout', function ($scope, $dialog, ConnectionStatus, $timeout) {
+        ConnectionStatus.handle();
+
         var offlineDialog = null;
+
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
             $scope.$apply(function () {
                 if (status === false && !offlineDialog) {
