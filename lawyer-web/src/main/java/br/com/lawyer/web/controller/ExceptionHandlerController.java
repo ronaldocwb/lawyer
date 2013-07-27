@@ -75,7 +75,7 @@ public class ExceptionHandlerController {
         restException.setMessage("Usuário ou senha incorretos.");
         restException.setInfo("BadCredentialsException");
 
-        return new ResponseEntity<RestException>(restException, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
 
     }
 
@@ -95,7 +95,7 @@ public class ExceptionHandlerController {
         restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
-        return new ResponseEntity<RestException>(restException, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
 
     }
 

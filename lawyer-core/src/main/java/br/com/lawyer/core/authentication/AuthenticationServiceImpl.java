@@ -24,7 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Usuario getUsuarioParaAutenticacao(String email) throws BusinessException {
 
-        Usuario usuario = null;
+        Usuario usuario;
 
         try {
             usuario = repository.findByEmail(email);

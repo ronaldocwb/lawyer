@@ -2,6 +2,7 @@ package br.com.lawyer.web.controller;
 
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.util.LawyerStringUtils;
 import br.com.lawyer.core.util.PasswordEncoder;
 import br.com.lawyer.web.exception.RestException;
@@ -82,7 +83,7 @@ public class AuthenticationController {
             }
         }
 
-        return new ResponseEntity<UsuarioVO>(usuario, http);
+        return new ResponseEntity<>(usuario, http);
     }
 
 

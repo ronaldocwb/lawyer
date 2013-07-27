@@ -37,7 +37,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      */
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        Usuario usuario = null;
+        Usuario usuario;
 
         if (authentication.getName().equals(authentication.getCredentials())) {
             throw new BadCredentialsException("Usuário / Senha inválidos.");
@@ -54,7 +54,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         try {
             usuario = authenticationService.getUsuarioParaAutenticacao(authentication.getName());
         } catch (BusinessException e) {
-            System.out.println(e);
             e.printStackTrace();
             
             return authentication;
@@ -84,7 +83,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      */
     public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> permissoes) {
 
-        List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authList = new ArrayList<>();
             for (Permissao permissao : permissoes) {
             authList.add(new SimpleGrantedAuthority(permissao.toString()));
         }

@@ -36,7 +36,7 @@ public class ExceptionController {
 
         String uri = (String)request.getAttribute(WebUtils.ERROR_REQUEST_URI_ATTRIBUTE);
 
-        String forwardUri = null;
+        String forwardUri;
         if (StringUtils.contains(uri, "/api/")) {
             forwardUri = "/errors/json/" + status;
         } else {
@@ -61,7 +61,7 @@ public class ExceptionController {
 
         HttpStatus http = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        return new ResponseEntity<RestException>(exception, http);
+        return new ResponseEntity<>(exception, http);
     }
 
     /**
