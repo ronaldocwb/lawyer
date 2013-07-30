@@ -59,7 +59,7 @@ angular.module('lawyer', [
 
         i18nNotifications.pushForCurrentRoute('crud.user.remove.success', 'success', {id : 4343});
 
-        $scope.$on('$routeChangeError', function(event, current, previous, rejection){
+        $scope.$on('$stateChangeFail', function(event, current, previous, rejection){
             i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
         });
 
