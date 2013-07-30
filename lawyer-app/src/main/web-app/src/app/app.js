@@ -7,10 +7,16 @@ angular.module('lawyer', [
         'ui.bootstrap',
         'ConnectionStatus',
         'Auth',
-        'AccessLevel'
-
-
+        'AccessLevel',
+        'services.i18nNotifications',
+        'services.httpRequestTracker',
+        'security',
+        'services.breadcrumbs',
+        'i18n.Constants',
+        'lawyer.header'
     ])
+
+
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/home');
         var interceptor = ['$location', '$q', function ($location, $q) {
@@ -38,11 +44,25 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(['Auth', function run(Auth) {
+    .run(['Auth', 'security', function run(Auth, security) {
         Auth.set();
+        security.requestCurrentUser();
     }])
 
-    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', '$timeout', function ($scope, $dialog, ConnectionStatus, $timeout) {
+    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', 'i18nNotifications', function ($scope, $dialog, ConnectionStatus, i18nNotifications) {
+
+        $scope.notifications = i18nNotifications;
+
+        $scope.removeNotification = function (notification) {
+            i18nNotifications.remove(notification);
+        };
+
+        i18nNotifications.pushForCurrentRoute('crud.user.remove.success', 'success', {id : 4343});
+
+        $scope.$on('$routeChangeError', function(event, current, previous, rejection){
+            i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
+        });
+
         ConnectionStatus.handle();
 
         var offlineDialog = null;

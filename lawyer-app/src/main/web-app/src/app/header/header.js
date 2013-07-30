@@ -1,20 +1,29 @@
-angular.module('lawyer.header', ['ui.state'])
+angular.module('lawyer.header', [])
 
-    .config(function ($stateProvider) {
-        $stateProvider.state('header', {
-            url : '/:q',
-            views: {
-                'header' : {
-                    controller: 'HeaderController',
-                    templateUrl: 'header/header.tpl.html'
+    .controller('HeaderController', ['$scope', '$location', '$route', 'security', 'breadcrumbs', 'notifications', 'httpRequestTracker',
+        function ($scope, $location, $route, security, breadcrumbs, notifications, httpRequestTracker) {
+            $scope.location = $location;
+            $scope.breadcrumbs = breadcrumbs;
+
+            $scope.isAuthenticated = security.isAuthenticated;
+            $scope.isAdmin = security.isAdmin;
+
+            $scope.home = function () {
+                if (security.isAuthenticated()) {
+                    $location.path('/dashboard');
+                } else {
+                    $location.path('/projectsinfo');
                 }
-            }
-        });
-    })
+            };
 
-    .controller('HeaderController', ['$scope', function ($scope) {
-        console.log('I\'m Here niggaz');
+            $scope.isNavbarActive = function (navBarPath) {
+                return navBarPath === breadcrumbs.getFirst().name;
+            };
 
-    }])
-;
+            $scope.hasPendingRequests = function () {
+                return httpRequestTracker.hasPendingRequests();
+            };
+        }]);
+
+
 
