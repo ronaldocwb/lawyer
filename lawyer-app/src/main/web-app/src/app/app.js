@@ -13,7 +13,8 @@ angular.module('lawyer', [
         'security',
         'services.breadcrumbs',
         'i18n.Constants',
-        'lawyer.header'
+        'lawyer.header',
+        'timer'
     ])
 
 
@@ -57,7 +58,7 @@ angular.module('lawyer', [
             i18nNotifications.remove(notification);
         };
 
-        i18nNotifications.pushForCurrentRoute('crud.user.remove.success', 'success', {id : 4343});
+        i18nNotifications.pushForCurrentRoute('crud.user.remove.success', 'success', {id : 'BATMAN'});
 
         $scope.$on('$stateChangeFail', function(event, current, previous, rejection){
             i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
