@@ -80,9 +80,10 @@ angular.module('timer', [])
                     $scope.seconds = $scope.seconds < 10 ? '0'+$scope.seconds : $scope.seconds;
                     $scope.minutes = $scope.minutes < 10 ? '0'+$scope.minutes : $scope.minutes;
                     $scope.hours = $scope.hours < 10 ? '0'+$scope.hours : $scope.hours;
-                    //We are not using $timeout for a reason. Please read here - https://github.com/siddii/angular-timer/pull/5
+
                     $timeout(function () {
                         tick();
+                        // o timeout faz o apply automatico. So temos que isolar esse escxopo pra nao replicar em $apply no app inteiro e evitar essa chamada quando o $scope estiver executando o $digest
                         //$scope.$apply();
                     }, $scope.interval);
 

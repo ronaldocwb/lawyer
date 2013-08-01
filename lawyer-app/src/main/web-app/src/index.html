@@ -25,88 +25,24 @@
 </head>
 <body>
 
-
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
             <div ng-include="'header/header.tpl.html'"></div>
-            <div ng-include="'notifications/notifications.tpl.html'" class="container-fluid"
-                 ng-show="notifications.getCurrent().length"></div>
+            <div ng-include="'notifications/notifications.tpl.html'" class="container-fluid" ng-show="notifications.getCurrent().length"></div>
         </div>
     </div>
     <div class="row-fluid">
-        <div class="span2">
-            <div class="progress">
-                <div class="bar">
-                </div>
-                <timer interval="1000"> <span data-ng-bind="hours"></span> : {{minutes}} : <span data-ng-bind="seconds"></span></timer>
-            </div>
-
-        </div>
+        <div class="span2" data-ng-include="'menus/esquerda/esquerda.tpl.html'"></div>
         <div class="span8">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Profile</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">Messages</a>
-                </li>
-                <li class="dropdown pull-right">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong
-                            class="caret"></strong></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Action</a>
-                        </li>
-                        <li>
-                            <a href="#">Another action</a>
-                        </li>
-                        <li>
-                            <a href="#">Something else here</a>
-                        </li>
-                        <li class="divider">
-                        </li>
-                        <li>
-                            <a href="#">Separated link</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div data-ui-view="main"></div>
+            <div class="row">
+                <div ng-include="'menus/central/central.tpl.html'"></div>
+            </div>
+            <div class="row">
+                <div ui-view="main"></div>
+            </div>
         </div>
-        <div class="span2">
-            <ul class="nav nav-list">
-                <li class="nav-header">
-                    List header
-                </li>
-                <li class="active">
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Library</a>
-                </li>
-                <li>
-                    <a href="#">Applications</a>
-                </li>
-                <li class="nav-header">
-                    Another list header
-                </li>
-                <li>
-                    <a href="#">Profile</a>
-                </li>
-                <li>
-                    <a href="#">Settings</a>
-                </li>
-                <li class="divider">
-                </li>
-                <li>
-                    <a href="#">Help</a>
-                </li>
-            </ul>
-        </div>
+        <div class="span2" ng-include="'menus/direita/direita.tpl.html'"></div>
     </div>
 </div>
 

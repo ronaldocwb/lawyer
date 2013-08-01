@@ -7,14 +7,15 @@ angular.module('lawyer', [
         'ui.bootstrap',
         'ConnectionStatus',
         'Auth',
-        'AccessLevel',
         'services.i18nNotifications',
         'services.httpRequestTracker',
         'security',
         'services.breadcrumbs',
         'i18n.Constants',
         'lawyer.header',
-        'timer'
+        'lawyer.menu.esquerda',
+        'lawyer.menu.direita',
+        'lawyer.menu.central'
     ])
 
 
@@ -53,7 +54,7 @@ angular.module('lawyer', [
     .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', 'i18nNotifications', function ($scope, $dialog, ConnectionStatus, i18nNotifications) {
 
         $scope.notifications = i18nNotifications;
-
+        
         $scope.removeNotification = function (notification) {
             i18nNotifications.remove(notification);
         };

@@ -4,10 +4,7 @@ angular.module('services.httpRequestTracker', [])
 
         return {
             hasPendingRequests: function () {
-                console.log($http.pendingRequests.length);
-                console.log('requests');
                 return $http.pendingRequests.length > 0;
-
             }
         };
     }]);
