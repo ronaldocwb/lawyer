@@ -435,21 +435,9 @@ module.exports = function (grunt) {
             less: {
                 files: [ 'src/**/*.less' ],
                 tasks: [ 'recess:build' ]
-            },
-
-            /**
-             * When a JavaScript unit test file changes, we only want to lint it and
-             * run the unit tests. We don't want to do any live reloading.
-             */
-            jsunit: {
-                files: [
-                    '<%= app_files.jsunit %>'
-                ],
-                tasks: [ 'jshint:test', 'karma:unit:run' ],
-                options: {
-                    livereload: false
-                }
             }
+
+
 
         }
     };
@@ -464,7 +452,7 @@ module.exports = function (grunt) {
      * before watching for changes.
      */
     grunt.renameTask('watch', 'delta');
-    grunt.registerTask('watch', [ 'build', 'karma:unit', 'delta' ]);
+    grunt.registerTask('watch', [ 'build', 'delta' ]);
 
     /**
      * The default task is to build and compile.
