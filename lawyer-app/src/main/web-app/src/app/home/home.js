@@ -17,8 +17,6 @@ angular.module('lawyer.home', [
 
     .controller('HomeController', ['$scope', function ($scope) {
 
-        $scope.data = new Date();
-
     }])
 
 ;
