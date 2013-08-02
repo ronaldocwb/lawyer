@@ -3,23 +3,23 @@
 <head>
     <title>Lawyer</title>
 
-
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
 
     <!--[if IE 7>
-    <link rel="stylesheet" href="assets/font-awesome-ie7.min.css />
+        colocar as putaris do IE aqui
     <![endif]-->
 
-    <!-- compiled JS --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script>
+    <!-- compiled JS -->
+    <% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
 
 </head>
@@ -28,7 +28,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <div ng-include="'header/header.tpl.html'"></div>
+            <div ng-include="'menus/header/header.tpl.html'"></div>
             <div ng-include="'notifications/notifications.tpl.html'" class="container-fluid" ng-show="notifications.getCurrent().length"></div>
         </div>
     </div>

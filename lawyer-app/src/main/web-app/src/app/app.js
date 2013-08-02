@@ -9,7 +9,6 @@ angular.module('lawyer', [
         'Auth',
         'services.i18nNotifications',
         'services.httpRequestTracker',
-        'security',
         'services.breadcrumbs',
         'i18n.Constants',
         'lawyer.header',
@@ -46,9 +45,8 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(['Auth', 'security', function run(Auth, security) {
+    .run(['Auth', function run(Auth) {
         Auth.set();
-        security.requestCurrentUser();
     }])
 
     .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', 'i18nNotifications', function ($scope, $dialog, ConnectionStatus, i18nNotifications) {
@@ -59,14 +57,12 @@ angular.module('lawyer', [
             i18nNotifications.remove(notification);
         };
 
-        i18nNotifications.pushForCurrentRoute('crud.user.remove.success', 'success', {id : 'BATMAN'});
-
         $scope.$on('$stateChangeFail', function(event, current, previous, rejection){
             i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
         });
 
+        // Tratamento de usuario sem conexao ativa.
         ConnectionStatus.handle();
-
         var offlineDialog = null;
 
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
