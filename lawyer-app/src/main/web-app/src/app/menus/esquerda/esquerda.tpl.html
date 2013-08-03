@@ -1,8 +1,15 @@
 <div data-ng-controller="MenuEsquerdaController">
-    <div class="progress">
-        <div class="bar">
-        </div>
-        <timer interval="1000"> <span data-ng-bind="hours"></span> : {{minutes}} : <span data-ng-bind="seconds"></span></timer>
-    </div>
-
+    <timer interval="1000">
+        <p class="clock">
+            <span class="clock-block">
+                <span class="clock-val" data-ng-bind="hours"></span>
+                <span class="clock-unit" >Horas</span>
+            </span>
+            <span class="clock-block">
+                <span class="clock-val" data-ng-bind="minutes"></span>
+                <span class="clock-unit" >Minutos</span>
+            </span>
+        </p>
+    </timer>
 </div>
+
