@@ -2,20 +2,14 @@
   "name": "lawyer-app",
   "version": "0.0.1",
   "devDependencies": {
-      // versao mais recente
     "angular-unstable": "~1.1.5",
     "angular-resource-unstable": "~1.1.5",
-      // mocks eh para testes
     "angular-mocks": "~1.0.7",
     "bootstrap": "~2.3.2",
-    "angular-bootstrap": "~0.3.0",
-      // router eh para gerenciar rotas, vai ser nativo do angular em breve
+    "angular-bootstrap": "~0.4.0",
     "angular-ui-router": "~0.0.1",
-      // utils e pah, veja no site do angular ui http://angular-ui.github.io/ui-utils/
     "angular-ui-utils": "~0.0.3",
-      // gerenciar cookies
     "angular-cookies": "~1.0.7",
-      // datas e padroes do brasil
     "angular-i18n": "~1.0.7"
   },
   "dependencies": {}
