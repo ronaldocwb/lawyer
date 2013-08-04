@@ -74,7 +74,7 @@ angular.module('lawyer', [
                         keyboard: false,
                         backdropClick: false
                     });
-                    offlineDialog.open('templates/modal-offline/modal-offline.tpl.html');
+                    offlineDialog.open('templates/modalOffline/modalOffline.tpl.html');
                 } else if (status === true && offlineDialog) {
                     offlineDialog.close();
                     offlineDialog = null;

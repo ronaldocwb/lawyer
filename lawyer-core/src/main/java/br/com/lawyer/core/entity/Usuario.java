@@ -1,16 +1,17 @@
 package br.com.lawyer.core.entity;
 
-import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Usuario implements Serializable {
 
     @Id
+    @GeneratedValue(generator = "hibernate-uuid")
+    @GenericGenerator (name = "hibernate-uuid", strategy = "uuid2")
     private String uuid;
 
     private String email;
@@ -20,13 +21,6 @@ public class Usuario implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Permissao.class)
     @Enumerated(value = EnumType.ORDINAL)
     private List<Permissao> permissoes;
-
-    @PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uuid)) {
-            this.uuid = UUID.randomUUID().toString();
-        }
-    }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;

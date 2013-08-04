@@ -5,6 +5,8 @@ public enum Permissao {
     USER("USER"),
     MANAGER("MANAGER"),
     ADMIN("ADMIN"),
+    FINANCE("FINANCE"),
+    READ_ONLY("READ_ONLY"),
     LAWYER("LAWYER");
 
     private String value;

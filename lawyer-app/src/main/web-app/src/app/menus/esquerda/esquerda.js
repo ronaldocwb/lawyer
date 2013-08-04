@@ -1,6 +1,7 @@
-angular.module('lawyer.menu.esquerda', ['timer'])
+angular.module('lawyer.menu.esquerda', ['timer', 'lawyer.atividades.popup'])
 
-.controller('MenuEsquerdaController', ['$scope', function ($scope) {
+.controller('MenuEsquerdaController', ['$scope', '$dialog', '$log', function ($scope, $dialog, $log) {
 
-}])
+
+    }])
 ;
