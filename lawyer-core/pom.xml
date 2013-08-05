@@ -16,6 +16,20 @@
         <org.springframework.version>3.2.2.RELEASE</org.springframework.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
     </properties>
+    
+    <build>
+    	<plugins>
+    		<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+    	</plugins>
+    </build>
+    
     <dependencies>
         <!-- Java EE 6 -->
         <dependency>
