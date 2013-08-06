@@ -16,6 +16,7 @@ angular.module('lawyer.home', [
     }])
 
     .controller('HomeController', ['$scope', function ($scope) {
+
     }])
 
 ;

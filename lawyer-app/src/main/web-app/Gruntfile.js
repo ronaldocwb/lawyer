@@ -31,7 +31,7 @@ module.exports = function (grunt) {
          * We read in our `package.json` file so we can access the package name and
          * version. It's already there, so we don't repeat ourselves here.
          */
-        pkg: grunt.file.readJSON("config/package.json"),
+        pkg: grunt.file.readJSON("./package.json"),
 
         /**
          * The banner is the comment that is placed at the top of our compiled
@@ -64,13 +64,13 @@ module.exports = function (grunt) {
         bump: {
             options: {
                 files: [
-                    "config/package.json",
+                    "package.json",
                     "bower.json"
                 ],
                 commit: false,
                 commitMessage: 'chore(release): v%VERSION%',
                 commitFiles: [
-                    "config/package.json",
+                    "package.json",
                     "client/bower.json"
                 ],
                 createTag: false,

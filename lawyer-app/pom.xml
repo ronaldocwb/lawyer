@@ -10,6 +10,28 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lawyer-app</artifactId>
-
+	
+	<!-- Execute depois que vc baixar o plugin do maven e instalar na sua maquina =)
+	<build>
+		<plugins>    
+			<plugin>    
+				<groupId>com.github.cavarzan</groupId>
+				<artifactId>angular-boilerplate-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<angularProjectDirectory></angularProjectDirectory>
+					<executeBower>false</executeBower>
+					<executeNpm>false</executeNpm>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build-->
 
 </project>

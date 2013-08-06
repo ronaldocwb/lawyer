@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html ng-app="lawyer" ng-controller="AppCtrl">
-  <head>
+<head>
     <title>Lawyer</title>
-
 
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
     <!-- compiled CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/lawyer.css" />
+    
+        <link rel="stylesheet" type="text/css" href="assets/lawyer.css"/>
+    
 
     <!--[if IE 7>
-    <link rel="stylesheet" href="assets/font-awesome-ie7.min.css />
+        colocar as putaris do IE aqui
     <![endif]-->
 
     <!-- compiled JS -->
-    <script type="text/javascript" src="assets/lawyer.js"></script>
-
-  </head>
-  <body>
     
-    <div class="container" ui-view="main"></div>
+        <script type="text/javascript" src="assets/lawyer.js"></script>
+    
 
-  </body>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div ng-include="'menus/header/header.tpl.html'"></div>
+            <div ng-include="'notifications/notifications.tpl.html'" class="container-fluid" ng-show="notifications.getCurrent().length"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span2" data-ng-include="'menus/esquerda/esquerda.tpl.html'"></div>
+        <div class="span8">
+            <div class="row">
+                <div ng-include="'menus/central/central.tpl.html'"></div>
+            </div>
+            <div class="row">
+                <div ui-view="main"></div>
+            </div>
+        </div>
+        <div class="span2" ng-include="'menus/direita/direita.tpl.html'"></div>
+    </div>
+</div>
+
+</body>
 </html>

@@ -7,10 +7,17 @@ angular.module('lawyer', [
         'ui.bootstrap',
         'ConnectionStatus',
         'Auth',
-        'AccessLevel'
-
-
+        'services.i18nNotifications',
+        'services.httpRequestTracker',
+        'services.breadcrumbs',
+        'i18n.Constants',
+        'lawyer.header',
+        'lawyer.menu.esquerda',
+        'lawyer.menu.direita',
+        'lawyer.menu.central'
     ])
+
+
     .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/home');
         var interceptor = ['$location', '$q', function ($location, $q) {
@@ -42,9 +49,20 @@ angular.module('lawyer', [
         Auth.set();
     }])
 
-    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', '$timeout', function ($scope, $dialog, ConnectionStatus, $timeout) {
-        ConnectionStatus.handle();
+    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', 'i18nNotifications', function ($scope, $dialog, ConnectionStatus, i18nNotifications) {
 
+        $scope.notifications = i18nNotifications;
+        
+        $scope.removeNotification = function (notification) {
+            i18nNotifications.remove(notification);
+        };
+
+        $scope.$on('$stateChangeFail', function(event, current, previous, rejection){
+            i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
+        });
+
+        // Tratamento de usuario sem conexao ativa.
+        ConnectionStatus.handle();
         var offlineDialog = null;
 
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
@@ -56,7 +74,7 @@ angular.module('lawyer', [
                         keyboard: false,
                         backdropClick: false
                     });
-                    offlineDialog.open('templates/modal-offline/modal-offline.tpl.html');
+                    offlineDialog.open('templates/modalOffline/modalOffline.tpl.html');
                 } else if (status === true && offlineDialog) {
                     offlineDialog.close();
                     offlineDialog = null;
