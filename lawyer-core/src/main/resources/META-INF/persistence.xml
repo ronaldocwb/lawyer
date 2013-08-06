@@ -7,7 +7,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
     <class>br.com.lawyer.core.entity.Usuario</class>
-    <class>br.com.lawyer.core.entity.Permissao</class>
+<!--     <class>br.com.lawyer.core.entity.Permissao</class> -->
 
     <properties>
          <property name="hibernate.hbm2ddl.auto" value="update" />
