@@ -9,13 +9,10 @@ import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.Authentication;
-
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,12 +65,9 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
             throw new BadCredentialsException("Usuário / Senha inválidos.");
         }
 
-        // Informações como IP e sessão ficam no WebAuthenticationDetails para monitoramento ou log.
-        WebAuthenticationDetails webDetails = (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
 
-        return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, webDetails, getAuthorities(usuario.getPermissoes()), token);
+        return new LawyerAuthenticationToken(authentication.getName(), authentication.getCredentials(), usuario, getAuthorities(usuario.getPermissoes()), token);
     }
 
     /**

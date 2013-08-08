@@ -61,15 +61,6 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
-        this.principal = principal;
-        this.credentials = credentials;
-        this.usuario = user;
-        this.setDetails(details);
-        super.setAuthenticated(true); // must use super, as we override
-    }
-
     public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
         super(authorities);
         this.principal = principal;
@@ -77,6 +68,15 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         this.usuario = user;
         this.token = token;
         this.setDetails(details);
+        super.setAuthenticated(true); // must use super, as we override
+    }
+
+    public LawyerAuthenticationToken (Object principal, Object credentials, Usuario usuario, Collection<? extends GrantedAuthority> authorities, String token) {
+        super(authorities);
+        this.principal = principal;
+        this.credentials = credentials;
+        this.usuario = usuario;
+        this.token = token;
         super.setAuthenticated(true); // must use super, as we override
     }
 

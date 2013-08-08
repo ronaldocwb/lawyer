@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
     private String senha;
 
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Permissao.class)
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     private List<Permissao> permissoes;
 
     @PrePersist
