@@ -1,4 +1,4 @@
-angular.module('ConnectionStatus', [])
+angular.module('lawyer.connectionStatus', [])
 
 /**
  * Verifica se a conexao muda de status.
@@ -6,7 +6,7 @@ angular.module('ConnectionStatus', [])
  * offline (e vai navegar!!!) sem preenchimento de dados que vem do server e sem saber o que ocorreu.
  * Eh igual ao Gmail.
  */
-    .factory('ConnectionStatus', ['$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout) {
+    .factory('connectionStatus', ['$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout) {
 
         function emit(_online) {
             $rootScope.$broadcast('ConnectionStatus.CHANGE', _online);

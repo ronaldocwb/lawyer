@@ -1,11 +1,11 @@
-angular.module('Auth', [
+angular.module('lawyer.auth', [
         'ngCookies'
     ])
 /**
  * Insere um usuário no cookie ou recupera ele.
  * Com base nas permissões, autoriza ou nao um acesso.
  */
-    .factory('Auth', ['$cookieStore', function ($cookieStore) {
+    .factory('auth', ['$cookieStore', function ($cookieStore) {
 
         var _user = {};
 

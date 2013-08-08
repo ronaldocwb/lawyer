@@ -1,10 +1,10 @@
-angular.module('AccessLevel', ['Auth'])
+angular.module('AccessLevel', ['lawyer.auth'])
 
     /**
     * Directive para esconder elementos no HTML que sejam de alguma permissao especifica e que o usuario nao tenha ela.
      * Essa validacao devera ser realizada no server tambem, por motivos obvios
     */
-    .directive('accessLevel', ['Auth', function (Auth) {
+    .directive('accessLevel', ['auth', function (auth) {
 
         return {
             restrict: 'A',
@@ -25,7 +25,7 @@ angular.module('AccessLevel', ['Auth'])
                  */
                 function updateCSS() {
                     if (accessLevel) {
-                        if (!Auth.authorize(accessLevel)) {
+                        if (!auth.authorize(accessLevel)) {
                             element.css('display', 'none');
                         } else {
                             element.css('display', prevDisp);

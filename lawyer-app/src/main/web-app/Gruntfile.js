@@ -289,7 +289,7 @@ module.exports = function (grunt) {
          */
         karma: {
             options: {
-                configFile: '<%= build_dir %>/karma-unit.js'
+                configFile: '<%= test_dir %>/karma-unit.js'
             },
             unit: {
                 runnerPort: 9101,
@@ -345,12 +345,12 @@ module.exports = function (grunt) {
          */
         karmaconfig: {
             unit: {
-                dir: '<%= build_dir %>',
+                dir: '<%= test_dir %>',
                 src: [
                     '<%= vendor_files.js %>',
                     '<%= html2js.app.dest %>',
                     '<%= html2js.common.dest %>',
-                    'vendor/angular-mocks/angular-mocks.js'
+                    'vendor/angular-mocks-unstable/angular-mocks.js'
                 ]
             }
         },
@@ -447,7 +447,7 @@ module.exports = function (grunt) {
                 ],
                 tasks: [ 'jshint:test', 'karma:unit:run' ],
                 options: {
-                    livereload: false
+                    livereload: true
                 }
             }
 
@@ -542,7 +542,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('karmaconfig', 'Process karma config templates', function () {
         var jsFiles = filterForJS(this.filesSrc);
 
-        grunt.file.copy('karma/karma-unit.tpl.js', grunt.config('build_dir') + '/karma-unit.js', {
+        grunt.file.copy('karma/karma-unit.tpl.js', grunt.config('test_dir') + '/karma-unit.js', {
             process: function (contents, path) {
                 return grunt.template.process(contents, {
                     data: {

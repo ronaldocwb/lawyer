@@ -5,8 +5,8 @@ angular.module('lawyer', [
         'ui.state',
         'ui.route',
         'ui.bootstrap',
-        'ConnectionStatus',
-        'Auth',
+        'lawyer.connectionStatus',
+        'lawyer.auth',
         'services.i18nNotifications',
         'services.httpRequestTracker',
         'services.breadcrumbs',
@@ -45,11 +45,11 @@ angular.module('lawyer', [
         $httpProvider.responseInterceptors.push(interceptor);
     }])
 
-    .run(['Auth', function run(Auth) {
-        Auth.set();
+    .run(['auth', function run(auth) {
+        auth.set();
     }])
 
-    .controller('AppCtrl', ['$scope', '$dialog', 'ConnectionStatus', 'i18nNotifications', function ($scope, $dialog, ConnectionStatus, i18nNotifications) {
+    .controller('AppCtrl', ['$scope', '$dialog', 'connectionStatus', 'i18nNotifications', function ($scope, $dialog, cconnectionStatus, i18nNotifications) {
 
         $scope.notifications = i18nNotifications;
         
@@ -62,7 +62,7 @@ angular.module('lawyer', [
         });
 
         // Tratamento de usuario sem conexao ativa.
-        ConnectionStatus.handle();
+        cconnectionStatus.handle();
         var offlineDialog = null;
 
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {

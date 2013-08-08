@@ -1,9 +1,9 @@
 module.exports = function ( karma ) {
-  karma.configure({
+  karma.set({
     /** 
      * From where to look for files, starting with the location of this file.
      */
-    basePath: './',
+    basePath: '../',
 
     /**
      * This is the list of file patterns to load into the browser during testing.
@@ -33,7 +33,7 @@ module.exports = function ( karma ) {
     /** 
      * Disable file watching by default.
      */
-    autoWatch: false,
+    autoWatch: true,
 
     /**
      * The list of browsers to launch to test on. This includes only "Firefox" by
