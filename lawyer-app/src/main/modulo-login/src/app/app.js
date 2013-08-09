@@ -1,6 +1,12 @@
-angular.module('lawyer-login', ['ngResource', 'ngCookies'])
+angular.module('lawyer-login', [
+        'ngResource',
+        'ngCookies',
+        'templates-app',
+        'lawyer.account.popup',
+        'ui.bootstrap'
+    ])
 
-    .controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', function ($scope, $resource, $window, $cookieStore) {
+    .controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', '$dialog', '$log', function ($scope, $resource, $window, $cookieStore, $dialog, $log) {
         var l = 'lawyer';
         var u = 'user';
         var j = 'JSES';
@@ -34,7 +40,16 @@ angular.module('lawyer-login', ['ngResource', 'ngCookies'])
                 angular.element('body').css('cursor', 'auto');
                 $scope.user.senha = '';
             });
-
         };
+
+        $scope.createAccount = function () {
+            var dialog = $dialog.dialog({
+                backdropFade: true,
+                dialogFade: true,
+                controller: 'AccountPopUp'
+            });
+            dialog.open('templates/account/create.tpl.html');
+        };
+
     }]);
 

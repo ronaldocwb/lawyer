@@ -1,0 +1,19 @@
+<div class="modal-header" >
+    <h3>Cadastro</h3>
+</div>
+<div class="modal-body">
+    <div class="content-wrap">
+        <form data-ng-submit="authenticate(formAuth)" name="formAuth">
+            <h6>Acesso</h6>
+            <div class="span12"><span class="text-error" data-ng-show="fail">E-mail ou senha incorretos.</span></div>
+            <input class="span12" name="login" data-ng-model="user.email" type="email" required placeholder="E-mail" >
+
+            <input class="span12" name="senha" data-ng-model="user.senha" type="password" placeholder="Senha" required>
+            <a href="#" class="forgot">Esqueceu a senha?</a>
+
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-disabled="processing || !formAuth.$valid" class="btn-glow primary login" type="submit" >Cadastrar</button>
+</div>
