@@ -18,7 +18,7 @@ angular.module('lawyer.app.notifications', [])
             i18nNotifications.remove(notification);
         };
 
-        $scope.$on('$stateChangeFail', function(event, current, previous, rejection){
+        $scope.$on('$stateChangeError', function(event, current, previous, rejection){
             i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
         });
     }])

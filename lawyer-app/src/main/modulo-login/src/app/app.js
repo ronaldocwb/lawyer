@@ -24,6 +24,8 @@ angular.module('lawyer-login', [
         $scope.authenticate = function () {
             angular.element('body').css('cursor', 'wait');
             $scope.processing = true;
+			
+			
 
             var Auth = $resource('auth/authenticate', {});
             Auth.save($scope.user, function success(userVO) {

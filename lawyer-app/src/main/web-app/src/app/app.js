@@ -6,16 +6,12 @@ angular.module('lawyer', [
         'ui.route',
         'ui.bootstrap',
         'lawyer.connectionStatus',
-        'lawyer.auth',
+        'lawyer.accessLevel',
         'services.i18nNotifications',
         'services.httpRequestTracker',
         'services.breadcrumbs',
         'i18n.Constants',
-        'lawyer.header',
-        'lawyer.app.notifications',
-        'lawyer.menu.esquerda',
-        'lawyer.menu.direita',
-        'lawyer.menu.central'
+        'lawyer.menus'
     ])
 
 
