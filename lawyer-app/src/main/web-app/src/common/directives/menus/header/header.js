@@ -1,4 +1,14 @@
 angular.module('lawyer.header', [])
+    .directive('header', [function () {
+        return {
+            restrict : 'E',
+            replace : true,
+            controller : 'HeaderController',
+            templateUrl : 'directives/menus/header/header.tpl.html',
+            link : function (scope, element, attrs) {
+            }
+        };
+    }])
 
     .controller('HeaderController', ['$scope', '$location', '$route', 'breadcrumbs', 'notifications', 'httpRequestTracker',
         function ($scope, $location, $route, breadcrumbs, notifications, httpRequestTracker) {
@@ -17,6 +27,3 @@ angular.module('lawyer.header', [])
                 return httpRequestTracker.hasPendingRequests();
             };
         }]);
-
-
-

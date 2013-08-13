@@ -40,11 +40,10 @@ module.exports = function (grunt) {
          */
         meta: {
             banner: '/**\n' +
-                ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
                 ' * <%= pkg.homepage %>\n' +
                 ' *\n' +
                 ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-                ' * Licensed <%= pkg.licenses.type %> <<%= pkg.licenses.url %>>\n' +
                 ' */\n'
         },
 
@@ -84,10 +83,15 @@ module.exports = function (grunt) {
         /**
          * The directories to delete when `grunt clean` is executed.
          */
-        clean: [
-            '<%= build_dir %>',
-            '<%= compile_dir %>'
-        ],
+        clean: {
+            build: {
+                src: ["<%= build_dir %>","<%= compile_dir %>"]
+            },
+            options : {
+                force: true
+            }
+
+        },
 
         /**
          * The `copy` task just copies files from A to B. We use it here to copy
@@ -162,6 +166,7 @@ module.exports = function (grunt) {
             }
         },
 
+
         /**
          * `ng-min` annotates the sources before minifying. That is, it allows us
          * to code without the array syntax.
@@ -212,7 +217,7 @@ module.exports = function (grunt) {
             },
             compile: {
                 src: [ '<%= recess.build.dest %>' ],
-                dest: '<%= recess.build.dest %>',
+                dest: '<%= build_dir %>/assets/<%= pkg.name %>.css',
                 options: {
                     compile: true,
                     compress: true,
@@ -252,7 +257,6 @@ module.exports = function (grunt) {
             },
             globals: {}
         },
-
 
         /**
          * HTML2JS is a Grunt plugin that takes all of your template files and
@@ -399,6 +403,7 @@ module.exports = function (grunt) {
                 tasks: [ 'jshint:src', 'karma:unit:run', 'copy:build_appjs' ]
             },
 
+
             /**
              * When assets are changed, copy them. Note that this will *not* copy new
              * files, so this is probably not very useful.
@@ -447,7 +452,7 @@ module.exports = function (grunt) {
                 ],
                 tasks: [ 'jshint:test', 'karma:unit:run' ],
                 options: {
-                    livereload: true
+                    livereload: false
                 }
             }
 

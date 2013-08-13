@@ -1,6 +1,5 @@
 angular.module('lawyer.home', [
-        'ui.state',
-        'AccessLevel'
+        'ui.state'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -15,8 +14,7 @@ angular.module('lawyer.home', [
         });
     }])
 
-    .controller('HomeController', ['$scope', function ($scope) {
-
+    .controller('HomeController', ['$scope', 'i18nNotifications', '$timeout', function ($scope, i18nNotifications, $timeout) {
     }])
 
 ;

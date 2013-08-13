@@ -10,6 +10,9 @@ angular.module('services.i18nNotifications', ['services.notifications', 'service
         };
 
         return {
+            size : function () {
+                return notifications.size();
+            },
             pushSticky : function (msgKey, type, interpolateParams, otherProperties) {
                 return notifications.pushSticky(prepareNotification(msgKey, type, interpolateParams, otherProperties));
             },

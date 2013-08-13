@@ -1,0 +1,10 @@
+<div>
+<div ng-repeat="notification in i18nNotifications.getCurrent()">
+    <div ng-class="['alert', 'alert-'+notification.type]" >
+        <button class="close" ng-click="removeNotification(notification)">x</button>
+        {{notification.message}}
+    </div>
+
+</div>
+</div>
+
