@@ -1,5 +1,8 @@
 angular.module('lawyer', [
-        'templates-app',
+        'ngRoute',
+		'ngAnimate',
+		'ngLocale',
+		'templates-app',
         'templates-common',
         'lawyer.home',
         'ui.state',
@@ -11,7 +14,9 @@ angular.module('lawyer', [
         'services.httpRequestTracker',
         'services.breadcrumbs',
         'i18n.Constants',
-        'lawyer.menus'
+        'services.exceptionHandler',
+        'lawyer.menus',
+        'lawyer.log'
     ])
 
 
@@ -46,7 +51,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppCtrl', ['$scope', '$dialog', 'connectionStatus', '$timeout', function ($scope, $dialog, connectionStatus) {
+    .controller('AppController', ['$scope', '$dialog', 'connectionStatus', '$timeout', function ($scope, $dialog, connectionStatus) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();

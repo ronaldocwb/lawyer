@@ -19,7 +19,7 @@ angular.module('lawyer.menu.direita', [])
                 controller: 'AtividadesPopUp'
             });
             dialog.open('atividades/popup/atividadesPopUp.tpl.html').then(function (result) {
-                $log.debug('Retorno do modal: ', result);
+                $log.debug('Retorno do modal: ', result, 'lol');
             });
         };
     }])
