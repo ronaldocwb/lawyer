@@ -6,35 +6,35 @@ angular.module('lawyer.log', [])
 
             return {
                  debug : function () {
-                     var args = [angularDate(new Date(), 'dd/MM/yyyy - hh:mm:ss'), ' - '];
+                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.debug.apply(null, args);
                  },
                  info : function () {
-                     var args = [angularDate(new Date(), 'dd/MM/yyyy - hh:mm:ss'), ' - '];
+                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.info.apply(null, args);
                  },
                  error: function () {
-                     var args = [angularDate(new Date(), 'dd/MM/yyyy - hh:mm:ss'), ' - '];
+                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.error.apply(null, args);
                  },
                  warn : function () {
-                     var args = [angularDate(new Date(), 'dd/MM/yyyy - hh:mm:ss'), ' - '];
+                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.warn.apply(null, args);
                  },
                  remote : function () {
-                     var args = [angularDate(new Date(), 'dd/MM/yyyy - hh:mm:ss'), ' - '];
+                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });

@@ -1,10 +1,24 @@
+/**
+ * @ngdoc object
+ * @name lawyer.app
+ * @description
+ * Esse é o modulo de entrada da aplicacao.
+ *
+ * Aqui estão registrados alguns mapeamentos iniciais e o carregamento dos módulos dependentes para o aplicativo funcionar.
+ *
+ * <strong>Serviços gerais do aplicativo devem ser carregados aqui, para evitar dependências cíclicas em múltiplos carregamento de módulos.</strong>
+ *
+ * Possui o registro para o `$urlRouterProvider` que intercepta as requisições não autorizadas retornadas do server.
+ * Configura o {@link laywer.auth} para recuperar o usuário gravado no cookie.
+ * Mantém o listener para o {@link ConnectionStatus} que notifica o usuário caso ele esteja offline no momento.
+ */
 angular.module('lawyer', [
         'ngRoute',
 		'ngAnimate',
 		'ngLocale',
 		'templates-app',
         'templates-common',
-        'lawyer.home',
+        'lawyer.controllers',
         'ui.state',
         'ui.route',
         'ui.bootstrap',
@@ -51,7 +65,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$dialog', 'connectionStatus', '$timeout', function ($scope, $dialog, connectionStatus) {
+    .controller('AppController', ['$scope', '$dialog', 'connectionStatus', function ($scope, $dialog, connectionStatus) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();

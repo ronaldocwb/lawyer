@@ -16,6 +16,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-ngdocs');
 
     /**
      * Load in our build configuration file.
@@ -41,7 +42,6 @@ module.exports = function (grunt) {
         meta: {
             banner: '/**\n' +
                 ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %>\n' +
-                ' * <%= pkg.homepage %>\n' +
                 ' *\n' +
                 ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
                 ' */\n'
@@ -253,6 +253,7 @@ module.exports = function (grunt) {
                 noarg: true,
                 sub: true,
                 boss: true,
+                '-W100' : true,
                 eqnull: true
             },
             globals: {}
@@ -456,6 +457,28 @@ module.exports = function (grunt) {
                 }
             }
 
+        },
+        ngdocs: {
+            options: {
+                dest: 'docs',
+                scripts: ['../vendor/angular/angular.js' ,'../src/**/*.js'],
+                html5Mode: false,
+                startPage: '/api',
+                title: "Lawyer AngularJS Docs",
+                analytics: {
+                    account: 'UA-0000',
+                    domainName: 'my-domain.com'
+                },
+                animations : true
+            },
+            tutorial: {
+                src: ['content/tutorial/*.ngdoc'],
+                title: 'Tutorial'
+            },
+            api: {
+                src: ['src/**/*.js', '!src/**/*.spec.js'], //'vendor/angular/angular.js',
+                title: 'API Documentation'
+            }
         }
     };
 
@@ -469,7 +492,7 @@ module.exports = function (grunt) {
      * before watching for changes.
      */
     grunt.renameTask('watch', 'delta');
-    grunt.registerTask('watch', [ 'build', 'karma:unit', 'delta' ]);
+    grunt.registerTask('watch', [ 'build', 'ngdocs', 'karma:unit', 'delta' ]);
 
     /**
      * The default task is to build and compile.

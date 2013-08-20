@@ -1,6 +1,6 @@
 {
   "name": "lawyer-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "devDependencies": {
     "angular": "v1.2.0rc1",
 	"angular-animate": "v1.2.0rc1",
