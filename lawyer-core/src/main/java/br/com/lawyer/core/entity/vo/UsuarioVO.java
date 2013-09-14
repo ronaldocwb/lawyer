@@ -2,6 +2,10 @@ package br.com.lawyer.core.entity.vo;
 
 import br.com.lawyer.core.entity.Permissao;
 import br.com.lawyer.core.entity.Usuario;
+<<<<<<< HEAD
+=======
+import org.codehaus.jackson.annotate.JsonIgnore;
+>>>>>>> origin/master
 
 import java.util.List;
 
@@ -21,6 +25,10 @@ public class UsuarioVO extends BaseVO<Usuario> {
         super(usuario);
     }
 
+<<<<<<< HEAD
+=======
+    @JsonIgnore
+>>>>>>> origin/master
     public String getSenha () {
         return senha;
     }
