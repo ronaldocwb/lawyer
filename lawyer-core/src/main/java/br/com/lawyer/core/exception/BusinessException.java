@@ -10,4 +10,8 @@ public class BusinessException extends Exception {
         super(e);
     }
 
+    public BusinessException(String message) {
+        super(message);
+    }
+
 }
