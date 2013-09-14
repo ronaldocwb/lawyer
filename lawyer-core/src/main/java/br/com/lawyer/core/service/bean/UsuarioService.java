@@ -18,6 +18,13 @@ public class UsuarioService extends BaseService<Usuario, UsuarioVO> implements I
     @Autowired
     private IUsuarioBO usuarioBO;
 
+    /**
+     * Realiza a autenticacao do usuario retornando um UsuarioVO com os dados do usuario.
+     * @param usuarioVO
+     * @param manager
+     * @return
+     * @throws BusinessException
+     */
     @Override
     public UsuarioVO authenticate (UsuarioVO usuarioVO, AuthenticationManager manager) throws BusinessException {
 
@@ -26,6 +33,11 @@ public class UsuarioService extends BaseService<Usuario, UsuarioVO> implements I
         return getVO(usuario);
     }
 
+    /**
+     * Lista todos os usuarios que existem na página informada.
+     * @param page
+     * @return Page com a lista de resultados do UsuarioVO
+     */
     @Override
     public Page<UsuarioVO> findUserByPage (PageRequest page) {
         Page<Usuario> result = usuarioBO.findAll(page);

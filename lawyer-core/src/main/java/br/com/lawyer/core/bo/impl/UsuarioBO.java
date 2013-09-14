@@ -23,7 +23,7 @@ public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> imple
     /**
      * Construtor
      *
-     * @param dao - DAO que será utilizado referente a entidade manipulada
+     * @param dao - DAO que será utilizado referente a entidade Usuario
      */
     @Autowired
     public UsuarioBO (IUsuarioRepository dao) {
