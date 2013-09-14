@@ -2,19 +2,13 @@ package br.com.lawyer.web.controller;
 
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.exception.RestException;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
-import org.springframework.web.util.WebUtils;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author Deividi Cavarzan
@@ -98,5 +92,6 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
 
     }
+
 
 }

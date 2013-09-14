@@ -1,7 +1,6 @@
 package br.com.lawyer.core.util;
 
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 import java.util.UUID;
 

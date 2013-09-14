@@ -19,7 +19,6 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
 
     private String token;
 
-    // TODO Implementar Objeto de autenticacao proprio.
     private Usuario usuario;
 
     //~ Constructors ===================================================================================================
@@ -78,6 +77,14 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         this.usuario = usuario;
         this.token = token;
         super.setAuthenticated(true); // must use super, as we override
+    }
+
+    public LawyerAuthenticationToken (Object principal, Object credentials, Usuario usuario) {
+        super(null);
+        this.principal = principal;
+        this.credentials = credentials;
+        this.usuario = usuario;
+        super.setAuthenticated(false);
     }
 
 

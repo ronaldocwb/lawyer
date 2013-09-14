@@ -1,17 +1,17 @@
 package br.com.lawyer.core.entity;
 
+import br.com.lawyer.core.base.IUID;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario implements IUID<String> {
 
     @Id
-    private String uuid;
+    private String uid;
 
     private String email;
 
@@ -21,19 +21,30 @@ public class Usuario implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private List<Permissao> permissoes;
 
+    @Transient
+    private String hashAutenticacao;
+
     @PrePersist
     private void generateUuid() {
-        if (StringUtils.isBlank(this.uuid)) {
-            this.uuid = UUID.randomUUID().toString();
+        if (StringUtils.isBlank(this.uid)) {
+            this.uid = UUID.randomUUID().toString();
         }
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public String getHashAutenticacao () {
+        return hashAutenticacao;
     }
 
-    public String getUuid() {
-        return uuid;
+    public void setHashAutenticacao (String hashAutenticacao) {
+        this.hashAutenticacao = hashAutenticacao;
+    }
+
+    public void setUid (String uuid) {
+        this.uid = uuid;
+    }
+
+    public String getUid () {
+        return uid;
     }
 
     public String getSenha() {
@@ -59,4 +70,6 @@ public class Usuario implements Serializable {
     public void setPermissoes (List<Permissao> permissoes) {
         this.permissoes = permissoes;
     }
+
+
 }
