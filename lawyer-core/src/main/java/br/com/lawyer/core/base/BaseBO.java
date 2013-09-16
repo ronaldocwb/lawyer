@@ -21,160 +21,160 @@ public abstract class BaseBO<ID extends Serializable, T extends IUID<ID>, D exte
 
     private static final long serialVersionUID = 8080307118544118690L;
 
-    private D dao;
+    private D repository;
 
     /**
      * Construtor
      *
-     * @param dao - DAO que será utilizado referente a entidade manipulada
+     * @param repository - DAO que será utilizado referente a entidade manipulada
      */
-    public BaseBO (D dao) {
-        this.dao = dao;
+    public BaseBO (D repository) {
+        this.repository = repository;
     }
 
     /**
-     * Retorna o dao para manipulação da entidade
+     * Retorna o repository para manipulação da entidade
      *
      * @return
      */
-    public D getDAO() {
-        return this.dao;
+    public D getRepository() {
+        return this.repository;
     }
 
     public T findByPrimaryKey(ID id) {
-        return this.getDAO().findByPrimaryKey(id);
+        return this.getRepository().findByPrimaryKey(id);
     }
 
     public List<T> find() {
-        return this.getDAO().find();
+        return this.getRepository().find();
     }
 
     public List<T> find(int offset, int limit) {
-        return this.getDAO().find(offset, limit);
+        return this.getRepository().find(offset, limit);
     }
 
     public long count() {
-        return (int) this.getDAO().count();
+        return (int) this.getRepository().count();
     }
 
     public List<T> findAll() {
-        return this.getDAO().findAll();
+        return this.getRepository().findAll();
     }
 
     @Override
     public List<T> findAll (Sort sort) {
-        return getDAO().findAll(sort);
+        return getRepository().findAll(sort);
     }
 
     @Override
     public Page<T> findAll (Pageable pageable) {
-        return getDAO().findAll(pageable);
+        return getRepository().findAll(pageable);
     }
 
     @Override
     public void flush () {
-        getDAO().flush();
+        getRepository().flush();
     }
 
     @Override
     public T saveAndFlush (T entity) {
-        return getDAO().saveAndFlush(entity);
+        return getRepository().saveAndFlush(entity);
     }
 
     @Override
     public void deleteInBatch (Iterable<T> entities) {
-        getDAO().deleteInBatch(entities);
+        getRepository().deleteInBatch(entities);
     }
 
     @Override
     public void deleteAllInBatch () {
-        getDAO().deleteAllInBatch();
+        getRepository().deleteAllInBatch();
     }
 
     @Override
     public <S extends T> List<S> save (Iterable<S> entities) {
-        return getDAO().save(entities);
+        return getRepository().save(entities);
     }
 
     @Override
     public <S extends T> S save (S entity) {
-        return getDAO().save(entity);
+        return getRepository().save(entity);
     }
 
     @Override
     public T findOne (ID id) {
-        return getDAO().findOne(id);
+        return getRepository().findOne(id);
     }
 
     @Override
     public boolean exists (ID id) {
-        return getDAO().exists(id);
+        return getRepository().exists(id);
     }
 
     @Override
     public Iterable<T> findAll (Iterable<ID> ids) {
-        return getDAO().findAll(ids);
+        return getRepository().findAll(ids);
     }
 
     @Override
     public void delete (ID id) {
-        getDAO().delete(id);
+        getRepository().delete(id);
     }
 
     @Override
     public void delete (T entity) {
-        getDAO().delete(entity);
+        getRepository().delete(entity);
     }
 
     @Override
     public void delete (Iterable<? extends T> entities) {
-        getDAO().delete(entities);
+        getRepository().delete(entities);
     }
 
     @Override
     public void deleteAll() {
-        getDAO().deleteAll();
+        getRepository().deleteAll();
     }
 
     @Override
     public T findOne (Specification<T> spec) {
-        return getDAO().findOne(spec);
+        return getRepository().findOne(spec);
     }
 
     @Override
     public List<T> findAll (Specification<T> spec) {
-        return getDAO().findAll(spec);
+        return getRepository().findAll(spec);
     }
 
     @Override
     public Page<T> findAll (Specification<T> spec, Pageable pageable) {
-        return getDAO().findAll(spec, pageable);
+        return getRepository().findAll(spec, pageable);
     }
 
     @Override
     public List<T> findAll (Specification<T> spec, Sort sort) {
-        return getDAO().findAll(spec, sort);
+        return getRepository().findAll(spec, sort);
     }
 
     @Override
     public long count (Specification<T> spec) {
-        return getDAO().count(spec);
+        return getRepository().count(spec);
     }
 
     public List<T> findAllByProperty(String property, String value) {
-        return getDAO().findAllByProperty(property,value);
+        return getRepository().findAllByProperty(property, value);
     }
 
     public List<T> findAllByPropertyLike(String property, String value) {
-        return getDAO().findAllByPropertyLike(property,value);
+        return getRepository().findAllByPropertyLike(property, value);
     }
 
     public T findByProperty(String property, String value) {
-        return getDAO().findByProperty(property,value);
+        return getRepository().findByProperty(property, value);
     }
 
     public T findByInnerEntityProperty(String entity, String property, String value) {
-        return getDAO().findByInnerEntityProperty(entity, property, value);
+        return getRepository().findByInnerEntityProperty(entity, property, value);
     }
 
 }

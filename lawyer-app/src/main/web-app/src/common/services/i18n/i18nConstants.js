@@ -1,4 +1,4 @@
-angular.module('i18n.Constants', []).constant('I18N.MESSAGES', {
+angular.module('i18n.Constants', []).constant('i18n.messages', {
     'errors.route.changeError': 'Erro na rota de URL',
     'crud.user.save.success': "A user with id '{{id}}' was saved successfully.",
     'crud.user.remove.success': "A user with id '{{id}}' was removed successfully.",

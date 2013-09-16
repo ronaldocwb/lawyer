@@ -5,11 +5,11 @@ import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
-@Repository
+@Service
 public class UsuarioRepository extends JPABaseRepository<String, Usuario> implements IUsuarioRepository {
 
     /**
@@ -18,6 +18,10 @@ public class UsuarioRepository extends JPABaseRepository<String, Usuario> implem
     @Autowired
     public UsuarioRepository (@Qualifier ("entityManager") EntityManager em) {
         super(Usuario.class, em);
+    }
+
+    public void findByEmail(String email) {
+
     }
 
 }

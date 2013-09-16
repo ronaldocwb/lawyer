@@ -17,17 +17,18 @@ import org.springframework.stereotype.Service;
 /**
  * @author Deividi Cavarzan
  */
+@SuppressWarnings ("ALL")
 @Service
 public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> implements IUsuarioBO {
 
     /**
      * Construtor
      *
-     * @param dao - DAO que será utilizado referente a entidade Usuario
+     * @param repository - DAO que será utilizado referente a entidade Usuario
      */
     @Autowired
-    public UsuarioBO (IUsuarioRepository dao) {
-        super(dao);
+    public UsuarioBO (IUsuarioRepository repository) {
+        super(repository);
     }
 
     /**
@@ -48,7 +49,7 @@ public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> imple
 
         String password = PasswordEncoder.encodePassword(user.getSenha(), user.getEmail());
 
-        Usuario usuario = getDAO().findByProperty("email", user.getEmail());
+        Usuario usuario = getRepository().findByProperty("email", user.getEmail());
 
         LawyerAuthenticationToken auth = new LawyerAuthenticationToken(user.getEmail(), password, usuario);
         auth = (LawyerAuthenticationToken) manager.authenticate(auth);

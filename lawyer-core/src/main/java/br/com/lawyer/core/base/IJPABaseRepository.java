@@ -2,6 +2,7 @@ package br.com.lawyer.core.base;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author Deividi Cavarzan
  *
  */
+@NoRepositoryBean
 public interface IJPABaseRepository<B extends Serializable, T extends IUID<B>> extends JpaRepository<T, B>, JpaSpecificationExecutor<T> {
 
     /**

@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Classe para gerenciamento do endpoint Usuario na API.
+ * @author Deividi Cavarzan
+ *
+ */
 @ApiController
 public class UsuarioController {
 

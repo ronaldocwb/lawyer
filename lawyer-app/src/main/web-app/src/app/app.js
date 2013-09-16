@@ -13,10 +13,9 @@
  * Mantém o listener para o {@link ConnectionStatus} que notifica o usuário caso ele esteja offline no momento.
  */
 angular.module('lawyer', [
-        'ngRoute',
-		'ngAnimate',
-		'ngLocale',
-		'templates-app',
+        'ngAnimate',
+        'ngLocale',
+        'templates-app',
         'templates-common',
         'lawyer.controllers',
         'ui.state',
@@ -34,31 +33,22 @@ angular.module('lawyer', [
     ])
 
 
-    .config(['$urlRouterProvider', '$routeProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $routeProvider, $locationProvider, $httpProvider) {
+    .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/home');
-        var interceptor = ['$location', '$q', function ($location, $q) {
 
-            function success(response) {
-                return response;
-            }
-
-            function error(response) {
-
-                if (response.status === 401) {
-                    $location.path('/login');
-                    return $q.reject(response);
+        $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+            return {
+                'responseError': function(rejection) {
+                    if (rejection.status === 401) {
+                        $location.path('/login');
+                        return $q.reject(rejection);
+                    }
+                    else {
+                        return $q.reject(rejection);
+                    }
                 }
-                else {
-                    return $q.reject(response);
-                }
-            }
-
-            return function (promise) {
-                return promise.then(success, error);
             };
-        }];
-
-        $httpProvider.responseInterceptors.push(interceptor);
+        }]);
     }])
 
     .run(['auth', function run(auth) {
@@ -87,7 +77,4 @@ angular.module('lawyer', [
                 }
             });
         });
-
-		}]);
-
-
+    }]);

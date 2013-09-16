@@ -10,8 +10,8 @@ angular.module('lawyer.header', [])
         };
     }])
 
-    .controller('HeaderController', ['$scope', '$location', '$route', 'breadcrumbs', 'notifications', 'httpRequestTracker',
-        function ($scope, $location, $route, breadcrumbs, notifications, httpRequestTracker) {
+    .controller('HeaderController', ['$scope', '$location', 'breadcrumbs', 'notifications', 'httpRequestTracker',
+        function ($scope, $location, breadcrumbs, notifications, httpRequestTracker) {
             $scope.location = $location;
             $scope.breadcrumbs = breadcrumbs;
 
