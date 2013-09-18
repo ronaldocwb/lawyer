@@ -1,7 +1,6 @@
 package br.com.lawyer.web.base;
 
 import br.com.lawyer.core.base.IUID;
-import br.com.lawyer.web.vo.BaseVO;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
