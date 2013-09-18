@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.io.Serializable;
 import java.util.List;
 
-public interface IBaseBO<ID extends Serializable, T extends IUID<ID>, D extends IJPABaseRepository<ID, T>> {
+public interface IBaseService<ID extends Serializable, T extends IUID<ID>, D extends IJPABaseRepository<ID, T>> {
 
     public T findByPrimaryKey(ID id);
 

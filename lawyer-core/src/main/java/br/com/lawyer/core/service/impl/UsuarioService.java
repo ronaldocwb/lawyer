@@ -1,11 +1,11 @@
-package br.com.lawyer.core.bo.impl;
+package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
-import br.com.lawyer.core.base.BaseBO;
-import br.com.lawyer.core.bo.IUsuarioBO;
+import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.IUsuarioRepository;
+import br.com.lawyer.core.service.IUsuarioService;
 import br.com.lawyer.core.util.LawyerStringUtils;
 import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @SuppressWarnings ("ALL")
 @Service
-public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> implements IUsuarioBO {
+public class UsuarioService extends BaseService<String, Usuario, IUsuarioRepository> implements IUsuarioService {
 
     /**
      * Construtor
@@ -27,7 +27,7 @@ public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> imple
      * @param repository - DAO que será utilizado referente a entidade Usuario
      */
     @Autowired
-    public UsuarioBO (IUsuarioRepository repository) {
+    public UsuarioService (IUsuarioRepository repository) {
         super(repository);
     }
 
@@ -49,7 +49,12 @@ public class UsuarioBO extends BaseBO<String, Usuario, IUsuarioRepository> imple
 
         String password = PasswordEncoder.encodePassword(user.getSenha(), user.getEmail());
 
-        Usuario usuario = getRepository().findByProperty("email", user.getEmail());
+        Usuario usuario = null;
+        try {
+            usuario = getRepository().findByProperty("email", user.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LawyerAuthenticationToken auth = new LawyerAuthenticationToken(user.getEmail(), password, usuario);
         auth = (LawyerAuthenticationToken) manager.authenticate(auth);

@@ -22,7 +22,7 @@
     <beans:import resource="spring-context-security-test.xml"/>
 
     <context:component-scan base-package="br.com.lawyer.core.authentication"/>
-    <context:component-scan base-package="br.com.lawyer.core.service"/>
+    <context:component-scan base-package="br.com.lawyer.web.delegate"/>
     <context:annotation-config/>
 
     <!-- Mapeamento dos arquivos estáticos da aplicação. JS, CSS, Imagens, etc. -->

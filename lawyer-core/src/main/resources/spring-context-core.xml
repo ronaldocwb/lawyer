@@ -16,14 +16,14 @@
              http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
 
     <!-- Mapeamento dos services do projeto -->
-    <context:component-scan base-package="br.com.lawyer.core.bo" />
     <context:component-scan base-package="br.com.lawyer.core.service" />
     <context:component-scan base-package="br.com.lawyer.core.repository" />
+    <context:component-scan base-package="br.com.lawyer.core.authentication" />
     <context:annotation-config />
 
     <jee:jndi-lookup id="lawyerDS" jndi-name="java:jboss/postgresDS" />
 
-    <beans:bean id="entityManagerFactory"
+    <beans:bean id="emf"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 
         <beans:property name="dataSource" ref="lawyerDS" />
@@ -45,13 +45,13 @@
 
     <beans:bean id="entityManager"
           class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
-        <beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+        <beans:property name="entityManagerFactory" ref="emf" />
     </beans:bean>
 
     <context:load-time-weaver  weaver-class="org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver"/>
 
     <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+        <beans:property name="entityManagerFactory" ref="emf" />
         <beans:property name="dataSource" ref="lawyerDS" />
     </beans:bean>
 
@@ -60,9 +60,7 @@
     <!--tx:jta-transaction-manager/-->
 
     <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
-    <jpa:repositories base-package="br.com.lawyer.core.repository" entity-manager-factory-ref="entityManagerFactory"
+    <jpa:repositories base-package="br.com.lawyer.core.repository" entity-manager-factory-ref="emf"
             transaction-manager-ref="transactionManager" />
-
-
 
 </beans:beans>

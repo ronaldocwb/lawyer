@@ -1,4 +1,4 @@
-package br.com.lawyer.core.entity.vo;
+package br.com.lawyer.web.vo;
 
 
 import br.com.lawyer.core.exception.ParseEntityToVOException;
@@ -25,7 +25,7 @@ public abstract class BaseVO<T> implements Serializable {
     /**
      * Popula os campos do VO com os valores da entidade.<br>
      * Todos os campos da entidade que no VO correspondem a um campo de um tipo
-     * que estende {@link BaseVO} também serão convertidos para o VO
+     * que estende {@link br.com.lawyer.web.vo.BaseVO} também serão convertidos para o VO
      * correspondente.
      *
      * @param object a entidade cujos valores serão copiados para o VO.
@@ -92,7 +92,7 @@ public abstract class BaseVO<T> implements Serializable {
 
     /**
      * Converte o VO para uma entidade.<br>
-     * Todos os campos do VO que forem de um tipo que estende {@link BaseVO}
+     * Todos os campos do VO que forem de um tipo que estende {@link br.com.lawyer.web.vo.BaseVO}
      * também serão convertidos para a entidade correspondente, inclusive
      * quando o campo for uma lista de VOs.
      *
@@ -191,14 +191,14 @@ public abstract class BaseVO<T> implements Serializable {
 
     /**
      * Converte uma lista de entidades para uma lista de VOs.
-     * Se o tipo da lista no VO não estende {@link BaseVO} será retornada a lista passada por parâmetro.
+     * Se o tipo da lista no VO não estende {@link br.com.lawyer.web.vo.BaseVO} será retornada a lista passada por parâmetro.
      *
      * @param field o campo que representa a lista no VO.
      * @param list a lista de entidades a serem convertidas para VOs.
      * @return a lista de entidades de VOs.
      * @throws NoSuchMethodException caso não seja possível instanciar um VO.
      * @throws IllegalAccessException caso não seja possível instanciar um VO.
-     * @throws InvocationTargetException caso não seja possível instanciar um VO.
+     * @throws java.lang.reflect.InvocationTargetException caso não seja possível instanciar um VO.
      * @throws InstantiationException caso não seja possível instanciar um VO.
      */
     private List<?> parseEntityList(Field field, List<?> list) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

@@ -1,14 +1,12 @@
 package br.com.lawyer.core.service;
 
-
-import br.com.lawyer.core.entity.vo.UsuarioVO;
+import br.com.lawyer.core.base.IBaseService;
+import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import br.com.lawyer.core.repository.IUsuarioRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 
-public interface IUsuarioService {
-    UsuarioVO authenticate (UsuarioVO authentication, AuthenticationManager manager) throws BusinessException;
+public interface IUsuarioService extends IBaseService<String, Usuario, IUsuarioRepository> {
 
-    Page<UsuarioVO> findUserByPage (PageRequest page);
+    Usuario authenticate (Usuario usuario, AuthenticationManager manager) throws BusinessException;
 }

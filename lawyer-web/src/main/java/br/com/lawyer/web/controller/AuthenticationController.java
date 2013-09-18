@@ -1,8 +1,8 @@
 package br.com.lawyer.web.controller;
 
-import br.com.lawyer.core.entity.vo.UsuarioVO;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.core.service.IUsuarioService;
+import br.com.lawyer.web.delegate.IUsuarioDelegate;
+import br.com.lawyer.web.vo.UsuarioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private IUsuarioDelegate usuarioDelegate;
 
     /**
      * Esse é o mapeamento que o Spring Security redireciona quando o usuário acessa um contexto protegido por ele.
@@ -42,7 +42,7 @@ public class AuthenticationController {
      */
     @RequestMapping(value = "/auth/authenticate", method = RequestMethod.POST)
     public ResponseEntity<UsuarioVO> autenticaUsuario(@RequestBody UsuarioVO usuarioVO) throws BusinessException {
-        UsuarioVO autenticacao = usuarioService.authenticate(usuarioVO, authenticationManager);
+        UsuarioVO autenticacao = usuarioDelegate.authenticate(usuarioVO, authenticationManager);
         return new ResponseEntity<>(autenticacao, HttpStatus.OK);
     }
 
