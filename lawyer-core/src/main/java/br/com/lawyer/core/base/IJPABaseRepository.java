@@ -25,33 +25,12 @@ public interface IJPABaseRepository<B extends Serializable, T extends IUID<B>> e
     EntityManager getEntityManager();
 
     /**
-     * Persiste a entidade na base.
-     *
-     * @param t a entidade a ser persistida.
-     * @return a entidade persistida.
-     */
-
-    /**
-     * Exclui a entidade da base.
-     *
-     * @param t a entidade a ser excluída.
-     */
-    void remove(T t);
-
-    /**
      * Pesquisa pela entidade por chave primária.
      *
      * @param b a chave primária da entidade a ser pesquisada.
      * @return a entidade pesquisada ou <code>null</code> caso a entidade não exista.
      */
     T findByPrimaryKey(B b);
-
-    /**
-     * Lista todas as entidades.
-     *
-     * @return uma lista com todas as entidades.
-     */
-    List<T> find();
 
     /**
      * Lista todas as entidades.

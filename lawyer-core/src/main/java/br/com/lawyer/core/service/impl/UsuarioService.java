@@ -41,7 +41,7 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
      * @throws BadCredentialsException
      */
     @Override
-    public Usuario authenticate (Usuario user, AuthenticationManager manager) throws BusinessException {
+    public Usuario authenticate (Usuario user, AuthenticationManager manager) {
 
         if (LawyerStringUtils.containStringBlank(user.getEmail(), user.getSenha())) {
             throw new BadCredentialsException("Usuario / Senha nao informado.");

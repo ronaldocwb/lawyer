@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class PasswordEncoder {
 
-    private static String salt = ":Law-|:.:|-yeR:";
+    private static final String salt = ":Law-|:.:|-yeR:";
 
     /**
      * @param password

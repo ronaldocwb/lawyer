@@ -34,7 +34,6 @@
      Em casos do projeto ter um package com repositories, pode haver o carreegamento incorreto dos beans -->
     <context:component-scan base-package="br.com.lawyer.web.annotation"/>
     <context:component-scan base-package="br.com.lawyer.web.api"/>
-    <context:component-scan base-package="br.com.lawyer.web.authentication"/>
     <context:component-scan base-package="br.com.lawyer.web.controller"/>
 
     <!-- Define o scan do Spring -->

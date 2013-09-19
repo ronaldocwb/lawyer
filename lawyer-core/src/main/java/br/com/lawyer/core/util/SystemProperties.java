@@ -14,9 +14,6 @@ import java.util.Properties;
  */
 public class SystemProperties {
 
-    /**
-     * Properties Holder.
-     */
     private static final Properties PROPS = new Properties();
 
     private SystemProperties() {
@@ -30,16 +27,11 @@ public class SystemProperties {
                 Assert.notNull(PROPS.get("algumaPropriedade"), "Voce deve especificar a propriedade algumaPropriedade");
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new RuntimeException("lawyer-core properties nao encontrado");
+                throw new RuntimeException("system.properties nao encontrado");
             }
         }
     }
 
-    /**
-     * Gets Authorization endpoint from properties.
-     *
-     * @return - Authorize endpoint uri
-     */
     public static String getProperty(String property) {
         return (String) PROPS.get(property);
     }

@@ -21,7 +21,7 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
 
     private static final long serialVersionUID = 8080307118544118690L;
 
-    private D repository;
+    private final D repository;
 
     /**
      * Construtor
@@ -43,10 +43,6 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
 
     public T findByPrimaryKey(ID id) {
         return this.getRepository().findByPrimaryKey(id);
-    }
-
-    public List<T> find() {
-        return this.getRepository().find();
     }
 
     public List<T> find(int offset, int limit) {

@@ -16,8 +16,6 @@ public interface IBaseService<ID extends Serializable, T extends IUID<ID>, D ext
 
     public List<T> findAll();
 
-    public List<T> find();
-
     public List<T> findAll(Sort sort);
     
     public Page<T> findAll(Pageable pageable);

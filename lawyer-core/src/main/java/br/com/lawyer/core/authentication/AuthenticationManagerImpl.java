@@ -55,7 +55,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      * @param permissoes
      * @return List<GrantedAuthority>
      */
-    public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> permissoes) {
+    Collection<? extends GrantedAuthority> getAuthorities (List<Permissao> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<>();
         for (Permissao permissao : permissoes) {
