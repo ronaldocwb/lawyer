@@ -44,4 +44,27 @@ public class UsuarioDelegate extends BaseDelegate<Usuario, UsuarioVO> implements
         return getVO(result, page);
     }
 
+    @Override
+    public UsuarioVO salvar (UsuarioVO usuarioVO) {
+        Usuario usuario = usuarioService.saveAndFlush(usuarioVO.parse());
+        return getVO(usuario);
+    }
+
+    @Override
+    public void deletar (String uid) {
+        usuarioService.delete(uid);
+    }
+
+    @Override
+    public UsuarioVO update (UsuarioVO usuarioVO, String uid) throws BusinessException {
+        Usuario usuario = usuarioService.atualizarUsuario(usuarioVO.parse(), uid);
+        return getVO(usuario);
+    }
+
+    @Override
+    public UsuarioVO findOne (String uid) {
+        Usuario usuario = usuarioService.findOne(uid);
+        return getVO(usuario);
+    }
+
 }

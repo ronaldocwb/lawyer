@@ -11,4 +11,12 @@ public interface IUsuarioDelegate {
     UsuarioVO authenticate (UsuarioVO authentication, AuthenticationManager manager) throws BusinessException;
 
     Page<UsuarioVO> findUserByPage (PageRequest page);
+
+    UsuarioVO salvar (UsuarioVO usuarioVO);
+
+    void deletar (String uid);
+
+    UsuarioVO update (UsuarioVO uid, String s) throws BusinessException;
+
+    UsuarioVO findOne (String uid);
 }

@@ -15,6 +15,7 @@
     <properties>
         <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
+        <org.springframework.data.jpa.version>1.4.1.RELEASE</org.springframework.data.jpa.version>
     </properties>
     
     <build>
@@ -152,7 +153,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.4.1.RELEASE</version>
+            <version>${org.springframework.data.jpa.version}</version>
         </dependency>
         <!-- Fim Dependencias do Spring3 -->
 

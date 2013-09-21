@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 
+/**
+ * @author Deividi Cavarzan
+ * @since 20/09/2013
+ *
+ * Essa implementação não é necessária até que algum método seja implementado.
+ * Deixada aqui como exemplo.
+ */
 @Service
 public class UsuarioRepository extends JPABaseRepository<String, Usuario> implements IUsuarioRepository {
 
@@ -20,8 +27,5 @@ public class UsuarioRepository extends JPABaseRepository<String, Usuario> implem
         super(Usuario.class, em);
     }
 
-    public void findByEmail(String email) {
-
-    }
 
 }

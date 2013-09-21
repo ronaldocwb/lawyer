@@ -72,5 +72,23 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
         return usuario;
     }
 
+    @Override
+    public Usuario atualizarUsuario (Usuario usuario, String uid) throws BusinessException {
+
+        if (LawyerStringUtils.isBlank(uid) || LawyerStringUtils.isBlank(usuario.getUid())) {
+            throw new BusinessException("Usuário deve ser informado!");
+        }
+
+        if (!getRepository().exists(uid)) {
+            throw new BusinessException("Entidade informada não existe.");
+        }
+
+        if (uid.equals(usuario.getUid())) {
+            return getRepository().save(usuario);
+        }
+
+        return null;
+    }
+
 
 }
