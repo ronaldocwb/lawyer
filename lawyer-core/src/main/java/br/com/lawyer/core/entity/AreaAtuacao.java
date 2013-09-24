@@ -1,17 +1,26 @@
 package br.com.lawyer.core.entity;
 
-import javax.persistence.Id;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 import br.com.lawyer.core.base.IUID;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-public class AreaAtuacao implements IUID<String> {
+@Entity
+public class AreaAtuacao extends AbstractBaseEntity implements IUID<String>, Serializable {
 	
-	@Id
-    private String uid;
+	private static final long serialVersionUID = 5093446877731548419L;
+	
+	@Column(length=100)
 	private String nome;
 	
-	@Override
-	public String getUid() {
-		return uid;
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }

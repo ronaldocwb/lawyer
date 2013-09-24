@@ -11,9 +11,9 @@ import java.io.Serializable;
 public interface IUID<T extends Serializable> {
 
     /**
-     * Retorna a chave primária da entidade.
+     * Retorna a chave primaria da entidade.
      *
-     * @return a chave primária da entidade.
+     * @return a chave primaria da entidade.
      */
     public T getUid();
 

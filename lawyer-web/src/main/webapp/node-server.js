@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var util = require('util'),
     http = require('http'),
     fs = require('fs'),
@@ -82,7 +80,7 @@ StaticServlet.MimeMap = {
   'jpeg': 'image/jpeg',
   'gif': 'image/gif',
   'png': 'image/png',
-  'svg': 'image/svg+xml'
+  'svg': 'image/svg+xml'
 };
 
 StaticServlet.prototype.handleRequest = function(req, res) {

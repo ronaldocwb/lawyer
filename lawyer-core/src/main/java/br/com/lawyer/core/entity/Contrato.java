@@ -1,34 +1,63 @@
 package br.com.lawyer.core.entity;
 
 import java.io.Serializable;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang.StringUtils;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-public class Contrato implements Serializable{
+public class Contrato extends AbstractBaseEntity  implements Serializable{
 	
 	private static final long serialVersionUID = -1345510489899638668L;
 	
-	@Id
-    private String uid;
+	@Column(length=200)
 	private String nome;
+	
+	@ManyToOne
 	private Empresa empresa;
 	
-	@PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uid)) {
-            this.uid = UUID.randomUUID().toString();
-        }
-    }
+	@ElementCollection(fetch=FetchType.EAGER)
+	private List<ConvencaoHonorarios> convencaoHonorarios;
 	
-	public void setUid (String uuid) {
-        this.uid = uuid;
-    }
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
+	public List<ConvencaoHonorarios> getConvencaoHonorarios() {
+		return convencaoHonorarios;
+	}
+	
+	public void addConvencaoHonorarios(ConvencaoHonorarios convencaoHonorarios) {
+		if(this.convencaoHonorarios == null){
+			this.convencaoHonorarios = new ArrayList<ConvencaoHonorarios>();
+		}
+		
+		this.convencaoHonorarios.add(convencaoHonorarios);
+	}
 
-    public String getUid () {
-        return uid;
-    }
+	public void removeConvencaoHonorarios(ConvencaoHonorarios convencaoHonorarios) {
+		if(this.convencaoHonorarios == null){
+			return;
+		}
+		
+		this.convencaoHonorarios.remove(convencaoHonorarios);
+	}
 }

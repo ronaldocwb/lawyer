@@ -1,36 +1,28 @@
 package br.com.lawyer.core.entity;
 
-import br.com.lawyer.core.base.IUID;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import br.com.lawyer.core.base.IUID;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+
 @Entity
-public class Atividade implements IUID<String> {
+public class Atividade extends AbstractBaseEntity implements IUID<String> {
 
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator (name = "hibernate-uuid", strategy = "uuid2")
-    private String uid;
+	private static final long serialVersionUID = -3614535508787511308L;
 
-    @ManyToOne
+	@ManyToOne
     private Usuario usuario;
 
     @Temporal(TemporalType.DATE)
     private Date data;
 
-
-
+    //TODO transformar em UserType, copiar do VeerePatterns
     private boolean ativo;
-
-    public void setUid (String uuid) {
-        this.uid = uuid;
-    }
-
-    public String getUid () {
-        return this.uid;
-    }
 
     public Usuario getUsuario () {
         return usuario;
