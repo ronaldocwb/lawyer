@@ -1,4 +1,4 @@
-package br.com.lawyer.core.entity.vo;
+package br.com.lawyer.web.base;
 
 
 import br.com.lawyer.core.exception.ParseEntityToVOException;
@@ -159,7 +159,7 @@ public abstract class BaseVO<T> implements Serializable {
      * @return a lista de entidades.
      */
     public List<T> parse(List<? extends BaseVO<T>> value) {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
 
         if (value == null) {
             return list;
@@ -180,7 +180,7 @@ public abstract class BaseVO<T> implements Serializable {
      */
     @SuppressWarnings("rawtypes")
     private List<Object> parseVoList(List<BaseVO> value) {
-        List<Object> list = new ArrayList<Object>();
+        List<Object> list = new ArrayList<>();
 
         for (BaseVO vo : value) {
             list.add(vo.parse());
@@ -198,7 +198,7 @@ public abstract class BaseVO<T> implements Serializable {
      * @return a lista de entidades de VOs.
      * @throws NoSuchMethodException caso não seja possível instanciar um VO.
      * @throws IllegalAccessException caso não seja possível instanciar um VO.
-     * @throws InvocationTargetException caso não seja possível instanciar um VO.
+     * @throws java.lang.reflect.InvocationTargetException caso não seja possível instanciar um VO.
      * @throws InstantiationException caso não seja possível instanciar um VO.
      */
     private List<?> parseEntityList(Field field, List<?> list) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -222,7 +222,7 @@ public abstract class BaseVO<T> implements Serializable {
             return list;
         }
 
-        List<Object> result = new ArrayList<Object>();
+        List<Object> result = new ArrayList<>();
 
         for (Object entity : list) {
             Object vo = ConstructorUtils.invokeConstructor(clazz, entity); // Constrói o VO passando a entidade como parâmetro

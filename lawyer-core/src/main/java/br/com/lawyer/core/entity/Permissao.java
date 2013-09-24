@@ -7,7 +7,7 @@ public enum Permissao {
     ADMIN("ADMIN"),
     LAWYER("LAWYER");
 
-    private String value;
+    private final String value;
 
     private Permissao (String value) {
         this.value = value;

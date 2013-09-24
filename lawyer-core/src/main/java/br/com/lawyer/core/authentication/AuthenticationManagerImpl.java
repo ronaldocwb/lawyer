@@ -1,6 +1,5 @@
-package br.com.lawyer.core.service.bean;
+package br.com.lawyer.core.authentication;
 
-import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.entity.Permissao;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.util.PasswordEncoder;
@@ -56,7 +55,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
      * @param permissoes
      * @return List<GrantedAuthority>
      */
-    public Collection<? extends GrantedAuthority> getAuthorities(List<Permissao> permissoes) {
+    Collection<? extends GrantedAuthority> getAuthorities (List<Permissao> permissoes) {
 
         List<GrantedAuthority> authList = new ArrayList<>();
         for (Permissao permissao : permissoes) {

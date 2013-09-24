@@ -25,7 +25,7 @@
         </security:session-management>
     </security:http>
 
-    <!-- Define qual é o service que vai autenticar o usuário -->
+    <!-- Define qual é o delegate que vai autenticar o usuário -->
     <security:authentication-manager alias="myAuthenticationManagerImpl" />
 
     </beans>

@@ -1,107 +1,176 @@
 package br.com.lawyer.core.base;
 
-import br.com.lawyer.core.entity.vo.BaseVO;
-import org.apache.commons.beanutils.ConstructorUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author: Deividi Cavarzan
- * @since: 10/09/13
+ * Estabelece os comportamentos básicos de negócio de uma entidade.
+ *
+ * @author Deividi Cavarzan
+ *
+ * @param <ID> tipo da chave primária da entidade.
+ * @param <T> tipo da entidade.
+ * @param <D> tipo do DAO.
  */
-@SuppressWarnings("unchecked")
-public abstract class BaseService<T extends IUID<?>, V extends BaseVO> {
+public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D extends IJPABaseRepository<ID, T>> implements Serializable, IBaseService<ID, T, D> {
 
+    private static final long serialVersionUID = 8080307118544118690L;
+
+    private final D repository;
 
     /**
-     * Converte uma entidade para um VO.
+     * Construtor
      *
-     * @param object a entidade a ser convertida.
-     * @return o VO da entidade ou <tt>null</tt> caso não seja possível converter.
-     * @see {@link #getVO(List)}
+     * @param repository - DAO que será utilizado referente a entidade manipulada
      */
-    protected V getVO(T object) {
-        if (object == null) {
-            return null;
-        }
-
-        V vo = null;
-
-        try {
-            Class<V> clazz = getClassVO();
-            vo = (V) ConstructorUtils.invokeConstructor(clazz, object);
-        } catch (Exception e) {
-            e.printStackTrace(); //"Não foi possível converter o objeto " + object + " para VO.", e);
-        }
-
-        return vo;
+    public BaseService (D repository) {
+        this.repository = repository;
     }
 
     /**
-     * Converte uma lista de entidades para uma lista de VOs.
+     * Retorna o repository para manipulação da entidade
      *
-     * @param list a lista de entidades a serem convertidas.
-     * @return a lista de VOs.
-     * @see #getVO(T)
+     * @return
      */
-    protected List<V> getVO(List<T> list) {
-        List<V> listVO = new ArrayList();
-
-        for (T t : list) {
-            V vo = getVO(t);
-
-            if (vo != null) {
-                listVO.add(vo);
-            }
-        }
-
-        return listVO;
+    public D getRepository() {
+        return this.repository;
     }
 
-    /**
-     * Retorna o Page<ClassVO> com o resultado encontrado para o PageRequest informado.
-     * @param page
-     * @param pageRequest Page com a lista de resultados da entidade encontrada.
-     * @return lista de entidades atraves de um Page.
-     */
-    protected Page<V> getVO (Page<T> page, PageRequest pageRequest) {
-        List<V> contentVO = getVO(page.getContent());
-        Page<V> pageResult = new PageImpl<>(contentVO, pageRequest, page.getTotalElements());
-        return pageResult;
+    public T findByPrimaryKey(ID id) {
+        return this.getRepository().findByPrimaryKey(id);
     }
 
-    /**
-     * Retorna a classe que representa o VO.
-     *
-     * @return a classe que representa o VO.
-     * @throws ClassNotFoundException caso a classe do VO não seja encontrada.
-     */
-    private Class<V> getClassVO() throws ClassNotFoundException {
-        Type superclass = this.getClass().getGenericSuperclass();
+    public List<T> find(int offset, int limit) {
+        return this.getRepository().find(offset, limit);
+    }
 
-        if (superclass instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) superclass;
-            Type[] typeArguments = parameterizedType.getActualTypeArguments();
+    public long count() {
+        return (int) this.getRepository().count();
+    }
 
-            if (typeArguments.length == 2) {
-                Type typeVO = typeArguments[1];
+    public List<T> findAll() {
+        return this.getRepository().findAll();
+    }
 
-                if (typeVO instanceof Class) {
-                    Class c = (Class) typeVO;
-                    String name = c.getName();
+    @Override
+    public List<T> findAll (Sort sort) {
+        return getRepository().findAll(sort);
+    }
 
-                    return (Class<V>) Class.forName(name);
-                }
-            }
-        }
+    @Override
+    public Page<T> findAll (Pageable pageable) {
+        return getRepository().findAll(pageable);
+    }
 
-        return null;
+    @Override
+    public void flush () {
+        getRepository().flush();
+    }
+
+    @Override
+    public T saveAndFlush (T entity) {
+        return getRepository().saveAndFlush(entity);
+    }
+
+    @Override
+    public void deleteInBatch (Iterable<T> entities) {
+        getRepository().deleteInBatch(entities);
+    }
+
+    @Override
+    public void deleteAllInBatch () {
+        getRepository().deleteAllInBatch();
+    }
+
+    @Override
+    public <S extends T> List<S> save (Iterable<S> entities) {
+        return getRepository().save(entities);
+    }
+
+    @Override
+    public <S extends T> S save (S entity) {
+        return getRepository().save(entity);
+    }
+
+    @Override
+    public T findOne (ID id) {
+        return getRepository().findOne(id);
+    }
+
+    @Override
+    public boolean exists (ID id) {
+        return getRepository().exists(id);
+    }
+
+    @Override
+    public Iterable<T> findAll (Iterable<ID> ids) {
+        return getRepository().findAll(ids);
+    }
+
+    @Override
+    public void delete (ID id) {
+        getRepository().delete(id);
+    }
+
+    @Override
+    public void delete (T entity) {
+        getRepository().delete(entity);
+    }
+
+    @Override
+    public void delete (Iterable<? extends T> entities) {
+        getRepository().delete(entities);
+    }
+
+    @Override
+    public void deleteAll() {
+        getRepository().deleteAll();
+    }
+
+    @Override
+    public T findOne (Specification<T> spec) {
+        return getRepository().findOne(spec);
+    }
+
+    @Override
+    public List<T> findAll (Specification<T> spec) {
+        return getRepository().findAll(spec);
+    }
+
+    @Override
+    public Page<T> findAll (Specification<T> spec, Pageable pageable) {
+        return getRepository().findAll(spec, pageable);
+    }
+
+    @Override
+    public List<T> findAll (Specification<T> spec, Sort sort) {
+        return getRepository().findAll(spec, sort);
+    }
+
+    @Override
+    public long count (Specification<T> spec) {
+        return getRepository().count(spec);
+    }
+
+    public List<T> findAllByProperty(String property, String value) {
+        return getRepository().findAllByProperty(property, value);
+    }
+
+    public List<T> findAllByPropertyLike(String property, String value) {
+        return getRepository().findAllByPropertyLike(property, value);
+    }
+
+    public T findByProperty(String property, String value) {
+        return getRepository().findByProperty(property, value);
+    }
+
+    public T findByInnerEntityProperty(String entity, String property, String value) {
+        return getRepository().findByInnerEntityProperty(entity, property, value);
     }
 
 }

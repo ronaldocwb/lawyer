@@ -20,12 +20,12 @@ public abstract class JPABaseRepository<ID extends Serializable, T extends IUID<
     /**
      * EntityManager - gerencia a entidade
      */
-    private EntityManager manager;
+    private final EntityManager manager;
 
     /**
      * Classe da entidade que será manipulada
      */
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
     /**
      * Construtor básico para classe de acesso a dados (DAO)
@@ -43,30 +43,10 @@ public abstract class JPABaseRepository<ID extends Serializable, T extends IUID<
         return this.manager;
     }
 
-    public void remove(T t) {
-        if (t == null) {
-            throw new IllegalArgumentException("A entidade a ser excluída deve ser informada.");
-        }
-
-        if (t.getUid() == null) {
-            throw new IllegalArgumentException("O ID da entidade a ser excluída deve ser informada.");
-        }
-
-        t = this.getEntityManager().find(this.entityClass, t.getUid());
-        this.getEntityManager().remove(t);
-    }
-
     public T findByPrimaryKey(ID id) {
         return this.getEntityManager().find(entityClass, id);
     }
 
-    @SuppressWarnings("unchecked")
-    public List<T> find() {
-        String listQuery = "SELECT e FROM " + entityClass.getSimpleName() + " e ORDER BY e.id ASC";
-        Query query = this.getEntityManager().createQuery(listQuery);
-
-        return query.getResultList();
-    }
     @SuppressWarnings("unchecked")
     public List<T> find(int offset, int limit) {
         String listQuery = "SELECT e FROM " + entityClass.getSimpleName() + " e ORDER BY e.id ASC";
