@@ -1,46 +1,52 @@
 package br.com.lawyer.core.entity;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-import javax.persistence.Id;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 
-import org.apache.commons.lang.StringUtils;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 /**
  * Representa o responsável por um setor especifico da empresa
  * 
  * @author Ronaldo
  */
-public class Responsavel implements Serializable{
+@Entity
+public class Responsavel extends AbstractBaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = -4486187479124482772L;
 
-	@Id
-    private String uid;
-	
 	@ManyToOne
 	private Pessoa pessoa;
 	
 	@ManyToOne
 	private Empresa empresa;
+	
+	@ManyToOne
 	private Setor setor;
-	
-	@PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uid)) {
-            this.uid = UUID.randomUUID().toString();
-        }
-    }
-	
-	public void setUid (String uuid) {
-        this.uid = uuid;
-    }
 
-    public String getUid () {
-        return uid;
-    }
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
 
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
 }

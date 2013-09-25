@@ -1,33 +1,25 @@
 package br.com.lawyer.core.entity;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-import org.apache.commons.lang.StringUtils;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-public class Setor implements Serializable{
+@Entity
+public class Setor extends AbstractBaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = -1345510669349638668L;
 	
-	@Id
-    private String uid;
+	@Column(length=200)
 	private String nome;
-	
-	@PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uid)) {
-            this.uid = UUID.randomUUID().toString();
-        }
-    }
-	
-	public void setUid (String uuid) {
-        this.uid = uuid;
-    }
 
-    public String getUid () {
-        return uid;
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

@@ -1,35 +1,36 @@
 package br.com.lawyer.core.entity;
 
-import br.com.lawyer.core.base.IUID;
-import org.apache.commons.lang.StringUtils;
-
-import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Transient;
+
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.Permissao;
 
 @Entity
-public class Usuario implements IUID<String> {
+public class Usuario extends AbstractBaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = -3038405341454481689L;
 
-    @Id
-    private String uid;
-
+	@Column(length=200)
     private String email;
-
+	
+	@Column(length=30)
     private String senha;
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = Permissao.class)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(value = EnumType.STRING)
     private List<Permissao> permissoes;
 
     @Transient
     private String hashAutenticacao;
-
-    @PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uid)) {
-            this.uid = UUID.randomUUID().toString();
-        }
-    }
 
     public String getHashAutenticacao () {
         return hashAutenticacao;
@@ -37,14 +38,6 @@ public class Usuario implements IUID<String> {
 
     public void setHashAutenticacao (String hashAutenticacao) {
         this.hashAutenticacao = hashAutenticacao;
-    }
-
-    public void setUid (String uuid) {
-        this.uid = uuid;
-    }
-
-    public String getUid () {
-        return uid;
     }
 
     public String getSenha() {
@@ -70,6 +63,5 @@ public class Usuario implements IUID<String> {
     public void setPermissoes (List<Permissao> permissoes) {
         this.permissoes = permissoes;
     }
-
 
 }

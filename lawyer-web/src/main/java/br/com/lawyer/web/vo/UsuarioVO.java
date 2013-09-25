@@ -1,7 +1,7 @@
 package br.com.lawyer.web.vo;
 
-import br.com.lawyer.core.entity.Permissao;
 import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.web.base.BaseVO;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;

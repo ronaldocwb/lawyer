@@ -1,7 +1,7 @@
 package br.com.lawyer.core.authentication;
 
-import br.com.lawyer.core.entity.Permissao;
 import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 /**
- * Servico que realiza a autenticação do Spring security e cria o {@link br.com.lawyer.core.authentication.LawyerAuthenticationToken} para armazenamento na sessão - {SecurityContextHolder}.
+ * Servico que realiza a autenticaï¿½ï¿½o do Spring security e cria o {@link br.com.lawyer.core.authentication.LawyerAuthenticationToken} para armazenamento na sessï¿½o - {SecurityContextHolder}.
  */
 @Service("authenticationManager")
 public class AuthenticationManagerImpl implements AuthenticationManager {
@@ -30,11 +30,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         Usuario usuario = lawyerAuthenticationToken.getUsuario();
 
         if (authentication.getName().equals(authentication.getCredentials())) {
-            throw new BadCredentialsException("Usuário / Senha inválidos.");
+            throw new BadCredentialsException("Usuï¿½rio / Senha invï¿½lidos.");
         }
 
         if (authentication.getName() == null) {
-            throw new BadCredentialsException("Usuário n?o informado.");
+            throw new BadCredentialsException("Usuï¿½rio n?o informado.");
         }
 
         if (authentication.getName().equals(authentication.getCredentials())) {
@@ -42,7 +42,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         }
 
         if (!usuario.getSenha().equals(authentication.getCredentials().toString())) {
-            throw new BadCredentialsException("Usuário / Senha inválidos.");
+            throw new BadCredentialsException("Usuï¿½rio / Senha invï¿½lidos.");
         }
 
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
@@ -51,7 +51,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     }
 
     /**
-     * Obtem todas as permiss?es deste usuário e insere como authorities
+     * Obtem todas as permiss?es deste usuï¿½rio e insere como authorities
      * @param permissoes
      * @return List<GrantedAuthority>
      */

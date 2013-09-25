@@ -5,11 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 @Entity
-public class AreaAtuacao extends AbstractBaseEntity implements IUID<String>, Serializable {
+public class AreaAtuacao extends AbstractBaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 5093446877731548419L;
 	

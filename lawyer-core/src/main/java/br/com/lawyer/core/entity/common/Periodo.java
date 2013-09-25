@@ -1,16 +1,21 @@
-package br.com.lawyer.core.entity;
+package br.com.lawyer.core.entity.common;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Embeddable
 public class Periodo implements Serializable{
 	
 	private static final long serialVersionUID = -2708153981864691785L;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date inicio;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fim;
 	
 	public Periodo() {

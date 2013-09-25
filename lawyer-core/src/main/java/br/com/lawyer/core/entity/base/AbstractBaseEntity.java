@@ -6,8 +6,10 @@ import java.util.UUID;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import br.com.lawyer.core.base.IUID;
+
 @MappedSuperclass
-public abstract class AbstractBaseEntity implements Serializable {
+public abstract class AbstractBaseEntity implements Serializable, IUID<String> {
 	private static final long serialVersionUID = 1L;
 
 	@Id

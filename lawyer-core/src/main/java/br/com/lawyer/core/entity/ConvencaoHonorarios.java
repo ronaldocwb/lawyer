@@ -1,34 +1,40 @@
 package br.com.lawyer.core.entity;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 
-import org.apache.commons.lang.StringUtils;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.TipoConvencaoHonorarios;
 
-public class ConvencaoHonorarios implements Serializable{
+@Entity
+public class ConvencaoHonorarios extends AbstractBaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = -1345510667899638668L;
 	
-	@Id
-    private String uid;
+	@Column(length=120)
 	private String nome;
+	
+	@Enumerated
 	private TipoConvencaoHonorarios tpConvencaoHonorarios;
-	
-	@PrePersist
-    private void generateUuid() {
-        if (StringUtils.isBlank(this.uid)) {
-            this.uid = UUID.randomUUID().toString();
-        }
-    }
-	
-	public void setUid (String uuid) {
-        this.uid = uuid;
-    }
 
-    public String getUid () {
-        return uid;
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public TipoConvencaoHonorarios getTpConvencaoHonorarios() {
+		return tpConvencaoHonorarios;
+	}
+
+	public void setTpConvencaoHonorarios(
+			TipoConvencaoHonorarios tpConvencaoHonorarios) {
+		this.tpConvencaoHonorarios = tpConvencaoHonorarios;
+	}
+	
 }

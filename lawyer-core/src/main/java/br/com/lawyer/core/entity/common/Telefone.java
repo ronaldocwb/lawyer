@@ -1,7 +1,10 @@
-package br.com.lawyer.core.entity;
+package br.com.lawyer.core.entity.common;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Telefone implements Serializable {
 	
 	private static final long serialVersionUID = 8490402582329057874L;
@@ -21,7 +24,7 @@ public class Telefone implements Serializable {
 		this.numero = numero;
 	}
 	
-	private Integer codPais;
-	private Integer codRegiao;
-	private Long numero;
+	Integer codPais;
+	Integer codRegiao;
+	Long numero;
 }

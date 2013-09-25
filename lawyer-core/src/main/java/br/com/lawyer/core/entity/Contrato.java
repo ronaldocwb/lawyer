@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-public class Contrato extends AbstractBaseEntity  implements Serializable{
+@Entity
+public class Contrato extends AbstractBaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = -1345510489899638668L;
 	

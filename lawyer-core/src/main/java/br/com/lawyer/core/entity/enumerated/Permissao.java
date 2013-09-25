@@ -1,5 +1,8 @@
-package br.com.lawyer.core.entity;
+package br.com.lawyer.core.entity.enumerated;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public enum Permissao {
 
     USER("USER"),
@@ -13,7 +16,7 @@ public enum Permissao {
         this.value = value;
     }
 
-    private String getValue() {
+    public String getValue() {
         return this.value;
     }
 

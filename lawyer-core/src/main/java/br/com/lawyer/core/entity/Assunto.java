@@ -18,11 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.common.Periodo;
+import br.com.lawyer.core.entity.enumerated.TipoAcesso;
+import br.com.lawyer.core.entity.enumerated.TipoProcesso;
 
 @Entity
-public class Assunto extends AbstractBaseEntity implements IUID<String>, Serializable {
+public class Assunto extends AbstractBaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 6794154357961752625L;
 	
