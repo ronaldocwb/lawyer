@@ -9,13 +9,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Estabelece os comportamentos básicos de negócio de uma entidade.
+ * Estabelece os comportamentos bï¿½sicos de negï¿½cio de uma entidade.
  *
+ * @param <ID> tipo da chave primï¿½ria da entidade.
+ * @param <T>  tipo da entidade.
+ * @param <D>  tipo do DAO.
  * @author Deividi Cavarzan
- *
- * @param <ID> tipo da chave primária da entidade.
- * @param <T> tipo da entidade.
- * @param <D> tipo do DAO.
  */
 public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D extends IJPABaseRepository<ID, T>> implements Serializable, IBaseService<ID, T, D> {
 
@@ -26,34 +25,26 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
     /**
      * Construtor
      *
-     * @param repository - DAO que será utilizado referente a entidade manipulada
+     * @param repository - DAO que serï¿½ utilizado referente a entidade manipulada
      */
     public BaseService (D repository) {
         this.repository = repository;
     }
 
     /**
-     * Retorna o repository para manipulação da entidade
+     * Retorna o repository para manipulaï¿½ï¿½o da entidade
      *
      * @return
      */
-    public D getRepository() {
+    public D getRepository () {
         return this.repository;
     }
 
-    public T findByPrimaryKey(ID id) {
-        return this.getRepository().findByPrimaryKey(id);
-    }
-
-    public List<T> find(int offset, int limit) {
-        return this.getRepository().find(offset, limit);
-    }
-
-    public long count() {
+    public long count () {
         return (int) this.getRepository().count();
     }
 
-    public List<T> findAll() {
+    public List<T> findAll () {
         return this.getRepository().findAll();
     }
 
@@ -128,7 +119,7 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
     }
 
     @Override
-    public void deleteAll() {
+    public void deleteAll () {
         getRepository().deleteAll();
     }
 
@@ -155,22 +146,6 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
     @Override
     public long count (Specification<T> spec) {
         return getRepository().count(spec);
-    }
-
-    public List<T> findAllByProperty(String property, String value) {
-        return getRepository().findAllByProperty(property, value);
-    }
-
-    public List<T> findAllByPropertyLike(String property, String value) {
-        return getRepository().findAllByPropertyLike(property, value);
-    }
-
-    public T findByProperty(String property, String value) {
-        return getRepository().findByProperty(property, value);
-    }
-
-    public T findByInnerEntityProperty(String entity, String property, String value) {
-        return getRepository().findByInnerEntityProperty(entity, property, value);
     }
 
 }

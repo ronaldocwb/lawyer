@@ -6,4 +6,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface IUsuarioRepository extends IJPABaseRepository<String, Usuario> {
+    Usuario findByEmail (String email);
 }

@@ -11,16 +11,17 @@ angular.module('lawyer.menu.direita', [])
         };
     }])
 
-    .controller('MenuDireitaController', ['$scope', '$dialog', '$log', function ($scope, $dialog, $log) {
+    .controller('MenuDireitaController', ['$scope', '$modal', '$log', function ($scope, $modal, $log) {
         $scope.openAtividades = function () {
-            var dialog = $dialog.dialog({
+            var dialog = $modal.open({
                 backdropFade: true,
                 dialogFade: true,
-                controller: 'AtividadesPopUp'
+                controller: 'AtividadesPopUp',
+                templateUrl: 'atividades/popup/atividadesPopUp.tpl.html'
             });
-            dialog.open('atividades/popup/atividadesPopUp.tpl.html').then(function (result) {
-                $log.debug('Retorno do modal: ', result, 'lol');
-            });
+           // dialog.open('atividades/popup/atividadesPopUp.tpl.html').then(function (result) {
+             //   $log.debug('Retorno do modal: ', result, 'lol');
+            //});
         };
     }])
 ;

@@ -1,0 +1,68 @@
+<form data-ng-submit="cadastrar()" name="cadastro">
+    <div class="control-group">
+        <label class="control-label" for="razao">Razão Social:</label>
+        <div class="controls">
+            <input id="razao" class="text x-large" type="text" ng-required="true" data-ng-model="empresa.razaoSocial"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="nome">Nome Fantasia::</label>
+        <div class="controls">
+            <input id="nome" class="text x-large" type="text"  data-ng-model="empresa.nomeFantasia"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="cnpj">CNPJ:</label>
+        <div class="controls">
+            <input id="cnpj" name="cnpj"class="text x-large" type="text" ng-model="empresa.cnpj" ui-mask="99.999.999/9999-99"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" >Telefones:</label>
+        <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0">
+            <div class="input-append">
+                <input name="telefone" class="span8" type="text" ng-model="telefone.numero" />
+                <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)" >Remover</button>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <button class="btn large" type="button" data-ng-click="addTelefone()">Adicionar Telefone</button>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" >Endereços:</label>
+        <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0">
+            <label class="control-label" for="cnpj">Logradouro:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.logradouro" />
+            <label class="control-label" for="cnpj">Número:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.numero" />
+            <label class="control-label" for="cnpj">Complemento:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+
+            <label class="control-label" for="cnpj">CEP:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+
+            <label class="control-label" for="cnpj">Bairro:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+
+            <label class="control-label" for="cnpj">Município:</label>
+            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+
+            <button type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)" >Remover</button>
+        </div>
+    </div>
+    <div class="control-group">
+        <button class="btn large" type="button" data-ng-click="addEndereco()">Adicionar Endereco</button>
+    </div>
+
+    <div class="control-group">
+        <button class="btn large" type="reset" >Limpar</button>
+    </div>
+
+    <div class="control-group">
+        <button class="btn btn-success" type="submit" >Salvar</button>
+    </div>
+
+</form>

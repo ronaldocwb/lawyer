@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Descreve o contrato de uma entidade que possui uma chave (IUID)
  *
  * @author Deividi Cavarzan
- *
  */
 public interface IUID<T extends Serializable> {
 
@@ -15,6 +14,6 @@ public interface IUID<T extends Serializable> {
      *
      * @return a chave primaria da entidade.
      */
-    public T getUid();
+    public T getUid ();
 
 }

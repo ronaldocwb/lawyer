@@ -2,10 +2,10 @@
  * @ngdoc object
  * @name lawyer.home
  * @description
- * Essa é a view inicial do app, responsável por carregar o "dashboard" inicial e apresentar algumas features.
+ * Essa ï¿½ a view inicial do app, responsï¿½vel por carregar o "dashboard" inicial e apresentar algumas features.
  */
 angular.module('lawyer.home', [
-        'ui.state'
+        'ui.router.state'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {

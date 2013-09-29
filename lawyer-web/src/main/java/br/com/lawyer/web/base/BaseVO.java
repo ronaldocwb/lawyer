@@ -5,6 +5,7 @@ import br.com.lawyer.core.exception.ParseEntityToVOException;
 import br.com.lawyer.core.exception.ParseVOToEntityException;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.hibernate.LazyInitializationException;
 
 import java.io.Serializable;
 import java.lang.reflect.*;
@@ -55,7 +56,7 @@ public abstract class BaseVO<T> implements Serializable {
                 // Se a entidade não possui o campo correspondente então não tenta copiar
                 continue;
             }
-
+            // todo lazy
             try {
                 if (field.getType().getGenericSuperclass() instanceof ParameterizedType) {
                     Type type = ((ParameterizedType) field.getType().getGenericSuperclass()).getRawType();
@@ -202,8 +203,15 @@ public abstract class BaseVO<T> implements Serializable {
      * @throws InstantiationException caso não seja possível instanciar um VO.
      */
     private List<?> parseEntityList(Field field, List<?> list) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        if (list.isEmpty()) {
-            return list;
+        try {
+            if (list.isEmpty()) {
+                return list;
+            }
+        } catch (LazyInitializationException e) {
+            // Se não estiver mapeado ou sem @Transaction no metodo pode ocorrer essa exceção.
+            // retorna null nesse caso.
+            e.printStackTrace();
+            return null;
         }
 
         if (!(field.getGenericType() instanceof ParameterizedType)) {

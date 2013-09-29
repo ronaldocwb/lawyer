@@ -27,9 +27,8 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
      * This constructor can be safely used by any code that wishes to create a
      * <code>{@link LawyerAuthenticationToken}</code>, as the {@link
      * #isAuthenticated()} will return <code>false</code>.
-     *
      */
-    public LawyerAuthenticationToken(Object principal, Object credentials) {
+    public LawyerAuthenticationToken (Object principal, Object credentials) {
         super(null);
         this.principal = principal;
         this.credentials = credentials;
@@ -45,14 +44,14 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
      * @param credentials
      * @param authorities
      */
-    public LawyerAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+    public LawyerAuthenticationToken (Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Collection<? extends GrantedAuthority> authorities) {
+    public LawyerAuthenticationToken (Object principal, Object credentials, Usuario user, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -60,7 +59,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true); // must use super, as we override
     }
 
-    public LawyerAuthenticationToken(Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
+    public LawyerAuthenticationToken (Object principal, Object credentials, Usuario user, Object details, Collection<? extends GrantedAuthority> authorities, String token) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -75,7 +74,6 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         this.principal = principal;
         this.credentials = credentials;
         this.usuario = usuario;
-        this.token = token;
         super.setAuthenticated(true); // must use super, as we override
     }
 
@@ -88,20 +86,20 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
     }
 
 
-    public Object getCredentials() {
+    public Object getCredentials () {
         return this.credentials;
     }
 
-    public Object getPrincipal() {
+    public Object getPrincipal () {
         return this.principal;
     }
 
-    public Usuario getUsuario() {
+    public Usuario getUsuario () {
         return this.usuario;
     }
 
     // Se for setar "na mao", lanca a excecao, pois este metodo so pode ser alterado com o super() do pai.
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+    public void setAuthenticated (boolean isAuthenticated) throws IllegalArgumentException {
         if (isAuthenticated) {
             throw new IllegalArgumentException(
                     "Năo é possível atribuir este Token como confiável - use o construtor que receba a lista de GrantedAuthority.");
@@ -111,12 +109,12 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     @Override
-    public void eraseCredentials() {
+    public void eraseCredentials () {
         super.eraseCredentials();
         credentials = null;
     }
 
-    public String getToken() {
+    public String getToken () {
         return token;
     }
 

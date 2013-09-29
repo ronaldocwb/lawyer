@@ -19,5 +19,6 @@ insert into areaatuacao values ('2', 'Cível')
 insert into areaatuacao values ('3', 'Consumidor') 
 insert into areaatuacao values ('4', 'Importação e Exportação') 
 
-
+INSERT INTO public.usuario (uid, email, senha) VALUES ('1', 'developer@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723');
+INSERT INTO public.usuario_permissoes (usuario_uid, value) VALUES ('1', 'MANAGER');
 

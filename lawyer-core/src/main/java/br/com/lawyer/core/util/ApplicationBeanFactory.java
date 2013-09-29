@@ -9,7 +9,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class ApplicationBeanFactory {
 
-    /** Arquivo de configuração dos beans no contexto do JPA. */
+    /**
+     * Arquivo de configuraï¿½ï¿½o dos beans no contexto do JPA.
+     */
     private static final String JPA_FILE_PATH = "spring-context-core.xml";
 
     private static ApplicationContext jpaContext;
@@ -18,10 +20,10 @@ public class ApplicationBeanFactory {
      * Efetua o lookup do bean usando o spring-context-core.
      *
      * @param clazz classe do bean.
-     * @return instância do bean.
+     * @return instï¿½ncia do bean.
      * @see org.springframework.beans.factory.BeanFactory#getBean(Class)
      */
-    public static <T> T getBean(Class<T> clazz) {
+    public static <T> T getBean (Class<T> clazz) {
         if (jpaContext == null) {
             jpaContext = new ClassPathXmlApplicationContext(JPA_FILE_PATH);
         }
@@ -33,11 +35,11 @@ public class ApplicationBeanFactory {
      * Efetua o lookup do bean usando o spring-context-core.
      *
      * @param clazz String do bean.
-     * @return instância do bean.
+     * @return instï¿½ncia do bean.
      * @see org.springframework.beans.factory.BeanFactory#getBean(Class)
      */
     @SuppressWarnings ("unchecked")
-    public static <T> T getBeanByName(String clazz) {
+    public static <T> T getBeanByName (String clazz) {
         if (jpaContext == null) {
             jpaContext = new ClassPathXmlApplicationContext(JPA_FILE_PATH);
         }

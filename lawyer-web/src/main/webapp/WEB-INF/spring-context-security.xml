@@ -6,26 +6,26 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
     <!-- Ativa as anotações em classes e métodos. -->
-    <security:global-method-security jsr250-annotations="enabled" pre-post-annotations="enabled" secured-annotations="enabled" />
+    <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
 
     <!-- Define os contextos que o security vai atuar e quais são os entrypoints da aplicação -->
-    <security:http use-expressions="true">
-        <security:intercept-url pattern="/secure/**" access="hasAnyRole('USER', 'MANAGER')" />
-        <security:intercept-url pattern="/api/**" access="hasAnyRole('USER', 'MANAGER')" />
+    <security:http use-expressions="true" auto-config="true">
+        <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
+        <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
         <security:intercept-url pattern="/auth/*/**" access="isAnonymous()" />
         <security:form-login login-page="/auth"
-                             authentication-failure-url="/auth" />
+                             authentication-failure-url="/auth"  />
         <security:logout logout-success-url="/" delete-cookies="JSESSIONID"/>
 
         <!-- O remeber me precisa de outras configurações, ver isso depois -->
         <!--security:remember-me /-->
 
         <security:session-management invalid-session-url="/">
-            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+            <security:concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
         </security:session-management>
     </security:http>
 
-    <!-- Define qual é o service que vai autenticar o usuário -->
+    <!-- Define qual é o delegate que vai autenticar o usuário -->
     <security:authentication-manager alias="myAuthenticationManagerImpl" />
 
     </beans>

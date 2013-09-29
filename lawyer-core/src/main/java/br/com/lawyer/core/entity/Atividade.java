@@ -1,24 +1,23 @@
 package br.com.lawyer.core.entity;
 
-import java.io.Serializable;
-import java.util.Date;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Atividade extends AbstractBaseEntity implements Serializable {
 
-	private static final long serialVersionUID = -3614535508787511308L;
+    private static final long serialVersionUID = -3614535508787511308L;
 
-	@ManyToOne
+    @ManyToOne
     private Usuario usuario;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal (TemporalType.DATE)
     private Date data;
 
     //TODO transformar em UserType, copiar do VeerePatterns

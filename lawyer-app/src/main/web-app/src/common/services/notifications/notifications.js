@@ -8,7 +8,7 @@ angular.module('services.notifications', [])
         };
         var addNotification = function (notificationsArray, notificationObj) {
             if (!angular.isObject(notificationObj)) {
-                throw new Error("Apenas objetos podem ser adicionados ao notifications service");
+                throw new Error("Apenas objetos podem ser adicionados ao notifications delegate");
             }
             notificationsArray.push(notificationObj);
             return notificationObj;

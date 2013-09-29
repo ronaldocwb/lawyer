@@ -24,7 +24,7 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
     /**
      * Construtor
      *
-     * @param repository - DAO que será utilizado referente a entidade Usuario
+     * @param repository - DAO que serÃ¡ utilizado referente a entidade Usuario
      */
     @Autowired
     public UsuarioService (IUsuarioRepository repository) {
@@ -32,8 +32,9 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
     }
 
     /**
-     * Realiza a autenticação do usuario com base na entidade informada e no manager que implementa a regra de autenticação.
-     * Qualquer exceção de negocio na autenticação lança uma {@link BadCredentialsException} em runtime.
+     * Realiza a autenticaÃ§Ã£o do usuario com base na entidade informada e no manager que implementa a regra de autenticaÃ§Ã£o.
+     * Qualquer exceÃ§Ã£o de negocio na autenticaÃ§Ã£o lanÃ§a uma {@link BadCredentialsException} em runtime.
+     *
      * @param user
      * @param manager
      * @return
@@ -51,7 +52,7 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
 
         Usuario usuario = null;
         try {
-            usuario = getRepository().findByProperty("email", user.getEmail());
+            usuario = getRepository().findByEmail(user.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,12 +62,11 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
 
         if (auth.isAuthenticated()) {
 
-            // Insere nosso token na sessão para ficar disponpivel para consulta.
+            // Insere nosso token na sessï¿½o para ficar disponpivel para consulta.
             SecurityContextHolder.getContext().setAuthentication(auth);
-            usuario.setHashAutenticacao(auth.getToken());
 
         } else {
-            throw new BadCredentialsException("Usuário não foi autenticado.");
+            throw new BadCredentialsException("UsuÃ¡rio nÃ£o foi autenticado.");
         }
 
         return usuario;
@@ -76,11 +76,11 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
     public Usuario atualizarUsuario (Usuario usuario, String uid) throws BusinessException {
 
         if (LawyerStringUtils.isBlank(uid) || LawyerStringUtils.isBlank(usuario.getUid())) {
-            throw new BusinessException("Usuário deve ser informado!");
+            throw new BusinessException("UsuÃ¡rio deve ser informado!");
         }
 
         if (!getRepository().exists(uid)) {
-            throw new BusinessException("Entidade informada não existe.");
+            throw new BusinessException("Entidade informada nÃ£o existe.");
         }
 
         if (uid.equals(usuario.getUid())) {

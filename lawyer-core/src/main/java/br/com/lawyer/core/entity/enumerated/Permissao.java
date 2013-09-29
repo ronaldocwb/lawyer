@@ -1,22 +1,20 @@
 package br.com.lawyer.core.entity.enumerated;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
+@SuppressWarnings ("ALL")
 public enum Permissao {
 
-    USER("USER"),
-    MANAGER("MANAGER"),
-    ADMIN("ADMIN"),
-    LAWYER("LAWYER");
+    USER("ROLE_USER"),
+    MANAGER("ROLE_MANAGER"),
+    ADMIN("ROLE_ADMIN"),
+    LAWYER("ROLE_LAWYER");
 
-    private final String value;
+    private String value;
 
     private Permissao (String value) {
         this.value = value;
     }
 
-    public String getValue() {
+    public String getValue () {
         return this.value;
     }
 

@@ -1,43 +1,47 @@
 package br.com.lawyer.core.entity.base;
 
-import java.io.Serializable;
-import java.util.UUID;
+import br.com.lawyer.core.base.IUID;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import br.com.lawyer.core.base.IUID;
+import java.io.Serializable;
+import java.util.UUID;
 
 @MappedSuperclass
 public abstract class AbstractBaseEntity implements Serializable, IUID<String> {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	private String uid;
+    @Id
+    private String uid;
 
-	public AbstractBaseEntity() {
-		this.uid = UUID.randomUUID().toString();
-	}
-	
-	public String getUid() {
-		return uid;
-	}
+    public AbstractBaseEntity () { }
 
-	@Override
-	public int hashCode() {
-		return getUid().hashCode();
-	}
+    public void setUid (String uid) {
+        this.uid = uid;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof AbstractBaseEntity)) {
-			return false;
-		}
-		AbstractBaseEntity other = (AbstractBaseEntity) obj;
-		return getUid().equals(other.getUid());
-	}
+    public String getUid () {
+        if (this.uid == null) {
+            this.uid = UUID.randomUUID().toString();
+        }
+        return uid;
+    }
+
+    @Override
+    public int hashCode () {
+        return getUid().hashCode();
+    }
+
+    @Override
+    public boolean equals (Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof AbstractBaseEntity)) {
+            return false;
+        }
+        AbstractBaseEntity other = (AbstractBaseEntity) obj;
+        return getUid().equals(other.getUid());
+    }
 }

@@ -1,85 +1,88 @@
 package br.com.lawyer.core.entity;
 
-import java.io.Serializable;
-import java.util.List;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.common.Endereco;
+import br.com.lawyer.core.entity.common.Telefone;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-
-import br.com.lawyer.core.entity.base.AbstractBaseEntity;
-import br.com.lawyer.core.entity.common.Endereco;
-import br.com.lawyer.core.entity.common.Telefone;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Empresa extends AbstractBaseEntity implements Serializable {
-	
-	private static final long serialVersionUID = 7794118770747818132L;
 
-	@Column(length=120)
-	private String razaoSocial;
-	
-	@Column(length=120)
-	private String nomeFantasia;
-	
-	@Column(length=15)
-	private String cnpj;
-	
-	@ElementCollection
-	private List<Telefone> telefones;
-	
-	@ElementCollection
-	private List<Endereco> enderecos;
-	
-	@OneToMany
-	private List<Responsavel> responsaveis;
+    private static final long serialVersionUID = 7794118770747818132L;
 
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
+    @Column (length = 120)
+    private String razaoSocial;
 
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
+    @Column (length = 120)
+    private String nomeFantasia;
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
+    @Column (length = 15)
+    private String cnpj;
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Telefone> telefones;
 
-	public String getCnpj() {
-		return cnpj;
-	}
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Endereco> enderecos;
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    @OneToMany
+    private List<Responsavel> responsaveis;
 
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
+    public String getRazaoSocial () {
+        return razaoSocial;
+    }
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
-	}
+    public void setRazaoSocial (String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
+    public String getNomeFantasia () {
+        return nomeFantasia;
+    }
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
+    public void setNomeFantasia (String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
 
-	public List<Responsavel> getResponsaveis() {
-		return responsaveis;
-	}
+    public String getCnpj () {
+        return cnpj;
+    }
 
-	public void setResponsaveis(List<Responsavel> responsaveis) {
-		this.responsaveis = responsaveis;
-	}
+    public void setCnpj (String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public List<Telefone> getTelefones () {
+        return telefones;
+    }
+
+    public void setTelefones (List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Endereco> getEnderecos () {
+        return enderecos;
+    }
+
+    public void setEnderecos (List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public List<Responsavel> getResponsaveis () {
+        return responsaveis;
+    }
+
+    public void setResponsaveis (List<Responsavel> responsaveis) {
+        this.responsaveis = responsaveis;
+    }
 }

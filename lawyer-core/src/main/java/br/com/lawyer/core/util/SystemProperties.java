@@ -7,16 +7,17 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Carrega informações de um arquivo de propriedades.
+ * Carrega informaï¿½ï¿½es de um arquivo de propriedades.
+ *
  * @author Deividi
  * @since 17/09/2013
- * TODO mover para uma pasta externa algum dia!
+ *        TODO mover para uma pasta externa algum dia!
  */
 public class SystemProperties {
 
     private static final Properties PROPS = new Properties();
 
-    private SystemProperties() {
+    private SystemProperties () {
     }
 
     static {
@@ -32,7 +33,7 @@ public class SystemProperties {
         }
     }
 
-    public static String getProperty(String property) {
+    public static String getProperty (String property) {
         return (String) PROPS.get(property);
     }
 

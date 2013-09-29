@@ -8,19 +8,20 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * @author Deividi Cavarzan
  * @since 20/09/2013
- *
- * Essa implementação não é necessária até que algum método seja implementado.
- * Deixada aqui como exemplo.
+ *        <p/>
+ *        Essa implementaï¿½ï¿½o nï¿½o ï¿½ necessï¿½ria atï¿½ que algum mï¿½todo seja implementado.
+ *        Deixada aqui como exemplo.
  */
 @Service
 public class UsuarioRepository extends JPABaseRepository<String, Usuario> implements IUsuarioRepository {
 
     /**
-     * Construtor básico para classe de acesso a dados (DAO)
+     * Construtor bï¿½sico para classe de acesso a dados (DAO)
      */
     @Autowired
     public UsuarioRepository (@Qualifier ("entityManager") EntityManager em) {
@@ -28,4 +29,10 @@ public class UsuarioRepository extends JPABaseRepository<String, Usuario> implem
     }
 
 
+    @Override
+    public Usuario findByEmail (String email) {
+        Query q = getEntityManager().createQuery("SELECT o FROM Usuario o WHERE o.email = :EMAIL");
+        q.setParameter("EMAIL", email);
+        return (Usuario) q.getSingleResult();
+    }
 }

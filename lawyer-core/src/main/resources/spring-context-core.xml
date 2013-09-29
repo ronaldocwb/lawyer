@@ -16,22 +16,22 @@
              http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
 
     <!-- Mapeamento dos services do projeto -->
-    <context:component-scan base-package="br.com.lawyer.core.service" />
-    <context:component-scan base-package="br.com.lawyer.core.repository" />
-    <context:component-scan base-package="br.com.lawyer.core.authentication" />
-    <context:annotation-config />
+    <context:component-scan base-package="br.com.lawyer.core.service"/>
+    <context:component-scan base-package="br.com.lawyer.core.repository"/>
+    <context:component-scan base-package="br.com.lawyer.core.authentication"/>
+    <context:annotation-config/>
 
-    <jee:jndi-lookup id="lawyerDS" jndi-name="java:jboss/postgresDS" />
+    <jee:jndi-lookup id="lawyerDS" jndi-name="java:jboss/postgresDS"/>
 
     <beans:bean id="emf"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+                class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 
-        <beans:property name="dataSource" ref="lawyerDS" />
+        <beans:property name="dataSource" ref="lawyerDS"/>
         <beans:property name="jpaProperties">
             <beans:props>
                 <beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</beans:prop>
-                <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="hibernate.show_sql">false</beans:prop>
                 <beans:prop key="hibernate.format_sql">true</beans:prop>
             </beans:props>
         </beans:property>
@@ -44,23 +44,23 @@
     </beans:bean>
 
     <beans:bean id="entityManager"
-          class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
-        <beans:property name="entityManagerFactory" ref="emf" />
+                class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <beans:property name="entityManagerFactory" ref="emf"/>
     </beans:bean>
 
-    <context:load-time-weaver  weaver-class="org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver"/>
+    <context:load-time-weaver weaver-class="org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver"/>
 
     <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <beans:property name="entityManagerFactory" ref="emf" />
-        <beans:property name="dataSource" ref="lawyerDS" />
+        <beans:property name="entityManagerFactory" ref="emf"/>
+        <beans:property name="dataSource" ref="lawyerDS"/>
     </beans:bean>
 
     <!-- Use @Transaction annotations for managing transactions -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
-    <!--tx:jta-transaction-manager/-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:jta-transaction-manager/>
 
     <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
     <jpa:repositories base-package="br.com.lawyer.core.repository" entity-manager-factory-ref="emf"
-            transaction-manager-ref="transactionManager" />
+                      transaction-manager-ref="transactionManager"/>
 
 </beans:beans>

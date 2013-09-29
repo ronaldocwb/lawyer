@@ -17,10 +17,10 @@ angular.module('lawyer', [
         'ngLocale',
         'templates-app',
         'templates-common',
-        'lawyer.controllers',
-        'ui.state',
-        'ui.route',
+        'ui.router',
+        'ui.router.state',
         'ui.bootstrap',
+        'lawyer.controllers',
         'lawyer.connectionStatus',
         'lawyer.accessLevel',
         'services.i18nNotifications',
@@ -55,7 +55,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$dialog', 'connectionStatus', function ($scope, $dialog, connectionStatus) {
+    .controller('AppController', ['$scope', '$modal', 'connectionStatus', function ($scope, $modal, connectionStatus) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();
@@ -64,7 +64,7 @@ angular.module('lawyer', [
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
             $scope.$apply(function () {
                 if (status === false && !offlineDialog) {
-                    offlineDialog = $dialog.dialog({
+                    offlineDialog = $modal.dialog({
                         backdropFade: true,
                         dialogFade: true,
                         keyboard: false,

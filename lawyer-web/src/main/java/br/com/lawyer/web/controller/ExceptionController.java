@@ -62,7 +62,7 @@ public class ExceptionController {
         exception.setMessage("O servidor encontrou o seguinte erro na sua chamada:" + status);
         exception.setClazz(RestException.class.toString());
 
-        HttpStatus http = HttpStatus.INTERNAL_SERVER_ERROR;
+        HttpStatus http = HttpStatus.valueOf(Integer.valueOf(status));
 
         return new ResponseEntity<>(exception, http);
     }

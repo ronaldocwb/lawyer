@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,39 +18,38 @@ import org.springframework.web.bind.annotation.*;
  *
  */
 @ApiController
-@RequestMapping(value = "/usuarios")
 public class UsuarioController {
 
     @Autowired
     private IUsuarioDelegate usuarioDelegate;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public @ResponseBody Page list(@RequestParam(value = "page", defaultValue = "0") int page,
                                    @RequestParam(value = "limit", defaultValue = "25") int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
         return usuarioDelegate.findUserByPage(pageRequest);
     }
 
-    @Secured(value = {"MANAGER", "LAWYER"})
-    @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody UsuarioVO salvarUsuario(UsuarioVO usuarioVO) {
+    @PreAuthorize ("hasAnyRole('LAWYER', 'MANAGER')")
+    @RequestMapping(value = "/usuarios", method = RequestMethod.POST)
+    public @ResponseBody UsuarioVO salvarUsuario(@RequestBody UsuarioVO usuarioVO) {
         return usuarioDelegate.salvar(usuarioVO);
     }
 
-    @Secured(value = {"MANAGER", "LAWYER"})
-    @RequestMapping(value = "/{uid}", method = RequestMethod.DELETE)
+    @PreAuthorize("hasAnyRole('LAWYER', 'MANAGER')")
+    @RequestMapping(value = "/usuarios/{uid}", method = RequestMethod.DELETE)
     public ResponseEntity excluir(@PathVariable("uid") String uid) {
         usuarioDelegate.deletar(uid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured(value = {"MANAGER", "LAWYER"})
-    @RequestMapping(value = "/{uid}", method = RequestMethod.PUT)
+    @PreAuthorize("hasAnyRole('LAWYER', 'MANAGER')")
+    @RequestMapping(value = "/usuarios/{uid}", method = RequestMethod.PUT)
     public @ResponseBody UsuarioVO update(@PathVariable("uid") String uid, @RequestBody UsuarioVO usuarioVO) throws BusinessException {
         return usuarioDelegate.update(usuarioVO, uid);
     }
 
-    @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/usuarios/{uid}", method = RequestMethod.GET)
     public @ResponseBody UsuarioVO findOne(@PathVariable("uid") String uid) {
         return usuarioDelegate.findOne(uid);
     }

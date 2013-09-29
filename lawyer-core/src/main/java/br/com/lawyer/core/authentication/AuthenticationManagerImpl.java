@@ -14,27 +14,33 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 /**
  * Servico que realiza a autentica��o do Spring security e cria o {@link br.com.lawyer.core.authentication.LawyerAuthenticationToken} para armazenamento na sess�o - {SecurityContextHolder}.
  */
-@Service("authenticationManager")
+@Service ("authenticationManager")
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
     /**
      * Realiza a autenticacao e atualiza o objeto Authetication
+     *
      * @param authentication
      */
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate (Authentication authentication) throws AuthenticationException {
 
         LawyerAuthenticationToken lawyerAuthenticationToken = (LawyerAuthenticationToken) authentication;
         Usuario usuario = lawyerAuthenticationToken.getUsuario();
 
+        if (usuario == null || authentication.getCredentials() == null) {
+            throw new BadCredentialsException("Usuário não encontrado.");
+        }
+
         if (authentication.getName().equals(authentication.getCredentials())) {
-            throw new BadCredentialsException("Usu�rio / Senha inv�lidos.");
+            throw new BadCredentialsException("Usuário / Senha inválidos.");
         }
 
         if (authentication.getName() == null) {
-            throw new BadCredentialsException("Usu�rio n?o informado.");
+            throw new BadCredentialsException("Usuário não informado.");
         }
 
         if (authentication.getName().equals(authentication.getCredentials())) {
@@ -42,7 +48,11 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         }
 
         if (!usuario.getSenha().equals(authentication.getCredentials().toString())) {
-            throw new BadCredentialsException("Usu�rio / Senha inv�lidos.");
+            throw new BadCredentialsException("Usuário / Senha inválidos.");
+        }
+
+        if (usuario.getPermissoes() == null || usuario.getPermissoes().size() == 0) {
+            throw new BadCredentialsException("Usuário sem premissões para acesso ao sistema.");
         }
 
         String token = PasswordEncoder.generateRandomToken(authentication.getName());
@@ -51,7 +61,8 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     }
 
     /**
-     * Obtem todas as permiss?es deste usu�rio e insere como authorities
+     * Obtem todas as permiss?es deste Usuário e insere como authorities
+     *
      * @param permissoes
      * @return List<GrantedAuthority>
      */
@@ -59,7 +70,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         List<GrantedAuthority> authList = new ArrayList<>();
         for (Permissao permissao : permissoes) {
-            authList.add(new SimpleGrantedAuthority(permissao.toString()));
+            authList.add(new SimpleGrantedAuthority(permissao.getValue()));
         }
         return authList;
     }

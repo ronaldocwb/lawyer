@@ -6,11 +6,11 @@ package br.com.lawyer.core.exception;
  */
 public class BusinessException extends Exception {
 
-    public BusinessException(Exception e) {
+    public BusinessException (Exception e) {
         super(e);
     }
 
-    public BusinessException(String message) {
+    public BusinessException (String message) {
         super(message);
     }
 

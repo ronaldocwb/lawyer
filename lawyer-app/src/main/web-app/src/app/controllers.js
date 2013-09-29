@@ -16,5 +16,9 @@
  */
 angular.module('lawyer.controllers', [
     'lawyer.home',
-    'lawyer.atividades.popup'
+    'lawyer.atividades.popup',
+    'lawyer.empresas',
+    'lawyer.empresas.cadastro',
+    'lawyer.empresas.edicao'
+
 ]);

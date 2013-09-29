@@ -1,58 +1,41 @@
 package br.com.lawyer.core.entity;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Transient;
-
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
 @Entity
 public class Usuario extends AbstractBaseEntity implements Serializable {
-	
-	private static final long serialVersionUID = -3038405341454481689L;
 
-	@Column(length=200)
+    private static final long serialVersionUID = -3038405341454481689L;
+
+    @Column (length = 200)
     private String email;
-	
-	@Column(length=30)
+
+    @Column (length = 128)
     private String senha;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(value = EnumType.STRING)
+    @ElementCollection (fetch = FetchType.EAGER, targetClass = Permissao.class)
+    @Enumerated (value = EnumType.STRING)
+    @JoinColumn (columnDefinition = "Permissao")
     private List<Permissao> permissoes;
 
-    @Transient
-    private String hashAutenticacao;
-
-    public String getHashAutenticacao () {
-        return hashAutenticacao;
-    }
-
-    public void setHashAutenticacao (String hashAutenticacao) {
-        this.hashAutenticacao = hashAutenticacao;
-    }
-
-    public String getSenha() {
+    public String getSenha () {
         return senha;
     }
 
-    public void setSenha(String senhaCriptografada) {
+    public void setSenha (String senhaCriptografada) {
         this.senha = senhaCriptografada;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 

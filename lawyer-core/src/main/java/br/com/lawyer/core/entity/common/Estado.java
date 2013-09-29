@@ -1,122 +1,116 @@
 package br.com.lawyer.core.entity.common;
 
+import br.com.lawyer.core.base.IUID;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import br.com.lawyer.core.base.IUID;
 
 
 @Entity
 public class Estado implements Serializable, IUID<Long> {
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	private Long cdEstado;
-	
-	@Column(name="CD_ESTADO_IBGE", length=2)
-	private String cdEstadoIbge;
-	
-	@Column(name="NM_ESTADO", nullable=false, length=40)
-	private String nmEstado;
-	
-	@Column(name="SG_ESTADO", nullable=false, length=4)
-	private String sgEstado;
-	
-	@ManyToOne
-	@JoinColumn(name="CD_PAIS", nullable=false)
-	private Pais pais;
-	
-	@OneToMany(mappedBy="estado")
-	private List<Municipio> municipios;
 
-    public Estado() {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    private Long cdEstado;
+
+    @Column (name = "CD_ESTADO_IBGE", length = 2)
+    private String cdEstadoIbge;
+
+    @Column (name = "NM_ESTADO", nullable = false, length = 40)
+    private String nmEstado;
+
+    @Column (name = "SG_ESTADO", nullable = false, length = 4)
+    private String sgEstado;
+
+    @ManyToOne
+    @JoinColumn (name = "CD_PAIS", nullable = false)
+    private Pais pais;
+
+    @OneToMany (mappedBy = "estado")
+    private List<Municipio> municipios;
+
+    public Estado () {
     }
-    
+
     @Override
-	public Long getUid() {
-		return getCdEstado();
-	}
+    public Long getUid () {
+        return getCdEstado();
+    }
 
-	public Long getCdEstado() {
-		return this.cdEstado;
-	}
+    public Long getCdEstado () {
+        return this.cdEstado;
+    }
 
-	public void setCdEstado(Long cdEstado) {
-		this.cdEstado = cdEstado;
-	}
+    public void setCdEstado (Long cdEstado) {
+        this.cdEstado = cdEstado;
+    }
 
-	public String getCdEstadoIbge() {
-		return this.cdEstadoIbge;
-	}
+    public String getCdEstadoIbge () {
+        return this.cdEstadoIbge;
+    }
 
-	public void setCdEstadoIbge(String cdEstadoIbge) {
-		this.cdEstadoIbge = cdEstadoIbge;
-	}
+    public void setCdEstadoIbge (String cdEstadoIbge) {
+        this.cdEstadoIbge = cdEstadoIbge;
+    }
 
-	public String getNmEstado() {
-		return this.nmEstado;
-	}
+    public String getNmEstado () {
+        return this.nmEstado;
+    }
 
-	public void setNmEstado(String nmEstado) {
-		this.nmEstado = nmEstado;
-	}
+    public void setNmEstado (String nmEstado) {
+        this.nmEstado = nmEstado;
+    }
 
-	public String getSgEstado() {
-		return this.sgEstado;
-	}
+    public String getSgEstado () {
+        return this.sgEstado;
+    }
 
-	public void setSgEstado(String sgEstado) {
-		this.sgEstado = sgEstado;
-	}
+    public void setSgEstado (String sgEstado) {
+        this.sgEstado = sgEstado;
+    }
 
-	public Pais getPais() {
-		return this.pais;
-	}
+    public Pais getPais () {
+        return this.pais;
+    }
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
-	
-	public List<Municipio> getMunicipios() {
-		return this.municipios;
-	}
+    public void setPais (Pais pais) {
+        this.pais = pais;
+    }
 
-	public void setMunicipios(List<Municipio> municipios) {
-		this.municipios = municipios;
-	}
+    public List<Municipio> getMunicipios () {
+        return this.municipios;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result
-				+ ((cdEstado == null) ? 0 : cdEstado.hashCode());
-		return result;
-	}
+    public void setMunicipios (List<Municipio> municipios) {
+        this.municipios = municipios;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Estado other = (Estado) obj;
-		if (cdEstado == null) {
-			if (other.cdEstado != null)
-				return false;
-		} else if (!cdEstado.equals(other.cdEstado))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode () {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result
+                + ((cdEstado == null) ? 0 : cdEstado.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals (Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Estado other = (Estado) obj;
+        if (cdEstado == null) {
+            if (other.cdEstado != null)
+                return false;
+        } else if (!cdEstado.equals(other.cdEstado))
+            return false;
+        return true;
+    }
 
 }

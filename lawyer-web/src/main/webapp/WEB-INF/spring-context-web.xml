@@ -42,4 +42,13 @@
             class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
     </beans:bean>
 
+    <beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></beans:bean>
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <beans:property name="messageConverters">
+            <beans:list>
+                <beans:ref bean="jacksonMessageConverter"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
 </beans:beans>

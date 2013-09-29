@@ -13,10 +13,10 @@ angular.module('lawyer.atividades.popup', [])
 
     }])
 
-    .controller('AtividadesPopUp', ['$scope', 'dialog', '$log', function ($scope, dialog, $log) {
+    .controller('AtividadesPopUp', ['$scope', '$modalInstance', '$log', function ($scope, $modalInstance, $log) {
 
         $scope.close = function () {
-            dialog.close();
+            $modalInstance.close();
         };
 
     }])
