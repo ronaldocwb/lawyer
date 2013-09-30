@@ -21,5 +21,4 @@ angular.module('lawyer.controllers', [
     'lawyer.empresas.cadastro',
     'lawyer.empresas.edicao',
     'lawyer.empresas.listar'
-
 ]);
