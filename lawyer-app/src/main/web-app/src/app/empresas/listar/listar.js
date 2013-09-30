@@ -11,19 +11,12 @@ angular.module('lawyer.empresas.listar', [
 .controller('EmpresaListarController', ['$scope', 'i18nNotifications', '$state', '$modal', '$log', 'EmpresaResource',
         function ($scope, i18nNotifications, $state, $modal, $log, EmpresaResource) {
 
-
-
             $scope.editEmpresa = function (empresa) {
                 event.preventDefault();
                 $state.data = empresa;
                 $state.transitionTo('empresas.edicao');
 
             };
-
-            $scope.$on('$stateChangeSuccess', function () {
-                $log.debug($scope.empresas.content);
-                $log.debug($state.data);
-            });
 
             $scope.deleteEmpresa = function (empresa) {
                 var modalInstance = $modal.open({
