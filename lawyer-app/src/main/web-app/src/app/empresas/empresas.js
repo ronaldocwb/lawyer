@@ -10,17 +10,21 @@ angular.module('lawyer.empresas', [
                     controller: 'EmpresaController',
                     templateUrl: 'empresas/empresas.tpl.html'
                 }
+            }, resolve : {
+                // Recupera a lista de empresas. Após o término do promise, constrói a view e o controller.
+                // empresas deverá ser injetado como parâmetro no construtor do controller.
+                empresas : function (EmpresaResource) {
+                    return EmpresaResource.query();
+                }
             }
-            // Recupera a lista de empresas. Após o término do promise, constrói a view e o controller.
-            // empresas deverá ser injetado como parâmetro no construtor do controller.
         });
     }])
 
-    .controller('EmpresaController', ['$scope', 'i18nNotifications', '$state', '$log', 'EmpresaResource',
-        function ($scope, i18nNotifications, $state, $log, EmpresaResource) {
-            if (!$scope.empresas) {
-                $scope.empresas = EmpresaResource.query();
-            }
+    .controller('EmpresaController', ['$scope', 'i18nNotifications', '$state', '$log', 'EmpresaResource', 'empresas',
+        function ($scope, i18nNotifications, $state, $log, EmpresaResource, empresas) {
+
+            $scope.empresas = empresas;
+
             $state.transitionTo('empresas.listar');
 
             $scope.$on('$stateChangeSuccess', function () {
