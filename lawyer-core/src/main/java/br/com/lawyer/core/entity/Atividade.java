@@ -38,4 +38,13 @@ public class Atividade extends AbstractBaseEntity implements Serializable {
     public void setAtivo (boolean ativo) {
         this.ativo = ativo;
     }
+
+    public Date getData () {
+        return data;
+    }
+
+    public void setData (Date data) {
+        this.data = data;
+    }
+
 }

@@ -1,4 +1,5 @@
 angular.module('lawyer.empresas.listar', [
+        'ui.bootstrap.pagination'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -12,11 +13,15 @@ angular.module('lawyer.empresas.listar', [
         function ($scope, i18nNotifications, $state, $modal, $log, EmpresaResource) {
 
             $scope.editEmpresa = function (empresa) {
+                // interrompe a propagação. não funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
+                // vai para a rota de edição.
                 $state.transitionTo('empresas.edicao');
 
             };
+
+            $scope.empresas.current= 1;
 
             $scope.deleteEmpresa = function (empresa) {
                 var modalInstance = $modal.open({
@@ -44,6 +49,12 @@ angular.module('lawyer.empresas.listar', [
 
                 }, function () {
                     $log.info('Modal fechada sem dar OK.');
+                });
+            };
+
+            $scope.pageChanged = function (page) {
+                $scope.empresas = EmpresaResource.query({page : page-1}, function () {
+                    $scope.empresas.current = $scope.empresas.number + 1;
                 });
             };
         }])

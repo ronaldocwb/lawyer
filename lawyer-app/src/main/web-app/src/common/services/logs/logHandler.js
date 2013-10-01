@@ -7,6 +7,8 @@
  * Essa implementação adiciona o horário que o log foi lançado.
  * Poderá salvar os logs em um server remoto através do methodo {@lawyer.log.remote}
  */
+var FORMAT = 'hh:mm:ss : ';
+
 angular.module('lawyer.log', [])
 
     /**
@@ -17,34 +19,35 @@ angular.module('lawyer.log', [])
      * Realiza o override da função $log via @link{logFactory#delegate}
      */
     .factory('logFactory', ['$filter', function ($filter) {
+
         return function ($delegate) {
 
             var angularDate = $filter('date');
 
             return {
                  debug : function () {
-                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
+                     var args = [angularDate(new Date(), FORMAT)];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.debug.apply(null, args);
                  },
                  info : function () {
-                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
+                     var args = [angularDate(new Date(), FORMAT)];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.info.apply(null, args);
                  },
                  error: function () {
-                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
+                     var args = [angularDate(new Date(), FORMAT)];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
                      $delegate.error.apply(null, args);
                  },
                  warn : function () {
-                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
+                     var args = [angularDate(new Date(), FORMAT)];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });
@@ -60,7 +63,7 @@ angular.module('lawyer.log', [])
                  * @param {string} string valor do log.
                  */
                  remote : function () {
-                     var args = [angularDate(new Date(), 'hh:mm:ss : ')];
+                     var args = [angularDate(new Date(), FORMAT)];
                      angular.forEach(arguments, function (i) {
                          args.push(i);
                      });

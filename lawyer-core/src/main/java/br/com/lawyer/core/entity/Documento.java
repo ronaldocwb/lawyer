@@ -47,4 +47,20 @@ public class Documento implements Serializable {
             return false;
         return true;
     }
+
+    public TipoDocumento getTipo () {
+        return tipo;
+    }
+
+    public void setTipo (TipoDocumento tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getIdentificacao () {
+        return identificacao;
+    }
+
+    public void setIdentificacao (String identificacao) {
+        this.identificacao = identificacao;
+    }
 }
