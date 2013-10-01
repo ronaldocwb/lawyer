@@ -1,5 +1,4 @@
 angular.module('lawyer.empresas.listar', [
-        'ui.bootstrap.pagination'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {

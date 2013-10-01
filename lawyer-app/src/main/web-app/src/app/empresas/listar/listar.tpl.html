@@ -20,8 +20,8 @@
         <td><span data-ng-bind="empresa.cnpj"></span></td>
         <td><span data-ng-bind="empresa.nomeFantasia"></span></td>
         <td>
-            <a href="" ><i class="icon-edit" ng-click="editEmpresa(empresa)"></i></a>
-            <a href="" ><i class="icon-trash" ng-click="deleteEmpresa(empresa)"></i></a>
+            <a href="" ><span tooltip="Editar"><i class="icon-edit icon-align-center" ng-click="editEmpresa(empresa)"></i></span></a>
+            <a href="" ><span tooltip="Excluir"><i class="icon-trash" ng-click="deleteEmpresa(empresa)"></i></span></a>
         </td>
     </tr>
     </tbody>
