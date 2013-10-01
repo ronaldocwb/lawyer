@@ -21,8 +21,6 @@ angular.module('lawyer.empresas.listar', [
 
             };
 
-            $scope.empresas.current= 1;
-
             $scope.deleteEmpresa = function (empresa) {
                 var modalInstance = $modal.open({
                     templateUrl: 'empresas/remocao/remover.tpl.html',
@@ -52,9 +50,10 @@ angular.module('lawyer.empresas.listar', [
                 });
             };
 
+            $scope.empresas.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.empresas = EmpresaResource.query({page : page-1}, function () {
-                    $scope.empresas.current = $scope.empresas.number + 1;
+                $scope.empresas = EmpresaResource.query({page : page - 1}, function () {
+                    $scope.empresas.current = page;
                 });
             };
         }])
