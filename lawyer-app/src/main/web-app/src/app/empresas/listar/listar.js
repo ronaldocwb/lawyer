@@ -52,7 +52,7 @@ angular.module('lawyer.empresas.listar', [
 
             $scope.empresas.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.empresas = EmpresaResource.query({page : page - 1}, function () {
+                $scope.empresas = EmpresaResource.query({page : page-1}, function () {
                     $scope.empresas.current = page;
                 });
             };
