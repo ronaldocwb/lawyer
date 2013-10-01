@@ -12,10 +12,10 @@ angular.module('lawyer.empresas.listar', [
         function ($scope, i18nNotifications, $state, $modal, $log, EmpresaResource) {
 
             $scope.editEmpresa = function (empresa) {
-                // interrompe a propagação. não funcionou sem essa parada
+                // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
-                // vai para a rota de edição.
+                // vai para a rota de edicao.
                 $state.transitionTo('empresas.edicao');
 
             };
