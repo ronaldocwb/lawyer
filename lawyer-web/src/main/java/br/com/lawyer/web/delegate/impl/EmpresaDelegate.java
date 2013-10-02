@@ -23,8 +23,9 @@ public class EmpresaDelegate extends BaseDelegate<Empresa, EmpresaVO> implements
 
     @Transactional
     @Override
-    public Page findEmpresaPorPagina (PageRequest pageRequest) {
-        Page<Empresa> empresas = empresaService.findAll(pageRequest);
+    public Page findEmpresaPorPagina (String query, int page, int limit) {
+        PageRequest pageRequest = new PageRequest(page, limit);
+        Page<Empresa> empresas = empresaService.buscarPorRazaoSocialOuNomeFantasiaLike(query, pageRequest);
         return getVO(empresas, pageRequest);
     }
 
