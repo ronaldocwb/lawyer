@@ -1,6 +1,5 @@
 package br.com.lawyer.core.entity.enumerated;
 
-@SuppressWarnings ("ALL")
 public enum Permissao {
 
     USER("ROLE_USER"),
