@@ -11,26 +11,58 @@
 
     <artifactId>lawyer-app</artifactId>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.cavarzan</groupId>
-				<artifactId>angular-boilerplate-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<angularProjectDirectory></angularProjectDirectory>  <!-- o padrao ja eh a pasta web-app -->
-					<executeBower>false</executeBower>
-					<executeNpm>false</executeNpm>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://github.com/cavarzan/angular-boilerplate-maven-plugin/raw/mvn-repo</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.cavarzan</groupId>
+                <artifactId>angular-boilerplate-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <angularProjectDirectory></angularProjectDirectory>
+                    <!-- o padrao ja eh a pasta web-app -->
+                    <executeBower>false</executeBower>
+                    <executeNpm>false</executeNpm>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>github</id>
+            <url>https://github.com/cavarzan/angular-boilerplate-maven-plugin/raw/mvn-repo</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <!--
+    RONALDO!
+
+    Você precisa adicionar esse xml dentro da tag servers no seu setting.xml do maven.
+
+        <server>
+            <id>github</id>
+            <username>ronaldocwb</username>
+            <password>SUA_SENHA</password>
+        </server>
+
+    -->
 
 </project>
