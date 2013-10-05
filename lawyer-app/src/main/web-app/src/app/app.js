@@ -18,7 +18,6 @@ angular.module('lawyer', [
         'templates-app',
         'templates-common',
         'ui.router',
-        'ui.router.state',
         'ui.bootstrap',
         'lawyer.controllers',
         'lawyer.connectionStatus',

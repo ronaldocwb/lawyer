@@ -7,12 +7,12 @@ angular.module('lawyer.empresas.edicao', [
         $stateProvider.state('empresas.edicao', {
             url: '/edicao',
             controller: 'EmpresaEdicaoController',
-            templateUrl: 'empresas/edicao/edicao.tpl.html'
+            templateUrl: 'empresas/editar/editar.tpl.html'
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'EmpresaResource', '$state',
-        function ($scope, i18nNotifications, $log, EmpresaResource, $state) {
+    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'Empresa', '$state',
+        function ($scope, i18nNotifications, $log, Empresa, $state) {
 
             // $state não possui a empresa para alterar. Volta pra pagina anterior.
             if (!$state.data) {
@@ -23,10 +23,17 @@ angular.module('lawyer.empresas.edicao', [
 
             $scope.salvar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.result = EmpresaResource.update({id : $scope.empresa.uid}, $scope.empresa, function () {
-                    $log.debug('Empresa alterada:', $scope.result);
+                $scope.empresa = new Empresa($scope.empresa);
+                $scope.empresa.$update(function () {
+                    $log.debug('Empresa alterada:', $scope.empresa);
                     $log.debug('Mostrar botao para voltar');
                 });
+
+                // teste --> mesma coisa do que está acima, mas sem instanciar diretamente a Empresa e recuperar um $resource
+//                $scope.empresa = EmpresaResource.update({uid : $scope.empresa.uid}, $scope.empresa, function () {
+//                    $log.debug('Empresa alterada:', $scope.empresa);
+//                    $log.debug('Mostrar botao para voltar');
+//                });
 
             };
 

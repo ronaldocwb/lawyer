@@ -3,28 +3,44 @@ angular.module('lawyer.empresas.cadastro', [
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
-        $stateProvider.state('empresas.cadastro', {
+        $stateProvider.state('empresas.cadastrar', {
             url: '/cadastro',
             controller: 'EmpresaCadastroController',
-            templateUrl: 'empresas/cadastro/cadastro.tpl.html'
+            templateUrl: 'empresas/cadastrar/cadastrar.tpl.html'
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', 'i18nNotifications', '$log', 'EmpresaResource',
-        function ($scope, i18nNotifications, $log, EmpresaResource) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa',
+        function ($scope, $state, $log, Empresa) {
 
+            $log.debug('cadastro');
             $scope.empresa = {
                 telefones : [],
                 enderecos : []
             };
 
+
             $scope.cadastrar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.result = EmpresaResource.save({}, $scope.empresa, function () {
+                $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
-                    $log.debug('Mostrar botao para voltar');
+                    $state.transitionTo('empresas.listar');
                 });
+            };
 
+            $scope.salvarContinuar = function () {
+                $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
+                $scope.result = Empresa.save($scope.empresa, function () {
+                    $log.debug('Empresa cadastrada:', $scope.result);
+                    $scope.empresa = {
+                        telefones : [],
+                        enderecos : []
+                    };
+                });
+            };
+
+            $scope.voltar = function () {
+                $state.transitionTo('empresas.listar');
             };
 
             $scope.addTelefone = function () {
@@ -41,7 +57,7 @@ angular.module('lawyer.empresas.cadastro', [
             $scope.addEndereco = function () {
                 $log.debug('Adicionando novo campo de endereco');
                 $scope.empresa.enderecos.push({});
-                $log.debug('telefones: ', $scope.empresa.enderecos);
+                $log.debug('enderecos : ', $scope.empresa.enderecos);
             };
 
             $scope.removerEndereco = function (endereco) {

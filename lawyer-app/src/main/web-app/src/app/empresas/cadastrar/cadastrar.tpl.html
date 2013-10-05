@@ -35,20 +35,20 @@
         <label class="control-label" >Endereços:</label>
         <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0">
             <label class="control-label" for="cnpj">Logradouro:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.logradouro" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.logradouro" />
             <label class="control-label" for="cnpj">Número:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.numero" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.numero" />
             <label class="control-label" for="cnpj">Complemento:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.complemento" />
 
             <label class="control-label" for="cnpj">CEP:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.cep" />
 
             <label class="control-label" for="cnpj">Bairro:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.bairro" />
 
             <label class="control-label" for="cnpj">Município:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="empresa.endereco.teste" />
+            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.municipio" />
 
             <button type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)" >Remover</button>
         </div>
@@ -63,6 +63,12 @@
 
     <div class="control-group">
         <button class="btn btn-success" type="submit" >Salvar</button>
+    </div>
+    <div class="control-group">
+        <button class="btn btn-info" type="button" data-ng-click="salvarContinuar()">Salvar e criar uma nova empresa</button>
+    </div>
+    <div class="control-group">
+        <button class="btn" type="button" data-ng-click="voltar()" >Voltar</button>
     </div>
 
 </form>
