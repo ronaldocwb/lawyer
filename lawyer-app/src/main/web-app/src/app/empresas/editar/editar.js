@@ -26,7 +26,7 @@ angular.module('lawyer.empresas.edicao', [
                 $scope.empresa = new Empresa($scope.empresa);
                 $scope.empresa.$update(function () {
                     $log.debug('Empresa alterada:', $scope.empresa);
-                    $log.debug('Mostrar botao para voltar');
+                    $state.transitionTo('empresas.listar');
                 });
 
                 // teste --> mesma coisa do que está acima, mas sem instanciar diretamente a Empresa e recuperar um $resource
