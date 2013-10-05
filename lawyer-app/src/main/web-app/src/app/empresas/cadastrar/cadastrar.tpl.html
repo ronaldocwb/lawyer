@@ -62,10 +62,10 @@
     </div>
 
     <div class="control-group">
-        <button class="btn btn-success" type="submit" >Salvar</button>
+        <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid"  >Salvar</button>
     </div>
     <div class="control-group">
-        <button class="btn btn-info" type="button" data-ng-click="salvarContinuar()">Salvar e criar uma nova empresa</button>
+        <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid" data-ng-click="salvarContinuar(cadastro)">Salvar e criar uma nova empresa</button>
     </div>
     <div class="control-group">
         <button class="btn" type="button" data-ng-click="voltar()" >Voltar</button>

@@ -28,7 +28,7 @@ angular.module('lawyer.empresas.cadastro', [
                 });
             };
 
-            $scope.salvarContinuar = function () {
+            $scope.salvarContinuar = function (cadastro) {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
@@ -37,6 +37,7 @@ angular.module('lawyer.empresas.cadastro', [
                         enderecos : []
                     };
                 });
+
             };
 
             $scope.voltar = function () {
