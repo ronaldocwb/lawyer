@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html data-ng-app="lawyer" lang="pt-br">
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Lawyer</title>
-
-
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-
     <!-- compiled CSS -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <% styles.forEach( function ( file ) { %>
-        <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
-
     <!--[if IE 7>
-        colocar as putaris do IE aqui
     <![endif]-->
-
     <!-- compiled JS -->
     <% scripts.forEach( function ( file ) { %>
-        <script type="text/javascript" src="<%= file %>"></script>
+    <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
 
 </head>
 <body data-ng-controller="AppController">
-
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">

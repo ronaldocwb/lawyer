@@ -196,8 +196,6 @@
             <artifactId>spring-aspects</artifactId>
             <version>3.2.3.RELEASE</version>
         </dependency>
-
-
         <!-- FIM Spring Security -->
 
 
@@ -214,12 +212,6 @@
         </dependency>
         <!-- FIM Hibernate -->
 
-        <!-- EclipseLink -->
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.4.0</version>
-        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -230,6 +222,5 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
-        <!-- FIM EclipseLink -->
     </dependencies>
 </project>

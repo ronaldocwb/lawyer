@@ -8,21 +8,42 @@ angular.module('lawyer.empresas.listar', [
             templateUrl: 'empresas/listar/listar.tpl.html'
         });
     }])
-.controller('EmpresaListarController', ['$scope', 'i18nNotifications', '$state', '$modal', '$log', 'EmpresaResource',
-        function ($scope, i18nNotifications, $state, $modal, $log, EmpresaResource) {
+.controller('EmpresaListarController', ['$scope', 'i18nNotifications', '$state', '$modal', '$log', 'Empresa',
+        function ($scope, i18nNotifications, $state, $modal, $log, Empresa) {
 
-            $scope.editEmpresa = function (empresa) {
+            $scope.pesquisa =  {
+                query : '',
+                inUse : false,
+                hasUsed : false
+            };
+
+            $scope.editar = function (empresa) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
                 // vai para a rota de edicao.
                 $state.transitionTo('empresas.edicao');
-
             };
 
-            $scope.deleteEmpresa = function (empresa) {
+            $scope.buscar = function () {
+                if ($scope.pesquisa.hasUsed === false) {
+                    $scope.originalResultSet = angular.copy($scope.empresas);
+                    $scope.pesquisa.hasUsed = true;
+                }
+
+                $scope.pesquisa.inUse = true;
+                $scope.empresas = Empresa.get({q : $scope.pesquisa.query});
+            };
+
+            $scope.limparBusca = function () {
+                $scope.empresas = $scope.originalResultSet;
+                $scope.pesquisa.query = '';
+                $scope.pesquisa.inUse = false;
+            };
+
+            $scope.deletar = function (empresa) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'empresas/remocao/remover.tpl.html',
+                    templateUrl: 'empresas/remover/remover.tpl.html',
                     controller: 'RemoverEmpresaController',
                     resolve: {
                         empresa: function () {
@@ -31,11 +52,9 @@ angular.module('lawyer.empresas.listar', [
                     }
                 });
 
-                modalInstance.result.then(function (empresa) {
+                modalInstance.result.then(function () {
                     $log.warn('Removendo empresa!');
-                    $log.debug(empresa);
-                    EmpresaResource.delete({id: empresa.uid}, function () {
-
+                        Empresa.remove({id: empresa.uid}, empresa, function () {
                         $log.debug('Empresa apagada', empresa.uid);
                         $scope.empresas.content.splice($scope.empresas.content.indexOf(empresa), 1);
 
@@ -49,9 +68,28 @@ angular.module('lawyer.empresas.listar', [
                 });
             };
 
+            $scope.visualizar = function (empresa) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'empresas/visualizar/visualizar.tpl.html',
+                    controller: 'VisualizarEmpresaController',
+                    resolve: {
+                        empresa: function () {
+                            return empresa;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (editar) {
+                    if (editar === true) {
+                        $state.data = empresa;
+                        $state.transitionTo('empresas.edicao');
+                    }
+                });
+            };
+
             $scope.empresas.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.empresas = EmpresaResource.query({page : page-1}, function () {
+                $scope.empresas = Empresa.get({q : $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page : page-1}, function () {
                     $scope.empresas.current = page;
                 });
             };
@@ -60,7 +98,21 @@ angular.module('lawyer.empresas.listar', [
     .controller('RemoverEmpresaController', ['$scope', '$modalInstance', 'empresa', function ($scope, $modalInstance, empresa) {
         $scope.empresa = empresa;
         $scope.ok = function () {
-            $modalInstance.close($scope.empresa);
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }])
+
+    .controller('VisualizarEmpresaController', ['$scope', '$modalInstance', 'empresa', function ($scope, $modalInstance, empresa) {
+        $scope.empresa = empresa;
+        $scope.ok = function () {
+            $modalInstance.close(false);
+        };
+        $scope.editar = function () {
+            $modalInstance.close(true);
         };
 
         $scope.cancel = function () {

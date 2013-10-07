@@ -7,7 +7,7 @@
  * Essa implementação adiciona o horário que o log foi lançado.
  * Poderá salvar os logs em um server remoto através do methodo {@lawyer.log.remote}
  */
-var FORMAT = 'hh:mm:ss : ';
+var FORMAT = 'HH:mm:ss : ';
 
 angular.module('lawyer.log', [])
 
