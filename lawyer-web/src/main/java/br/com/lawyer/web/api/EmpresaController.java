@@ -48,7 +48,7 @@ public class EmpresaController {
         return empresaDelegate.atualizar(EmpresaVO, uid);
     }
 
-    @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/empresas/{uid}", method = RequestMethod.GET)
     public @ResponseBody EmpresaVO findOne(@PathVariable("uid") String uid) {
         return empresaDelegate.buscarPorUid(uid);
     }

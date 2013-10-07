@@ -20,5 +20,8 @@ angular.module('lawyer.controllers', [
     'lawyer.empresas',
     'lawyer.empresas.cadastro',
     'lawyer.empresas.edicao',
-    'lawyer.empresas.listar'
+    'lawyer.empresas.listar',
+    'lawyer.areasAtuacao',
+    'lawyer.areasAtuacao.listar',
+    'lawyer.areasAtuacao.cadastro'
 ]);
