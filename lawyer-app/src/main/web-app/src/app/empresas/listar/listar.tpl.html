@@ -26,10 +26,10 @@
     </thead>
     <tbody>
     <tr data-ng-repeat="empresa in empresas.content">
-        <td><span data-ng-bind="empresa.uid"></span></td>
-        <td><span data-ng-bind="empresa.razaoSocial"></span></td>
-        <td><span data-ng-bind="empresa.cnpj"></span></td>
-        <td><span data-ng-bind="empresa.nomeFantasia"></span></td>
+        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.uid"></span></td>
+        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.razaoSocial"></span></td>
+        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.cnpj"></span></td>
+        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.nomeFantasia"></span></td>
         <td>
             <a href="" ><span tooltip="Ver Detalhes"><i class="icon-search icon-align-center" ng-click="visualizar(empresa)"></i></span></a>
             <a href="" ><span tooltip="Editar"><i class="icon-edit icon-align-center" ng-click="editar(empresa)"></i></span></a>

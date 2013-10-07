@@ -1,5 +1,6 @@
 angular.module('lawyer.empresas', [
-        'Empresa',
+        'lawyer.Empresa',
+        'lawyer.Municipio'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -28,6 +29,7 @@ angular.module('lawyer.empresas', [
             $scope.empresas = empresas;
 
             if ($location.path().indexOf('cadastro') !== -1) {
+                // acessando o cadastro direto pela url
                 $state.transitionTo('empresas.cadastrar');
             } else {
                 $state.transitionTo('empresas.listar');

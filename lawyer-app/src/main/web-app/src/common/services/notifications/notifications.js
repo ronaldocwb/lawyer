@@ -7,6 +7,7 @@ angular.module('services.notifications', [])
             'ROUTE_NEXT': []
         };
         var addNotification = function (notificationsArray, notificationObj) {
+            console.log('add');
             if (!angular.isObject(notificationObj)) {
                 throw new Error("Apenas objetos podem ser adicionados ao notifications delegate");
             }

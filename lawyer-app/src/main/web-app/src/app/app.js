@@ -28,7 +28,8 @@ angular.module('lawyer', [
         'i18n.Constants',
         'services.exceptionHandler',
         'lawyer.menus',
-        'lawyer.log'
+        'lawyer.log',
+        'lawyer.app.notifications'
     ])
 
 

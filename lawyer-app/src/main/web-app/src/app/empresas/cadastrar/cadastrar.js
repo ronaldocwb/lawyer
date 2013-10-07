@@ -1,5 +1,6 @@
 angular.module('lawyer.empresas.cadastro', [
-        'ui.mask'
+        'ui.mask',
+        'ui.bootstrap'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -10,10 +11,9 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa',
-        function ($scope, $state, $log, Empresa) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', '$http',
+        function ($scope, $state, $log, Empresa, Municipio, $http) {
 
-            $log.debug('cadastro');
             $scope.empresa = {
                 telefones : [],
                 enderecos : []
@@ -64,6 +64,17 @@ angular.module('lawyer.empresas.cadastro', [
             $scope.removerEndereco = function (endereco) {
                 $log.debug('removendo o endereco', endereco);
                 $scope.empresa.enderecos.splice($scope.empresa.enderecos.indexOf(endereco), 1);
+            };
+
+            $scope.loading = true;
+            $scope.municipios = Municipio.query({q : 'CURITI'});
+            $scope.getMunicipios = function (value) {
+                $log.debug($scope.loading);
+                return $http.get('/lawyer/api/municipios?q=' + value).then(function (response) {
+                    return response.data;
+                });
+
+
             };
 
     }])

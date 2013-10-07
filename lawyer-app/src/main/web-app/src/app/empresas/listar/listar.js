@@ -16,13 +16,12 @@ angular.module('lawyer.empresas.listar', [
                 inUse : false,
                 hasUsed : false
             };
-
             $scope.editar = function (empresa) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
                 // vai para a rota de edicao.
-                $state.transitionTo('empresas.edicao');
+                $state.transitionTo('empresas.editar');
             };
 
             $scope.buscar = function () {
@@ -57,7 +56,10 @@ angular.module('lawyer.empresas.listar', [
                         Empresa.remove({id: empresa.uid}, empresa, function () {
                         $log.debug('Empresa apagada', empresa.uid);
                         $scope.empresas.content.splice($scope.empresas.content.indexOf(empresa), 1);
-
+                        if ($scope.originalResultSet) {
+                            $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(empresa), 1);
+                        }
+                            $scope.foo();
                     }, function error(err) {
                         $log.debug('Empresa nao apagada por erro no server', err);
                         $log.debug('Empresa deve ter chaves estrangeiras que nao foram apagadas corretamente');
@@ -82,7 +84,7 @@ angular.module('lawyer.empresas.listar', [
                 modalInstance.result.then(function (editar) {
                     if (editar === true) {
                         $state.data = empresa;
-                        $state.transitionTo('empresas.edicao');
+                        $state.transitionTo('empresas.editar');
                     }
                 });
             };

@@ -34,21 +34,22 @@
     <div class="control-group">
         <label class="control-label" >Endereços:</label>
         <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0">
-            <label class="control-label" for="cnpj">Logradouro:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.logradouro" />
-            <label class="control-label" for="cnpj">Número:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.numero" />
-            <label class="control-label" for="cnpj">Complemento:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.complemento" />
+            <label class="control-label" for="logradouro">Logradouro:</label>
+            <input name="logradouro" id="logradouro" class="text x-large" type="text" ng-model="endereco.logradouro" />
+            <label class="control-label" for="numero">Número:</label>
+            <input name="numero" id="numero" class="text x-large" type="text" ng-model="endereco.numero" />
+            <label class="control-label" for="complemento">Complemento:</label>
+            <input name="complemento" id="complemento" class="text x-large" type="text" ng-model="endereco.complemento" />
 
-            <label class="control-label" for="cnpj">CEP:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.cep" />
+            <label class="control-label" for="cep">CEP:</label>
+            <input name="cep" id="cep" class="text x-large" type="text" ng-model="endereco.cep" />
 
-            <label class="control-label" for="cnpj">Bairro:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.bairro" />
+            <label class="control-label" for="bairro">Bairro:</label>
+            <input name="bairro" id="bairro" class="text x-large" type="text" ng-model="endereco.bairro" />
 
-            <label class="control-label" for="cnpj">Município:</label>
-            <input name="cnpj"class="text x-large" type="text" ng-model="endereco.municipio" />
+            <label class="control-label" for="municipio">Município:</label>
+            <input name="municipio" id="municipio" class="text x-large" type="text" ng-model="selectedMunicipio"
+                   typeahead-loading="loading" typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
 
             <button type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)" >Remover</button>
         </div>

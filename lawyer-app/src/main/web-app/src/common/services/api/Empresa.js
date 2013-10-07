@@ -1,4 +1,4 @@
-angular.module('Empresa', [
+angular.module('lawyer.Empresa', [
         'ngResource'
     ])
 

@@ -4,22 +4,26 @@ angular.module('lawyer.empresas.edicao', [
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
-        $stateProvider.state('empresas.edicao', {
-            url: '/edicao',
+        $stateProvider.state('empresas.editar', {
+            url: '/editar/:uid',
             controller: 'EmpresaEdicaoController',
             templateUrl: 'empresas/editar/editar.tpl.html'
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'Empresa', '$state',
-        function ($scope, i18nNotifications, $log, Empresa, $state) {
-
-            // $state não possui a empresa para alterar. Volta pra pagina anterior.
-            if (!$state.data) {
-                $state.transitionTo('empresas');
-            }
+    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'Empresa', '$state', '$stateParams',
+        function ($scope, i18nNotifications, $log, Empresa, $state, $stateParams) {
 
             $scope.empresa = $state.data;
+
+            // $state não possui a empresa para alterar. Volta pra pagina anterior.
+            if (!$state.data && !$state.empresa) {
+                if ($stateParams.uid) {
+                    $scope.empresa = Empresa.get({uid : $stateParams.uid});
+                } else {
+                    $state.transitionTo('empresas');
+                }
+            }
 
             $scope.salvar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
@@ -35,6 +39,10 @@ angular.module('lawyer.empresas.edicao', [
 //                    $log.debug('Mostrar botao para voltar');
 //                });
 
+            };
+
+            $scope.voltar = function () {
+                $state.transitionTo('empresas.listar');
             };
 
             $scope.addTelefone = function () {
