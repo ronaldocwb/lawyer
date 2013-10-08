@@ -23,5 +23,6 @@ angular.module('lawyer.controllers', [
     'lawyer.empresas.listar',
     'lawyer.areasAtuacao',
     'lawyer.areasAtuacao.listar',
-    'lawyer.areasAtuacao.cadastro'
+    'lawyer.areasAtuacao.cadastro',
+    'lawyer.areasAtuacao.edicao'
 ]);

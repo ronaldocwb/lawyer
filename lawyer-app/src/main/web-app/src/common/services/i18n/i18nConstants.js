@@ -1,6 +1,7 @@
 angular.module('i18n.Constants', []).constant('i18n.messages', {
     'errors.route.changeError': 'Erro na rota de URL',
     'empresa.salva' : "A empresa foi salva!",
+    'areaAtuacao.salva' : "A área de atuação foi salva!",
     'crud.user.save.success': "A user with id '{{id}}' was saved successfully.",
     'crud.user.remove.success': "A user with id '{{id}}' was removed successfully.",
     'crud.user.remove.error': "Something went wrong when removing user with id '{{id}}'.",
