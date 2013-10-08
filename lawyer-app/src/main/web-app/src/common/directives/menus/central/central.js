@@ -13,10 +13,10 @@ angular.module('lawyer.menu.central', [
         };
     }])
 
-    .controller('MenuCentralController', ['$scope', function ($scope) {
-
-        $scope.data = new Date();
-
+    .controller('MenuCentralController', ['$scope', '$location', function ($scope, $location) {
+        $scope.ativo = function (url) {
+            return $location.path().indexOf(url) > -1 ? 'active' : '';
+        };
     }])
 
 ;

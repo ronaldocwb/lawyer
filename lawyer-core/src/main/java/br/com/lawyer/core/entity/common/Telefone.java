@@ -8,46 +8,13 @@ public class Telefone implements Serializable {
 
     private static final long serialVersionUID = 8490402582329057874L;
 
-    public Telefone () {
-    }
+    private String numero;
 
-    public Telefone (Integer codPais, Integer codRegiao, Long numero) {
-        this.codPais = codPais;
-        this.codRegiao = codRegiao;
-        this.numero = numero;
-    }
-
-    public Telefone (Integer codRegiao, Long numero) {
-        this.codPais = 55;
-        this.codRegiao = codRegiao;
-        this.numero = numero;
-    }
-
-    Integer codPais;
-    Integer codRegiao;
-    Long numero;
-
-    public Integer getCodPais () {
-        return codPais;
-    }
-
-    public void setCodPais (Integer codPais) {
-        this.codPais = codPais;
-    }
-
-    public Integer getCodRegiao () {
-        return codRegiao;
-    }
-
-    public void setCodRegiao (Integer codRegiao) {
-        this.codRegiao = codRegiao;
-    }
-
-    public Long getNumero () {
+    public String getNumero () {
         return numero;
     }
 
-    public void setNumero (Long numero) {
+    public void setNumero (String numero) {
         this.numero = numero;
     }
 }

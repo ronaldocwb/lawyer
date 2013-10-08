@@ -1,6 +1,5 @@
 angular.module('lawyer.empresas.cadastro', [
-        'ui.mask',
-        'ui.bootstrap'
+        'ui.bootstrap',
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -11,8 +10,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', '$http',
-        function ($scope, $state, $log, Empresa, Municipio, $http) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'i18nNotifications',
+        function ($scope, $state, $log, Empresa, Municipio, i18nNotifications) {
 
             $scope.empresa = {
                 telefones : [],
@@ -24,6 +23,8 @@ angular.module('lawyer.empresas.cadastro', [
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
+                    i18nNotifications.pushForNextRoute('empresa.salva', 'success');
+                    $scope.empresas.content.push($scope.result);
                     $state.transitionTo('empresas.listar');
                 });
             };
@@ -32,6 +33,8 @@ angular.module('lawyer.empresas.cadastro', [
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
+                    i18nNotifications.pushForCurrentRoute('empresa.salva', 'success');
+                    $scope.empresas.content.push($scope.result);
                     $scope.empresa = {
                         telefones : [],
                         enderecos : []
@@ -66,14 +69,10 @@ angular.module('lawyer.empresas.cadastro', [
                 $scope.empresa.enderecos.splice($scope.empresa.enderecos.indexOf(endereco), 1);
             };
 
-            $scope.loading = true;
-            $scope.municipios = Municipio.query({q : 'CURITI'});
             $scope.getMunicipios = function (value) {
-                $log.debug($scope.loading);
-                return $http.get('/lawyer/api/municipios?q=' + value).then(function (response) {
-                    return response.data;
+                Municipio.query({q : value}, function (data) {
+                    return data;
                 });
-
 
             };
 

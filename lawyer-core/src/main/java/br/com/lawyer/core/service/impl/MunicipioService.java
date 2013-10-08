@@ -29,7 +29,7 @@ public class MunicipioService extends BaseService<Long, Municipio, IMunicipioRep
     @Override
     public List<Municipio> buscaPorNomeContendo (String query) {
         if (StringUtils.isBlank(query)) {
-            // TODO retornar lista padrão.
+            return null;
         }
         return getRepository().findByNmMunicipioContaining(query.toUpperCase());
     }

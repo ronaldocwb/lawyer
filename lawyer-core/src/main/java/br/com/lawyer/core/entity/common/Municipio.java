@@ -3,13 +3,10 @@ package br.com.lawyer.core.entity.common;
 import br.com.lawyer.core.base.IUID;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
-public class Municipio implements Serializable, IUID<Long> {
-
-    private static final long serialVersionUID = 1L;
+public class Municipio implements IUID<Long> {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

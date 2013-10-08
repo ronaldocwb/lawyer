@@ -3,14 +3,11 @@ package br.com.lawyer.core.entity.common;
 import br.com.lawyer.core.base.IUID;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
-public class Estado implements Serializable, IUID<Long> {
-
-    private static final long serialVersionUID = 1L;
+public class Estado implements IUID<Long> {
 
     @Id
     private Long cdEstado;

@@ -1,25 +1,24 @@
 <form data-ng-submit="cadastrar()" name="cadastro">
     <div class="control-group">
-        <label class="control-label" for="razao">Razão Social:</label>
-        <div class="controls">
-            <input id="razao" class="text x-large" type="text" ng-required="true" data-ng-model="empresa.razaoSocial"/>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="nome">Nome Fantasia::</label>
+        <label class="control-label" for="nome">Nome Fantasia:*</label>
         <div class="controls">
             <input id="nome" class="text x-large" type="text"  data-ng-model="empresa.nomeFantasia"/>
         </div>
     </div>
+    <div class="control-group" >
+            <label class="control-label" for="razao">Razão Social:</label>
+            <div class="controls">
+                <input id="razao" class="text x-large" type="text" ng-required="true" data-ng-model="empresa.razaoSocial"/>
+            </div>
+        </div>
     <div class="control-group">
         <label class="control-label" for="cnpj">CNPJ:</label>
         <div class="controls">
             <input id="cnpj" name="cnpj"class="text x-large" type="text" ng-model="empresa.cnpj" ui-mask="99.999.999/9999-99"/>
         </div>
     </div>
-
     <div class="control-group">
-        <label class="control-label" >Telefones:</label>
+        <label class="control-label" >Telefone:</label>
         <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0">
             <div class="input-append">
                 <input name="telefone" class="span8" type="text" ng-model="telefone.numero" />
@@ -48,10 +47,13 @@
             <input name="bairro" id="bairro" class="text x-large" type="text" ng-model="endereco.bairro" />
 
             <label class="control-label" for="municipio">Município:</label>
-            <input name="municipio" id="municipio" class="text x-large" type="text" ng-model="selectedMunicipio"
-                   typeahead-loading="loading" typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
+            <input name="municipio" id="municipio" class="text x-large" type="text" ng-model="endereco.municipio" />
+                   <!--typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/-->
+
+
 
             <button type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)" >Remover</button>
+
         </div>
     </div>
     <div class="control-group">
