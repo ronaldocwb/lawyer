@@ -21,6 +21,7 @@ angular.module('lawyer.app.notifications', [])
         $scope.$on('$stateChangeError', function(event, current, previous, rejection){
             i18nNotifications.pushForCurrentRoute('errors.route.changeError', 'error', {}, {rejection: rejection});
         });
+
     }])
 
 ;

@@ -8,8 +8,8 @@ angular.module('lawyer.areasAtuacao.listar', [
             templateUrl: 'areasAtuacao/listar/listar.tpl.html'
         });
     }])
-.controller('AreaAtuacaoListarController', ['$scope', 'i18nNotifications', '$state', '$modal', '$log', 'AreaAtuacaoResource',
-        function ($scope, i18nNotifications, $state, $modal, $log, AreaAtuacaoResource) {
+.controller('AreaAtuacaoListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'AreaAtuacaoResource',
+        function ($scope, notifications, $state, $modal, $log, AreaAtuacaoResource) {
 
             $scope.editAreaAtuacao = function (areaAtuacao) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada

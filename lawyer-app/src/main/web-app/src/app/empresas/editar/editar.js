@@ -11,8 +11,8 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'Empresa', '$state', '$stateParams',
-        function ($scope, i18nNotifications, $log, Empresa, $state, $stateParams) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams',
+        function ($scope, notifications, $log, Empresa, $state, $stateParams) {
 
             $scope.empresa = $state.data;
 
@@ -21,7 +21,7 @@ angular.module('lawyer.empresas.edicao', [
                 if ($stateParams.uid) {
                     $scope.empresa = Empresa.get({uid : $stateParams.uid});
                 } else {
-                    $state.transitionTo('empresas');
+                    $state.go('empresas.listar');
                 }
             }
 
@@ -30,7 +30,7 @@ angular.module('lawyer.empresas.edicao', [
                 $scope.empresa = new Empresa($scope.empresa);
                 $scope.empresa.$update(function () {
                     $log.debug('Empresa alterada:', $scope.empresa);
-                    $state.transitionTo('empresas.listar');
+                    $state.go('empresas.listar');
                 });
 
                 // teste --> mesma coisa do que está acima, mas sem instanciar diretamente a Empresa e recuperar um $resource
@@ -42,7 +42,7 @@ angular.module('lawyer.empresas.edicao', [
             };
 
             $scope.voltar = function () {
-                $state.transitionTo('empresas.listar');
+                $state.go('empresas.listar');
             };
 
             $scope.addTelefone = function () {

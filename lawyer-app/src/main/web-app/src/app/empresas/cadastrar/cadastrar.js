@@ -10,8 +10,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'i18nNotifications',
-        function ($scope, $state, $log, Empresa, Municipio, i18nNotifications) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications',
+        function ($scope, $state, $log, Empresa, Municipio, notifications) {
 
             $scope.empresa = {
                 telefones : [],
@@ -23,9 +23,9 @@ angular.module('lawyer.empresas.cadastro', [
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
-                    i18nNotifications.pushForNextRoute('empresa.salva', 'success');
+                    notifications.pushForNextRoute('empresa.salva', 'success');
                     $scope.empresas.content.push($scope.result);
-                    $state.transitionTo('empresas.listar');
+                    $state.go('empresas.listar');
                 });
             };
 
@@ -33,7 +33,7 @@ angular.module('lawyer.empresas.cadastro', [
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.result = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.result);
-                    i18nNotifications.pushForCurrentRoute('empresa.salva', 'success');
+                    notifications.pushForCurrentRoute('empresa.salva', 'success');
                     $scope.empresas.content.push($scope.result);
                     $scope.empresa = {
                         telefones : [],
@@ -44,7 +44,7 @@ angular.module('lawyer.empresas.cadastro', [
             };
 
             $scope.voltar = function () {
-                $state.transitionTo('empresas.listar');
+                $state.go('empresas.listar');
             };
 
             $scope.addTelefone = function () {

@@ -22,14 +22,13 @@ angular.module('lawyer', [
         'lawyer.controllers',
         'lawyer.connectionStatus',
         'lawyer.accessLevel',
-        'services.i18nNotifications',
+        'services.notifications',
         'services.httpRequestTracker',
         'services.breadcrumbs',
         'i18n.Constants',
         'services.exceptionHandler',
         'lawyer.menus',
-        'lawyer.log',
-        'lawyer.app.notifications'
+        'lawyer.log'
     ])
 
 
@@ -55,7 +54,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$modal', 'connectionStatus', function ($scope, $modal, connectionStatus) {
+    .controller('AppController', ['$scope', '$modal', 'connectionStatus', 'notifications', function ($scope, $modal, connectionStatus, i18nNotifications) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();

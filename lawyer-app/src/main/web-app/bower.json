@@ -12,7 +12,8 @@
     "angular-bootstrap": "latest",
     "angular-ui-router": "latest",
     "angular-ui-utils": "latest",
-    "angular-route": "latest"
+    "angular-route": "latest",
+    "noty": "~2.1.0"
   },
   "dependencies": {}
 }

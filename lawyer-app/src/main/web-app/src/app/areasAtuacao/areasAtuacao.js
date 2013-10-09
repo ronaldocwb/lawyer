@@ -20,8 +20,8 @@ angular.module('lawyer.areasAtuacao', [
         });
     }])
 
-    .controller('AreaAtuacaoController', ['$scope', 'i18nNotifications', '$state', '$log', 'AreaAtuacaoResource', 'areasAtuacao',
-        function ($scope, i18nNotifications, $state, $log, AreaAtuacaoResource, areasAtuacao) {
+    .controller('AreaAtuacaoController', ['$scope', 'notifications', '$state', '$log', 'AreaAtuacaoResource', 'areasAtuacao',
+        function ($scope, notifications, $state, $log, AreaAtuacaoResource, areasAtuacao) {
 
             $scope.areasAtuacao = areasAtuacao;
 

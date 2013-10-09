@@ -1,54 +1,38 @@
-angular.module('services.notifications', [])
-    .factory('notifications', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+angular.module('services.notifications', ['services.notificationsHandler', 'services.localizedMessages'])
 
-        var notifications = {
-            'STICKY': [],
-            'ROUTE_CURRENT': [],
-            'ROUTE_NEXT': []
-        };
-        var addNotification = function (notificationsArray, notificationObj) {
-            if (!angular.isObject(notificationObj)) {
-                throw new Error("Apenas objetos podem ser adicionados ao notifications delegate");
-            }
-            notificationsArray.push(notificationObj);
-            return notificationObj;
-        };
+    .factory('notifications', ['localizedMessages', 'notificationsHandler', function (localizedMessages, notificationsHandler) {
 
-        $rootScope.$on('$stateChangeSuccess', function () {
-            notifications.ROUTE_CURRENT.length = 0;
-            notifications.ROUTE_CURRENT = angular.copy(notifications.ROUTE_NEXT);
-            notifications.ROUTE_NEXT.length = 0;
-        });
+        var prepareNotification = function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+            return angular.extend({
+                message: localizedMessages.get(mensagem, interpolateParams),
+                type: type,
+                layout : layout,
+                timeout : timeout
+            }, otherProperties);
+        };
 
         return {
-            getCurrent: function () {
-                return [].concat(notifications.STICKY, notifications.ROUTE_CURRENT);
+            size : function () {
+                return notificationsHandler.size();
+            },
+            pushSticky : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+                return notificationsHandler.pushSticky(prepareNotification(mensagem, type, layout, false, interpolateParams, otherProperties));
             },
 
-            pushSticky: function (notification) {
-                return addNotification(notifications.STICKY, notification);
+            pushForCurrentRoute : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+                return notificationsHandler.pushForCurrentRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
-            pushForCurrentRoute: function (notification) {
-                return addNotification(notifications.ROUTE_CURRENT, notification);
+            pushForNextRoute : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+                return notificationsHandler.pushForNextRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
-            pushForNextRoute: function (notification) {
-                return addNotification(notifications.ROUTE_NEXT, notification);
+            getCurrent : function () {
+                return notificationsHandler.getCurrent();
             },
 
-            remove: function (notification) {
-                angular.forEach(notifications, function (notificationsByType) {
-                    var idx = notificationsByType.indexOf(notification);
-                    if (idx > -1) {
-                        notificationsByType.splice(idx, 1);
-                    }
-                });
-            },
-            removeAll: function () {
-                angular.forEach(notifications, function (notificationsByType) {
-                    notificationsByType.length = 0;
-                });
+            remove : function (notification) {
+                return notificationsHandler.remove(notification);
             }
         };
 

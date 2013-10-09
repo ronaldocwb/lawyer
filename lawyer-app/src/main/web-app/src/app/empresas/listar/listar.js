@@ -3,13 +3,18 @@ angular.module('lawyer.empresas.listar', [
 
     .config(['$stateProvider',  function config($stateProvider) {
         $stateProvider.state('empresas.listar', {
-            url: '/listar',
+            url: '/',
             controller: 'EmpresaListarController',
             templateUrl: 'empresas/listar/listar.tpl.html'
         });
     }])
-.controller('EmpresaListarController', ['$scope', 'i18nNotifications', '$state', '$modal', '$log', 'Empresa',
-        function ($scope, i18nNotifications, $state, $modal, $log, Empresa) {
+.controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
+        function ($scope, notifications, $state, $modal, $log, Empresa) {
+
+            notifications.pushSticky('fixo', 'error');
+            notifications.pushForCurrentRoute('teste', 'information');
+            notifications.pushForCurrentRoute('teste5', 'information', 'topRight', 5000);
+
 
             $scope.pesquisa =  {
                 query : '',
@@ -21,7 +26,7 @@ angular.module('lawyer.empresas.listar', [
                 event.preventDefault();
                 $state.data = empresa;
                 // vai para a rota de edicao.
-                $state.transitionTo('empresas.editar');
+                $state.go('empresas.editar');
             };
 
             $scope.buscar = function () {
@@ -59,7 +64,6 @@ angular.module('lawyer.empresas.listar', [
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(empresa), 1);
                         }
-                            $scope.foo();
                     }, function error(err) {
                         $log.debug('Empresa nao apagada por erro no server', err);
                         $log.debug('Empresa deve ter chaves estrangeiras que nao foram apagadas corretamente');
@@ -84,7 +88,7 @@ angular.module('lawyer.empresas.listar', [
                 modalInstance.result.then(function (editar) {
                     if (editar === true) {
                         $state.data = empresa;
-                        $state.transitionTo('empresas.editar');
+                        $state.go('empresas.editar');
                     }
                 });
             };

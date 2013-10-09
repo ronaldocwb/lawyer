@@ -10,8 +10,8 @@ angular.module('lawyer.areasAtuacao.cadastro', [
         });
     }])
 
-    .controller('AreaAtuacaoCadastroController', ['$scope', 'i18nNotifications', '$log', 'AreaAtuacaoResource',
-        function ($scope, i18nNotifications, $log, AreaAtuacaoResource) {
+    .controller('AreaAtuacaoCadastroController', ['$scope', 'notifications', '$log', 'AreaAtuacaoResource',
+        function ($scope, notifications, $log, AreaAtuacaoResource) {
 
             $scope.cadastrar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.areaAtuacao);

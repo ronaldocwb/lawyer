@@ -6,10 +6,11 @@ angular.module('lawyer.empresas', [
     .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('empresas', {
             url: '/empresas',
+            abstract : true,
             views: {
                 "main": {
                     controller: 'EmpresaController',
-                    templateUrl: 'empresas/empresas.tpl.html'
+                    template: '<div ui-view></div>'
                 }
             }, resolve : {
                 // Recupera a lista de empresas. Após o término do promise, constrói a view e o controller.
@@ -23,21 +24,21 @@ angular.module('lawyer.empresas', [
         });
     }])
 
-    .controller('EmpresaController', ['$scope', '$location', '$state', '$log', 'empresas',
-        function ($scope, $location, $state, $log, empresas) {
+    .controller('EmpresaController', ['$scope', '$location', '$state', '$log', 'empresas', 'notifications',
+        function ($scope, $location, $state, $log, empresas, notifications) {
 
             $scope.empresas = empresas;
 
             if ($location.path().indexOf('cadastro') !== -1) {
                 // acessando o cadastro direto pela url
-                $state.transitionTo('empresas.cadastrar');
+                $state.go('empresas.cadastrar');
             } else {
-                $state.transitionTo('empresas.listar');
+                $state.go('empresas.listar');
             }
 
             $scope.$on('$stateChangeSuccess', function () {
-                if ($state.current.url === '/empresas') {
-                    $state.transitionTo('empresas.listar');
+                if ($state.current.url === '/empresas' || $state.current.url === '/empresas/') {
+                    $state.go('empresas.listar');
                 }
             });
         }])

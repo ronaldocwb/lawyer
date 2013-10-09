@@ -20,7 +20,7 @@ angular.module('lawyer.home', [
         });
     }])
 
-    .controller('HomeController', ['$scope', 'i18nNotifications', '$timeout', function ($scope, i18nNotifications, $timeout) {
+    .controller('HomeController', ['$scope', 'notifications', '$timeout', function ($scope, notifications, $timeout) {
     }])
 
 ;

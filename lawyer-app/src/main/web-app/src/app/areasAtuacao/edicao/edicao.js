@@ -11,8 +11,8 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'i18nNotifications', '$log', 'EmpresaResource', '$state',
-        function ($scope, i18nNotifications, $log, EmpresaResource, $state) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'EmpresaResource', '$state',
+        function ($scope, notifications, $log, EmpresaResource, $state) {
 
             // $state não possui a empresa para alterar. Volta pra pagina anterior.
             if (!$state.data) {
