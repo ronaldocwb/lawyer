@@ -11,8 +11,8 @@ angular.module('lawyer.areasAtuacao.edicao', [
         });
     }])
 
-    .controller('AreaAtuacaoEdicaoController', ['$scope', 'i18nNotifications', '$log', 'AreaAtuacaoResource', '$state', '$stateParams',
-        function ($scope, i18nNotifications, $log, AreaAtuacaoResource, $state, $stateParams) {
+    .controller('AreaAtuacaoEdicaoController', ['$scope', 'notifications', '$log', 'AreaAtuacaoResource', '$state', '$stateParams',
+        function ($scope, notifications, $log, AreaAtuacaoResource, $state, $stateParams) {
 
             // $state nao possui a areaAtuacao para alterar. Volta pra pagina anterior.
             if (!$state.data) {
@@ -26,7 +26,7 @@ angular.module('lawyer.areasAtuacao.edicao', [
                 $scope.result = AreaAtuacaoResource.update({id : $scope.areaAtuacao.uid}, $scope.areaAtuacao, function () {
                     $log.debug('AreaAtuacao alterada:', $scope.result);
                     $log.debug('Mostrar botao para voltar');
-                    i18nNotifications.pushForNextRoute('areaAtuacao.salva', 'success');
+                    notifications.pushForNextRoute('areaAtuacao.salva', 'success');
                     $state.transitionTo('areasAtuacao.listar');
                 });
 

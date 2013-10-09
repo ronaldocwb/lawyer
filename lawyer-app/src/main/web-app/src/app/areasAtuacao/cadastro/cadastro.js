@@ -10,16 +10,16 @@ angular.module('lawyer.areasAtuacao.cadastro', [
         });
     }])
 
-    .controller('AreaAtuacaoCadastroController', ['$scope', '$state', '$log', 'i18nNotifications', 'AreaAtuacaoResource',
-        function ($scope, $state, $log, i18nNotifications, AreaAtuacaoResource) {
+    .controller('AreaAtuacaoCadastroController', ['$scope', '$state', '$log', 'notifications', 'AreaAtuacaoResource',
+        function ($scope, $state, $log, notifications, AreaAtuacaoResource) {
 
             $scope.cadastrar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.areaAtuacao);
                 $scope.result = AreaAtuacaoResource.save({}, $scope.areaAtuacao, function () {
                     $log.debug('AreaAtuacao cadastrada:', $scope.result);
                     $log.debug('Mostrar botao para voltar');
-                    $scope.areasAtuacao.content._push($scope.result)
-                    $state.transitionTo('areasAtuacao.listar');
+                    $scope.areasAtuacao.content.push($scope.result);
+                    $state.go('areasAtuacao.listar');
                 });
 
             };
