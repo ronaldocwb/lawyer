@@ -1,55 +1,57 @@
 
-angular.module('lawyer.empresas.edicao', [
+angular.module('lawyer.areasAtuacao.edicao', [
         'ui.mask'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
-        $stateProvider.state('empresas.edicao', {
+        $stateProvider.state('areasAtuacao.edicao', {
             url: '/edicao',
-            controller: 'EmpresaEdicaoController',
-            templateUrl: 'empresas/edicao/edicao.tpl.html'
+            controller: 'AreaAtuacaoEdicaoController',
+            templateUrl: 'areasAtuacao/edicao/edicao.tpl.html'
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'EmpresaResource', '$state',
-        function ($scope, notifications, $log, EmpresaResource, $state) {
+    .controller('AreaAtuacaoEdicaoController', ['$scope', 'i18nNotifications', '$log', 'AreaAtuacaoResource', '$state', '$stateParams',
+        function ($scope, i18nNotifications, $log, AreaAtuacaoResource, $state, $stateParams) {
 
-            // $state não possui a empresa para alterar. Volta pra pagina anterior.
+            // $state nao possui a areaAtuacao para alterar. Volta pra pagina anterior.
             if (!$state.data) {
-                $state.transitionTo('empresas');
+                $state.transitionTo('areasAtuacao');
             }
 
-            $scope.empresa = $state.data;
+            $scope.areaAtuacao = $state.data;
 
             $scope.salvar = function () {
-                $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.result = EmpresaResource.update({id : $scope.empresa.uid}, $scope.empresa, function () {
-                    $log.debug('Empresa alterada:', $scope.result);
+                $log.debug('Enviando cadastro para o endpoint', $scope.areaAtuacao);
+                $scope.result = AreaAtuacaoResource.update({id : $scope.areaAtuacao.uid}, $scope.areaAtuacao, function () {
+                    $log.debug('AreaAtuacao alterada:', $scope.result);
                     $log.debug('Mostrar botao para voltar');
+                    i18nNotifications.pushForNextRoute('areaAtuacao.salva', 'success');
+                    $state.transitionTo('areasAtuacao.listar');
                 });
 
             };
 
             $scope.addTelefone = function () {
                 $log.debug('Adicionando novo campo de telefone');
-                $scope.empresa.telefones.push({});
-                $log.debug('telefones: ', $scope.empresa.telefones);
+                $scope.areaAtuacao.telefones.push({});
+                $log.debug('telefones: ', $scope.areaAtuacao.telefones);
             };
 
             $scope.removerTelefone = function (telefone) {
                 $log.debug('removendo o telefone', telefone);
-                $scope.empresa.telefones.splice($scope.empresa.telefones.indexOf(telefone), 1);
+                $scope.areaAtuacao.telefones.splice($scope.areaAtuacao.telefones.indexOf(telefone), 1);
             };
 
             $scope.addEndereco = function () {
                 $log.debug('Adicionando novo campo de endereco');
-                $scope.empresa.enderecos.push({});
-                $log.debug('telefones: ', $scope.empresa.enderecos);
+                $scope.areaAtuacao.enderecos.push({});
+                $log.debug('telefones: ', $scope.areaAtuacao.enderecos);
             };
 
             $scope.removerEndereco = function (endereco) {
                 $log.debug('removendo o endereco', endereco);
-                $scope.empresa.enderecos.splice($scope.empresa.enderecos.indexOf(endereco), 1);
+                $scope.areaAtuacao.enderecos.splice($scope.areaAtuacao.enderecos.indexOf(endereco), 1);
             };
 
         }])
