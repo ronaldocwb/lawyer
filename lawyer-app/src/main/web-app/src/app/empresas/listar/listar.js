@@ -13,8 +13,7 @@ angular.module('lawyer.empresas.listar', [
 
             notifications.pushSticky('fixo', 'error');
             notifications.pushForCurrentRoute('teste', 'information');
-            notifications.pushForCurrentRoute('teste5', 'information', 'topRight', 5000);
-
+            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
 
             $scope.pesquisa =  {
                 query : '',
@@ -25,6 +24,7 @@ angular.module('lawyer.empresas.listar', [
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
+                console.log('LOL');
                 // vai para a rota de edicao.
                 $state.go('empresas.editar');
             };

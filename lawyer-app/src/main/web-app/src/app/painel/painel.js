@@ -4,23 +4,21 @@
  * @description
  * Essa � a view inicial do app, respons�vel por carregar o "dashboard" inicial e apresentar algumas features.
  */
-angular.module('lawyer.home', [
-        'ui.router.state'
-    ])
+angular.module('lawyer.painel', [])
 
     .config(['$stateProvider', function config($stateProvider) {
-        $stateProvider.state('home', {
-            url: '/home',
+        $stateProvider.state('painel', {
+            url: '/painel',
             views: {
                 "main": {
-                    controller: 'HomeController',
-                    templateUrl: 'home/home.tpl.html'
+                    controller: 'PainelController',
+                    templateUrl: 'painel/painel.tpl.html'
                 }
             }
         });
     }])
 
-    .controller('HomeController', ['$scope', 'notifications', '$timeout', function ($scope, notifications, $timeout) {
+    .controller('PainelController', ['$scope', function ($scope) {
     }])
 
 ;

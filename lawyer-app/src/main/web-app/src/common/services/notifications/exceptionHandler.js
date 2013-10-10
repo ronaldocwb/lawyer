@@ -1,15 +1,14 @@
-angular.module('services.exceptionHandler', ['services.notificationsHandler'])
+angular.module('services.exceptionHandler', ['services.notifications'])
 
     .factory('exceptionHandlerFactory', ['$injector', function ($injector) {
         return function ($delegate) {
 
             return function (exception, cause) {
                 // Lazy load notifications para evitar a dependencia circular caso seja injetado diretamente
-                var i18nNotifications = $injector.get('notificationsHandler');
+                var i18nNotifications = $injector.get('notifications');
 
                 $delegate(exception, cause);
-
-                i18nNotifications.pushForCurrentRoute('error.fatal', 'error', {}, {
+                i18nNotifications.pushForCurrentRoute('error.fatal', 'error', 'top', 0, {}, {
                     exception: exception,
                     cause: cause
                 });

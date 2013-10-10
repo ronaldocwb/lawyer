@@ -21,30 +21,26 @@ angular.module('lawyer.empresas.cadastro', [
 
             $scope.cadastrar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.result = Empresa.save($scope.empresa, function () {
-                    $log.debug('Empresa cadastrada:', $scope.result);
-                    notifications.pushForNextRoute('empresa.salva', 'success');
-                    $scope.empresas.content.push($scope.result);
+                $scope.empresa = Empresa.save($scope.empresa, function (result) {
+                    $log.debug('Empresa cadastrada:', $scope.empresa);
+                    notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
+                    $scope.empresas.content.push($scope.empresa);
                     $state.go('empresas.listar');
                 });
             };
 
             $scope.salvarContinuar = function (cadastro) {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.result = Empresa.save($scope.empresa, function () {
-                    $log.debug('Empresa cadastrada:', $scope.result);
-                    notifications.pushForCurrentRoute('empresa.salva', 'success');
-                    $scope.empresas.content.push($scope.result);
+                $scope.empresa = Empresa.save($scope.empresa, function () {
+                    $log.debug('Empresa cadastrada:', $scope.empresa);
+                    notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
+                    $scope.empresas.content.push($scope.empresa);
                     $scope.empresa = {
                         telefones : [],
                         enderecos : []
                     };
                 });
 
-            };
-
-            $scope.voltar = function () {
-                $state.go('empresas.listar');
             };
 
             $scope.addTelefone = function () {

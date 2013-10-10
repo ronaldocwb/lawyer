@@ -1,11 +1,43 @@
 <div class="modal-header">
-    <h3><span data-ng-bind="empresa.razaoSocial"></span></h3>
+    <h3><span data-ng-bind="empresa.nomeFantasia"></span></h3>
 </div>
 <div class="modal-body">
-    <h3><span data-ng-bind="empresa.razaoSocial"></span></h3>
-    <h3><span data-ng-bind="empresa.nomeFantasia"></span></h3>
-    <h3><span data-ng-bind="empresa.cnpj"></span></h3>
-    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>Nome: </dt>
+        <dd><span data-ng-bind="empresa.nomeFantasia"></span></dd>
+        <dt>Razão Social: </dt>
+        <dd><span data-ng-bind="empresa.razaoSocial"></span></dd>
+        <dd><span data-ng-hide="empresa.razaoSocial">Não informado.</span></dd>
+        <dt>Cnpj: </dt>
+        <dd><span data-ng-bind="empresa.cnpj"></span></dd>
+        <dd><span data-ng-hide="empresa.cnpj">Não informado.</span></dd>
+        <dt>
+            <ng-pluralize count="empresa.telefones.length"
+                      when="{'0': '',
+                     'one': 'Telefone:',
+                     'other': 'Telefones:'}">
+            </ng-pluralize>
+        </dt>
+        <dd data-ng-show="empresa.telefones" data-ng-repeat="telefone in empresa.telefones"><span data-ng-bind="telefone.numero"></span></dd>
+        <dt>
+            <ng-pluralize count="empresa.enderecos.length"
+                      when="{'0': '',
+                     'one': 'Endereço:',
+                     'other': 'Endereços:'}">
+            </ng-pluralize>
+        </dt>
+        <dd data-ng-show="empresa.enderecos" data-ng-repeat="endereco in empresa.enderecos">
+            <span data-ng-bind="endereco.logradouro"></span> - <span data-ng-bind="endereco.numero"></span><br>
+            <span data-ng-show="endereco.complemento">Complemento: </span><span data-ng-show="endereco.complemento" data-ng-bind="endereco.complemento"></span><br>
+            <span data-ng-show="endereco.cep">Cep: </span><span data-ng-show="endereco.cep" data-ng-bind="endereco.cep"></span><br>
+            <span data-ng-show="endereco.bairro">Bairro: </span><span data-ng-show="endereco.bairro" data-ng-bind="endereco.bairro"></span><br>
+            <span data-ng-show="endereco.cidade">Cidade: </span>
+                <span data-ng-show="endereco.cidade" data-ng-bind="endereco.cidade.nmMunicipio"> - </span>
+                <span data-ng-show="endereco.cidade.estado" data-ng-bind="endereco.cidade.estado.nomeEstado"></span>
+        </dd>
+    </dl>
+
 </div>
 <div class="modal-footer">
     <button class="btn btn-info" ng-click="editar()">Editar</button>

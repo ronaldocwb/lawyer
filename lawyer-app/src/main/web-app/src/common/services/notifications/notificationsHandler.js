@@ -1,6 +1,6 @@
 angular.module('services.notificationsHandler', [ 'lawyer.notifications'
     ])
-    .factory('notificationsHandler', ['$rootScope', 'notificationService', '$timeout', function ($rootScope, notificationService, $timeout) {
+    .factory('notificationsHandler', ['$rootScope', 'notificationService', function ($rootScope, notificationService) {
 
         var notifications = {
             'STICKY': [],

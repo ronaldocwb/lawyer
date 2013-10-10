@@ -33,7 +33,7 @@ angular.module('lawyer', [
 
 
     .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $locationProvider, $httpProvider) {
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/painel');
 
         $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
             return {
@@ -54,7 +54,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$modal', 'connectionStatus', 'notifications', function ($scope, $modal, connectionStatus, i18nNotifications) {
+    .controller('AppController', ['$scope', '$modal', 'connectionStatus', function ($scope, $modal, connectionStatus) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();

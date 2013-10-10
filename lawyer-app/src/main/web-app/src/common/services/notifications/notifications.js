@@ -15,15 +15,15 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
             size : function () {
                 return notificationsHandler.size();
             },
-            pushSticky : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+            pushSticky : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
                 return notificationsHandler.pushSticky(prepareNotification(mensagem, type, layout, false, interpolateParams, otherProperties));
             },
 
-            pushForCurrentRoute : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+            pushForCurrentRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
                 return notificationsHandler.pushForCurrentRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
-            pushForNextRoute : function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
+            pushForNextRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
                 return notificationsHandler.pushForNextRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 

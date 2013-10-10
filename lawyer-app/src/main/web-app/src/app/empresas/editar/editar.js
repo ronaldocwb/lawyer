@@ -5,7 +5,7 @@ angular.module('lawyer.empresas.edicao', [
 
     .config(['$stateProvider',  function config($stateProvider) {
         $stateProvider.state('empresas.editar', {
-            url: '/editar/:uid',
+            url: '/editar/',
             controller: 'EmpresaEdicaoController',
             templateUrl: 'empresas/editar/editar.tpl.html'
         });
@@ -30,6 +30,7 @@ angular.module('lawyer.empresas.edicao', [
                 $scope.empresa = new Empresa($scope.empresa);
                 $scope.empresa.$update(function () {
                     $log.debug('Empresa alterada:', $scope.empresa);
+                    notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
                     $state.go('empresas.listar');
                 });
 
@@ -40,6 +41,7 @@ angular.module('lawyer.empresas.edicao', [
 //                });
 
             };
+
 
             $scope.voltar = function () {
                 $state.go('empresas.listar');
