@@ -63,13 +63,12 @@ angular.module('lawyer', [
         $scope.$on('ConnectionStatus.CHANGE', function (event, status) {
             $scope.$apply(function () {
                 if (status === false && !offlineDialog) {
-                    offlineDialog = $modal.dialog({
+                    offlineDialog = $modal.open({
                         backdropFade: true,
                         dialogFade: true,
-                        keyboard: false,
-                        backdropClick: false
+                        backdrop: 'static',
+                        templateUrl : 'templates/modalOffline/modalOffline.tpl.html'
                     });
-                    offlineDialog.open('templates/modalOffline/modalOffline.tpl.html');
                 } else if (status === true && offlineDialog) {
                     offlineDialog.close();
                     offlineDialog = null;

@@ -6,7 +6,7 @@ angular.module('lawyer.empresas.cadastro', [
         $stateProvider.state('empresas.cadastrar', {
             url: '/cadastro',
             controller: 'EmpresaCadastroController',
-            templateUrl: 'empresas/cadastrar/cadastrar.tpl.html'
+            templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html'
         });
     }])
 

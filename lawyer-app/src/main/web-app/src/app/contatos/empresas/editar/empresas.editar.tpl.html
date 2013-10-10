@@ -1,0 +1,83 @@
+<form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
+    <fieldset>
+        <legend>Editar Pessoa</legend>
+        <div class="control-group">
+            <label class="control-label" for="nome">Nome:*</label>
+
+            <div class="controls">
+                <input id="nome" class="text x-large" type="text" ng-required="true"
+                       data-ng-model="empresa.nomeFantasia"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="razao">Razão Social:</label>
+
+            <div class="controls">
+                <input id="razao" class="text x-large" type="text" data-ng-model="empresa.razaoSocial"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="cnpj">CNPJ:</label>
+
+            <div class="controls">
+                <input id="cnpj" name="cnpj" class="x-large" type="text" ng-model="empresa.cnpj"
+                       ui-mask="99.999.999/9999-99"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Telefones:</label>
+            <div class="controls">
+                <button type="button" class="btn btn-info" data-ng-click="addTelefone()"><i class="icon-plus-sign icon-white"></i></button>
+            </div>
+            <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0"
+                 class="controls">
+                <br>
+                <div class="input-append">
+                    <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
+                    <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i class="icon-trash icon-white"></i> </button>
+                </div>
+                <hr>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Endereços:</label>
+            <div class="controls">
+                <button type="button" class="btn btn-info" data-ng-click="addEndereco()"><i class="icon-plus-sign icon-white"></i></button>
+            </div>
+            <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0"
+                 class="controls">
+                <div class="span5">
+                    <label class="control-label" for="logradouro">Logradouro:</label>
+                    <input name="logradouro" id="logradouro" class="x-large" type="text"
+                           ng-model="endereco.logradouro"/>
+                    <label class="control-label" for="numero">Número:</label>
+                    <input name="numero" id="numero" class="x-large" type="text" ng-model="endereco.numero"/>
+                    <label class="control-label" for="complemento">Complemento:</label>
+                    <input name="complemento" id="complemento" class="x-large" type="text"
+                           ng-model="endereco.complemento"/>
+                    <label class="control-label" for="cep">CEP:</label>
+                    <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
+
+                    <label class="control-label" for="bairro">Bairro:</label>
+                    <input name="bairro" id="bairro" class="x-large" type="text" ng-model="endereco.bairro"/>
+
+                    <label class="control-label" for="municipio">Município:</label>
+                    <input name="municipio" id="municipio" class="x-large" type="text" ng-model="endereco.municipio"/>
+                    <!--typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/-->
+                    <button id="remover" type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        </div>
+        <hr>
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid || !cadastro.$dirty">Salvar</button>
+                ou <a ui-sref="pessoas.listar">Clique para voltar</a>
+            </div>
+        </div>
+        <hr>
+    </fieldset>
+</form>

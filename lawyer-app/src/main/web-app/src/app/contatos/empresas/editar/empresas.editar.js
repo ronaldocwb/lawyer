@@ -7,7 +7,7 @@ angular.module('lawyer.empresas.edicao', [
         $stateProvider.state('empresas.editar', {
             url: '/editar/',
             controller: 'EmpresaEdicaoController',
-            templateUrl: 'empresas/editar/editar.tpl.html'
+            templateUrl: 'contatos/empresas/editar/empresas.editar.tpl.html'
         });
     }])
 

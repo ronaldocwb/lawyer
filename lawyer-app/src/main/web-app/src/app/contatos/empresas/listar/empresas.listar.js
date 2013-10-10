@@ -5,7 +5,7 @@ angular.module('lawyer.empresas.listar', [
         $stateProvider.state('empresas.listar', {
             url: '/',
             controller: 'EmpresaListarController',
-            templateUrl: 'empresas/listar/listar.tpl.html'
+            templateUrl: 'contatos/empresas/listar/empresas.listar.tpl.html'
         });
     }])
 .controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
@@ -24,7 +24,6 @@ angular.module('lawyer.empresas.listar', [
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
-                console.log('LOL');
                 // vai para a rota de edicao.
                 $state.go('empresas.editar');
             };
@@ -36,6 +35,9 @@ angular.module('lawyer.empresas.listar', [
                 }
 
                 $scope.pesquisa.inUse = true;
+                if ($scope.pesquisa.query === '') {
+                    $scope.pesquisa.inUse = false;
+                }
                 $scope.empresas = Empresa.get({q : $scope.pesquisa.query});
             };
 
@@ -47,7 +49,7 @@ angular.module('lawyer.empresas.listar', [
 
             $scope.deletar = function (empresa) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'empresas/remover/remover.tpl.html',
+                    templateUrl: 'contatos/empresas/remover/empresas.remover.tpl.html',
                     controller: 'RemoverEmpresaController',
                     resolve: {
                         empresa: function () {
@@ -76,7 +78,7 @@ angular.module('lawyer.empresas.listar', [
 
             $scope.visualizar = function (empresa) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'empresas/visualizar/visualizar.tpl.html',
+                    templateUrl: 'contatos/empresas/visualizar/empresas.visualizar.tpl.html',
                     controller: 'VisualizarEmpresaController',
                     resolve: {
                         empresa: function () {
