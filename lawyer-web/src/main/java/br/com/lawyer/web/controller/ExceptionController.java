@@ -43,7 +43,7 @@ public class ExceptionController {
         if (StringUtils.contains(uri, "/api/")) {
             forwardUri = "/errors/json/" + status;
         } else if (status.equals("403")) {
-            forwardUri = "authentication/index";
+            forwardUri = "/authentication/index";
         } else {
             forwardUri = "/errors/pages/" + status;
         }

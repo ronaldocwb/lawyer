@@ -6,7 +6,7 @@ angular.module('lawyer-login', [
         'ui.bootstrap'
     ])
 
-    .controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', '$dialog', '$log', function ($scope, $resource, $window, $cookieStore, $dialog, $log) {
+    .controller('LoginController', ['$scope', '$resource', '$window', '$cookieStore', '$dialog', '$log', '$location', function ($scope, $resource, $window, $cookieStore, $dialog, $log, $location) {
         var l = 'lawyer';
         var u = 'user';
         var j = 'JSES';
@@ -29,6 +29,8 @@ angular.module('lawyer-login', [
             Auth.save($scope.user, function success(userVO) {
                 if (typeof userVO !== 'undefined' && userVO.email) {
                     $cookieStore.put(l+'.'+u, userVO);
+                    $cookieStore.put("location", $location.path());
+
                     $window.location = '/lawyer/secure/';
                 }
                 angular.element('body').css('cursor', 'auto');
