@@ -19,7 +19,4 @@ public class EntryPointController {
     public String home() {
         return "authentication/index";
     }
-
-
-
 }

@@ -28,10 +28,7 @@ angular.module('lawyer-login', [
             var Auth = $resource('auth/authenticate', {});
             Auth.save($scope.user, function success(userVO) {
                 if (typeof userVO !== 'undefined' && userVO.email) {
-                    $cookieStore.put(l+'.'+u, userVO);
-                    $cookieStore.put("location", $location.path());
-
-                    $window.location = '/lawyer/secure/';
+                    $window.location = '/lawyer/secure/#' + $location.path();
                 }
                 angular.element('body').css('cursor', 'auto');
 

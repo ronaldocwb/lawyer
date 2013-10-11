@@ -54,12 +54,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$modal', 'connectionStatus', '$cookieStore', '$location', function ($scope, $modal, connectionStatus, $cookieStore, $location) {
-
-        var location = $cookieStore.get("location");
-        if (location) {
-            $location.path(location);
-        }
+    .controller('AppController', ['$scope', '$modal', 'connectionStatus',  function ($scope, $modal, connectionStatus) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();
