@@ -64,8 +64,7 @@ angular.module('lawyer', [
             $scope.$apply(function () {
                 if (status === false && !offlineDialog) {
                     offlineDialog = $modal.open({
-                        backdropFade: true,
-                        dialogFade: true,
+                        keyboard : false,
                         backdrop: 'static',
                         templateUrl : 'templates/modalOffline/modalOffline.tpl.html'
                     });
