@@ -54,6 +54,14 @@
         <location>/errors/redirect/404</location>
     </error-page>
     <error-page>
+        <error-code>401</error-code>
+        <location>/errors/redirect/401</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errors/redirect/403</location>
+    </error-page>
+    <error-page>
         <error-code>405</error-code>
         <location>/errors/redirect/405</location>
     </error-page>

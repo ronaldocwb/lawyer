@@ -9,7 +9,7 @@
     <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
 
     <!-- Define os contextos que o security vai atuar e quais são os entrypoints da aplicação -->
-    <security:http use-expressions="true" auto-config="true">
+    <security:http use-expressions="true" auto-config="true" entry-point-ref="entryPoint" >
         <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
         <security:intercept-url pattern="/api/**" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER')" />
         <security:intercept-url pattern="/auth/*/**" access="isAnonymous()" />
@@ -24,6 +24,10 @@
             <security:concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
         </security:session-management>
     </security:http>
+
+    <bean id="entryPoint"
+                class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+
 
     <!-- Define qual é o delegate que vai autenticar o usuário -->
     <security:authentication-manager alias="myAuthenticationManagerImpl" />

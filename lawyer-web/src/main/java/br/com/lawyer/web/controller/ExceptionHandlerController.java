@@ -121,5 +121,21 @@ public class ExceptionHandlerController {
 
     }
 
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<RestException> handleThrowable(Throwable e) {
+
+        RestException restException = new RestException();
+
+        restException.setClazz(e.getClass().getSimpleName());
+        restException.setCause(e.getCause().toString());
+        restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
+        restException.setMessage(e.getMessage());
+
+        e.printStackTrace();
+
+        return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
+
+    }
+
 
 }

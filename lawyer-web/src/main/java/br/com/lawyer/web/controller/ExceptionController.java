@@ -42,6 +42,8 @@ public class ExceptionController {
         String forwardUri;
         if (StringUtils.contains(uri, "/api/")) {
             forwardUri = "/errors/json/" + status;
+        } else if (status.equals("403")) {
+            forwardUri = "authentication/index";
         } else {
             forwardUri = "/errors/pages/" + status;
         }
@@ -59,6 +61,16 @@ public class ExceptionController {
 
         RestException exception = new RestException();
         exception.setCause(status);
+
+        if (Integer.parseInt(status) == 401) {
+            exception.setMessage("Acesso não autorizado");
+            return new ResponseEntity<>(exception, HttpStatus.UNAUTHORIZED);
+        }
+
+        if (Integer.parseInt(status) == 403) {
+            exception.setMessage("Acesso não autorizado");
+            return new ResponseEntity<>(exception, HttpStatus.FORBIDDEN);
+        }
         exception.setMessage("O servidor encontrou o seguinte erro na sua chamada:" + status);
         exception.setClazz(RestException.class.toString());
 
