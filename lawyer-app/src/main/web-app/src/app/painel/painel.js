@@ -4,7 +4,8 @@
  * @description
  * Essa � a view inicial do app, respons�vel por carregar o "dashboard" inicial e apresentar algumas features.
  */
-angular.module('lawyer.painel', [])
+angular.module('lawyer.painel', [
+    ])
 
     .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('painel', {

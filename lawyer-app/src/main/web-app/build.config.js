@@ -7,6 +7,8 @@ module.exports = {
      * A PASTA BUILT È O CAMINHO DO WAR EXPLODED.
      */
     test_dir: 'build',
+//    build_dir: '../../../../lawyer-web/target/lawyer.war/secure',
+//    compile_dir: '../../../../lawyer-web/src/main/webapp/secure',
     build_dir: '../../../../lawyer-web/src/main/webapp/secure',
     compile_dir: '../../../../lawyer-web/src/main/webapp/secure_compilado',
 
@@ -41,9 +43,11 @@ module.exports = {
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/topRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
-            'vendor/noty/js/noty/themes/default.js'
+            'vendor/noty/js/noty/themes/default.js',
+            'vendor/animate.css/animate.css'
         ],
         css: [
+            'vendor/animate.css/animate.css'
         ]
     }
 };

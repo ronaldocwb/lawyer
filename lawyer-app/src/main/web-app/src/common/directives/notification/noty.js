@@ -3,7 +3,7 @@ angular.module('lawyer.noty', [])
 
         $.noty.defaults.layout = "top";
         $.noty.defaults.timeout = 3000;
-        $.noty.defaults.maxVisible = 6;
+        $.noty.defaults.maxVisible = 5;
         $.noty.defaults.modal = false;
         $.noty.defaults.closeWith = ["click"];
         var doNotCloseNotifications = [];
