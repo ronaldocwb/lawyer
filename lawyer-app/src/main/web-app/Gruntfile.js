@@ -129,6 +129,16 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            build_vendorcss: {
+                files: [
+                    {
+                        src: [ '<%= vendor_files.css %>' ],
+                        dest: '<%= build_dir %>/',
+                        cwd: '.',
+                        expand: true
+                    }
+                ]
+            },
             compile_assets: {
                 files: [
                     {
@@ -505,6 +515,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean', 'html2js', 'jshint', 'recess:build',
         'copy:build_assets', 'copy:build_appjs', 'copy:build_vendorjs',
+        'copy:build_vendorcss',
         'index:build'
     ]);
 

@@ -44,7 +44,6 @@ module.exports = {
             'vendor/noty/js/noty/layouts/topRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
             'vendor/noty/js/noty/themes/default.js',
-            'vendor/animate.css/animate.css'
         ],
         css: [
             'vendor/animate.css/animate.css'
