@@ -40,6 +40,7 @@ module.exports = {
             'vendor/noty/js/noty/jquery.noty.js',
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/topRight.js',
+            'vendor/noty/js/noty/layouts/bottom.js',
             'vendor/noty/js/noty/themes/default.js'
         ],
         css: [

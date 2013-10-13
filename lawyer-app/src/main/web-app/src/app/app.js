@@ -28,6 +28,7 @@ angular.module('lawyer', [
         'i18n.Constants',
         'services.exceptionHandler',
         'lawyer.menus',
+        'lawyer.noty',
         'lawyer.log'
     ])
 
@@ -74,4 +75,5 @@ angular.module('lawyer', [
                 }
             });
         });
+
     }]);

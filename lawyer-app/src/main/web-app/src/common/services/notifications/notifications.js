@@ -4,7 +4,7 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
 
         var prepareNotification = function (mensagem, type, layout, timeout, interpolateParams, otherProperties) {
             return angular.extend({
-                message: localizedMessages.get(mensagem, interpolateParams),
+                text: localizedMessages.get(mensagem, interpolateParams),
                 type: type,
                 layout : layout,
                 timeout : timeout
@@ -12,11 +12,12 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
         };
 
         return {
-            size : function () {
-                return notificationsHandler.size();
+            pushSticky : function (mensagem, type, interpolateParams, layout, timeout, otherProperties) {
+                return notificationsHandler.pushSticky(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
-            pushSticky : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
-                return notificationsHandler.pushSticky(prepareNotification(mensagem, type, layout, false, interpolateParams, otherProperties));
+
+            pushError : function (mensagem, type, interpolateParams, layout, timeout, otherProperties) {
+                return notificationsHandler.pushError(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
             pushForCurrentRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
@@ -25,14 +26,6 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
 
             pushForNextRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
                 return notificationsHandler.pushForNextRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
-            },
-
-            getCurrent : function () {
-                return notificationsHandler.getCurrent();
-            },
-
-            remove : function (notification) {
-                return notificationsHandler.remove(notification);
             }
         };
 

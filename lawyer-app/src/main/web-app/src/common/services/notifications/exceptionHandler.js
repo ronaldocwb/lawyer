@@ -4,14 +4,16 @@ angular.module('services.exceptionHandler', ['services.notifications'])
         return function ($delegate) {
 
             return function (exception, cause) {
-                // Lazy load notifications para evitar a dependencia circular caso seja injetado diretamente
-                var i18nNotifications = $injector.get('notifications');
+                var notifications = $injector.get('notifications');
 
                 $delegate(exception, cause);
-                i18nNotifications.pushForCurrentRoute('error.fatal', 'error', 'top', 0, {}, {
-                    exception: exception,
-                    cause: cause
-                });
+                if ($.noty) {
+                    notifications.pushError('error.fatal', 'error', {
+                        exception: exception.message,
+                        cause: cause
+                    });
+                }
+
             };
         };
     }])

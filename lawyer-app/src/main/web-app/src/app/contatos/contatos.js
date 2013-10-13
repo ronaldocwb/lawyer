@@ -14,6 +14,5 @@ angular.module('lawyer.contatos', [
     }])
 .controller('ContatosController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa',
         function ($scope, notifications, $state, $modal, $log, Pessoa) {
-
         }])
 ;

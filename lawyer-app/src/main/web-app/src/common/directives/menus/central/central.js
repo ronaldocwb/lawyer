@@ -1,23 +1,17 @@
 angular.module('lawyer.menu.central', [
     ])
 
-
-    .directive('menuCentral', [function () {
+    .directive('menuCentral', ['$location', function ($location) {
         return {
             restrict: 'E',
             replace: true,
-            controller: 'MenuCentralController',
             templateUrl: 'directives/menus/central/central.tpl.html',
-            link: function (scope, element, attrs) {
+            link: function (scope, elem, attrs) {
+                scope.ativo = function (url) {
+                    return $location.path().indexOf(url) > -1 ? 'active' : '';
+                };
             }
         };
     }])
-
-    .controller('MenuCentralController', ['$scope', '$location', function ($scope, $location) {
-        $scope.ativo = function (url) {
-            return $location.path().indexOf(url) > -1 ? 'active' : '';
-        };
-    }])
-
 ;
 
