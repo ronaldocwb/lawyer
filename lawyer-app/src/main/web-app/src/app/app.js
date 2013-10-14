@@ -39,7 +39,7 @@ angular.module('lawyer', [
         $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
             return {
                 'responseError': function(rejection) {
-                    if (rejection.status === 401) {
+                    if (rejection.status === 401 || rejection.status === 403) {
                         $location.path('/login');
                         return $q.reject(rejection);
                     }
