@@ -11,9 +11,9 @@ angular.module('lawyer.empresas.listar', [
 .controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
         function ($scope, notifications, $state, $modal, $log, Empresa) {
 
-//            notifications.pushSticky('fixo', 'error');
-//            notifications.pushForCurrentRoute('teste', 'information');
-//            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
+            notifications.pushSticky('fixo', 'error');
+            notifications.pushForCurrentRoute('teste', 'information');
+            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
 
             $scope.pesquisa =  {
                 query : '',
