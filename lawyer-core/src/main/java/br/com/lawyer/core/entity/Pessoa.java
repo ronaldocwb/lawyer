@@ -1,6 +1,7 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
 import br.com.lawyer.core.entity.common.Telefone;
 
@@ -27,6 +28,9 @@ public class Pessoa extends AbstractBaseEntity implements Serializable {
 
     @ElementCollection
     private List<Telefone> telefones;
+
+    @ElementCollection
+    private List<Email> emails;
 
     @ElementCollection
     private List<Endereco> enderecos;
@@ -77,5 +81,17 @@ public class Pessoa extends AbstractBaseEntity implements Serializable {
 
     public void setEnderecos (List<Endereco> enderecos) {
         this.enderecos = enderecos;
+    }
+
+    public static long getSerialVersionUID () {
+        return serialVersionUID;
+    }
+
+    public List<Email> getEmails () {
+        return emails;
+    }
+
+    public void setEmails (List<Email> emails) {
+        this.emails = emails;
     }
 }

@@ -17,7 +17,6 @@
 angular.module('lawyer.controllers', [
     'lawyer.painel',
     'lawyer.atividades.popup',
-    'lawyer.contatos',
     'lawyer.empresas',
     'lawyer.empresas.cadastro',
     'lawyer.empresas.edicao',

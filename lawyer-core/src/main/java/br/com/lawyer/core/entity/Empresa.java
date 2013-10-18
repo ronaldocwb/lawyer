@@ -1,6 +1,7 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
 import br.com.lawyer.core.entity.common.Telefone;
 import org.hibernate.annotations.LazyCollection;
@@ -34,6 +35,9 @@ public class Empresa extends AbstractBaseEntity implements Serializable {
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Endereco> enderecos;
+
+    @ElementCollection
+    private List<Email> emails;
 
     @OneToMany
     private List<Responsavel> responsaveis;
@@ -84,5 +88,17 @@ public class Empresa extends AbstractBaseEntity implements Serializable {
 
     public void setResponsaveis (List<Responsavel> responsaveis) {
         this.responsaveis = responsaveis;
+    }
+
+    public static long getSerialVersionUID () {
+        return serialVersionUID;
+    }
+
+    public List<Email> getEmails () {
+        return emails;
+    }
+
+    public void setEmails (List<Email> emails) {
+        this.emails = emails;
     }
 }

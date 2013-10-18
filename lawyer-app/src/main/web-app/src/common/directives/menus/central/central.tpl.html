@@ -1,29 +1,38 @@
 <ul class="nav nav-tabs">
-    <li ng-class="ativo('painel')">
+    <li ng-class="{true : 'active'}[abas.painel]">
         <a href="#/painel">Painel</a>
     </li>
-    <li ng-class="ativo('contatos')">
-        <a href="#/contatos/">Contatos</a>
+    <li ng-class="{true : 'dropdown active', false : 'dropdown'}[abas.contatos]" >
+        <a href="#"  data-toggle="dropdown" class="dropdown-toggle">Contatos</a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#/empresas/">Listar Empresas</a>
+            </li>
+            <li>
+                <a href="#/empresas/cadastro">Cadastrar uma Empresa</a>
+            </li>
+            <li class="divider">
+            <li>
+                <a href="#/pessoas/">Listar Pessoas</a>
+            </li>
+            <li>
+                <a href="#/pessoas/cadastro">Cadastrar uma Pessoa</a>
+            </li>
+        </ul>
     </li>
-    <li ng-class="ativo('empresas')">
-        <a href="#/empresas/">Empresas</a>
-    </li>
-    <li ng-class="ativo('pessoas')">
-        <a href="#/pessoas/">Pessoas</a>
-    </li>
-    <li ng-class="ativo('areasAtuacao')">
+    <li ng-class="{true : 'active'}[abas.areasAtuacao]">
         <a href="#/areasAtuacao">Áreas de Atuação</a>
     </li>
-    <li ng-class="ativo('assuntos')">
+    <li ng-class="{true : 'active'}[abas.assuntos]">
         <a href="#/assuntos">Assuntos</a>
     </li>
-    <li ng-class="ativo('agenda')">
+    <li ng-class="{true : 'active'}[abas.agenda]">
         <a href="#/agenda">Agenda</a>
     </li>
-    <li ng-class="ativo('financeiro')">
+    <li ng-class="{true : 'active'}[abas.financeiro]">
         <a href="#/financeiro">Financeiro</a>
     </li>
-    <li ng-class="ativo('timesheet')">
+    <li ng-class="{true : 'active'}[abas.timesheet]">
         <a href="#/timesheet">Time Sheet</a>
     </li>
     <li class="dropdown pull-right">

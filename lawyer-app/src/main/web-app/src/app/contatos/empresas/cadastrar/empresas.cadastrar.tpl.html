@@ -1,4 +1,4 @@
-<div class="animated fadeInUp">
+<div ng-if="true" class="fadeInUp">
     <form data-ng-submit="cadastrar()" name="cadastro" class="form-horizontal">
         <fieldset>
             <legend>Nova Empresa</legend>
@@ -33,11 +33,11 @@
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
                 <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0"
-                     class="controls">
+                     class="controls fadeInLeft fadeOutRight">
                     <br>
 
                     <div class="input-append">
-                        <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
+                        <input name="telefone" class="x-large" type="text" ng-model="telefone.numero" />
                         <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i
                                 class="icon-trash icon-white"></i></button>
                     </div>
@@ -52,7 +52,7 @@
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
                 <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0"
-                     class="controls">
+                     class="controls fadeInLeft fadeOutRight">
                     <div class="span5">
                         <label class="control-label" for="logradouro">Logradouro:</label>
                         <input name="logradouro" id="logradouro" class="x-large" type="text"
