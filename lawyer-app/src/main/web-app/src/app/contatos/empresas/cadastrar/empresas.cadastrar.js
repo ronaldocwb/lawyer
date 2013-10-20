@@ -10,8 +10,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications',
-        function ($scope, $state, $log, Empresa, Municipio, notifications) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http',
+        function ($scope, $state, $log, Empresa, Municipio, notifications, $http) {
 
             $scope.empresa = {
                 telefones : [],
@@ -24,7 +24,9 @@ angular.module('lawyer.empresas.cadastro', [
                 $scope.empresa = Empresa.save($scope.empresa, function (result) {
                     $log.debug('Empresa cadastrada:', $scope.empresa);
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
-                    $scope.empresas.content.push($scope.empresa);
+                    if ($scope.empresas) {
+                        $scope.empresas.content.push($scope.empresa);
+                    }
                     $state.go('empresas.listar');
                 });
             };
@@ -34,13 +36,14 @@ angular.module('lawyer.empresas.cadastro', [
                 $scope.empresa = Empresa.save($scope.empresa, function () {
                     $log.debug('Empresa cadastrada:', $scope.empresa);
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
-                    $scope.empresas.content.push($scope.empresa);
+                    if ($scope.empresas) {
+                        $scope.empresas.content.push($scope.empresa);
+                    }
                     $scope.empresa = {
                         telefones : [],
                         enderecos : []
                     };
                 });
-
             };
 
             $scope.addTelefone = function () {
@@ -66,10 +69,16 @@ angular.module('lawyer.empresas.cadastro', [
             };
 
             $scope.getMunicipios = function (value) {
-                Municipio.query({q : value}, function (data) {
+                return $http.get('/lawyer/api/municipios?q='+value)
+                    .then(function(results){
+                        return results.data;
+                    });
+            };
+
+            $scope.getEmpresas = function (value) {
+                Empresa.query({q : value}, function (data) {
                     return data;
                 });
-
             };
 
     }])

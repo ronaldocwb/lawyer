@@ -5,21 +5,28 @@ angular.module('lawyer.pessoas.listar', [
         $stateProvider.state('pessoas.listar', {
             url: '/',
             controller: 'PessoaListarController',
-            templateUrl: 'contatos/pessoas/listar/pessoas.listar.tpl.html'
+            templateUrl: 'contatos/pessoas/listar/pessoas.listar.tpl.html',
+            resolve : {
+                pessoas : function (Pessoa) {
+                    return Pessoa.get();
+                }
+            }
         });
     }])
-.controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa',
-        function ($scope, notifications, $state, $modal, $log, Pessoa) {
+.controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa', 'pessoas',
+        function ($scope, notifications, $state, $modal, $log, Pessoa, pessoas) {
+
+            $scope.pessoas = angular.extend(pessoas);
 
             $scope.pesquisa =  {
                 query : '',
                 inUse : false,
                 hasUsed : false
             };
-            $scope.editar = function (empresa) {
+            $scope.editar = function (pessoa) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
-                $state.data = empresa;
+                $state.data = pessoa;
                 // vai para a rota de edicao.
                 $state.go('pessoas.editar');
             };
@@ -43,24 +50,24 @@ angular.module('lawyer.pessoas.listar', [
                 $scope.pesquisa.inUse = false;
             };
 
-            $scope.deletar = function (empresa) {
+            $scope.deletar = function (pessoa) {
                 var modalInstance = $modal.open({
                     templateUrl: 'contatos/pessoas/remover/pessoas.remover.tpl.html',
                     controller: 'RemoverPessoaController',
                     resolve: {
-                        empresa: function () {
-                            return empresa;
+                        pessoa: function () {
+                            return pessoa;
                         }
                     }
                 });
 
                 modalInstance.result.then(function () {
-                    $log.warn('Removendo empresa!');
-                        Pessoa.remove({id: empresa.uid}, empresa, function () {
-                        $log.debug('Pessoa apagada', empresa.uid);
-                        $scope.pessoas.content.splice($scope.pessoas.content.indexOf(empresa), 1);
+                    $log.warn('Removendo pessoa!');
+                        Pessoa.remove({id: pessoa.uid}, pessoa, function () {
+                        $log.debug('Pessoa apagada', pessoa.uid);
+                        $scope.pessoas.content.splice($scope.pessoas.content.indexOf(pessoa), 1);
                         if ($scope.originalResultSet) {
-                            $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(empresa), 1);
+                            $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(pessoa), 1);
                         }
                     }, function error(err) {
                         $log.debug('Pessoa nao apagada por erro no server', err);
@@ -72,20 +79,20 @@ angular.module('lawyer.pessoas.listar', [
                 });
             };
 
-            $scope.visualizar = function (empresa) {
+            $scope.visualizar = function (pessoa) {
                 var modalInstance = $modal.open({
                     templateUrl: 'contatos/pessoas/visualizar/pessoas.visualizar.tpl.html',
                     controller: 'VisualizarPessoaController',
                     resolve: {
-                        empresa: function () {
-                            return empresa;
+                        pessoa: function () {
+                            return pessoa;
                         }
                     }
                 });
 
                 modalInstance.result.then(function (editar) {
                     if (editar === true) {
-                        $state.data = empresa;
+                        $state.data = pessoa;
                         $state.go('pessoas.editar');
                     }
                 });
@@ -99,8 +106,8 @@ angular.module('lawyer.pessoas.listar', [
             };
         }])
 
-    .controller('RemoverPessoaController', ['$scope', '$modalInstance', 'empresa', function ($scope, $modalInstance, empresa) {
-        $scope.empresa = empresa;
+    .controller('RemoverPessoaController', ['$scope', '$modalInstance', 'pessoa', function ($scope, $modalInstance, pessoa) {
+        $scope.pessoa = pessoa;
         $scope.ok = function () {
             $modalInstance.close();
         };
@@ -110,8 +117,8 @@ angular.module('lawyer.pessoas.listar', [
         };
     }])
 
-    .controller('VisualizarPessoaController', ['$scope', '$modalInstance', 'empresa', function ($scope, $modalInstance, empresa) {
-        $scope.empresa = empresa;
+    .controller('VisualizarPessoaController', ['$scope', '$modalInstance', 'pessoa', function ($scope, $modalInstance, pessoa) {
+        $scope.pessoa = pessoa;
         $scope.ok = function () {
             $modalInstance.close(false);
         };

@@ -14,7 +14,7 @@ public class Documento implements Serializable {
     private static final long serialVersionUID = 9020556663256241017L;
 
     @Enumerated (EnumType.ORDINAL)
-    private TipoDocumento tipo;
+    private TipoDocumento tipoIdentificacao;
 
     @Column (length = 20)
     private String identificacao;
@@ -25,7 +25,7 @@ public class Documento implements Serializable {
         int result = 1;
         result = prime * result
                 + ((identificacao == null) ? 0 : identificacao.hashCode());
-        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+        result = prime * result + ((tipoIdentificacao == null) ? 0 : tipoIdentificacao.hashCode());
         return result;
     }
 
@@ -43,17 +43,17 @@ public class Documento implements Serializable {
                 return false;
         } else if (!identificacao.equals(other.identificacao))
             return false;
-        if (tipo != other.tipo)
+        if (tipoIdentificacao != other.tipoIdentificacao)
             return false;
         return true;
     }
 
-    public TipoDocumento getTipo () {
-        return tipo;
+    public TipoDocumento getTipoIdentificacao () {
+        return tipoIdentificacao;
     }
 
-    public void setTipo (TipoDocumento tipo) {
-        this.tipo = tipo;
+    public void setTipoIdentificacao (TipoDocumento tipo) {
+        this.tipoIdentificacao = tipo;
     }
 
     public String getIdentificacao () {

@@ -6,71 +6,107 @@
 
             <div class="controls">
                 <input id="nome" class="text x-large" type="text" ng-required="true"
-                       data-ng-model="empresa.nomeFantasia"/>
+                       data-ng-model="pessoa.nome"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="razao">Razão Social:</label>
-
+            <label class="control-label" for="documento">Documento:</label>
             <div class="controls">
-                <input id="razao" class="text x-large" type="text" data-ng-model="empresa.razaoSocial"/>
+                <input id="documento" name="documento" class="x-large" type="text" ng-model="pessoa.documento.identificacao"/>
+                <select ng-model="pessoa.documento.tipoIdentificacao" class="span2">
+                    <option value="RG">RG</option>
+                    <option value="CPF">CPF</option>
+                    <option value="RNE">RNE</option>
+                </select>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="cnpj">CNPJ:</label>
-
+            <label class="control-label" for="documento">Empresa:</label>
             <div class="controls">
-                <input id="cnpj" name="cnpj" class="x-large" type="text" ng-model="empresa.cnpj"
-                       ui-mask="99.999.999/9999-99"/>
+                <input name="empresa" id="empresa" class="x-large" type="text"
+                       ng-model="pessoa.empresa"
+                       typeahead-on-add="addEmpresa($item)"
+                       typeahead-editable="false"
+                       typeahead-lawyer="empresa as empresa.nomeFantasia for empresa in getEmpresas($viewValue)"/>
+                <noty-container notification="notification" completar="completarEmpresa()"></noty-container>
+                <!--input id="empresa" name="empresa" class="x-large" type="text" ng-model="pessoa.empresa"/-->
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Telefones:</label>
+
             <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="addTelefone()"><i class="icon-plus-sign icon-white"></i></button>
+                <button type="button" class="btn btn-info" data-ng-click="addTelefone()"><i
+                        class="icon-plus-sign icon-white"></i></button>
             </div>
-            <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0"
-                 class="controls">
+            <div data-ng-repeat="telefone in pessoa.telefones" data-ng-hide="pessoa.telefones.length == 0"
+                 class="controls fadeInLeft">
                 <br>
+
                 <div class="input-append">
                     <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
-                    <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i class="icon-trash icon-white"></i> </button>
+                    <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i
+                            class="icon-trash icon-white"></i></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Emails:</label>
+
+            <div class="controls">
+                <button type="button" class="btn btn-info" data-ng-click="addEmail()"><i
+                        class="icon-plus-sign icon-white"></i></button>
+            </div>
+            <div data-ng-repeat="email in pessoa.emails" data-ng-hide="pessoa.emails.length == 0"
+                 class="controls fadeInLeft">
+                <br>
+
+                <div class="input-append">
+                    <input name="email" class="x-large" type="email" ng-model="email.value"/>
+                    <button type="button" class="btn btn-info" data-ng-click="removerEmail(email)"><i
+                            class="icon-trash icon-white"></i></button>
                 </div>
                 <hr>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Endereços:</label>
+
             <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="addEndereco()"><i class="icon-plus-sign icon-white"></i></button>
+                <button type="button" class="btn btn-info" data-ng-click="addEndereco()"><i
+                        class="icon-plus-sign icon-white"></i></button>
             </div>
-            <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0"
-                 class="controls">
-                    <div class="span5">
-                        <label class="control-label" for="logradouro">Logradouro:</label>
-                        <input name="logradouro" id="logradouro" class="x-large" type="text"
-                               ng-model="endereco.logradouro"/>
-                        <label class="control-label" for="numero">Número:</label>
-                        <input name="numero" id="numero" class="x-large" type="text" ng-model="endereco.numero"/>
-                        <label class="control-label" for="complemento">Complemento:</label>
-                        <input name="complemento" id="complemento" class="x-large" type="text"
-                               ng-model="endereco.complemento"/>
-                        <label class="control-label" for="cep">CEP:</label>
-                        <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
+            <div data-ng-repeat="endereco in pessoa.enderecos" data-ng-hide="pessoa.enderecos.length == 0"
+                 class="controls fadeInLeft">
+                <div class="span5">
+                    <label class="control-label" for="logradouro">Logradouro*:</label>
+                    <input name="logradouro" id="logradouro" class="x-large" type="text" ng-required="required" required="required"
+                           ng-model="endereco.logradouro"/>
+                    <label class="control-label" for="numero">Número:</label>
+                    <input name="numero" id="numero" class="x-large" type="text" ng-model="endereco.numero"/>
+                    <label class="control-label" for="complemento">Complemento:</label>
+                    <input name="complemento" id="complemento" class="x-large" type="text"
+                           ng-model="endereco.complemento"/>
+                    <label class="control-label" for="cep">CEP:</label>
+                    <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
 
                     <label class="control-label" for="bairro">Bairro:</label>
                     <input name="bairro" id="bairro" class="x-large" type="text" ng-model="endereco.bairro"/>
 
                     <label class="control-label" for="municipio">Município:</label>
-                    <input name="municipio" id="municipio" class="x-large" type="text" ng-model="endereco.municipio"/>
-                    <!--
-                    Esperando o bugfix do promise no angular 1.2 para inserir o typeahead que funcione =(
-                    typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/-->
-                    <button id="remover" type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
-                        <hr>
-                    </div>
+
+                    <input name="municipio" id="municipio" class="x-large" type="text"
+                           ng-model="endereco.municipio"
+                           typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                           typeahead-editable="false"
+                           typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
+                    <button id="remover" type="button" class="btn btn-info" data-ng-click="removerEndereco(endereco)"><i
+                            class="icon-trash icon-white"></i></button>
+                    <hr>
                 </div>
             </div>
+        </div>
         </div>
         <hr>
         <div class="control-group">

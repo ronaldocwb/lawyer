@@ -1,5 +1,6 @@
 package br.com.lawyer.core.entity;
 
+import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
@@ -11,11 +12,10 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Empresa extends AbstractBaseEntity implements Serializable {
+public class Empresa extends AbstractBaseEntity implements IUID<String> {
 
     private static final long serialVersionUID = 7794118770747818132L;
 

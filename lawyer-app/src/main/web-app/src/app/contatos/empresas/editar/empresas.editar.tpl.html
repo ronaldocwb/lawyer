@@ -1,7 +1,7 @@
 <div ng-if="true" class="fadeInUp">
     <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
-            <legend>Editar Pessoa</legend>
+            <legend>Editar Empresa</legend>
             <div class="control-group">
                 <label class="control-label" for="nome">Nome:*</label>
 
@@ -71,8 +71,10 @@
 
                         <label class="control-label" for="municipio">Município:</label>
                         <input name="municipio" id="municipio" class="x-large" type="text"
-                               ng-model="endereco.municipio"/>
-                        <!--typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/-->
+                               ng-model="endereco.municipio"
+                               typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                               typeahead-editable="false"
+                               typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
                         <button id="remover" type="button" class="btn btn-info"
                                 data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
                         <hr>
@@ -86,7 +88,7 @@
                     <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid || !cadastro.$dirty">
                         Salvar
                     </button>
-                    ou <a ui-sref="empresas.listar">Clique para voltar</a>
+                    ou <a data-ng-click="voltar()">Clique para voltar</a>
                 </div>
             </div>
             <hr>

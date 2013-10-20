@@ -1,16 +1,16 @@
 package br.com.lawyer.core.entity;
 
+import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
 import br.com.lawyer.core.entity.common.Telefone;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Pessoa extends AbstractBaseEntity implements Serializable {
+public class Pessoa extends AbstractBaseEntity implements IUID<String> {
 
     private static final long serialVersionUID = -5903236395110275037L;
 

@@ -9,9 +9,9 @@ import br.com.lawyer.web.base.BaseVO;
  */
 public class EstadoVO extends BaseVO<Estado> {
 
-    private String cdEstadoIbge;
-
     private String nmEstado;
+
+    private String sgEstado;
 
     public EstadoVO (Estado estado) {
         super(estado);
@@ -19,19 +19,19 @@ public class EstadoVO extends BaseVO<Estado> {
 
     public EstadoVO () {    }
 
-    public String getCdEstadoIbge () {
-        return cdEstadoIbge;
-    }
-
-    public void setCdEstadoIbge (String cdEstadoIbge) {
-        this.cdEstadoIbge = cdEstadoIbge;
-    }
-
     public String getNmEstado () {
         return nmEstado;
     }
 
     public void setNmEstado (String nmEstado) {
         this.nmEstado = nmEstado;
+    }
+
+    public String getSgEstado () {
+        return sgEstado;
+    }
+
+    public void setSgEstado (String sgEstado) {
+        this.sgEstado = sgEstado;
     }
 }

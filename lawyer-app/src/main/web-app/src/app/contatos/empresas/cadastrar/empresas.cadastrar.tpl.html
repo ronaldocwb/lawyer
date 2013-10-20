@@ -70,10 +70,10 @@
 
                         <label class="control-label" for="municipio">Município:</label>
                         <input name="municipio" id="municipio" class="x-large" type="text"
-                               ng-model="endereco.municipio"/>
-                        <!--
-                        Esperando o bugfix do promise no angular 1.2 para inserir o typeahead que funcione =(
-                        typeahead="municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/-->
+                               ng-model="endereco.municipio"
+                               typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                               typeahead-editable="false"
+                               typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
                         <button id="remover" type="button" class="btn btn-info"
                                 data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
                         <hr>

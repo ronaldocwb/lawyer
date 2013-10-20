@@ -1,7 +1,6 @@
 package br.com.lawyer.web.vo;
 
 import br.com.lawyer.core.entity.common.Endereco;
-import br.com.lawyer.core.entity.common.Municipio;
 import br.com.lawyer.web.base.BaseVO;
 
 /**
@@ -10,7 +9,7 @@ import br.com.lawyer.web.base.BaseVO;
  */
 public class EnderecoVO extends BaseVO<Endereco> {
 
-    private Municipio municipio;
+    private MunicipioVO municipio;
 
     private String cep;
 
@@ -28,11 +27,11 @@ public class EnderecoVO extends BaseVO<Endereco> {
 
     public EnderecoVO() {}
 
-    public Municipio getMunicipio () {
+    public MunicipioVO getMunicipio () {
         return municipio;
     }
 
-    public void setMunicipio (Municipio municipio) {
+    public void setMunicipio (MunicipioVO municipio) {
         this.municipio = municipio;
     }
 

@@ -2,10 +2,7 @@ package br.com.lawyer.core.entity.common;
 
 import br.com.lawyer.core.base.IUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class Pais implements Serializable, IUID<Long> {
     @Column (name = "SG_PAIS", nullable = false, length = 5)
     private String sgPais;
 
-    @OneToMany (mappedBy = "pais")
+    @OneToMany (mappedBy = "pais", fetch = FetchType.LAZY)
     private List<Estado> estados;
 
     public Pais () {

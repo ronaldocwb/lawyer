@@ -15,6 +15,7 @@
 angular.module('lawyer', [
         'ngAnimate',
         'ngLocale',
+        'ngSanitize',
         'templates-app',
         'templates-common',
         'ui.router',
@@ -29,7 +30,9 @@ angular.module('lawyer', [
         'services.exceptionHandler',
         'lawyer.menus',
         'lawyer.noty',
-        'lawyer.log'
+        'lawyer.noty.container',
+        'lawyer.log',
+        'lawyer.typeahead'
     ])
 
 

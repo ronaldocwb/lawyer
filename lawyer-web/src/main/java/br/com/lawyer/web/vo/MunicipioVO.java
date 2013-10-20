@@ -21,6 +21,10 @@ public class MunicipioVO extends BaseVO<Municipio> {
 
     public MunicipioVO () {    }
 
+    public MunicipioVO (String s) {
+        System.out.println(s);
+    }
+
     public Long getCdMunicipio () {
         return cdMunicipio;
     }

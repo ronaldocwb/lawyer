@@ -11,10 +11,11 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http',
+        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http) {
 
             $scope.empresa = $state.data;
+            $scope.modal = $state.data.modal;
 
             // $state não possui a empresa para alterar. Volta pra pagina anterior.
             if (!$state.data && !$state.empresa) {
@@ -27,21 +28,17 @@ angular.module('lawyer.empresas.edicao', [
 
             $scope.salvar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.empresa = new Empresa($scope.empresa);
-                $scope.empresa.$update(function () {
+
+                $scope.empresa = Empresa.update({uid : $scope.empresa.uid}, $scope.empresa, function () {
                     $log.debug('Empresa alterada:', $scope.empresa);
-                    notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
-                    $state.go('empresas.listar');
+                    if ($scope.modal) {
+                        $scope.modal.close(true);
+                    } else {
+                        notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
+                        $state.go('empresas.listar');
+                    }
                 });
-
-                // teste --> mesma coisa do que está acima, mas sem instanciar diretamente a Empresa e recuperar um $resource
-//                $scope.empresa = EmpresaResource.update({uid : $scope.empresa.uid}, $scope.empresa, function () {
-//                    $log.debug('Empresa alterada:', $scope.empresa);
-//                    $log.debug('Mostrar botao para voltar');
-//                });
-
             };
-
 
             $scope.voltar = function () {
                 $state.go('empresas.listar');
@@ -49,6 +46,7 @@ angular.module('lawyer.empresas.edicao', [
 
             $scope.addTelefone = function () {
                 $log.debug('Adicionando novo campo de telefone');
+                console.log($scope.empresa);
                 $scope.empresa.telefones.push({});
                 $log.debug('telefones: ', $scope.empresa.telefones);
             };
@@ -68,7 +66,19 @@ angular.module('lawyer.empresas.edicao', [
                 $log.debug('removendo o endereco', endereco);
                 $scope.empresa.enderecos.splice($scope.empresa.enderecos.indexOf(endereco), 1);
             };
+            $scope.voltar = function () {
+                if ($scope.modal) {
+                    $scope.modal.close(true);
+                } else {
+                    $state.go("empresas.listar");
+                }
+            };
 
+            $scope.getMunicipios = function (value) {
+                return $http.get('/lawyer/api/municipios?q='+value)
+                    .then(function(results){
+                        return results.data;
+                    });
+            };
         }])
-
 ;

@@ -1,0 +1,9 @@
+<ul class="typeahead dropdown-menu" ng-style="{display: isOpen()&&'block' || 'none', top: position.top+'px', left: position.left+'px'}">
+    <li ng-repeat="match in matches" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)">
+        <typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></typeahead-match>
+    </li>
+    <li data-ng-show="showAdd()">
+        <a ng-click="addNew()" tabindex="{{matches.length+1}}" ><i class="icon-plus-sign"></i> <span data-ng-bind="valor.text"></span> (Adicionar novo)</a>
+    </li>
+</ul>
+

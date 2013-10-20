@@ -36,12 +36,12 @@ public class PessoaService extends BaseService<String, Pessoa, IPessoaRepository
      */
     @Override
     public Page<Pessoa> buscarPorNomeLike (String query, PageRequest pageRequest) {
-        Page<Pessoa> empresas;
+        Page<Pessoa> pessoas;
         if (StringUtils.isNotBlank(query)) {
-            empresas = getRepository().findByNomeContaining(query, pageRequest);
+            pessoas = getRepository().findByNomeContaining(query, pageRequest);
         } else {
-            empresas = getRepository().findAll(pageRequest);
+            pessoas = getRepository().findAll(pageRequest);
         }
-        return empresas;
+        return pessoas;
     }
 }

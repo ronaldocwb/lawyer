@@ -19,7 +19,7 @@ public class Municipio implements IUID<Long> {
     @Column (name = "NM_MUNICIPIO", nullable = false, length = 40)
     private String nmMunicipio;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "CD_ESTADO", nullable = false)
     private Estado estado;
 

@@ -1,24 +1,31 @@
 angular.module('lawyer.empresas.listar', [
     ])
 
-    .config(['$stateProvider',  function config($stateProvider) {
+    .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('empresas.listar', {
             url: '/',
             controller: 'EmpresaListarController',
-            templateUrl: 'contatos/empresas/listar/empresas.listar.tpl.html'
+            templateUrl: 'contatos/empresas/listar/empresas.listar.tpl.html',
+            resolve: {
+                empresas: function (Empresa) {
+                    return Empresa.get();
+                }
+            }
         });
     }])
-.controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
-        function ($scope, notifications, $state, $modal, $log, Empresa) {
+    .controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa', 'empresas',
+        function ($scope, notifications, $state, $modal, $log, Empresa, empresas) {
 
-            notifications.pushSticky('fixo', 'error');
-            notifications.pushForCurrentRoute('teste', 'information');
-            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
+            $scope.empresas = empresas;
 
-            $scope.pesquisa =  {
-                query : '',
-                inUse : false,
-                hasUsed : false
+//            notifications.pushSticky('fixo', 'error');
+//            notifications.pushForCurrentRoute('teste', 'information');
+//            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
+
+            $scope.pesquisa = {
+                query: '',
+                inUse: false,
+                hasUsed: false
             };
             $scope.editar = function (empresa) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada
@@ -38,7 +45,7 @@ angular.module('lawyer.empresas.listar', [
                 if ($scope.pesquisa.query === '') {
                     $scope.pesquisa.inUse = false;
                 }
-                $scope.empresas = Empresa.get({q : $scope.pesquisa.query});
+                $scope.empresas = Empresa.get({q: $scope.pesquisa.query});
             };
 
             $scope.limparBusca = function () {
@@ -60,7 +67,7 @@ angular.module('lawyer.empresas.listar', [
 
                 modalInstance.result.then(function () {
                     $log.warn('Removendo empresa!');
-                        Empresa.remove({id: empresa.uid}, empresa, function () {
+                    Empresa.remove({id: empresa.uid}, empresa, function () {
                         $log.debug('Empresa apagada', empresa.uid);
                         $scope.empresas.content.splice($scope.empresas.content.indexOf(empresa), 1);
                         if ($scope.originalResultSet) {
@@ -97,7 +104,7 @@ angular.module('lawyer.empresas.listar', [
 
             $scope.empresas.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.empresas = Empresa.get({q : $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page : page-1}, function () {
+                $scope.empresas = Empresa.get({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
                     $scope.empresas.current = page;
                 });
             };

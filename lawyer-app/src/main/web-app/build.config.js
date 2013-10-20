@@ -32,6 +32,7 @@ module.exports = {
 			'vendor/angular-mocks/angular-mocks.js',
 			'vendor/angular-resource/angular-resource.js',
 			'vendor/angular-route/angular-route.js',
+			'vendor/angular-sanitize/angular-sanitize.js',
 			'vendor/angular-i18n/angular-locale_pt.js',
             'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
             'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
@@ -43,6 +44,7 @@ module.exports = {
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/topRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
+            'vendor/noty/js/noty/layouts/inline.js',
             'vendor/noty/js/noty/themes/default.js',
         ],
         css: [

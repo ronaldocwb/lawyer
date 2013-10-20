@@ -13,7 +13,8 @@
     "angular-ui-router": "latest",
     "angular-ui-utils": "latest",
     "angular-route": "latest",
-    "noty": "latest"
+    "noty": "latest",
+    "angular-sanitize": "1.2.0-rc.3"
   },
   "dependencies": {}
 }
