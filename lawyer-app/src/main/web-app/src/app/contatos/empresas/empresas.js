@@ -12,12 +12,18 @@ angular.module('lawyer.empresas', [
                     controller: 'EmpresaController',
                     template: '<div ui-view></div>'
                 }
+            },
+            resolve: {
+                empresas: function (Empresa) {
+                    return Empresa.get();
+                }
             }
         });
     }])
 
-    .controller('EmpresaController', ['$scope', '$location', '$state', '$log',
-        function ($scope, $location, $state, $log) {
+    .controller('EmpresaController', ['$scope', 'empresas',
+        function ($scope, empresas) {
+            $scope.empresas = empresas;
         }])
 
 ;

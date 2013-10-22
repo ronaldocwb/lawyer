@@ -5,18 +5,11 @@ angular.module('lawyer.pessoas.listar', [
         $stateProvider.state('pessoas.listar', {
             url: '/',
             controller: 'PessoaListarController',
-            templateUrl: 'contatos/pessoas/listar/pessoas.listar.tpl.html',
-            resolve: {
-                pessoas: function (Pessoa) {
-                    return Pessoa.get();
-                }
-            }
+            templateUrl: 'contatos/pessoas/listar/pessoas.listar.tpl.html'
         });
     }])
-    .controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa', 'pessoas',
-        function ($scope, notifications, $state, $modal, $log, Pessoa, pessoas) {
-
-            $scope.pessoas = angular.extend(pessoas);
+    .controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa',
+        function ($scope, notifications, $state, $modal, $log, Pessoa) {
 
             $scope.pesquisa = {
                 query: '',

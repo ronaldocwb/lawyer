@@ -12,13 +12,17 @@ angular.module('lawyer.pessoas', [
                     controller: 'PessoaController',
                     template: '<div ui-view></div>'
                 }
+            },
+            resolve: {
+                pessoas: function (Pessoa) {
+                    return Pessoa.get();
+                }
             }
         });
     }])
 
-    .controller('PessoaController', ['$scope', '$location', '$state', '$log',
-        function ($scope, $location, $state, $log) {
-
+    .controller('PessoaController', ['$scope', 'pessoas', function ($scope, pessoas) {
+            $scope.pessoas = pessoas;
         }])
 
 ;

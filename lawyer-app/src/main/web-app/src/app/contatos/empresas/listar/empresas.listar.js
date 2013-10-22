@@ -5,18 +5,11 @@ angular.module('lawyer.empresas.listar', [
         $stateProvider.state('empresas.listar', {
             url: '/',
             controller: 'EmpresaListarController',
-            templateUrl: 'contatos/empresas/listar/empresas.listar.tpl.html',
-            resolve: {
-                empresas: function (Empresa) {
-                    return Empresa.get();
-                }
-            }
+            templateUrl: 'contatos/empresas/listar/empresas.listar.tpl.html'
         });
     }])
-    .controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa', 'empresas',
-        function ($scope, notifications, $state, $modal, $log, Empresa, empresas) {
-
-            $scope.empresas = empresas;
+    .controller('EmpresaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
+        function ($scope, notifications, $state, $modal, $log, Empresa) {
 
             notifications.pushSticky('fixo', 'error');
             notifications.pushForCurrentRoute('teste', 'information');

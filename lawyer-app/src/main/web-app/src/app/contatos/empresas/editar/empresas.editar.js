@@ -28,7 +28,7 @@ angular.module('lawyer.empresas.edicao', [
             }
 
             $scope.salvar = function () {
-                $scope.empresa = Empresa.update({uid : $scope.empresa.uid}, $scope.empresa, function () {
+                $scope.empresa = Empresa.update($scope.empresa, function () {
                     notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
                     angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
                 });
