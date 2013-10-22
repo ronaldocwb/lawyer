@@ -38,37 +38,12 @@ angular.module('lawyer.pessoas.edicao', [
                 $state.go('pessoas.listar');
             };
 
-            $scope.addTelefone = function () {
-                $log.debug('Adicionando novo campo de telefone');
-                $scope.pessoa.telefones.push({});
-                $log.debug('telefones: ', $scope.pessoa.telefones);
+            $scope.add = function (key) {
+                $scope.pessoa[key].push({});
             };
 
-            $scope.removerTelefone = function (telefone) {
-                $log.debug('removendo o telefone', telefone);
-                $scope.pessoa.telefones.splice($scope.pessoa.telefones.indexOf(telefone), 1);
-            };
-
-            $scope.addEndereco = function () {
-                $log.debug('Adicionando novo campo de endereco');
-                $scope.pessoa.enderecos.push({});
-                $log.debug('telefones: ', $scope.pessoa.enderecos);
-            };
-
-            $scope.removerEndereco = function (endereco) {
-                $log.debug('removendo o endereco', endereco);
-                $scope.pessoa.enderecos.splice($scope.pessoa.enderecos.indexOf(endereco), 1);
-            };
-
-            $scope.addEmail = function () {
-                $log.debug('Adicionando novo campo de email');
-                $scope.pessoa.emails.push({});
-                $log.debug('telefones: ', $scope.pessoa.emails);
-            };
-
-            $scope.removerEmail = function (email) {
-                $log.debug('removendo o email', email);
-                $scope.pessoa.emails.splice($scope.pessoa.emails.indexOf(email), 1);
+            $scope.remove = function (key, $index) {
+                $scope.pessoa[key].splice($index, 1);
             };
 
         }])

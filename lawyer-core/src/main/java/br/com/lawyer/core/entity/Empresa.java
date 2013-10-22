@@ -40,6 +40,7 @@ public class Empresa extends AbstractBaseEntity implements IUID<String> {
     private List<Email> emails;
 
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Responsavel> responsaveis;
 
     public String getRazaoSocial () {

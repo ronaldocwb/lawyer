@@ -108,7 +108,7 @@ public class PessoaVO extends BaseVO<Pessoa>{
         List<EnderecoVO> empty = new ArrayList<>();
         for (EnderecoVO vo : enderecos) {
 
-            if (vo == null || vo.getLogradouro() == null) {
+            if (vo == null) {
                 empty.add(vo);
                 continue;
             }

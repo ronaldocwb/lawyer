@@ -20,7 +20,6 @@ angular.module('lawyer.pessoas.cadastro', [
             };
 
             $scope.cadastrar = function () {
-                $log.debug('Enviando cadastro para o endpoint', $scope.pessoa);
                 $scope.pessoa = Pessoa.save($scope.pessoa, function () {
                     $log.debug('Pessoa cadastrada:', $scope.pessoa);
                     notifications.pushForNextRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
@@ -34,7 +33,6 @@ angular.module('lawyer.pessoas.cadastro', [
             };
 
             $scope.salvarContinuar = function (cadastro) {
-                $log.debug('Enviando cadastro para o endpoint', $scope.pessoa);
                 $scope.pessoa = Pessoa.save($scope.pessoa, function () {
                     $log.debug('Pessoa cadastrada:', $scope.pessoa);
                     notifications.pushForCurrentRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
@@ -51,38 +49,14 @@ angular.module('lawyer.pessoas.cadastro', [
                 });
             };
 
-            $scope.addTelefone = function () {
-                $log.debug('Adicionando novo campo de telefone');
-                $scope.pessoa.telefones.push({});
-                $log.debug('telefones: ', $scope.pessoa.telefones);
+            $scope.add = function (key) {
+                $scope.pessoa[key].push({});
             };
 
-            $scope.addEmail = function () {
-                $log.debug('Adicionando novo campo de email');
-                $scope.pessoa.emails.push({});
-                $log.debug('telefones: ', $scope.pessoa.emails);
+            $scope.remove = function (key, $index) {
+                $scope.pessoa[key].splice($index, 1);
             };
 
-            $scope.removerEmail = function (email) {
-                $log.debug('removendo o email', email);
-                $scope.pessoa.emails.splice($scope.pessoa.emails.indexOf(email), 1);
-            };
-
-            $scope.removerTelefone = function (telefone) {
-                $log.debug('removendo o telefone', telefone);
-                $scope.pessoa.telefones.splice($scope.pessoa.telefones.indexOf(telefone), 1);
-            };
-
-            $scope.addEndereco = function () {
-                $log.debug('Adicionando novo campo de endereco');
-                $scope.pessoa.enderecos.push({});
-                $log.debug('enderecos : ', $scope.pessoa.enderecos);
-            };
-
-            $scope.removerEndereco = function (endereco) {
-                $log.debug('removendo o endereco', endereco);
-                $scope.pessoa.enderecos.splice($scope.pessoa.enderecos.indexOf(endereco), 1);
-            };
 
             $scope.getMunicipios = function (value) {
                 return $http.get('/lawyer/api/municipios?q='+value)

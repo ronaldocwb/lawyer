@@ -15,7 +15,10 @@ angular.module('lawyer.empresas.edicao', [
         function ($scope, notifications, $log, Empresa, $state, $stateParams, $http) {
 
             $scope.empresa = $state.data;
-            $scope.modal = $state.data.modal;
+            $scope.modal = null;
+            if ($state.data && $state.data.modal) {
+                $scope.modal = $state.data.modal;
+            }
 
             // $state não possui a empresa para alterar. Volta pra pagina anterior.
             if (!$state.data && !$state.empresa) {
@@ -31,10 +34,10 @@ angular.module('lawyer.empresas.edicao', [
 
                 $scope.empresa = Empresa.update({uid : $scope.empresa.uid}, $scope.empresa, function () {
                     $log.debug('Empresa alterada:', $scope.empresa);
+                    notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
                     if ($scope.modal) {
                         $scope.modal.close(true);
                     } else {
-                        notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
                         $state.go('empresas.listar');
                     }
                 });
@@ -44,28 +47,15 @@ angular.module('lawyer.empresas.edicao', [
                 $state.go('empresas.listar');
             };
 
-            $scope.addTelefone = function () {
-                $log.debug('Adicionando novo campo de telefone');
-                console.log($scope.empresa);
-                $scope.empresa.telefones.push({});
-                $log.debug('telefones: ', $scope.empresa.telefones);
+            $scope.add = function (key) {
+                $scope.empresa[key].push({});
             };
 
-            $scope.removerTelefone = function (telefone) {
-                $log.debug('removendo o telefone', telefone);
-                $scope.empresa.telefones.splice($scope.empresa.telefones.indexOf(telefone), 1);
+            $scope.remove = function (key, $index) {
+                $scope.empresa[key].splice($index, 1);
             };
 
-            $scope.addEndereco = function () {
-                $log.debug('Adicionando novo campo de endereco');
-                $scope.empresa.enderecos.push({});
-                $log.debug('telefones: ', $scope.empresa.enderecos);
-            };
 
-            $scope.removerEndereco = function (endereco) {
-                $log.debug('removendo o endereco', endereco);
-                $scope.empresa.enderecos.splice($scope.empresa.enderecos.indexOf(endereco), 1);
-            };
             $scope.voltar = function () {
                 if ($scope.modal) {
                     $scope.modal.close(true);

@@ -29,7 +29,7 @@
                 <label class="control-label">Telefones:</label>
 
                 <div class="controls">
-                    <button type="button" class="btn btn-info" data-ng-click="addTelefone()"><i
+                    <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
                 <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0"
@@ -38,7 +38,7 @@
 
                     <div class="input-append">
                         <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
-                        <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i
+                        <button type="button" class="btn btn-info" data-ng-click="remove('telefones', $index)"><i
                                 class="icon-trash icon-white"></i></button>
                     </div>
                     <hr>
@@ -49,7 +49,7 @@
                 <label class="control-label">Endereços:</label>
 
                 <div class="controls">
-                    <button type="button" class="btn btn-info" data-ng-click="addEndereco()"><i
+                    <button type="button" class="btn btn-info" data-ng-click="add('enderecos')"><i
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
                 <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0"
@@ -76,7 +76,7 @@
                                typeahead-editable="false"
                                typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
                         <button id="remover" type="button" class="btn btn-info"
-                                data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
+                                data-ng-click="remove('enderecos', $index)"><i class="icon-trash icon-white"></i></button>
                         <hr>
                     </div>
                 </div>

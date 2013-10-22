@@ -13,41 +13,67 @@
             <label class="control-label" for="documento">Documento:</label>
 
             <div class="controls">
-                <input id="documento" class="text x-large" type="text" data-ng-model="pessoa.documento"/>
+                <input id="documento" name="documento" class="x-large" type="text"
+                       ng-model="pessoa.documento.identificacao"/>
+                <select ng-model="pessoa.documento.tipoIdentificacao" class="span2">
+                    <option value="RG">RG</option>
+                    <option value="CPF">CPF</option>
+                    <option value="RNE">RNE</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="documento">Empresa:</label>
+
+            <div class="controls">
+                <input name="empresa" id="empresa" class="x-large" type="text"
+                       ng-model="pessoa.empresa"
+                       typeahead-on-add="addEmpresa($item)"
+                       typeahead-editable="false"
+                       typeahead-lawyer="empresa as empresa.nomeFantasia for empresa in getEmpresas($viewValue)"/>
+                <noty-container notification="notification" completar="completarEmpresa()"></noty-container>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Telefones:</label>
 
             <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="addTelefone()"><i
+                <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
                         class="icon-plus-sign icon-white"></i></button>
             </div>
             <div data-ng-repeat="telefone in pessoa.telefones" data-ng-hide="pessoa.telefones.length == 0"
-                 class="controls">
+                 class="controls fadeInLeft">
                 <br>
 
                 <div class="input-append">
                     <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
-                    <button type="button" class="btn btn-info" data-ng-click="removerTelefone(telefone)"><i
+                    <button type="button" class="btn btn-info" data-ng-click="remove('telefones', $index)"><i
                             class="icon-trash icon-white"></i></button>
                 </div>
                 <hr>
-
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Emails:</label>
+
             <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="addEmail()"><i class="icon-plus-sign icon-white"></i></button>
+                <button type="button" class="btn btn-info" data-ng-click="add('emails')"><i
+                        class="icon-plus-sign icon-white"></i></button>
             </div>
             <div data-ng-repeat="email in pessoa.emails" data-ng-hide="pessoa.emails.length == 0"
                  class="controls fadeInLeft">
                 <br>
-                <div class="input-append">
-                    <input name="email" class="x-large" type="text" ng-model="email.value"/>
-                    <button type="button" class="btn btn-info" data-ng-click="removerEmail(email)"><i class="icon-trash icon-white"></i> </button>
-                </div>
+                <ng-form name="formEmail">
+                    <div class="input-append">
+
+                        <input name="email" class="x-large" type="email" ng-model="email.value"/>
+
+                        <button type="button" class="btn btn-info" data-ng-click="remove('emails', $index)"><i
+                                class="icon-trash icon-white"></i></button>
+
+                    </div>
+                    <span ng-show="formEmail.email.$error.email">Digite um email válido</span>
+                </ng-form>
                 <hr>
             </div>
         </div>
@@ -55,37 +81,46 @@
             <label class="control-label">Endereços:</label>
 
             <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="addEndereco()"><i
+                <button type="button" class="btn btn-info" data-ng-click="add('enderecos')"><i
                         class="icon-plus-sign icon-white"></i></button>
             </div>
             <div data-ng-repeat="endereco in pessoa.enderecos" data-ng-hide="pessoa.enderecos.length == 0"
-                 class="controls">
-                <div class="span5">
-                    <label class="control-label" for="logradouro">Logradouro:</label>
-                    <input name="logradouro" id="logradouro" class="x-large" type="text"
-                           ng-model="endereco.logradouro"/>
-                    <label class="control-label" for="numero">Número:</label>
-                    <input name="numero" id="numero" class="x-large" type="text" ng-model="endereco.numero"/>
-                    <label class="control-label" for="complemento">Complemento:</label>
-                    <input name="complemento" id="complemento" class="x-large" type="text"
-                           ng-model="endereco.complemento"/>
-                    <label class="control-label" for="cep">CEP:</label>
-                    <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
+                 class="controls fadeInLeft">
+                <ng-form name="formEndereco">
+                    <div class="span5">
+                        <label class="control-label" for="logradouro">Logradouro*:</label>
+                        <input name="logradouro" id="logradouro" class="x-large" type="text" required
+                               ng-model="endereco.logradouro"/>
+                        <br>
+                        <span data-ng-show="formEndereco.logradouro.$error.required && formEndereco.$dirty"></span>
+                        <label class="control-label" for="numero">Número:</label>
+                        <input name="numero" id="numero" class="x-large" type="text"
+                               ng-model="endereco.numero"/>
+                        <label class="control-label" for="complemento">Complemento:</label>
+                        <input name="complemento" id="complemento" class="x-large" type="text"
+                               ng-model="endereco.complemento"/>
+                        <label class="control-label" for="cep">CEP:</label>
+                        <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
 
-                    <label class="control-label" for="bairro">Bairro:</label>
-                    <input name="bairro" id="bairro" class="x-large" type="text" ng-model="endereco.bairro"/>
+                        <label class="control-label" for="bairro">Bairro:</label>
+                        <input name="bairro" id="bairro" class="x-large" type="text"
+                               ng-model="endereco.bairro"/>
 
-                    <label class="control-label" for="municipio">Município:</label>
-                    <input name="municipio" id="municipio" class="x-large" type="text"
-                           ng-model="endereco.municipio"
-                           typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
-                           typeahead-editable="false"
-                           typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
-                    <button id="remover" type="button" class="btn btn-info"
-                            data-ng-click="removerEndereco(endereco)"><i class="icon-trash icon-white"></i></button>
-                    <hr>
-                </div>
+                        <label class="control-label" for="municipio">Município*:</label>
+
+                        <input name="municipio" id="municipio" class="x-large" type="text" required
+                               ng-model="endereco.municipio"
+                               typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                               typeahead-editable="false"
+                               typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
+                        <button id="remover" type="button" class="btn btn-info" data-ng-click="remove('enderecos', $index)">
+                            <i
+                                    class="icon-trash icon-white"></i></button>
+                        <hr>
+                    </div>
+                </ng-form>
             </div>
+        </div>
         </div>
         <hr>
         <div class="control-group">
