@@ -1,5 +1,4 @@
 angular.module('lawyer.pessoas.cadastro', [
-        'ui.bootstrap',
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -19,26 +18,26 @@ angular.module('lawyer.pessoas.cadastro', [
                 enderecos : []
             };
 
+            $scope.pushPessoaListagem = function () {
+                if ($scope.pessoas) {
+                    $scope.pessoas.content.push($scope.pessoa);
+                }
+            };
+
             $scope.cadastrar = function () {
                 $scope.pessoa = Pessoa.save($scope.pessoa, function () {
-                    $log.debug('Pessoa cadastrada:', $scope.pessoa);
                     notifications.pushForNextRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
-                    if ($scope.pessoas) {
-                        $scope.pessoas.content.push($scope.pessoa);
-                    }
+                    $scope.pushPessoaListagem();
                     $state.go('pessoas.listar');
                 }, function () {
                     notifications.pushForCurrentRoute('pessoa.salva.erro', 'error', {nome : $scope.pessoa.nome});
                 });
             };
 
-            $scope.salvarContinuar = function (cadastro) {
+            $scope.salvarContinuar = function () {
                 $scope.pessoa = Pessoa.save($scope.pessoa, function () {
-                    $log.debug('Pessoa cadastrada:', $scope.pessoa);
                     notifications.pushForCurrentRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
-                    if ($scope.pessoas) {
-                        $scope.pessoas.content.push($scope.pessoa);
-                    }
+                    $scope.pushPessoaListagem();
                     $scope.pessoa = {
                         telefones : [],
                         enderecos : [],

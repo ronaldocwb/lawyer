@@ -18,9 +18,9 @@ angular.module('lawyer.empresas.listar', [
 
             $scope.empresas = empresas;
 
-//            notifications.pushSticky('fixo', 'error');
-//            notifications.pushForCurrentRoute('teste', 'information');
-//            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
+            notifications.pushSticky('fixo', 'error');
+            notifications.pushForCurrentRoute('teste', 'information');
+            notifications.pushForCurrentRoute('teste5', 'information', {}, 'topRight', 5000);
 
             $scope.pesquisa = {
                 query: '',
@@ -31,7 +31,6 @@ angular.module('lawyer.empresas.listar', [
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = empresa;
-                // vai para a rota de edicao.
                 $state.go('empresas.editar');
             };
 
@@ -66,16 +65,14 @@ angular.module('lawyer.empresas.listar', [
                 });
 
                 modalInstance.result.then(function () {
-                    $log.warn('Removendo empresa!');
                     Empresa.remove({id: empresa.uid}, empresa, function () {
-                        $log.debug('Empresa apagada', empresa.uid);
+                        notifications.pushForCurrentRoute('empresa.apagada', 'success', {nome : empresa.nomeFantasia});
                         $scope.empresas.content.splice($scope.empresas.content.indexOf(empresa), 1);
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(empresa), 1);
                         }
-                    }, function error(err) {
-                        $log.debug('Empresa nao apagada por erro no server', err);
-                        $log.debug('Empresa deve ter chaves estrangeiras que nao foram apagadas corretamente');
+                    }, function error() {
+                        notifications.pushForCurrentRoute('empresa.erro.apagar', 'error', {nome : empresa.nomeFantasia});
                     });
 
                 }, function () {

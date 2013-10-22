@@ -1,6 +1,4 @@
-
 angular.module('lawyer.pessoas.edicao', [
-        'ui.mask'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -16,7 +14,6 @@ angular.module('lawyer.pessoas.edicao', [
 
             $scope.pessoa = $state.data;
 
-            // $state não possui a empresa para alterar. Volta pra pagina anterior.
             if (!$state.data && !$state.pessoa) {
                 if ($stateParams.uid) {
                     $scope.pessoa = Pessoa.get({uid : $stateParams.uid});
@@ -26,10 +23,8 @@ angular.module('lawyer.pessoas.edicao', [
             }
 
             $scope.salvar = function () {
-                $log.debug('Enviando cadastro para o endpoint', $scope.pessoa);
                 $scope.pessoa = Pessoa.update($scope.pessoa, function () {
-                    $log.debug('Pessoa alterada:', $scope.pessoa);
-                    notifications.pushForCurrentRoute('pessoa.alterada', 'success', {nome : $scope.pessoa.nome});
+                    notifications.pushForNextRoute('pessoa.alterada', 'success', {nome : $scope.pessoa.nome});
                     $state.go('pessoas.listar');
                 });
             };

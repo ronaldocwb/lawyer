@@ -1,33 +1,32 @@
 angular.module('lawyer.pessoas.listar', [
     ])
 
-    .config(['$stateProvider',  function config($stateProvider) {
+    .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('pessoas.listar', {
             url: '/',
             controller: 'PessoaListarController',
             templateUrl: 'contatos/pessoas/listar/pessoas.listar.tpl.html',
-            resolve : {
-                pessoas : function (Pessoa) {
+            resolve: {
+                pessoas: function (Pessoa) {
                     return Pessoa.get();
                 }
             }
         });
     }])
-.controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa', 'pessoas',
+    .controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa', 'pessoas',
         function ($scope, notifications, $state, $modal, $log, Pessoa, pessoas) {
 
             $scope.pessoas = angular.extend(pessoas);
 
-            $scope.pesquisa =  {
-                query : '',
-                inUse : false,
-                hasUsed : false
+            $scope.pesquisa = {
+                query: '',
+                inUse: false,
+                hasUsed: false
             };
             $scope.editar = function (pessoa) {
                 // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = pessoa;
-                // vai para a rota de edicao.
                 $state.go('pessoas.editar');
             };
 
@@ -41,7 +40,7 @@ angular.module('lawyer.pessoas.listar', [
                 if ($scope.pesquisa.query === '') {
                     $scope.pesquisa.inUse = false;
                 }
-                $scope.pessoas = Pessoa.get({q : $scope.pesquisa.query});
+                $scope.pessoas = Pessoa.get({q: $scope.pesquisa.query});
             };
 
             $scope.limparBusca = function () {
@@ -62,20 +61,18 @@ angular.module('lawyer.pessoas.listar', [
                 });
 
                 modalInstance.result.then(function () {
-                    $log.warn('Removendo pessoa!');
-                        Pessoa.remove({id: pessoa.uid}, pessoa, function () {
-                        $log.debug('Pessoa apagada', pessoa.uid);
+                    Pessoa.remove({id: pessoa.uid}, pessoa, function () {
+                        notifications.pushForCurrentRoute('pessoa.apagada', 'success', {nome : pessoa.nome});
                         $scope.pessoas.content.splice($scope.pessoas.content.indexOf(pessoa), 1);
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(pessoa), 1);
                         }
-                    }, function error(err) {
-                        $log.debug('Pessoa nao apagada por erro no server', err);
-                        $log.debug('Pessoa deve ter chaves estrangeiras que nao foram apagadas corretamente');
+                    }, function error() {
+                        notifications.pushForCurrentRoute('pessoa.erro.apagar', 'error', {nome : pessoa.nome});
                     });
 
                 }, function () {
-                    $log.info('Modal fechada sem dar OK.');
+                    $log.debug('Modal fechada sem dar OK para deletar.');
                 });
             };
 
@@ -100,7 +97,7 @@ angular.module('lawyer.pessoas.listar', [
 
             $scope.pessoas.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.pessoas = Pessoa.get({q : $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page : page-1}, function () {
+                $scope.pessoas = Pessoa.get({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
                     $scope.pessoas.current = page;
                 });
             };

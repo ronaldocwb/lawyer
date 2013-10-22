@@ -1,5 +1,4 @@
 angular.module('lawyer.empresas.cadastro', [
-        'ui.bootstrap',
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
@@ -18,27 +17,25 @@ angular.module('lawyer.empresas.cadastro', [
                 enderecos : []
             };
 
+            $scope.pushEmpresaListagem = function() {
+                if ($scope.empresas) {
+                    $scope.empresas.content.push($scope.empresa);
+                }
+            };
 
             $scope.cadastrar = function () {
                 $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
-                $scope.empresa = Empresa.save($scope.empresa, function (result) {
-                    $log.debug('Empresa cadastrada:', $scope.empresa);
+                $scope.empresa = Empresa.save($scope.empresa, function () {
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
-                    if ($scope.empresas) {
-                        $scope.empresas.content.push($scope.empresa);
-                    }
+                    $scope.pushEmpresaListagem();
                     $state.go('empresas.listar');
                 });
             };
 
-            $scope.salvarContinuar = function (cadastro) {
-                $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
+            $scope.salvarContinuar = function () {
                 $scope.empresa = Empresa.save($scope.empresa, function () {
-                    $log.debug('Empresa cadastrada:', $scope.empresa);
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome : $scope.empresa.nomeFantasia});
-                    if ($scope.empresas) {
-                        $scope.empresas.content.push($scope.empresa);
-                    }
+                    $scope.pushEmpresaListagem();
                     $scope.empresa = {
                         telefones : [],
                         enderecos : []
@@ -59,12 +56,6 @@ angular.module('lawyer.empresas.cadastro', [
                     .then(function(results){
                         return results.data;
                     });
-            };
-
-            $scope.getEmpresas = function (value) {
-                Empresa.query({q : value}, function (data) {
-                    return data;
-                });
             };
 
     }])
