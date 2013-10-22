@@ -14,7 +14,8 @@
     "angular-ui-utils": "latest",
     "angular-route": "latest",
     "noty": "latest",
-    "angular-sanitize": "1.2.0-rc.3"
+    "angular-sanitize": "1.2.0-rc.3",
+    "animate.css": "~2.1.0"
   },
   "dependencies": {}
 }
