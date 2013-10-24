@@ -110,6 +110,7 @@ public class EmpresaVO extends BaseVO<Empresa> {
         return responsaveis;
     }
 
+
     public void setResponsaveis (List<ResponsavelVO> responsaveis) {
         if (responsaveis == null) {
             return;

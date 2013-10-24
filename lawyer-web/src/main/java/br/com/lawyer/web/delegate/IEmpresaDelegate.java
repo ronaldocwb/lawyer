@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
  * @since 26/09/2013
  */
 public interface IEmpresaDelegate  {
-    Page findEmpresaPorPagina (String q, int page, int limit);
+    Page<EmpresaVO> findEmpresaPorPagina (String q, int page, int limit);
 
     EmpresaVO salvar (EmpresaVO empresaVO);
 

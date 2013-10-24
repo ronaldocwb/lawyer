@@ -33,6 +33,7 @@ public class UsuarioRepository extends JPABaseRepository<String, Usuario> implem
     public Usuario findByEmail (String email) {
         Query q = getEntityManager().createQuery("SELECT o FROM Usuario o WHERE o.email = :EMAIL");
         q.setParameter("EMAIL", email);
+
         return (Usuario) q.getSingleResult();
     }
 }

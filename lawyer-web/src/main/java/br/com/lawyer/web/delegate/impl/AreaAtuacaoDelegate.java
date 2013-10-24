@@ -1,16 +1,15 @@
 package br.com.lawyer.web.delegate.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import br.com.lawyer.core.entity.AreaAtuacao;
 import br.com.lawyer.core.service.IAreaAtuacaoService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.IAreaAtuacaoDelegate;
 import br.com.lawyer.web.vo.AreaAtuacaoVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Deividi
@@ -24,7 +23,7 @@ public class AreaAtuacaoDelegate extends BaseDelegate<AreaAtuacao, AreaAtuacaoVO
 
     @Transactional
     @Override
-    public Page findAreaAtuacaoPorPagina (String query, int page, int limit) {
+    public Page<AreaAtuacaoVO> findAreaAtuacaoPorPagina (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<AreaAtuacao> areaAtuacao = areaAtuacaoService.buscarPorNomeLike(query, pageRequest);
         return getVO(areaAtuacao, pageRequest);

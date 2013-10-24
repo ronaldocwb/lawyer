@@ -1,12 +1,13 @@
 angular.module('lawyer.empresas', [
         'lawyer.Empresa',
-        'lawyer.Municipio'
+        'lawyer.Municipio',
+        'lawyer.Responsavel'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('empresas', {
             url: '/empresas',
-            abstract : true,
+            abstract: true,
             views: {
                 "main": {
                     controller: 'EmpresaController',

@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
  * @author Deividi
  * @since 10/10/2013
  */
-public interface IPessoaRepository  extends IJPABaseRepository<String, Pessoa> {
+public interface IPessoaRepository extends IJPABaseRepository<String, Pessoa> {
 
     /**
      * Esse metodo está personalizando a query usando a anotação @Query

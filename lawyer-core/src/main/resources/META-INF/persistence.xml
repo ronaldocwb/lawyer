@@ -21,6 +21,7 @@
         <class>br.com.lawyer.core.entity.Pessoa</class>
         <class>br.com.lawyer.core.entity.Responsavel</class>
         <class>br.com.lawyer.core.entity.Setor</class>
+        <class>br.com.lawyer.core.entity.Lembrete</class>
 
         <class>br.com.lawyer.core.entity.common.Estado</class>
         <class>br.com.lawyer.core.entity.common.Municipio</class>

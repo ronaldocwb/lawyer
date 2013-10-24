@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
  * @since 10/10/2013
  */
 public interface IPessoaDelegate {
-    Page findPessoaPorPagina (String query, int page, int limit);
+    Page<PessoaVO> findPessoaPorPagina (String query, int page, int limit);
 
     PessoaVO salvar (PessoaVO pessoaVO);
 

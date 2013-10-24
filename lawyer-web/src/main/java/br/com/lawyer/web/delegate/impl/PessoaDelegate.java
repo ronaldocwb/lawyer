@@ -23,7 +23,7 @@ public class PessoaDelegate extends BaseDelegate<Pessoa, PessoaVO> implements IP
 
     @Transactional
     @Override
-    public Page findPessoaPorPagina (String query, int page, int limit) {
+    public Page<PessoaVO> findPessoaPorPagina (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<Pessoa> pessoas = pessoaService.buscarPorNomeLike(query, pageRequest);
         return getVO(pessoas, pageRequest);

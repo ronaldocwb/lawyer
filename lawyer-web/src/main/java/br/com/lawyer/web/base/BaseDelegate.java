@@ -4,7 +4,7 @@ import br.com.lawyer.core.base.IUID;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -70,7 +70,7 @@ public abstract class BaseDelegate<T extends IUID<?>, V extends BaseVO> {
      * @param pageRequest Page com a lista de resultados da entidade encontrada.
      * @return lista de entidades atraves de um Page.
      */
-    protected Page<V> getVO (Page<T> page, PageRequest pageRequest) {
+    protected Page<V> getVO (Page<T> page, Pageable pageRequest) {
         List<V> contentVO = getVO(page.getContent());
         Page<V> pageResult = new PageImpl<>(contentVO, pageRequest, page.getTotalElements());
         return pageResult;

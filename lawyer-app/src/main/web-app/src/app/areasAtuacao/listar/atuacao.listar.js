@@ -3,26 +3,23 @@ angular.module('lawyer.areasAtuacao.listar', [
 
     .config(['$stateProvider',  function config($stateProvider) {
         $stateProvider.state('areasAtuacao.listar', {
-            url: '/listar',
+            url: '/',
             controller: 'AreaAtuacaoListarController',
-            templateUrl: 'areasAtuacao/listar/listar.tpl.html'
+            templateUrl: 'areasAtuacao/listar/atuacao.listar.tpl.html'
         });
     }])
-.controller('AreaAtuacaoListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'AreaAtuacaoResource',
-        function ($scope, notifications, $state, $modal, $log, AreaAtuacaoResource) {
+.controller('AreaAtuacaoListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'AreaAtuacao',
+        function ($scope, notifications, $state, $modal, $log, AreaAtuacao) {
 
             $scope.editAreaAtuacao = function (areaAtuacao) {
-                // interrompe a propagacaoo. nao funcionou sem essa parada
                 event.preventDefault();
                 $state.data = areaAtuacao;
-                // vai para a rota de edicao.
                 $state.transitionTo('areasAtuacao.edicao');
-
             };
 
             $scope.deleteAreaAtuacao = function (areaAtuacao) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'areasAtuacao/remocao/remover.tpl.html',
+                    templateUrl: 'areasAtuacao/remocao/atuacao.remover.tpl.html',
                     controller: 'RemoverAreaAtuacaoController',
                     resolve: {
                         areaAtuacao: function () {
@@ -32,26 +29,19 @@ angular.module('lawyer.areasAtuacao.listar', [
                 });
 
                 modalInstance.result.then(function (areaAtuacao) {
-                    $log.warn('Removendo Área de Atuação!');
-                    $log.debug(areaAtuacao);
-                    AreaAtuacaoResource.delete({id: areaAtuacao.uid}, function () {
-
-                        $log.debug('Area de Atuacao apagada', areaAtuacao.uid);
+                    AreaAtuacao.delete(areaAtuacao, function () {
                         $scope.areasAtuacao.content.splice($scope.areasAtuacao.content.indexOf(areaAtuacao), 1);
 
-                    }, function error(err) {
-                        $log.debug('Area de Atuacao nao apagada por erro no server', err);
-                        $log.debug('Area de Atuacao deve ter chaves estrangeiras que nao foram apagadas corretamente');
+                    }, function error() {
+                        notifications.pushForNextRoute('areaAtuacao.erro.apagar', 'error');
                     });
 
-                }, function () {
-                    $log.info('Modal fechada sem dar OK.');
                 });
             };
 
             $scope.areasAtuacao.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.areasAtuacao = AreaAtuacaoResource.query({page : page-1}, function () {
+                $scope.areasAtuacao = AreaAtuacao.query({page : page-1}, function () {
                     $scope.areasAtuacao.current = page;
                 });
             };

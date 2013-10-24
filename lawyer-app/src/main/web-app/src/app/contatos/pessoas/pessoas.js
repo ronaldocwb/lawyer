@@ -6,7 +6,7 @@ angular.module('lawyer.pessoas', [
     .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('pessoas', {
             url: '/pessoas',
-            abstract : true,
+            abstract: true,
             views: {
                 "main": {
                     controller: 'PessoaController',
@@ -22,7 +22,7 @@ angular.module('lawyer.pessoas', [
     }])
 
     .controller('PessoaController', ['$scope', 'pessoas', function ($scope, pessoas) {
-            $scope.pessoas = pessoas;
-        }])
+        $scope.pessoas = pessoas;
+    }])
 
 ;

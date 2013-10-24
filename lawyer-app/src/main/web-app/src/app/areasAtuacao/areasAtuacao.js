@@ -1,5 +1,5 @@
 angular.module('lawyer.areasAtuacao', [
-        'AreaAtuacaoResource',
+        'lawyer.AreaAtuacao',
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -8,30 +8,23 @@ angular.module('lawyer.areasAtuacao', [
             views: {
                 "main": {
                     controller: 'AreaAtuacaoController',
-                    templateUrl: 'areasAtuacao/areasAtuacao.tpl.html'
+                    template: '<div ui-view></div>'
                 }
-            }, resolve : {
+            }, resolve: {
                 // Recupera a lista de areasAtuacao. Após o término do promise, constrói a view e o controller.
                 // areasAtuacao deverá ser injetado como parâmetro no construtor do controller.
-                areasAtuacao : function (AreaAtuacaoResource) {
-                    return AreaAtuacaoResource.query();
+                areasAtuacao: function (AreaAtuacao) {
+                    return AreaAtuacao.get();
                 }
             }
         });
     }])
 
-    .controller('AreaAtuacaoController', ['$scope', 'notifications', '$state', '$log', 'AreaAtuacaoResource', 'areasAtuacao',
-        function ($scope, notifications, $state, $log, AreaAtuacaoResource, areasAtuacao) {
+    .controller('AreaAtuacaoController', ['$scope', 'notifications', '$state', '$log', 'AreaAtuacao', 'areasAtuacao',
+        function ($scope, notifications, $state, $log, AreaAtuacao, areasAtuacao) {
 
             $scope.areasAtuacao = areasAtuacao;
 
-            $state.transitionTo('areasAtuacao.listar');
-
-            $scope.$on('$stateChangeSuccess', function () {
-                if ($state.current.url === '/areasAtuacao') {
-                    $state.transitionTo('areasAtuacao.listar');
-                }
-            });
         }])
 
 ;
