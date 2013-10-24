@@ -15,6 +15,10 @@ angular.module('i18n.Constants', [])
         'pessoa.alterada': "A pessoa com nome <strong>{{nome}}</strong> foi alterada!",
         'pessoa.apagada': "Pessoa com nome <strong>{{nome}}</strong> foi apagada niggaz",
         'pessoa.erro.apagar': "Putz....Erro ao deletar a pessoa com nome <strong>{{nome}}</strong>...",
-        'empresa.erro.apagar': "Putz....Erro ao deletar a empresa com nome fantasia <strong>{{nome}}</strong>..."
-
+        'empresa.erro.apagar': "Putz....Erro ao deletar a empresa com nome fantasia <strong>{{nome}}</strong>...",
+        'advogado.salva': "O advogado com nome <strong>{{nome}}</strong> foi criada!",
+        'advogado.salva.erro': "Ocorreu um erro ao salvar o advogado <strong>{{nome}}</strong>. =(",
+        'advogado.alterada': "O advogado com nome <strong>{{nome}}</strong> foi alterada!",
+        'advogado.apagada': "O advogado com nome <strong>{{nome}}</strong> foi apagado",
+        'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>..."
     });
