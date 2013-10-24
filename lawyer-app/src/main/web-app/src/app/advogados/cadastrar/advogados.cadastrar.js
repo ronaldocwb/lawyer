@@ -12,7 +12,7 @@ angular.module('lawyer.advogados.cadastro', [
     .controller('AdvogadoCadastroController', ['$scope', '$state', '$log', 'Advogado', 'Municipio', 'notifications', '$http', 'Empresa', '$modal',
         function ($scope, $state, $log, Advogado, Municipio, notifications, $http, Empresa, $modal) {
 
-            $scope.pessoa = {
+            $scope.advogado = {
                 telefones : [],
                 emails : [],
                 enderecos : []
@@ -20,13 +20,13 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.pushAdvogadoListagem = function () {
                 if ($scope.advogados) {
-                    $scope.advogados.content.push($scope.pessoa);
+                    $scope.advogados.content.push($scope.advogado);
                 }
             };
 
             $scope.cadastrar = function () {
-                $scope.pessoa = Advogado.save($scope.pessoa, function () {
-                    notifications.pushForNextRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
+                $scope.advogado = Advogado.save($scope.advogado, function () {
+                    notifications.pushForNextRoute('advogado.salva', 'success', {nome : $scope.advogado.nome});
                     $scope.pushAdvogadoListagem();
                     $state.go('advogados.listar');
                 }, function () {

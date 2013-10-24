@@ -14,42 +14,42 @@ angular.module('lawyer.lembretes', [
     }])
     .controller('LembretesController', ['$scope', '$interval', 'Lembrete', '$timeout', function ($scope, $interval, Lembrete, $timeout) {
 
-        $scope.items = [];//Lembrete.get();
+        $scope.lembretes = [];//Lembrete.get();
 
         $scope.novoLembrete = {
             texto: '',
             uid : 3
         };
 
-        $scope.add = function () {
-            $scope.items.push(angular.copy($scope.novoLembrete));
+        $scope.addLembrete = function () {
+            $scope.lembretes.push(angular.copy($scope.novoLembrete));
             $scope.novoLembrete = {
                 texto: '',
                 uid : 3
             };
         };
 
-        $scope.removeTodo = function (index) {
-            $scope.items.splice(index, 1);
+        $scope.removeLembrete = function (index) {
+            $scope.lembretes.splice(index, 1);
         };
 
         $scope.clearAll = function () {
             var interval = $interval(function () {
-                if ($scope.items.length === 0) {
+                if ($scope.lembretes.length === 0) {
                     $interval.cancel(interval);
                     return;
                 }
-                Lembrete.remove($scope.items.length-1);
-                $scope.items.pop();
+                Lembrete.remove($scope.lembretes.length-1);
+                $scope.lembretes.pop();
             }, 50);
         };
 
         $scope.clearFinished = function () {
-            angular.forEach($scope.items, function (item) {
+            angular.forEach($scope.lembretes, function (item) {
                 /** @namespace item.finalizado */
                 if (item.finalizado === true) {
+                    $scope.lembretes.splice($scope.lembretes.indexOf(item), 1);
                     Lembrete.remove(item);
-                    $scope.items.splice($scope.items.indexOf(item), 1);
                 }
             });
         };

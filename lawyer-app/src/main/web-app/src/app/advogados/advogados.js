@@ -1,6 +1,7 @@
 angular.module('lawyer.advogados', [
         'lawyer.Pessoa',
-        'lawyer.Municipio'
+        'lawyer.Municipio',
+        'lawyer.Advogado'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
