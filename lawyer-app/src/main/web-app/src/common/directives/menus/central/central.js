@@ -2,7 +2,7 @@ angular.module('lawyer.menu.central', [
         'lawyer.dropdown.hover'
     ])
     .directive('menuCentral', [function () {
-        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'responsaveis'];
+        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'advogados'];
         return {
             restrict: 'E',
             replace: true,
@@ -14,7 +14,7 @@ angular.module('lawyer.menu.central', [
                     scope.abas[field] = false;
                 });
 
-                // Desativa o $watch que rodava a cada segundo e só altera a view quando receber o evento de troca de tela.
+                // Desativa o $watch que rodava a cada segundo e so altera a view quando receber o evento de troca de tela.
                 scope.$on('$stateChangeSuccess', function (event, toState) {
                     for (var field in scope.abas) {
                         scope.abas[field] = false;
@@ -25,7 +25,7 @@ angular.module('lawyer.menu.central', [
                         case 'empresas' :       scope.abas.contatos = true; break;
                         case 'pessoas' :        scope.abas.contatos = true; break;
                         case 'areasAtuacao' :   scope.abas.areasAtuacao = true; break;
-                        case 'responsaveis' :   scope.abas.responsaveis = true; break;
+                        case 'advogados' :      scope.abas.advogados = true; break;
                     }
                 });
             }
