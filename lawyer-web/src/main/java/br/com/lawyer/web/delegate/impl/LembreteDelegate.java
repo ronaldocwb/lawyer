@@ -25,8 +25,8 @@ public class LembreteDelegate extends BaseDelegate<Lembrete, LembreteVO> impleme
 
     @Override
     @Transactional
-    public LembreteVO salvar (LembreteVO lembreteVO) {
-        Lembrete lembrete = lembreteService.save(lembreteVO.parse());
+    public LembreteVO salvar (LembreteVO lembreteVO) throws BusinessException {
+        Lembrete lembrete = lembreteService.salvar(lembreteVO.parse());
         return getVO(lembrete);
     }
 
@@ -43,5 +43,11 @@ public class LembreteDelegate extends BaseDelegate<Lembrete, LembreteVO> impleme
     public List<LembreteVO> findAll () throws BusinessException {
         List<Lembrete> lembretes = lembreteService.findAllByCurrentUser();
         return getVO(lembretes);
+    }
+
+    @Override
+    public LembreteVO atualizar (LembreteVO lembreteVO) throws BusinessException {
+        Lembrete lembrete = lembreteService.salvar(lembreteVO.parse());
+        return getVO(lembrete);
     }
 }

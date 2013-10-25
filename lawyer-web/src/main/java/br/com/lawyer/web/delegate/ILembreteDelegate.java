@@ -11,11 +11,12 @@ import java.util.List;
  */
 public interface ILembreteDelegate {
 
-    LembreteVO salvar (LembreteVO lembreteVO);
+    LembreteVO salvar (LembreteVO lembreteVO) throws BusinessException;
 
     void deletar (Iterable<LembreteVO> lembretes);
 
     List<LembreteVO> findAll () throws BusinessException;
 
+    LembreteVO atualizar (LembreteVO lembrete) throws BusinessException;
 
 }

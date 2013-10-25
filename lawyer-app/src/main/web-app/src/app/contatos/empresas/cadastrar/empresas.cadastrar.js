@@ -9,8 +9,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa',
-        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal',
+        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa, $modal) {
 
             $scope.empresa = {
                 telefones: [],
@@ -66,17 +66,40 @@ angular.module('lawyer.empresas.cadastro', [
                     });
             };
 
+            $scope.notification = {};
             $scope.addPessoa = function (name, $index) {
                 var pessoa = {
                     nome : name
                 };
                 Pessoa.save(pessoa, function (result) {
                     $scope.empresa.responsaveis[$index].pessoa = result;
+                    $scope.notification = {
+                        text : 'A pessoa <b>' + name + '</b> foi criada!'
+                    };
                 });
             };
 
             $scope.onSelectPessoa = function (pessoa, $index) {
                 $scope.empresa.responsaveis[$index].pessoa = pessoa;
+            };
+
+            $scope.completarPessoa = function (pessoa) {
+                $state.data = pessoa;
+                $state.data.modal = $modal.open({
+                    templateUrl: 'contatos/pessoas/editar/pessoas.editar.tpl.html',
+                    controller: 'PessoaEdicaoController',
+                    resolve: {
+                        pessoa: function () {
+                            return pessoa;
+                        }
+                    }
+                });
+
+                $state.data.modal.result.then(function (editar) {
+                    if (editar === true) {
+                        $state.data = pessoa;
+                    }
+                });
             };
 
         }])

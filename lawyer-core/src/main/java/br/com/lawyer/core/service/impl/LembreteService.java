@@ -1,14 +1,11 @@
 package br.com.lawyer.core.service.impl;
 
-import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Lembrete;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.ILembreteRepository;
 import br.com.lawyer.core.service.ILembreteService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,10 +28,13 @@ public class LembreteService extends BaseService<String, Lembrete, ILembreteRepo
 
     @Override
     public List<Lembrete> findAllByCurrentUser () throws BusinessException {
-        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
-            throw new BusinessException("Usuario nao encontrado na autenticação.");
-        }
-        return getRepository().findByUsuarioUid(token.getUsuario().getUid());
+        return getRepository().findByUsuarioUid(getUsuarioLogado().getUid());
     }
+
+    @Override
+    public Lembrete salvar (Lembrete lembrete) throws BusinessException {
+        lembrete.setUsuario(getUsuarioLogado());
+        return getRepository().save(lembrete);
+    }
+
 }

@@ -34,4 +34,9 @@ public class Advogado extends AbstractBaseEntity implements Serializable {
     public void setNumeroOAB (String numeroOAB) {
         this.numeroOAB = numeroOAB;
     }
+
+    // precisa pra fazer o parse do VO
+    public void setPessoa (Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 }

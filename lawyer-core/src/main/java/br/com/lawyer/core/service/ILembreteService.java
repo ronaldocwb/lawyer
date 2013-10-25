@@ -14,4 +14,6 @@ import java.util.List;
 public interface ILembreteService extends IBaseService<String, Lembrete, ILembreteRepository> {
     List<Lembrete> findAllByCurrentUser () throws BusinessException;
 
+    Lembrete salvar (Lembrete parse) throws BusinessException;
+
 }

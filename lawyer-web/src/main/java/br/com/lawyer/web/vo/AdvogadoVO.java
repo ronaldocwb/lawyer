@@ -1,9 +1,8 @@
 package br.com.lawyer.web.vo;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.web.base.BaseVO;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
  * @author Ronaldo

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,13 +31,19 @@ public class LembreteController {
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/lembretes", method = RequestMethod.POST)
     public @ResponseBody
-    LembreteVO salvarUsuario (@RequestBody LembreteVO lembrete) {
+    LembreteVO salvar(@RequestBody LembreteVO lembrete) throws BusinessException {
         return lembreteDelegate.salvar(lembrete);
     }
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
-    @RequestMapping(value = "/lembretes/", method = RequestMethod.DELETE)
-    public ResponseEntity excluir(@RequestBody List<LembreteVO> lembretes) {
+    @RequestMapping(value = "/lembretes/{uid}", method = RequestMethod.PUT)
+    public @ResponseBody LembreteVO update(@PathVariable("uid") String uid, @RequestBody LembreteVO lembrete) throws BusinessException {
+        return lembreteDelegate.atualizar(lembrete);
+    }
+
+    @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
+    @RequestMapping(value = "/lembretes/batch", method = RequestMethod.POST)
+    public ResponseEntity excluirBatch(@RequestBody List<LembreteVO> lembretes) {
         lembreteDelegate.deletar(lembretes);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,9 +1,14 @@
 package br.com.lawyer.core.base;
 
+import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
+import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.exception.BusinessException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.Serializable;
 import java.util.List;
@@ -146,6 +151,22 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
     @Override
     public long count (Specification<T> spec) {
         return getRepository().count(spec);
+    }
+
+    protected Usuario getUsuarioLogado() throws BusinessException {
+        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
+            throw new BusinessException("Usuario nao encontrado na autenticação.");
+        }
+        return token.getUsuario();
+    }
+
+    protected LawyerAuthenticationToken getCredenciais() throws BusinessException {
+        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
+            throw new BusinessException("Usuario nao encontrado na autenticação.");
+        }
+        return token;
     }
 
 }

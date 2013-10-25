@@ -7,7 +7,7 @@
         <blockquote class="fadeInLeft" ng-repeat="item in lembretes" ng-class="{'todo-complete': item.finalizado}">
             <span class="close" ng-click="removeLembrete($index)">&times;</span>
             <label>
-                <input type="checkbox" ng-model="item.finalizado">
+                <input type="checkbox" ng-model="item.finalizado" data-ng-click="updateLembrete($index)">
                 <span ng-bind="item.texto"></span>
             </label>
         </blockquote>

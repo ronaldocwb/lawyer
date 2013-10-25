@@ -9,7 +9,7 @@ import br.com.lawyer.web.base.BaseVO;
  */
 public class LembreteVO extends BaseVO<Lembrete> {
 
-    private UsuarioVO usuario;
+    private String uid;
 
     private String texto;
 
@@ -21,14 +21,6 @@ public class LembreteVO extends BaseVO<Lembrete> {
 
     public LembreteVO() {
         super();
-    }
-
-    public UsuarioVO getUsuario () {
-        return usuario;
-    }
-
-    public void setUsuario (UsuarioVO usuario) {
-        this.usuario = usuario;
     }
 
     public String getTexto () {
@@ -45,5 +37,13 @@ public class LembreteVO extends BaseVO<Lembrete> {
 
     public void setFinalizado (boolean finalizado) {
         this.finalizado = finalizado;
+    }
+
+    public String getUid () {
+        return uid;
+    }
+
+    public void setUid (String uid) {
+        this.uid = uid;
     }
 }

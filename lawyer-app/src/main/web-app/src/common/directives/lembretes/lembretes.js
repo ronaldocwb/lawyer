@@ -14,23 +14,28 @@ angular.module('lawyer.lembretes', [
     }])
     .controller('LembretesController', ['$scope', '$interval', 'Lembrete', '$timeout', function ($scope, $interval, Lembrete, $timeout) {
 
-        $scope.lembretes = [];//Lembrete.get();
+        $scope.lembretes = Lembrete.query();
 
         $scope.novoLembrete = {
-            texto: '',
-            uid : 3
+            texto: ''
         };
 
         $scope.addLembrete = function () {
-            $scope.lembretes.push(angular.copy($scope.novoLembrete));
+            $scope.todo = angular.copy($scope.novoLembrete);
+            $scope.todo = Lembrete.save($scope.todo);
+            $scope.lembretes.push($scope.todo);
             $scope.novoLembrete = {
-                texto: '',
-                uid : 3
+                texto: ''
             };
         };
 
         $scope.removeLembrete = function (index) {
             $scope.lembretes.splice(index, 1);
+        };
+
+        $scope.updateLembrete = function ($item) {
+            $scope.lembretes[$item].finalizado = !$scope.lembretes[$item].finalizado;
+            Lembrete.update($scope.lembretes[$item]);
         };
 
         $scope.clearAll = function () {
@@ -39,20 +44,14 @@ angular.module('lawyer.lembretes', [
                     $interval.cancel(interval);
                     return;
                 }
-                Lembrete.remove($scope.lembretes.length-1);
                 $scope.lembretes.pop();
             }, 50);
+            Lembrete.removeAll();
         };
 
-        $scope.clearFinished = function () {
-            angular.forEach($scope.lembretes, function (item) {
-                /** @namespace item.finalizado */
-                if (item.finalizado === true) {
-                    $scope.lembretes.splice($scope.lembretes.indexOf(item), 1);
-                    Lembrete.remove(item);
-                }
-            });
-        };
+//        $scope.clearFinished = function () {
+//            Lembrete.removeBatch();
+//        };
     }])
 ;
 
