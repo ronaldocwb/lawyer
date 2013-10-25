@@ -69,14 +69,14 @@ angular.module('lawyer.empresas.cadastro', [
                     });
             };
 
-            $scope.notification = {};
-            $scope.addPessoa = function (name, $index) {
+            $scope.notification = [];
+            $scope.addPessoa = function (name, $index, responsavel) {
                 var pessoa = {
                     nome : name
                 };
                 Pessoa.save(pessoa, function (result) {
                     $scope.empresa.responsaveis[$index].pessoa = result;
-                    $scope.notification = {
+                    responsavel.message = {
                         text : 'A pessoa <b>' + name + '</b> foi criada!'
                     };
                 });
@@ -86,7 +86,7 @@ angular.module('lawyer.empresas.cadastro', [
                 $scope.empresa.responsaveis[$index].pessoa = pessoa;
             };
 
-            $scope.completarPessoa = function (pessoa) {
+            $scope.completarPessoa = function (pessoa, $index) {
                 $state.data = pessoa;
                 $state.data.modal = $modal.open({
                     templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html',
@@ -106,7 +106,6 @@ angular.module('lawyer.empresas.cadastro', [
             };
 
             $scope.voltar = function () {
-                console.log('chegou');
                 angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
             };
 

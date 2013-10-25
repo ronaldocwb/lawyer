@@ -13,8 +13,8 @@ angular.module('lawyer.pessoas.edicao', [
         function ($scope, notifications, $log, Pessoa, $state, $stateParams, $http, Empresa, $modal) {
 
             $scope.tela = {
-                cadastro : true,
-                edicao : false
+                cadastro : false,
+                edicao : true
             };
 
             $scope.pessoa = $state.data;
@@ -80,7 +80,6 @@ angular.module('lawyer.pessoas.edicao', [
 
             $scope.completarEmpresa = function () {
                 $state.data = $scope.pessoa.empresa;
-                console.log('completando');
                 $state.data.modal = $modal.open({
                     templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html',
                     controller: 'EmpresaEdicaoController',

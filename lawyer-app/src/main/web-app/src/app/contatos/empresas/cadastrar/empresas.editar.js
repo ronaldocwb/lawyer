@@ -10,8 +10,8 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http', 'Pessoa', '$modal',
+        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http, Pessoa, $modal) {
             $scope.tela = {
                 cadastro : false,
                 edicao : true
@@ -53,6 +53,49 @@ angular.module('lawyer.empresas.edicao', [
                 return $http.get('/lawyer/api/municipios?q='+value)
                     .then(function(result){
                         return result.data;
+                    });
+            };
+
+            $scope.notification = {};
+            $scope.addPessoa = function (name, $index) {
+                var pessoa = {
+                    nome : name
+                };
+                Pessoa.save(pessoa, function (result) {
+                    $scope.empresa.responsaveis[$index].pessoa = result;
+                    $scope.notification = {
+                        text : 'A pessoa <b>' + name + '</b> foi criada!'
+                    };
+                });
+            };
+
+            $scope.onSelectPessoa = function (pessoa, $index) {
+                $scope.empresa.responsaveis[$index].pessoa = pessoa;
+            };
+
+            $scope.completarPessoa = function (pessoa) {
+                $state.data = pessoa;
+                $state.data.modal = $modal.open({
+                    templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html',
+                    controller: 'PessoaEdicaoController',
+                    resolve: {
+                        pessoa: function () {
+                            return pessoa;
+                        }
+                    }
+                });
+
+                $state.data.modal.result.then(function (editar) {
+                    if (editar === true) {
+                        $state.data = pessoa;
+                    }
+                });
+            };
+
+            $scope.getPessoas = function (value) {
+                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
+                    .then(function (result) {
+                        return result.data.content;
                     });
             };
         }])
