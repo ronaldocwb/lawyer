@@ -1,7 +1,8 @@
 <div ng-if="true" class="fadeInUp">
-    <form data-ng-submit="cadastrar()" name="cadastro" class="form-horizontal">
+    <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
-            <legend>Nova Empresa</legend>
+            <legend data-ng-show="tela.cadastro === true">Nova Empresa</legend>
+            <legend data-ng-show="tela.edicao === true">Editar Empresa</legend>
             <div class="control-group">
                 <label class="control-label" for="nome">Nome:*</label>
 
@@ -114,10 +115,10 @@
             <div class="control-group">
                 <div class="controls">
                     <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid">Salvar</button>
-                    <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid"
+                    <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid" data-ng-show="tela.cadastro === true"
                             data-ng-click="salvarContinuar(cadastro)">Salvar e criar uma nova empresa
                     </button>
-                    ou <a ui-sref="empresas.listar">Clique para voltar</a>
+                    ou <a data-ng-click="voltar()">Clique para voltar</a>
                 </div>
             </div>
             <hr>

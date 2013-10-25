@@ -11,7 +11,10 @@ angular.module('lawyer.empresas.cadastro', [
 
     .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal',
         function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa, $modal) {
-
+            $scope.tela = {
+                cadastro : true,
+                edicao : false
+            };
             $scope.empresa = {
                 telefones: [],
                 responsaveis: [],
@@ -24,7 +27,7 @@ angular.module('lawyer.empresas.cadastro', [
                 }
             };
 
-            $scope.cadastrar = function () {
+            $scope.salvar = function () {
                 $scope.empresa = Empresa.save($scope.empresa, function () {
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome: $scope.empresa.nomeFantasia});
                     $scope.pushEmpresaListagem();
@@ -86,7 +89,7 @@ angular.module('lawyer.empresas.cadastro', [
             $scope.completarPessoa = function (pessoa) {
                 $state.data = pessoa;
                 $state.data.modal = $modal.open({
-                    templateUrl: 'contatos/pessoas/editar/pessoas.editar.tpl.html',
+                    templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html',
                     controller: 'PessoaEdicaoController',
                     resolve: {
                         pessoa: function () {
@@ -100,6 +103,11 @@ angular.module('lawyer.empresas.cadastro', [
                         $state.data = pessoa;
                     }
                 });
+            };
+
+            $scope.voltar = function () {
+                console.log('chegou');
+                angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
             };
 
         }])

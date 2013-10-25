@@ -3,6 +3,8 @@ package br.com.lawyer.core.base;
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
+import com.mysema.query.types.OrderSpecifier;
+import com.mysema.query.types.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -129,6 +131,31 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
     }
 
     @Override
+    public T findOne (Predicate spec) {
+        return getRepository().findOne(spec);
+    }
+
+    @Override
+    public List<T> findAll (Predicate spec) {
+        return (List<T>) getRepository().findAll(spec);
+    }
+
+    @Override
+    public Page<T> findAll (Predicate spec, Pageable pageable) {
+        return getRepository().findAll(spec, pageable);
+    }
+
+    @Override
+    public List<T> findAll (Predicate spec, OrderSpecifier sort) {
+        return (List<T>) getRepository().findAll(spec, sort);
+    }
+
+    @Override
+    public long count (Predicate spec) {
+        return getRepository().count(spec);
+    }
+
+    @Override
     public T findOne (Specification<T> spec) {
         return getRepository().findOne(spec);
     }
@@ -163,7 +190,7 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
 
     protected LawyerAuthenticationToken getCredenciais() throws BusinessException {
         LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
+        if (token == null || token.getCredentials() == null) {
             throw new BusinessException("Usuario nao encontrado na autenticação.");
         }
         return token;

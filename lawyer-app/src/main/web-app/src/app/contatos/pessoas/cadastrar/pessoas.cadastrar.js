@@ -12,6 +12,11 @@ angular.module('lawyer.pessoas.cadastro', [
     .controller('PessoaCadastroController', ['$scope', '$state', '$log', 'Pessoa', 'Municipio', 'notifications', '$http', 'Empresa', '$modal',
         function ($scope, $state, $log, Pessoa, Municipio, notifications, $http, Empresa, $modal) {
 
+            $scope.tela = {
+                cadastro : true,
+                edicao : false
+            };
+
             $scope.pessoa = {
                 telefones : [],
                 emails : [],
@@ -24,11 +29,11 @@ angular.module('lawyer.pessoas.cadastro', [
                 }
             };
 
-            $scope.cadastrar = function () {
+            $scope.salvar = function () {
                 $scope.pessoa = Pessoa.save($scope.pessoa, function () {
                     notifications.pushForNextRoute('pessoa.salva', 'success', {nome : $scope.pessoa.nome});
                     $scope.pushPessoaListagem();
-                    $state.go('pessoas.listar');
+                    angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('pessoas.listar'));
                 }, function () {
                     notifications.pushForCurrentRoute('pessoa.salva.erro', 'error', {nome : $scope.pessoa.nome});
                 });
@@ -87,7 +92,7 @@ angular.module('lawyer.pessoas.cadastro', [
             $scope.completarEmpresa = function () {
                 $state.data = $scope.pessoa.empresa;
                 $state.data.modal = $modal.open({
-                    templateUrl: 'contatos/empresas/editar/empresas.editar.tpl.html',
+                    templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html',
                     controller: 'EmpresaEdicaoController',
                     resolve: {
                         empresa: function () {
@@ -101,6 +106,10 @@ angular.module('lawyer.pessoas.cadastro', [
                         $state.data = $scope.pessoa.empresa;
                     }
                 });
+            };
+
+            $scope.voltar = function () {
+                angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('pessoas.listar'));
             };
 
 

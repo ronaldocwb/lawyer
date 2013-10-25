@@ -28,12 +28,12 @@ public class LembreteService extends BaseService<String, Lembrete, ILembreteRepo
 
     @Override
     public List<Lembrete> findAllByCurrentUser () throws BusinessException {
-        return getRepository().findByUsuarioUid(getUsuarioLogado().getUid());
+        return getRepository().findByUsuarioUid(super.getUsuarioLogado().getUid());
     }
 
     @Override
     public Lembrete salvar (Lembrete lembrete) throws BusinessException {
-        lembrete.setUsuario(getUsuarioLogado());
+        lembrete.setUsuario(super.getUsuarioLogado());
         return getRepository().save(lembrete);
     }
 

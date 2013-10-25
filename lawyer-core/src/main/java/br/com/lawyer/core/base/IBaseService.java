@@ -1,5 +1,7 @@
 package br.com.lawyer.core.base;
 
+import com.mysema.query.types.OrderSpecifier;
+import com.mysema.query.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -42,6 +44,18 @@ public interface IBaseService<ID extends Serializable, T extends IUID<ID>, D ext
 
     public void deleteAll ();
 
+    public T findOne (Predicate spec);
+
+    public List<T> findAll (Predicate spec);
+
+    public Page<T> findAll (Predicate spec, Pageable pageable);
+
+    public List<T> findAll (Predicate spec, OrderSpecifier sort);
+
+    public long count (Predicate spec);
+
+    public long count ();
+
     public T findOne (Specification<T> spec);
 
     public List<T> findAll (Specification<T> spec);
@@ -51,7 +65,5 @@ public interface IBaseService<ID extends Serializable, T extends IUID<ID>, D ext
     public List<T> findAll (Specification<T> spec, Sort sort);
 
     public long count (Specification<T> spec);
-
-    public long count ();
 
 }

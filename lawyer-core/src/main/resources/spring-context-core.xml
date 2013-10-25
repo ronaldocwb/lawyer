@@ -61,6 +61,6 @@
 
     <!-- Define o package para scan de classes de repositórios do Spring data JPA -->
     <jpa:repositories base-package="br.com.lawyer.core.repository" entity-manager-factory-ref="emf"
-                      transaction-manager-ref="transactionManager"/>
+                      transaction-manager-ref="transactionManager" />
 
 </beans:beans>

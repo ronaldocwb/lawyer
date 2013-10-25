@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import static br.com.lawyer.core.repository.specifications.ResponsavelSpecification.*;
+import static br.com.lawyer.core.repository.specifications.ResponsavelSpecification.PESSOA;
 
 /**
  * @author Deividi
@@ -31,15 +31,15 @@ public class ResponsavelService extends BaseService<String, Responsavel, IRespon
 
     @Override
     public Page<Responsavel> buscarPorCampoLike (String query, String field, Pageable pageRequest) throws BusinessException {
-        Page<Responsavel> result;
+        Page<Responsavel> result = null;
         if (StringUtils.isBlank(field)) {
             throw new BusinessException("Busca deve informar o tipo: pessoa ou empresa");
         }
         if (StringUtils.isNotBlank(field)) {
             if (field.equals(PESSOA)) {
-                result = getRepository().findAll(queryResponsavelPorNomePessoaLike(query), pageRequest);
+                //result = getRepository().findAll(queryResponsavelPorNomePessoaLike(query), pageRequest);
             } else {
-                result = getRepository().findAll(queryResponsavelPorNomeEmpresaLike(query), pageRequest);
+                //result = getRepository().findAll(queryResponsavelPorNomeEmpresaLike(query), pageRequest);
             }
         } else {
             result = getRepository().findAll(pageRequest);

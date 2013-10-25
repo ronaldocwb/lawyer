@@ -6,13 +6,16 @@ angular.module('lawyer.empresas.edicao', [
         $stateProvider.state('empresas.editar', {
             url: '/editar/',
             controller: 'EmpresaEdicaoController',
-            templateUrl: 'contatos/empresas/editar/empresas.editar.tpl.html'
+            templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html'
         });
     }])
 
     .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http',
         function ($scope, notifications, $log, Empresa, $state, $stateParams, $http) {
-
+            $scope.tela = {
+                cadastro : false,
+                edicao : true
+            };
             $scope.empresa = $state.data;
 
             if ($state.data && $state.data.modal) {
