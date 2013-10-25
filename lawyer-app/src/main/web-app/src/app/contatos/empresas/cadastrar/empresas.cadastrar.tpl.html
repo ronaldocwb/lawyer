@@ -57,10 +57,11 @@
                      class="controls">
                     <br>
                     <input name="responsavel" id="responsavel" class="x-large" type="text"
-                           ng-model="responsavel"
-                           typeahead-on-add="addResponsavel($item)"
+                           ng-model="pessoa"
+                           typeahead-on-add="addPessoa($item, $index)"
                            typeahead-editable="false"
-                           typeahead-lawyer="responsavel as responsavel.pessoa.nome for responsavel in getResponsaveis($viewValue)"/>
+                           typeahead-on-select="onSelectPessoa(pessoa, $index)"
+                           typeahead-lawyer="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>
                     <noty-container notification="notification" completar="completarResponsavel()"></noty-container>
                         <button type="button" class="btn btn-info" data-ng-click="remove('responsaveis', $index)"><i
                                 class="icon-trash icon-white"></i></button>

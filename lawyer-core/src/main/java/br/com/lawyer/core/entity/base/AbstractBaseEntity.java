@@ -4,6 +4,7 @@ import br.com.lawyer.core.base.IUID;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -21,10 +22,14 @@ public abstract class AbstractBaseEntity implements Serializable, IUID<String> {
     }
 
     public String getUid () {
+        return uid;
+    }
+
+    @PrePersist
+    protected void generateUid() {
         if (this.uid == null) {
             this.uid = UUID.randomUUID().toString();
         }
-        return uid;
     }
 
     @Override

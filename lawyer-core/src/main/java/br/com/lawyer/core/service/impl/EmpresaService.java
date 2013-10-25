@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmpresaService extends BaseService<String, Empresa, IEmpresaRepository> implements IEmpresaService {
+
     /**
      * Construtor
      *
@@ -30,6 +31,7 @@ public class EmpresaService extends BaseService<String, Empresa, IEmpresaReposit
      * Busca os resultados das empresas por paginação informada.
      * Se o parametro <code>query</code> for informado, faz um <code>like</code> com {@link Empresa#razaoSocial} ou {@link Empresa#nomeFantasia}
      * Se o parametro <code>query</code> nao for informado, retorna todas.
+     *
      * @param query
      * @param pageRequest
      * @return Page<Empresa>

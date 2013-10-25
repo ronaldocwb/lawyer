@@ -27,3 +27,6 @@ INSERT INTO public.empresa (uid, cnpj, nomefantasia, razaosocial) VALUES ('53c68
 INSERT INTO public.empresa (uid, cnpj, nomefantasia, razaosocial) VALUES ('0a91a8b8-0d49-4638-9dd4-2a3c6ff17409', '32165498745632', 'Esparta Software', 'Esparta SW');
 INSERT INTO public.empresa (uid, cnpj, nomefantasia, razaosocial) VALUES ('7231a544-80e1-45c0-aa5a-79a0847e2ead', '32559874512654', 'Vernalha', 'VR');
 
+INSERT INTO public.pessoa (uid, identificacao, tipoidentificacao, email, nome, empresa_uid) VALUES ('22807067-9770-4ab6-b631-40d08eacfbac', '04330357909', 0, null, 'Deividi Cavarzan', '0a91a8b8-0d49-4638-9dd4-2a3c6ff17409');
+INSERT INTO public.pessoa (uid, identificacao, tipoidentificacao, email, nome, empresa_uid) VALUES ('42117a72-fee2-46fc-ab2a-fc624b0c3ffb', '5452826963', 1, null, 'Ronaldo Campos', '53c68bd8-aa4c-4f84-a687-013549106e5b');
+INSERT INTO public.pessoa_emails (pessoa_uid, value) VALUES ('42117a72-fee2-46fc-ab2a-fc624b0c3ffb', 'ronaldocwb@gmail.com');

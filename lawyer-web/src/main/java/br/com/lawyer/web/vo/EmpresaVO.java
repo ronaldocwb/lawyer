@@ -122,11 +122,6 @@ public class EmpresaVO extends BaseVO<Empresa> {
                 empty.add(vo);
                 continue;
             }
-            if (vo.getEmpresa() == null) {
-                EmpresaVO e = new EmpresaVO();
-                e.setUid(uid);
-                vo.setEmpresa(e);
-            }
         }
         responsaveis.removeAll(empty);
         this.responsaveis = responsaveis;

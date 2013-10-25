@@ -11,8 +11,6 @@ public class ResponsavelVO extends BaseVO<Responsavel> {
 
     private PessoaVO pessoa;
 
-    private EmpresaVO empresa;
-
     private SetorVO setor;
 
     public ResponsavelVO () {
@@ -29,14 +27,6 @@ public class ResponsavelVO extends BaseVO<Responsavel> {
 
     public void setPessoa (PessoaVO pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public EmpresaVO getEmpresa () {
-        return empresa;
-    }
-
-    public void setEmpresa (EmpresaVO empresa) {
-        this.empresa = empresa;
     }
 
     public SetorVO getSetor () {

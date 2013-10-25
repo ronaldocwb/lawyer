@@ -9,8 +9,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Responsavel',
-        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Responsavel) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa',
+        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa) {
 
             $scope.empresa = {
                 telefones: [],
@@ -25,7 +25,6 @@ angular.module('lawyer.empresas.cadastro', [
             };
 
             $scope.cadastrar = function () {
-                $log.debug('Enviando cadastro para o endpoint', $scope.empresa);
                 $scope.empresa = Empresa.save($scope.empresa, function () {
                     notifications.pushForCurrentRoute('empresa.salva', 'success', {nome: $scope.empresa.nomeFantasia});
                     $scope.pushEmpresaListagem();
@@ -39,6 +38,7 @@ angular.module('lawyer.empresas.cadastro', [
                     $scope.pushEmpresaListagem();
                     $scope.empresa = {
                         telefones: [],
+                        responsaveis: [],
                         enderecos: []
                     };
                 });
@@ -59,20 +59,24 @@ angular.module('lawyer.empresas.cadastro', [
                     });
             };
 
-            $scope.getResponsaveis = function (value) {
-                return $http.get('/lawyer/api/responsaveis?q=' + value + '&page=0&limit:8')
+            $scope.getPessoas = function (value) {
+                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
                     .then(function (result) {
                         return result.data.content;
                     });
             };
 
-            $scope.addResponsavel = function (name) {
-                var responsavel = {
+            $scope.addPessoa = function (name, $index) {
+                var pessoa = {
                     nome : name
                 };
-                Responsavel.save(responsavel, function (result, $index) {
-                    // TODO inserir no index certo do array
+                Pessoa.save(pessoa, function (result) {
+                    $scope.empresa.responsaveis[$index].pessoa = result;
                 });
+            };
+
+            $scope.onSelectPessoa = function (pessoa, $index) {
+                $scope.empresa.responsaveis[$index].pessoa = pessoa;
             };
 
         }])

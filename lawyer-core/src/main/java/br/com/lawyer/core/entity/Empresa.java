@@ -8,10 +8,7 @@ import br.com.lawyer.core.entity.common.Telefone;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -39,7 +36,7 @@ public class Empresa extends AbstractBaseEntity implements IUID<String> {
     @ElementCollection
     private List<Email> emails;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Responsavel> responsaveis;
 

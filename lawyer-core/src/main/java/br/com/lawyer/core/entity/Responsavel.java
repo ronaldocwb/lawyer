@@ -20,9 +20,6 @@ public class Responsavel extends AbstractBaseEntity implements Serializable {
     private Pessoa pessoa;
 
     @ManyToOne
-    private Empresa empresa;
-
-    @ManyToOne
     private Setor setor;
 
     public Pessoa getPessoa () {
@@ -31,14 +28,6 @@ public class Responsavel extends AbstractBaseEntity implements Serializable {
 
     public void setPessoa (Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public Empresa getEmpresa () {
-        return empresa;
-    }
-
-    public void setEmpresa (Empresa empresa) {
-        this.empresa = empresa;
     }
 
     public Setor getSetor () {
