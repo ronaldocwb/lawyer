@@ -20,7 +20,7 @@ public class Pessoa extends AbstractBaseEntity implements IUID<String> {
     @Embedded
     private Documento documento;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Empresa empresa;
 
     @Column (length = 200)

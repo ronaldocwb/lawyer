@@ -11,6 +11,10 @@ angular.module('lawyer.pessoas.listar', [
     .controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa',
         function ($scope, notifications, $state, $modal, $log, Pessoa) {
 
+            $scope.$on('suamae', function () {
+                console.log('suamaeeee   e');
+            });
+
             $scope.pesquisa = {
                 query: '',
                 inUse: false,

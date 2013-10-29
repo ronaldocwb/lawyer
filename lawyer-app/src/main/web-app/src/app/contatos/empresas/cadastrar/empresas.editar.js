@@ -31,13 +31,17 @@ angular.module('lawyer.empresas.edicao', [
             }
 
             $scope.salvar = function () {
+                console.log($scope.empresa);
                 $scope.empresa = Empresa.update($scope.empresa, function () {
                     notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
-                    angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
+                    angular.noop($scope.modal ? $scope.modal.close($scope.empresa) : $state.go('empresas.listar'));
                 });
             };
 
             $scope.add = function (key) {
+                if (!$scope.empresa[key]) {
+                    $scope.empresa[key] = [];
+                }
                 $scope.empresa[key].push({});
             };
 
@@ -56,25 +60,29 @@ angular.module('lawyer.empresas.edicao', [
                     });
             };
 
-            $scope.notification = {};
             $scope.addPessoa = function (name, $index) {
                 var pessoa = {
                     nome : name
                 };
-                Pessoa.save(pessoa, function (result) {
-                    $scope.empresa.responsaveis[$index].pessoa = result;
-                    $scope.notification = {
-                        text : 'A pessoa <b>' + name + '</b> foi criada!'
-                    };
+                Pessoa.save(pessoa, function (pessoa) {
+                    $scope.empresa.responsaveis[$index].pessoa = pessoa;
+                    // emite a notificação para completar cadastro: i18n, nome, callback e objeto
+                    notifications.pushCompletarCadastro('pessoa.completar.cadastro', { nome: name} , 'empresas.cadastrar.pessoa.callback', pessoa);
                 });
             };
 
+            $scope.$on('empresas.cadastrar.pessoa.callback', function ($event, pessoa) {
+                $scope.completarPessoa(pessoa);
+            });
+
             $scope.onSelectPessoa = function (pessoa, $index) {
+                console.log(pessoa, $index);
                 $scope.empresa.responsaveis[$index].pessoa = pessoa;
             };
 
             $scope.completarPessoa = function (pessoa) {
-                $state.data = pessoa;
+                //envia o objeto de retorno no OK do modal para a popup de edicao, copia ele pra nao fazer bind automatico e aparecer alterando na tela de fundo.
+                $state.data = angular.copy(pessoa);
                 $state.data.modal = $modal.open({
                     templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html',
                     controller: 'PessoaEdicaoController',
@@ -85,10 +93,19 @@ angular.module('lawyer.empresas.edicao', [
                     }
                 });
 
-                $state.data.modal.result.then(function (editar) {
-                    if (editar === true) {
-                        $state.data = pessoa;
+                $state.data.modal.result.then(function (pessoaAtualizada) {
+                    if (!pessoaAtualizada) {
+                        return;
                     }
+                    // se atualizou a pessoa, ela existe e vamos substituir no array de responsaveis para a alteração ficar visivel na tela, e mostramos uma notificação de OK.
+                    var index = null;
+                    angular.forEach($scope.empresa.responsaveis, function (responsavel) {
+                        if (responsavel.pessoa.uid === pessoaAtualizada.uid) {
+                            index = $scope.empresa.responsaveis.indexOf(responsavel);
+                        }
+                    });
+                    $scope.empresa.responsaveis[index].pessoa = pessoaAtualizada;
+                    notifications.pushForCurrentRoute('pessoa.alterada', 'success', { nome: pessoaAtualizada.nome});
                 });
             };
 

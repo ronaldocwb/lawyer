@@ -20,12 +20,22 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
                 return notificationsHandler.pushError(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
-            pushForCurrentRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
+            pushForCurrentRoute : function (mensagem, type, interpolateParams, layout, timeout, otherProperties) {
                 return notificationsHandler.pushForCurrentRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
-            pushForNextRoute : function (mensagem, type, interpolateParams,  layout, timeout, otherProperties) {
+            pushForNextRoute : function (mensagem, type, interpolateParams, layout, timeout, otherProperties) {
                 return notificationsHandler.pushForNextRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
+            },
+            pushCompletarCadastro : function (mensagem, interpolateParams, callback, item) {
+                var type = "information";
+                var layout = "topRight";
+                var timeout = 3000;
+                var properties = {
+                    callback : callback,
+                    item : item
+                };
+                return notificationsHandler.pushCompletarCadastro(prepareNotification(mensagem, type, layout, timeout, interpolateParams, properties));
             }
         };
 

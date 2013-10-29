@@ -16,10 +16,10 @@ public class Responsavel extends AbstractBaseEntity implements Serializable {
 
     private static final long serialVersionUID = -4486187479124482772L;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Pessoa pessoa;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Setor setor;
 
     public Pessoa getPessoa () {

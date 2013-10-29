@@ -22,8 +22,9 @@ angular.module('lawyer.pessoas', [
         });
     }])
 
-    .controller('PessoaController', ['$scope', 'pessoas', function ($scope, pessoas) {
+    .controller('PessoaController', ['$scope', 'pessoas', '$rootScope', function ($scope, pessoas, $rootScope) {
         $scope.pessoas = pessoas;
+
     }])
 
 ;

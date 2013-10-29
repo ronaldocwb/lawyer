@@ -1,5 +1,5 @@
 angular.module('lawyer.noty', [])
-    .directive("noty", function () {
+    .directive("noty", ['$rootScope', '$timeout', function ($rootScope, $timeout) {
 
         $.noty.defaults.layout = "top";
         $.noty.defaults.timeout = 3000;
@@ -13,33 +13,65 @@ angular.module('lawyer.noty', [])
             restrict: "A",
             replace : false,
 
-            link: function (scope, elem, attrs) {
+            link: function (scope) {
+
+                scope.$on('noty.add.completar.cadastro', function (event, notification) {
+                    event.preventDefault();
+                    scope.addCompletarNotification(angular.extend(notification));
+                });
 
                 scope.$on('noty.close.route.notifications', function () {
+                    event.preventDefault();
                     scope.closeForRoute();
 
                 });
                 scope.$on('noty.add.notifications', function (event, notifications) {
+                    event.preventDefault();
                     scope.addAll(notifications);
 
                 });
                 scope.$on('noty.add.sticky.notification', function (event, notification) {
+                    event.preventDefault();
                     notification.timeout = false;
                     scope.add(angular.extend(notification));
                 });
 
                 scope.$on('noty.add.notification', function (event, notification) {
+                    event.preventDefault();
                     scope.add(angular.extend(notification));
                 });
 
                 scope.$on('noty.add.error.notification', function (event, notification) {
+                    event.preventDefault();
                     notification.timeout = false;
                     scope.addError(angular.extend(notification));
                 });
 
                 scope.add = function (notification) {
+                    event.preventDefault();
                     var box = noty(notification);
                     angular.noop(box.options.timeout === false ? doNotCloseNotifications.push(box.options.id) : canCloseNotifications.push(box.options.id));
+                };
+
+                scope.addCompletarNotification = function (notification) {
+                    var buttons = [
+                        {
+                            addClass: 'btn btn-success', text: 'Completar Cadastro', onClick: function ($noty) {
+                                event.preventDefault();
+                                $noty.close();
+                                scope.emitCompletarCallback(notification);
+                            }
+                        }
+                    ];
+                    notification.buttons = buttons;
+                    var box = noty(notification);
+                    $timeout(function () {
+                        $.noty.close(box.options.id);
+                    }, notification.timeout);
+                };
+
+                scope.emitCompletarCallback = function (notification) {
+                    $rootScope.$broadcast(notification.callback, notification.item);
                 };
 
                 scope.addError = function (notification) {
@@ -82,5 +114,5 @@ angular.module('lawyer.noty', [])
                 };
             }
         };
-    })
+    }])
 ;

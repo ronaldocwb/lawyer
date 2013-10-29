@@ -37,6 +37,10 @@ angular.module('services.notificationsHandler', [ ])
 
             pushForNextRoute: function (notification) {
                 addNotification(notifications.ROUTE_NEXT, notification);
+            },
+
+            pushCompletarCadastro: function (notification) {
+                $rootScope.$broadcast('noty.add.completar.cadastro', notification);
             }
 
         };

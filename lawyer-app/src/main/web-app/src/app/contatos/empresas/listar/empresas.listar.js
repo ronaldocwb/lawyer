@@ -54,7 +54,7 @@ angular.module('lawyer.empresas.listar', [
                 });
 
                 modalInstance.result.then(function () {
-                    Empresa.remove({id: empresa.uid}, empresa, function () {
+                    Empresa.remove(empresa, function () {
                         notifications.pushForCurrentRoute('empresa.apagada', 'success', {nome : empresa.nomeFantasia});
                         $scope.empresas.content.splice($scope.empresas.content.indexOf(empresa), 1);
                         if ($scope.originalResultSet) {

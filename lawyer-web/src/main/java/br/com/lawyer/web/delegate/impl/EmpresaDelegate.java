@@ -40,6 +40,7 @@ public class EmpresaDelegate extends BaseDelegate<Empresa, EmpresaVO> implements
         empresaService.delete(uid);
     }
 
+    @Transactional
     @Override
     public EmpresaVO atualizar (EmpresaVO empresaVO, String uid) {
         Empresa empresa = empresaService.save(empresaVO.parse());
