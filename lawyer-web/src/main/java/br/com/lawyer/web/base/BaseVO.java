@@ -3,9 +3,11 @@ package br.com.lawyer.web.base;
 
 import br.com.lawyer.core.exception.ParseEntityToVOException;
 import br.com.lawyer.core.exception.ParseVOToEntityException;
+import br.com.lawyer.web.annotation.IgnoreVOParser;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.LazyInitializationException;
+import org.jboss.logging.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.*;
@@ -17,6 +19,8 @@ import java.util.List;
  * @since: 10/09/13
  */
 public abstract class BaseVO<T> implements Serializable {
+
+    private static final Logger log = Logger.getLogger(BaseVO.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -119,6 +123,11 @@ public abstract class BaseVO<T> implements Serializable {
                 continue;
             }
 
+            // Ignora campos que não devem ir para a entidade ou que não existem na entidade
+            if (field.isAnnotationPresent(IgnoreVOParser.class)) {
+                continue;
+            }
+
             field.setAccessible(true);
             Object value;
 
@@ -144,7 +153,11 @@ public abstract class BaseVO<T> implements Serializable {
                 } catch (InvocationTargetException e) {
                     throw new ParseVOToEntityException(e);
                 } catch (NoSuchMethodException e) {
-                    throw new ParseVOToEntityException(e);
+                    String error = (String.format("Entidade %s não possui o campo %s para parse. " +
+                            "Considere usar a anotação %s no campos para descartá-la ou verifique " +
+                            "se ela bate com o campo na entidade.",
+                            object.getClass().toString(), field.getName(), IgnoreVOParser.class.toString()));
+                    throw new ParseVOToEntityException(error, e);
                 }
             }
         }
