@@ -5,8 +5,6 @@ import br.com.lawyer.web.exception.RestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,7 +29,6 @@ public class ExceptionHandlerController {
     public @ResponseBody RestException handleException(Exception e) {
         RestException restException = new RestException();
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         restException.setInfo(e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
@@ -96,7 +93,7 @@ public class ExceptionHandlerController {
 
         restException.setClazz(e.getClass().getSimpleName());
         restException.setCause(e.getCause().toString());
-        restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
+        restException.setInfo("NullPointerException - " + e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
         e.printStackTrace();
@@ -112,7 +109,7 @@ public class ExceptionHandlerController {
 
         restException.setClazz(e.getClass().getSimpleName());
         restException.setCause(e.getCause().toString());
-        restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
+        restException.setInfo("HttpRequestMethodNotSupportedException Exception - " + e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
         e.printStackTrace();
@@ -128,7 +125,7 @@ public class ExceptionHandlerController {
 
         restException.setClazz(e.getClass().getSimpleName());
         restException.setCause(e.getCause().toString());
-        restException.setInfo("BadCredentialsException Exception - " + e.getLocalizedMessage());
+        restException.setInfo("Throwable Exception - " + e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 
         e.printStackTrace();
