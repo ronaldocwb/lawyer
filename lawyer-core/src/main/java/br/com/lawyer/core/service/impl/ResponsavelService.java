@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import static br.com.lawyer.core.repository.specifications.ResponsavelSpecification.PESSOA;
-
 /**
  * @author Deividi
  * @since 22/10/2013
@@ -36,11 +34,6 @@ public class ResponsavelService extends BaseService<String, Responsavel, IRespon
             throw new BusinessException("Busca deve informar o tipo: pessoa ou empresa");
         }
         if (StringUtils.isNotBlank(field)) {
-            if (field.equals(PESSOA)) {
-                //result = getRepository().findAll(queryResponsavelPorNomePessoaLike(query), pageRequest);
-            } else {
-                //result = getRepository().findAll(queryResponsavelPorNomeEmpresaLike(query), pageRequest);
-            }
         } else {
             result = getRepository().findAll(pageRequest);
         }
