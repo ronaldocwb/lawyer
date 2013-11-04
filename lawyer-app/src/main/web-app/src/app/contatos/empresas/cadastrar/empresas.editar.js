@@ -129,6 +129,7 @@ angular.module('lawyer.empresas.edicao', [
                 };
                 Setor.save(setor, function (setor) {
                     $scope.empresa.responsaveis[$index].setor = setor;
+                    notifications.pushForCurrentRoute('setor.criado', 'success', { nome: name});
                 });
             };
         }])

@@ -40,7 +40,7 @@ angular.module('lawyer', [
     .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/painel');
 
-        $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+        $httpProvider.interceptors.push(['$q', '$location', 'notifications', function ($q, $location, notifications) {
             return {
                 'responseError': function(rejection) {
                     if (rejection.status === 401 || rejection.status === 403) {
@@ -48,6 +48,7 @@ angular.module('lawyer', [
                         return $q.reject(rejection);
                     }
                     else {
+                        notifications.pushForCurrentRoute('tretas', 'warning');
                         return $q.reject(rejection);
                     }
                 }

@@ -115,8 +115,6 @@ angular.module('lawyer.pessoas.cadastro', [
                     }
                     // se atualizou a pessoa, ela existe e vamos substituir no array de responsaveis para a alteração ficar visivel na tela, e mostramos uma notificação de OK.
                     $scope.pessoa.empresa = empresaAtualizada;
-                    $log.debug($scope.pessoa.empresa, empresaAtualizada);
-                    notifications.pushForCurrentRoute('empresa.alterada', 'success', { nome: empresaAtualizada.nome});
                 });
             };
 

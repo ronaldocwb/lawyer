@@ -22,5 +22,7 @@ angular.module('i18n.Constants', [])
         'advogado.salva.erro': "Ocorreu um erro ao salvar o advogado <strong>{{nome}}</strong>. =(",
         'advogado.alterada': "O advogado com nome <strong>{{nome}}</strong> foi alterada!",
         'advogado.apagada': "O advogado com nome <strong>{{nome}}</strong> foi apagado",
-        'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>..."
+        'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>...",
+        'setor.criado' : "O setor <strong>{{nome}}</strong> foi criado.",
+        'tretas' : "Erro no servidor niggaz... TRETAS!"
     });
