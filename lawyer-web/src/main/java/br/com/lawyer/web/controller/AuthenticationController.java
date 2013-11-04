@@ -1,5 +1,6 @@
 package br.com.lawyer.web.controller;
 
+import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.delegate.IUsuarioDelegate;
 import br.com.lawyer.web.vo.UsuarioVO;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,8 @@ public class AuthenticationController {
     @RequestMapping(value = "/auth/authenticate", method = RequestMethod.POST)
     public ResponseEntity<UsuarioVO> autenticaUsuario(@RequestBody UsuarioVO usuarioVO) throws BusinessException {
         UsuarioVO autenticacao = usuarioDelegate.authenticate(usuarioVO, authenticationManager);
+        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        autenticacao.setToken(token.getToken());
         return new ResponseEntity<>(autenticacao, HttpStatus.OK);
     }
 

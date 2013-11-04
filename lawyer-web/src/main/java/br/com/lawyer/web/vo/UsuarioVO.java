@@ -13,6 +13,7 @@ public class UsuarioVO extends BaseVO<Usuario> {
 
     private String email;
 
+    @IgnoreVOParser
     private String token;
 
     private List<Permissao> permissoes;
@@ -64,10 +65,12 @@ public class UsuarioVO extends BaseVO<Usuario> {
         this.permissoes = permissoes;
     }
 
+    @JsonIgnore
     public String getNovaSenha () {
         return novaSenha;
     }
 
+    @JsonProperty
     public void setNovaSenha (String novaSenha) {
         this.novaSenha = novaSenha;
     }

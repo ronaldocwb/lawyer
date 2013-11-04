@@ -1,13 +1,35 @@
-<span data-ng-bind="usuario.email"></span>
-<h2>Alterar Senha</h2>
-<form name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
-    <label>Senha atual:</label>
-    <input type="password" ng-required="true" data-ng-model="user.senha" name="senha">
-    <label>Nova senha:</label>
-    <input type="password" ng-required="true" data-ng-model="user.novaSenha" name="novaSenha" >
-    <label>Confirme a nova senha:</label>
-    <input type="password" data-ng-model="user.confirmaNovaSenha" ng-required="true" name="confirmaNovaSenha">
-    <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid ">Alterar Senha</button>
-</form>
+<div class="row-fluid">
+    <div class="span2">
+        <ul class="nav nav-list">
+            <li class="nav-header">
+                Minha Conta
+            </li>
+            <li class="active">
+                <a href="#">Alterar Senha</a>
+            </li>
+            <li>
+                <a href="#/empresas">Empresas</a>
+                <a href="#/areasAtuacao">Áreas de Atuação</a>
+            </li>
+        </ul>
+    </div>
+    <div class="span6">
+        <span data-ng-bind="usuario.email"></span>
 
+        <h2>Alterar Senha</h2>
+
+        <form name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
+            <label>Senha atual:</label>
+            <input type="password" ng-required="true" data-ng-model="user.senha" name="senha" id="senha">
+            <label>Nova senha:</label>
+            <input type="password" ng-required="true" data-ng-model="user.novaSenha" name="novaSenha" >
+            <label>Confirme a nova senha:</label>
+            <input type="password" data-ng-model="user.confirmaNovaSenha" ng-required="true" name="confirmaNovaSenha"
+                   ui-validate=" '$value===user.novaSenha' "
+                   ui-validate-watch=" 'user.novaSenha' ">
+            <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid">Alterar Senha
+            </button>
+        </form>
         <span data-ng-repeat="mensagem in mensagens"> {{mensagem}} <br></span>
+    </div>
+</div>

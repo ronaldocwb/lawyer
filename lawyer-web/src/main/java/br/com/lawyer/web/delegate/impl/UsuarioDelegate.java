@@ -27,9 +27,7 @@ public class UsuarioDelegate extends BaseDelegate<Usuario, UsuarioVO> implements
      */
     @Override
     public UsuarioVO authenticate (UsuarioVO usuarioVO, AuthenticationManager manager) throws BusinessException {
-
         Usuario usuario = usuarioService.authenticate(usuarioVO.parse(), manager);
-
         return getVO(usuario);
     }
 
@@ -64,6 +62,18 @@ public class UsuarioDelegate extends BaseDelegate<Usuario, UsuarioVO> implements
     @Override
     public UsuarioVO findOne (String uid) {
         Usuario usuario = usuarioService.findOne(uid);
+        return getVO(usuario);
+    }
+
+    @Override
+    public UsuarioVO getUsuarioAtual () throws BusinessException {
+        Usuario usuario = usuarioService.getUsuarioLogado();
+        return getVO(usuario);
+    }
+
+    @Override
+    public UsuarioVO updateSenha (UsuarioVO usuarioVO, String token, String novaSenha) throws BusinessException {
+        Usuario usuario = usuarioService.atualizarSenhaUsuario(usuarioVO.parse(), token, novaSenha);
         return getVO(usuario);
     }
 

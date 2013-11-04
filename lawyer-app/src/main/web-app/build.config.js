@@ -39,6 +39,7 @@ module.exports = {
             'vendor/angular-ui-router/release/angular-ui-router.js',
             'vendor/angular-ui-utils/modules/route/route.js',
             'vendor/angular-ui-utils/modules/mask/mask.js',
+            'vendor/angular-ui-utils/modules/validate/validate.js',
             'vendor/jquery/jquery.min.js',
             'vendor/noty/js/noty/jquery.noty.js',
             'vendor/noty/js/noty/layouts/top.js',

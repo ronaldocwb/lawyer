@@ -16,7 +16,12 @@ public interface IUsuarioDelegate {
 
     void deletar (String uid);
 
-    UsuarioVO update (UsuarioVO uid, String s) throws BusinessException;
+    UsuarioVO update (UsuarioVO usuarioVO, String uid) throws BusinessException;
 
     UsuarioVO findOne (String uid);
+
+    UsuarioVO getUsuarioAtual () throws BusinessException;
+
+
+    UsuarioVO updateSenha (UsuarioVO usuarioVO, String uid, String novaSenha) throws BusinessException;
 }

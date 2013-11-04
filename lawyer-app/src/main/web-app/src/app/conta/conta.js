@@ -1,5 +1,6 @@
 angular.module('lawyer.configuracoes.conta', [
-        'lawyer.Usuario'
+        'lawyer.Usuario',
+        'ui.validate'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -19,8 +20,9 @@ angular.module('lawyer.configuracoes.conta', [
         });
     }])
 
-    .controller('ContaController', ['$scope', 'Usuario', 'usuario',
-        function ($scope, Usuario, usuario) {
+    .controller('ContaController', ['$scope', 'Usuario', 'usuario', '$log',
+        function ($scope, Usuario, usuario, $log) {
+            console.log(usuario);
             $scope.usuario = usuario;
             $scope.user = {
                 novaSenha : null,
@@ -30,14 +32,20 @@ angular.module('lawyer.configuracoes.conta', [
 
             $scope.alterar = function (alterarSenhaForm) {
                 $scope.mensagens = [];
-                if ($scope.user.senha !== $scope.usuario.senha) {
-                    $scope.mensagens.push("Senha incorreta.");
-                }
                 if ($scope.user.novaSenha !== $scope.user.confirmaNovaSenha) {
                     $scope.mensagens.push("Senhas não conferem.");
+                    $("#novaSenha").focus();
                 }
-                if ($scope.user.novaSenha !== $scope.user.senha) {
-                    $scope.mensagens.push("Senhas iguais.");
+                if ($scope.user.novaSenha === $scope.user.senha) {
+                    $scope.mensagens.push("Senhas devem ser diferentes.");
+                    $("#senha").focus();
+                }
+                if ($scope.mensagens.length === 0) {
+                    $scope.usuario.senha = $scope.user.senha;
+                    $scope.usuario.novaSenha = $scope.user.novaSenha;
+                    Usuario.updateSenha($scope.usuario, function () {
+                        $log.debug('usuario atualizado!');
+                    });
                 }
             };
         }])

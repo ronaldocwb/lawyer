@@ -1,5 +1,8 @@
 package br.com.lawyer.core.base;
 
+import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
+import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.exception.BusinessException;
 import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
 import org.springframework.data.domain.Page;
@@ -65,5 +68,9 @@ public interface IBaseService<ID extends Serializable, T extends IUID<ID>, D ext
     public List<T> findAll (Specification<T> spec, Sort sort);
 
     public long count (Specification<T> spec);
+
+    public Usuario getUsuarioLogado() throws BusinessException;
+
+    public LawyerAuthenticationToken getCredenciais() throws BusinessException;
 
 }

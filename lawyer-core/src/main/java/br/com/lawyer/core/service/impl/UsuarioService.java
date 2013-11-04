@@ -11,6 +11,7 @@ import br.com.lawyer.core.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -90,5 +91,36 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
         return null;
     }
 
+    @Override
+    public Usuario atualizarSenhaUsuario (Usuario usuario, String token, String novaSenha) throws AuthenticationException, BusinessException {
+        LawyerAuthenticationToken auth = getCredenciais();
 
+        if (LawyerStringUtils.isBlank(novaSenha)) {
+            throw new BusinessException("Senha não pode ser em branco.");
+        }
+
+        if (usuario == null) {
+            throw new BusinessException("Usuário deve ser informado.");
+        }
+
+        if (!usuario.getEmail().equals(auth.getUsuario().getEmail()) || !token.equals(auth.getToken())) {
+            throw new BusinessException("Credenciais inválidas");
+        }
+        String oldPassword = PasswordEncoder.encodePassword(usuario.getSenha(), auth.getUsuario().getEmail());
+
+        if (!oldPassword.equals(auth.getUsuario().getSenha())) {
+            throw new BusinessException("Senha atual incorreta.");
+        }
+
+        String password = PasswordEncoder.encodePassword(novaSenha, auth.getUsuario().getEmail());
+
+        if (password.equals(auth.getUsuario().getSenha())) {
+            throw new BusinessException("Senha é igual a anterior.");
+        }
+
+        auth.getUsuario().setSenha(password);
+        getRepository().save(auth.getUsuario());
+
+        return auth.getUsuario();
+    }
 }

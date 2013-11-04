@@ -74,6 +74,7 @@ public class LawyerAuthenticationToken extends AbstractAuthenticationToken {
         this.principal = principal;
         this.credentials = credentials;
         this.usuario = usuario;
+        this.token = token;
         super.setAuthenticated(true); // must use super, as we override
     }
 

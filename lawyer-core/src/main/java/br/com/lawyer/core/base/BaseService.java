@@ -180,7 +180,8 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
         return getRepository().count(spec);
     }
 
-    protected Usuario getUsuarioLogado() throws BusinessException {
+    @Override
+    public Usuario getUsuarioLogado() throws BusinessException {
         LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
             throw new BusinessException("Usuario nao encontrado na autenticação.");
@@ -188,7 +189,8 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
         return token.getUsuario();
     }
 
-    protected LawyerAuthenticationToken getCredenciais() throws BusinessException {
+    @Override
+    public LawyerAuthenticationToken getCredenciais() throws BusinessException {
         LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         if (token == null || token.getCredentials() == null) {
             throw new BusinessException("Usuario nao encontrado na autenticação.");
