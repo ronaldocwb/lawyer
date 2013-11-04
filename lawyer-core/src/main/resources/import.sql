@@ -31,3 +31,8 @@ INSERT INTO public.empresa (uid, cnpj, nomefantasia, razaosocial) VALUES ('7231a
 INSERT INTO public.pessoa (uid, identificacao, tipoidentificacao, email, nome, empresa_uid) VALUES ('22807067-9770-4ab6-b631-40d08eacfbac', '04330357909', 0, null, 'Deividi Cavarzan', '0a91a8b8-0d49-4638-9dd4-2a3c6ff17409');
 INSERT INTO public.pessoa (uid, identificacao, tipoidentificacao, email, nome, empresa_uid) VALUES ('42117a72-fee2-46fc-ab2a-fc624b0c3ffb', '5452826963', 1, null, 'Ronaldo Campos', '53c68bd8-aa4c-4f84-a687-013549106e5b');
 INSERT INTO public.pessoa_emails (pessoa_uid, value) VALUES ('42117a72-fee2-46fc-ab2a-fc624b0c3ffb', 'ronaldocwb@gmail.com');
+
+INSERT INTO public.setor (uid, nome) VALUES ('215cae92-a3eb-4a5d-a3a9-3b2b239700c1', 'Diretoria');
+INSERT INTO public.setor (uid, nome) VALUES ('f2b2c7fa-641c-43b3-9caa-3e01746af7c7', 'Financeiro');
+
+
