@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,12 +30,8 @@ public class LembreteDelegate extends BaseDelegate<Lembrete, LembreteVO> impleme
     }
 
     @Override
-    public void deletar (Iterable<LembreteVO> lembretesVO) {
-        List<Lembrete> lembretes = new ArrayList<>();
-        for (LembreteVO vo : lembretesVO) {
-            lembretes.add(vo.parse());
-        }
-        lembreteService.deleteInBatch(lembretes);
+    public void deletar (LembreteVO lembretesVO) {
+        lembreteService.delete(lembretesVO.parse());
     }
 
     @Override
@@ -49,5 +44,10 @@ public class LembreteDelegate extends BaseDelegate<Lembrete, LembreteVO> impleme
     public LembreteVO atualizar (LembreteVO lembreteVO) throws BusinessException {
         Lembrete lembrete = lembreteService.salvar(lembreteVO.parse());
         return getVO(lembrete);
+    }
+
+    @Override
+    public void deletarTodos () throws BusinessException {
+        lembreteService.deleteTodos();
     }
 }

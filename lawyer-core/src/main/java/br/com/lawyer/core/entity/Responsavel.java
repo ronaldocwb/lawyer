@@ -14,8 +14,6 @@ import java.io.Serializable;
 @Entity
 public class Responsavel extends AbstractBaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -4486187479124482772L;
-
     @ManyToOne(optional = true)
     private Pessoa pessoa;
 

@@ -42,9 +42,9 @@ public class LembreteController {
     }
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
-    @RequestMapping(value = "/lembretes/batch", method = RequestMethod.POST)
-    public ResponseEntity excluirBatch(@RequestBody List<LembreteVO> lembretes) {
-        lembreteDelegate.deletar(lembretes);
+    @RequestMapping(value = "/lembretes/all", method = RequestMethod.DELETE)
+    public ResponseEntity excluirBatch() throws BusinessException {
+        lembreteDelegate.deletarTodos();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

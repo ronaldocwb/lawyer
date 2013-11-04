@@ -49,9 +49,6 @@ angular.module('lawyer.lembretes', [
             Lembrete.removeAll();
         };
 
-//        $scope.clearFinished = function () {
-//            Lembrete.removeBatch();
-//        };
     }])
 ;
 

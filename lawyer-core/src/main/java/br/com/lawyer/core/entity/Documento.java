@@ -11,8 +11,6 @@ import java.io.Serializable;
 @Embeddable
 public class Documento implements Serializable {
 
-    private static final long serialVersionUID = 9020556663256241017L;
-
     @Enumerated (EnumType.ORDINAL)
     private TipoDocumento tipoIdentificacao;
 

@@ -3,12 +3,9 @@ package br.com.lawyer.core.entity;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Advogado extends AbstractBaseEntity implements Serializable {
-
-    private static final long serialVersionUID = 8860808843851913915L;
+public class Advogado extends AbstractBaseEntity {
 
     @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Pessoa pessoa;

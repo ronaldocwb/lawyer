@@ -10,8 +10,8 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http', 'Pessoa', '$modal',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http, Pessoa, $modal) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http', 'Pessoa', '$modal', 'Setor',
+        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http, Pessoa, $modal, Setor) {
             $scope.tela = {
                 cadastro : false,
                 edicao : true
@@ -114,6 +114,22 @@ angular.module('lawyer.empresas.edicao', [
                     .then(function (result) {
                         return result.data.content;
                     });
+            };
+
+            $scope.getSetores = function () {
+                return $http.get('/lawyer/api/setores')
+                    .then(function (result) {
+                        return result.data;
+                    });
+            };
+
+            $scope.addSetor = function (name, $index) {
+                var setor = {
+                    nome : name
+                };
+                Setor.save(setor, function (setor) {
+                    $scope.empresa.responsaveis[$index].setor = setor;
+                });
             };
         }])
 ;

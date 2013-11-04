@@ -3,14 +3,11 @@ package br.com.lawyer.core.entity;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Contrato extends AbstractBaseEntity implements Serializable {
-
-    private static final long serialVersionUID = -1345510489899638668L;
+public class Contrato extends AbstractBaseEntity {
 
     @Column (length = 200)
     private String nome;
@@ -20,7 +17,6 @@ public class Contrato extends AbstractBaseEntity implements Serializable {
 
     @ElementCollection (fetch = FetchType.EAGER)
     private List<ConvencaoHonorarios> convencaoHonorarios;
-
 
     public String getNome () {
         return nome;

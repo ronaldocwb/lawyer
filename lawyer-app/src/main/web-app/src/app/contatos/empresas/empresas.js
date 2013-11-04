@@ -2,7 +2,8 @@ angular.module('lawyer.empresas', [
         'lawyer.Empresa',
         'lawyer.Municipio',
         'lawyer.Responsavel',
-        'lawyer.Pessoa'
+        'lawyer.Pessoa',
+        'lawyer.Setor'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {

@@ -9,8 +9,8 @@ angular.module('lawyer.empresas.cadastro', [
         });
     }])
 
-    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal',
-        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa, $modal) {
+    .controller('EmpresaCadastroController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal', 'Setor',
+        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa, $modal, Setor) {
             $scope.tela = {
                 cadastro : true,
                 edicao : false
@@ -67,6 +67,22 @@ angular.module('lawyer.empresas.cadastro', [
                     .then(function (result) {
                         return result.data.content;
                     });
+            };
+
+            $scope.getSetores = function () {
+                return $http.get('/lawyer/api/setores')
+                    .then(function (result) {
+                        return result.data;
+                    });
+            };
+
+            $scope.addSetor = function (name, $index) {
+                var setor = {
+                    nome : name
+                };
+                Setor.save(setor, function (setor) {
+                    $scope.empresa.responsaveis[$index].setor = setor;
+                });
             };
 
             $scope.addPessoa = function (name, $index) {

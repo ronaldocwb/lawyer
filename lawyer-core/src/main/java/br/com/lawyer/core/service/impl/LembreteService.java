@@ -2,6 +2,7 @@ package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Lembrete;
+import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.ILembreteRepository;
 import br.com.lawyer.core.service.ILembreteService;
@@ -35,6 +36,12 @@ public class LembreteService extends BaseService<String, Lembrete, ILembreteRepo
     public Lembrete salvar (Lembrete lembrete) throws BusinessException {
         lembrete.setUsuario(super.getUsuarioLogado());
         return getRepository().save(lembrete);
+    }
+
+    @Override
+    public void deleteTodos () throws BusinessException {
+        Usuario usuario = getUsuarioLogado();
+        getRepository().deletarTodosLembretesUsuario(usuario.getUid());
     }
 
 }

@@ -6,16 +6,13 @@ import br.com.lawyer.core.entity.enumerated.TipoAcesso;
 import br.com.lawyer.core.entity.enumerated.TipoProcesso;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Assunto extends AbstractBaseEntity implements Serializable {
-
-    private static final long serialVersionUID = 6794154357961752625L;
+public class Assunto extends AbstractBaseEntity {
 
     @ManyToOne
     private Empresa cliente;
@@ -31,6 +28,7 @@ public class Assunto extends AbstractBaseEntity implements Serializable {
 
     @ManyToOne
     private AreaAtuacao areaAtuacao;
+
 
     @ManyToOne
     @JoinColumn (name = "uuid_adv_responsavel")

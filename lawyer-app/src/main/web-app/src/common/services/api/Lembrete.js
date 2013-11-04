@@ -3,9 +3,9 @@ angular.module('lawyer.Lembrete', [
     ])
 
     .factory('Lembrete', function ($resource) {
-        return $resource('/lawyer/api/lembretes/:uid/:batch', {uid: '@uid'}, {
+        return $resource('/lawyer/api/lembretes/:uid/:all', {uid: '@uid'}, {
             update  : { method: 'PUT' },
-            removeBatch : { params : {batch : 'batch'}, method: 'POST', isArray:true}
+            removeAll : { params : {all : 'all'}, method: 'DELETE'}
         });
     })
 ;

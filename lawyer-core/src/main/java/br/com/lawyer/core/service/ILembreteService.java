@@ -16,4 +16,7 @@ public interface ILembreteService extends IBaseService<String, Lembrete, ILembre
 
     Lembrete salvar (Lembrete parse) throws BusinessException;
 
+    void deleteTodos () throws BusinessException;
+
+
 }

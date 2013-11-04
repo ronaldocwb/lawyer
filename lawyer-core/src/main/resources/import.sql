@@ -9,8 +9,9 @@ insert into estado values (25, 1, 'SÃO PAULO', 'SP', 1);
 
 insert into municipio values (2853, 16, 'CURITIBA', 16);
 
+INSERT INTO public.advocacia (uid, nome) VALUES ('1', 'Saul Law Corp.');
 -- Usuário padrao e permissões
-INSERT INTO usuario (uid, email, senha) VALUES ('1', 'developer@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723');
+INSERT INTO usuario (uid, email, senha, advocacia_uid) VALUES ('1', 'developer@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723', '1');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'ADMIN');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'MANAGER');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'LAWYER');

@@ -4,19 +4,19 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Usuario extends AbstractBaseEntity implements Serializable {
-
-    private static final long serialVersionUID = -3038405341454481689L;
+public class Usuario extends AbstractBaseEntity {
 
     @Column (length = 200)
     private String email;
 
     @Column (length = 128)
     private String senha;
+
+    @ManyToOne
+    private Advocacia advocacia;
 
     @ElementCollection (fetch = FetchType.EAGER, targetClass = Permissao.class)
     @Enumerated (value = EnumType.STRING)
@@ -47,4 +47,11 @@ public class Usuario extends AbstractBaseEntity implements Serializable {
         this.permissoes = permissoes;
     }
 
+    public Advocacia getAdvocacia () {
+        return advocacia;
+    }
+
+    public void setAdvocacia (Advocacia advocacia) {
+        this.advocacia = advocacia;
+    }
 }

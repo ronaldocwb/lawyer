@@ -9,6 +9,7 @@
 
         <class>br.com.lawyer.core.entity.Usuario</class>
 
+        <class>br.com.lawyer.core.entity.Advocacia</class>
         <class>br.com.lawyer.core.entity.Advogado</class>
         <class>br.com.lawyer.core.entity.AreaAtuacao</class>
         <class>br.com.lawyer.core.entity.Assunto</class>

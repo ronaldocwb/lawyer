@@ -13,10 +13,12 @@ public interface ILembreteDelegate {
 
     LembreteVO salvar (LembreteVO lembreteVO) throws BusinessException;
 
-    void deletar (Iterable<LembreteVO> lembretes);
+    void deletar (LembreteVO lembrete);
 
     List<LembreteVO> findAll () throws BusinessException;
 
     LembreteVO atualizar (LembreteVO lembrete) throws BusinessException;
+
+    void deletarTodos () throws BusinessException;
 
 }

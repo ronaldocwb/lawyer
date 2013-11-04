@@ -1,6 +1,5 @@
 package br.com.lawyer.core.entity;
 
-import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
@@ -15,9 +14,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Empresa extends AbstractBaseEntity implements IUID<String> {
-
-    private static final long serialVersionUID = 7794118770747818132L;
+public class Empresa extends AbstractBaseEntity {
 
     @Column (length = 120)
     private String razaoSocial;
@@ -89,10 +86,6 @@ public class Empresa extends AbstractBaseEntity implements IUID<String> {
 
     public void setResponsaveis (List<Responsavel> responsaveis) {
         this.responsaveis = responsaveis;
-    }
-
-    public static long getSerialVersionUID () {
-        return serialVersionUID;
     }
 
     public List<Email> getEmails () {

@@ -57,12 +57,21 @@
                 <div data-ng-repeat="responsavel in empresa.responsaveis" data-ng-hide="empresa.responsaveis.length == 0"
                      class="controls">
                     <br>
+                    <label for="responsavel">Nome:</label>
                     <input name="responsavel" id="responsavel" class="x-large" type="text"
                            ng-model="responsavel.pessoa"
                            typeahead-on-add="addPessoa($item, $index, responsavel)"
                            typeahead-editable="false"
                            typeahead-on-select="onSelectPessoa(responsavel.pessoa, $index)"
                            typeahead-lawyer="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>
+
+                    <label for="setor">Setor:</label>
+                    <input name="setor" id="setor" class="x-large" type="text"
+                           ng-model="responsavel.setor"
+                           typeahead-on-add="addSetor($item, $index, responsavel)"
+                           typeahead-editable="false"
+                           typeahead-on-select="onSelectSetor(responsavel.setor, $index)"
+                           typeahead-lawyer="setor as setor.nome for setor in getSetores($viewValue)"/>
                         <button type="button" class="btn btn-info" data-ng-click="remove('responsaveis', $index)"><i
                                 class="icon-trash icon-white"></i></button>
                     <hr>

@@ -5,12 +5,10 @@ import br.com.lawyer.core.base.IUID;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
-import java.io.Serializable;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class AbstractBaseEntity implements Serializable, IUID<String> {
-    private static final long serialVersionUID = 1L;
+public abstract class AbstractBaseEntity implements IUID<String> {
 
     @Id
     private String uid;

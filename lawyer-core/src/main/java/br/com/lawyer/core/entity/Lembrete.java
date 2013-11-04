@@ -1,6 +1,5 @@
 package br.com.lawyer.core.entity;
 
-import br.com.lawyer.core.base.IUID;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 import javax.persistence.Column;
@@ -12,9 +11,7 @@ import javax.persistence.ManyToOne;
  * @since 22/10/2013
  */
 @Entity
-public class Lembrete extends AbstractBaseEntity implements IUID<String> {
-
-    private static final long serialVersionUID = 7794118770747818132L;
+public class Lembrete extends AbstractBaseEntity {
 
     @ManyToOne
     private Usuario usuario;
