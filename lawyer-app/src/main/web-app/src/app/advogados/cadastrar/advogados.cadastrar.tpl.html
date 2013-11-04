@@ -36,22 +36,23 @@
         </div>
         <div class="control-group">
             <label class="control-label">Telefones:</label>
-
-            <div class="controls">
-                <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
-                        class="icon-plus-sign icon-white"></i></button>
-            </div>
-            <div data-ng-repeat="telefone in advogado.pessoa.telefones" data-ng-hide="advogado.pessoa.telefones.length == 0"
-                 class="controls fadeInLeft">
-                <br>
-
-                <div class="input-append">
-                    <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
-                    <button type="button" class="btn btn-info" data-ng-click="remove('telefones',$index)"><i
-                            class="icon-trash icon-white"></i></button>
+            <ng-form name="formTelefone">
+                <div class="controls">
+                    <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
+                            class="icon-plus-sign icon-white"></i></button>
                 </div>
-                <hr>
-            </div>
+                <div data-ng-repeat="telefone in advogado.pessoa.telefones" data-ng-hide="advogado.pessoa.telefones.length == 0"
+                     class="controls fadeInLeft">
+                    <br>
+
+                    <div class="input-append">
+                        <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
+                        <button type="button" class="btn btn-info" data-ng-click="remove('telefones',$index)"><i
+                                class="icon-trash icon-white"></i></button>
+                    </div>
+                    <hr>
+                </div>
+            </ng-form>
         </div>
         <div class="control-group">
             <label class="control-label">Emails:</label>

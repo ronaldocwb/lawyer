@@ -22,7 +22,7 @@ public class AdvogadoController {
     private IAdvogadoDelegate advogadoDelegate;
 
     @RequestMapping (value = "/advogados", method = RequestMethod.GET)
-    public @ResponseBody Page list(
+    public @ResponseBody Page<AdvogadoVO> list(
                 @RequestParam (value = "q", required = false) String q,
                 @RequestParam (value = "page", defaultValue = "0", required = false) int page,
                 @RequestParam(value = "limit", defaultValue = "25", required = false) int limit) {
