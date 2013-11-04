@@ -33,5 +33,6 @@ angular.module('lawyer.controllers', [
     'lawyer.advogados.listar',
     'lawyer.advogados.cadastro',
     'lawyer.advogados.edicao',
-    'lawyer.configuracoes.advocacia'
+    'lawyer.configuracoes.advocacia',
+    'lawyer.configuracoes.conta'
 ]);

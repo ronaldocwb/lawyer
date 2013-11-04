@@ -8,6 +8,8 @@ insert into estado values (24, 1, 'SANTA CATARINA', 'SC', 1);
 insert into estado values (25, 1, 'SÃO PAULO', 'SP', 1);
 
 insert into municipio values (2853, 16, 'CURITIBA', 16);
+insert into municipio values (2854, 16, 'SÃO JOSÉ DOS PINHAIS', 16);
+insert into municipio values (2855, 25, 'SÃO PAULO', 25);
 
 INSERT INTO public.advocacia (uid, nome) VALUES ('1', 'Saul Law Corp.');
 -- Usuário padrao e permissões

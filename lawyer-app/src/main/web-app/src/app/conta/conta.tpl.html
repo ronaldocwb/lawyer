@@ -1,0 +1,13 @@
+<span data-ng-bind="usuario.email"></span>
+<h2>Alterar Senha</h2>
+<form name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
+    <label>Senha atual:</label>
+    <input type="password" ng-required="true" data-ng-model="user.senha" name="senha">
+    <label>Nova senha:</label>
+    <input type="password" ng-required="true" data-ng-model="user.novaSenha" name="novaSenha" >
+    <label>Confirme a nova senha:</label>
+    <input type="password" data-ng-model="user.confirmaNovaSenha" ng-required="true" name="confirmaNovaSenha">
+    <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid ">Alterar Senha</button>
+</form>
+
+        <span data-ng-repeat="mensagem in mensagens"> {{mensagem}} <br></span>
