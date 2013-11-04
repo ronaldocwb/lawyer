@@ -12,7 +12,9 @@ angular.module('lawyer.advogados.cadastro', [
     .controller('AdvogadoCadastroController', ['$scope', '$state', '$log', 'Advogado', 'Municipio', 'notifications', '$http', 'Empresa', '$modal',
         function ($scope, $state, $log, Advogado, Municipio, notifications, $http, Empresa, $modal) {
 
-            $scope.advogado = {
+            $scope.advogado = {};
+
+            $scope.advogado.pessoa = {
                 telefones : [],
                 emails : [],
                 enderecos : []
@@ -26,11 +28,11 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.cadastrar = function () {
                 $scope.advogado = Advogado.save($scope.advogado, function () {
-                    notifications.pushForNextRoute('advogado.salva', 'success', {nome : $scope.advogado.nome});
+                    notifications.pushForNextRoute('advogado.salva', 'success', {nome : $scope.advogado.pessoa.nome});
                     $scope.pushAdvogadoListagem();
                     $state.go('advogados.listar');
                 }, function () {
-                    notifications.pushForCurrentRoute('advogado.salva.erro', 'error', {nome : $scope.advogado.nome});
+                    notifications.pushForCurrentRoute('advogado.salva.erro', 'error', {nome : $scope.advogado.pessoa.nome});
                 });
             };
 
@@ -38,7 +40,9 @@ angular.module('lawyer.advogados.cadastro', [
                 $scope.advogado = Advogado.save($scope.advogado, function () {
                     notifications.pushForCurrentRoute('advogado.salva', 'success', {nome : $scope.advogado.nome});
                     $scope.pushAdvogadoListagem();
-                    $scope.advogado = {
+
+                    $scope.advogado = {};
+                    $scope.advogado.pessoa = {
                         telefones : [],
                         enderecos : [],
                         emails : []
@@ -49,11 +53,11 @@ angular.module('lawyer.advogados.cadastro', [
             };
 
             $scope.add = function (key) {
-                $scope.advogado[key].push({});
+                $scope.advogado.pessoa[key].push({});
             };
 
             $scope.remove = function (key, $index) {
-                $scope.advogado[key].splice($index, 1);
+                $scope.advogado.pessoa[key].splice($index, 1);
             };
 
 
@@ -72,12 +76,12 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.notification = {};
             $scope.addEmpresa = function ($item) {
-                $scope.advogado.empresa = {
+                $scope.advogado.pessoa.empresa = {
                     nomeFantasia : $item,
                     telefones : [],
                     enderecos : []
                 };
-                $scope.advogado.empresa = Empresa.save($scope.advogado.empresa, function () {
+                $scope.advogado.pessoa.empresa = Empresa.save($scope.advogado.empresa, function () {
                     $scope.notification = {
                         text : 'A empresa <b>' + $item + '</b> foi criada!'
                     };
@@ -91,14 +95,14 @@ angular.module('lawyer.advogados.cadastro', [
                     controller: 'EmpresaEdicaoController',
                     resolve: {
                         empresa: function () {
-                            return $scope.advogado.empresa;
+                            return $scope.advogado.pessoa.empresa;
                         }
                     }
                 });
 
                 $state.data.modal.result.then(function (editar) {
                     if (editar === true) {
-                        $state.data = $scope.advogado.empresa;
+                        $state.data = $scope.advogado.pessoa.empresa;
                     }
                 });
             };

@@ -12,19 +12,19 @@ angular.module('lawyer.advogados.edicao', [
     .controller('AdvogadoEdicaoController', ['$scope', 'notifications', '$log', 'Advogado', '$state', '$stateParams',
         function ($scope, notifications, $log, Advogado, $state, $stateParams) {
 
-            $scope.pessoa = $state.data;
+            $scope.advogado = $state.data;
 
-            if (!$state.data && !$state.pessoa) {
+            if (!$state.data && !$state.advogado) {
                 if ($stateParams.uid) {
-                    $scope.pessoa = Advogado.get({uid : $stateParams.uid});
+                    $scope.advogado = Advogado.get({uid : $stateParams.uid});
                 } else {
                     $state.go('advogados.listar');
                 }
             }
 
             $scope.salvar = function () {
-                $scope.pessoa = Advogado.update($scope.pessoa, function () {
-                    notifications.pushForNextRoute('pessoa.alterada', 'success', {nome : $scope.pessoa.nome});
+                $scope.advogado = Advogado.update($scope.advogado, function () {
+                    notifications.pushForNextRoute('advogado.alterado', 'success', {nome : $scope.advogado.pessoa.nome});
                     $state.go('advogados.listar');
                 });
             };
@@ -34,11 +34,11 @@ angular.module('lawyer.advogados.edicao', [
             };
 
             $scope.add = function (key) {
-                $scope.pessoa[key].push({});
+                $scope.advogado.pessoa[key].push({});
             };
 
             $scope.remove = function (key, $index) {
-                $scope.pessoa[key].splice($index, 1);
+                $scope.advogado.pessoa[key].splice($index, 1);
             };
 
         }])
