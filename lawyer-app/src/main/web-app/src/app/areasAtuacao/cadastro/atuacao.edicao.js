@@ -6,7 +6,7 @@ angular.module('lawyer.areasAtuacao.edicao', [
         $stateProvider.state('areasAtuacao.edicao', {
             url: '/edicao',
             controller: 'AreaAtuacaoEdicaoController',
-            templateUrl: 'areasAtuacao/edicao/atuacao.edicao.tpl.html'
+            templateUrl: 'areasAtuacao/cadastro/atuacao.cadastro.tpl.html'
         });
     }])
 
@@ -24,8 +24,12 @@ angular.module('lawyer.areasAtuacao.edicao', [
                     notifications.pushForNextRoute('areaAtuacao.salva', 'success');
                     $state.transitionTo('areasAtuacao.listar');
                 });
-
             };
+
+            $scope.voltar = function () {
+                $state.go('areasAtuacao.listar');
+            };
+
 
         }])
 
