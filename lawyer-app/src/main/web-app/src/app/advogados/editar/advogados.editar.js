@@ -35,6 +35,7 @@ angular.module('lawyer.advogados.edicao', [
 
             $scope.add = function (key) {
                 $scope.advogado.pessoa[key].push({});
+                //TODO como dar o foco no campo aqui? Com uma directive?
             };
 
             $scope.remove = function (key, $index) {
