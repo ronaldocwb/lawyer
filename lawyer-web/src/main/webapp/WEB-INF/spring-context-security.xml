@@ -3,10 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
-
-    <!-- Ativa as anotações em classes e métodos. -->
-    <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
 
     <!-- Define os contextos que o security vai atuar e quais são os entrypoints da aplicação -->
     <security:http use-expressions="true" auto-config="true" entry-point-ref="entryPoint" >
@@ -17,16 +14,12 @@
                              authentication-failure-url="/auth"  />
         <security:logout logout-success-url="/" delete-cookies="JSESSIONID"/>
 
-        <!-- O remeber me precisa de outras configurações, ver isso depois -->
-        <!--security:remember-me /-->
-
         <security:session-management invalid-session-url="/">
             <security:concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
         </security:session-management>
     </security:http>
 
-    <bean id="entryPoint"
-                class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+    <bean id="entryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
 
     <!-- Define qual é o delegate que vai autenticar o usuário -->

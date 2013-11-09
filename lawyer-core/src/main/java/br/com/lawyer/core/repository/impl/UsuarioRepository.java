@@ -4,7 +4,6 @@ import br.com.lawyer.core.base.JPABaseRepository;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -24,7 +23,7 @@ public class UsuarioRepository extends JPABaseRepository<String, Usuario> implem
      * Construtor b�sico para classe de acesso a dados (DAO)
      */
     @Autowired
-    public UsuarioRepository (@Qualifier ("entityManager") EntityManager em) {
+    public UsuarioRepository (EntityManager em) {
         super(Usuario.class, em);
     }
 

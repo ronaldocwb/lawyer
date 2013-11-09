@@ -6,25 +6,6 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:jboss/postgresDS</jta-data-source>
         
-        <class>br.com.lawyer.core.entity.Usuario</class>
-        <class>br.com.lawyer.core.entity.Advocacia</class>
-        <class>br.com.lawyer.core.entity.Advogado</class>
-        <class>br.com.lawyer.core.entity.AreaAtuacao</class>
-        <class>br.com.lawyer.core.entity.Assunto</class>
-        <class>br.com.lawyer.core.entity.Atividade</class>
-        <class>br.com.lawyer.core.entity.Contrato</class>
-        <class>br.com.lawyer.core.entity.ConvencaoHonorarios</class>
-        <class>br.com.lawyer.core.entity.Documento</class>
-        <class>br.com.lawyer.core.entity.Empresa</class>
-        <class>br.com.lawyer.core.entity.Orgao</class>
-        <class>br.com.lawyer.core.entity.Pessoa</class>
-        <class>br.com.lawyer.core.entity.Responsavel</class>
-        <class>br.com.lawyer.core.entity.Setor</class>
-        <class>br.com.lawyer.core.entity.Lembrete</class>
-        <class>br.com.lawyer.core.entity.common.Estado</class>
-        <class>br.com.lawyer.core.entity.common.Municipio</class>
-        <class>br.com.lawyer.core.entity.common.Pais</class>
-        
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>

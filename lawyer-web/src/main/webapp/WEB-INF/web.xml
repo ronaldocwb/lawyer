@@ -5,48 +5,6 @@
          metadata-complete="false">
 
 
-    <!-- Declara onde o Spring vai encontrar o carquivo de configuração para mapear as URLs e serviços quando a aplicação for inicializada. -->
-    <servlet>
-        <servlet-name>appServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>
-                WEB-INF/spring-context-web.xml
-            </param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <!-- Mapeamento de qual URL o Spring vai responder -->
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <!-- Listener da Servlet que o Spring usa para o mapeamento de endpoints-->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            WEB-INF/spring-context-web.xml
-        </param-value>
-    </context-param>
-
-    <!-- Filter do Spring security-->
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-
-    <!-- Mapeamento da URL que o Spring security passa a monitorar -->
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <!-- Redirecionamentos de erros para as exceções HTTP comuns.
          Não inclui o mapeamento de exceções que a aplicação lança. Isso é feito na ExceptionHandlerController com a anotação @ControllerAdvice -->
     <error-page>

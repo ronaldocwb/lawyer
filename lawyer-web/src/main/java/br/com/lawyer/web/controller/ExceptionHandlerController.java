@@ -108,7 +108,7 @@ public class ExceptionHandlerController {
         RestException restException = new RestException();
 
         restException.setClazz(e.getClass().getSimpleName());
-        restException.setCause(e.getCause().toString());
+        //restException.setCause(e.getCause().toString());
         restException.setInfo("HttpRequestMethodNotSupportedException Exception - " + e.getLocalizedMessage());
         restException.setMessage(e.getMessage());
 

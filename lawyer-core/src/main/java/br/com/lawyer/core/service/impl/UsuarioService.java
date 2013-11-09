@@ -46,7 +46,7 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
     public Usuario authenticate (Usuario user, AuthenticationManager manager) {
 
         if (LawyerStringUtils.containStringBlank(user.getEmail(), user.getSenha())) {
-            throw new BadCredentialsException("Usuario / Senha nao informado.");
+            throw new IllegalArgumentException("Usuario / Senha nao informado.");
         }
 
         String password = PasswordEncoder.encodePassword(user.getSenha(), user.getEmail());
@@ -77,7 +77,7 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
     public Usuario atualizarUsuario (Usuario usuario, String uid) throws BusinessException {
 
         if (LawyerStringUtils.isBlank(uid) || LawyerStringUtils.isBlank(usuario.getUid())) {
-            throw new BusinessException("Usuário deve ser informado!");
+            throw new IllegalArgumentException("Usuário deve ser informado!");
         }
 
         if (!getRepository().exists(uid)) {
@@ -96,11 +96,11 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
         LawyerAuthenticationToken auth = getCredenciais();
 
         if (LawyerStringUtils.isBlank(novaSenha)) {
-            throw new BusinessException("Senha não pode ser em branco.");
+            throw new IllegalArgumentException("Senha não pode ser em branco.");
         }
 
         if (usuario == null) {
-            throw new BusinessException("Usuário deve ser informado.");
+            throw new IllegalArgumentException("Usuário deve ser informado.");
         }
 
         if (!usuario.getEmail().equals(auth.getUsuario().getEmail()) || !token.equals(auth.getToken())) {
