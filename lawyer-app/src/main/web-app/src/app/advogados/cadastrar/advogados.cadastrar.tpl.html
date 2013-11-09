@@ -10,6 +10,14 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="oab">OAB:*</label>
+
+            <div class="controls">
+                <input id="oab" class="text x-large" type="text" ng-required="false"
+                       data-ng-model="advogado.numeroOAB"/>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label" for="documento">Documento:</label>
 
             <div class="controls">
@@ -128,7 +136,7 @@
             <div class="controls">
                 <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid">Salvar</button>
                 <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid"
-                        data-ng-click="salvarContinuar(cadastro)">Salvar e criar uma nova pessoa
+                        data-ng-click="salvarContinuar(cadastro)">Salvar e cadastrar novo advogado
                 </button>
                 ou <a ui-sref="advogados.listar">Clique para voltar</a>
             </div>

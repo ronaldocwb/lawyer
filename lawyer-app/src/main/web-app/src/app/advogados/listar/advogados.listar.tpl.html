@@ -23,18 +23,18 @@
             <thead>
             <tr>
                 <th>Nome</th>
+                <th>OAB</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                <th>OAB</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr data-ng-repeat="advogado in advogados.content">
                 <td data-ng-click="visualizar(advogado)"><span data-ng-bind="advogado.pessoa.nome"></span></td>
+                <td data-ng-click="visualizar(advogado)"><span data-ng-bind="advogado.numeroOAB"></span></td>
                 <td data-ng-click="visualizar(advogado)"><span data-ng-bind="advogado.pessoa.email"></span></td>
                 <td data-ng-click="visualizar(advogado)"><span data-ng-bind="advogado.pessoa.telefones[0].numero"></span></td>
-                <td data-ng-click="visualizar(advogado)"><span data-ng-bind="advogado.numeroOAB"></span></td>
                 <td>
                     <a href><span tooltip="Ver Detalhes"><i class="icon-search"
                                                             ng-click="visualizar(advogado)"></i></span></a>
