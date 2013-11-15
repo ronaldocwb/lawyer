@@ -14,4 +14,5 @@ public interface IEmpresaService extends IBaseService<String, Empresa, IEmpresaR
 
     Page<Empresa> buscarPorRazaoSocialOuNomeFantasiaLike (String query, PageRequest pageRequest);
 
+    void deletarEmpresa (String uid);
 }

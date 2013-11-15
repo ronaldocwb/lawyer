@@ -11,18 +11,13 @@ angular.module('lawyer.pessoas.listar', [
     .controller('PessoaListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Pessoa',
         function ($scope, notifications, $state, $modal, $log, Pessoa) {
 
-            $scope.$on('suamae', function () {
-                console.log('suamaeeee   e');
-            });
-
             $scope.pesquisa = {
                 query: '',
                 inUse: false,
                 hasUsed: false
             };
-            $scope.editar = function (pessoa) {
-                // interrompe a propagacaoo. nao funcionou sem essa parada
-                event.preventDefault();
+            $scope.editar = function (pessoa,$event) {
+                $event.preventDefault();
                 $state.data = pessoa;
                 $state.go('pessoas.editar');
             };

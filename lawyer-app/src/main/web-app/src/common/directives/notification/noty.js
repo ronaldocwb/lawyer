@@ -16,39 +16,32 @@ angular.module('lawyer.noty', [])
             link: function (scope) {
 
                 scope.$on('noty.add.completar.cadastro', function (event, notification) {
-                    event.preventDefault();
                     scope.addCompletarNotification(angular.extend(notification));
                 });
 
                 scope.$on('noty.close.route.notifications', function () {
-                    event.preventDefault();
                     scope.closeForRoute();
 
                 });
                 scope.$on('noty.add.notifications', function (event, notifications) {
-                    event.preventDefault();
                     scope.addAll(notifications);
 
                 });
                 scope.$on('noty.add.sticky.notification', function (event, notification) {
-                    event.preventDefault();
                     notification.timeout = false;
                     scope.add(angular.extend(notification));
                 });
 
                 scope.$on('noty.add.notification', function (event, notification) {
-                    event.preventDefault();
                     scope.add(angular.extend(notification));
                 });
 
                 scope.$on('noty.add.error.notification', function (event, notification) {
-                    event.preventDefault();
                     notification.timeout = false;
                     scope.addError(angular.extend(notification));
                 });
 
                 scope.add = function (notification) {
-                    event.preventDefault();
                     var box = noty(notification);
                     angular.noop(box.options.timeout === false ? doNotCloseNotifications.push(box.options.id) : canCloseNotifications.push(box.options.id));
                 };
@@ -57,7 +50,6 @@ angular.module('lawyer.noty', [])
                     var buttons = [
                         {
                             addClass: 'btn btn-success', text: 'Completar Cadastro', onClick: function ($noty) {
-                                event.preventDefault();
                                 $noty.close();
                                 scope.emitCompletarCallback(notification);
                             }

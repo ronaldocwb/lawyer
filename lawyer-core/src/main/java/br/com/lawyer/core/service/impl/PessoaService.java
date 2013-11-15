@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Deividi
  * @since 26/09/2013
@@ -43,5 +45,15 @@ public class PessoaService extends BaseService<String, Pessoa, IPessoaRepository
             pessoas = getRepository().findAll(pageRequest);
         }
         return pessoas;
+    }
+
+    @Override
+    public void removerReferenciaDaEmpresa (String uid) {
+        List<Pessoa> pessoas = getRepository().findByEmpresaUid(uid);
+
+        for (Pessoa pessoa : pessoas) {
+            pessoa.setEmpresa(null);
+        }
+
     }
 }

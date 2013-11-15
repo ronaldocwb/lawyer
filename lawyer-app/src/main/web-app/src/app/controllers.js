@@ -21,6 +21,10 @@ angular.module('lawyer.controllers', [
     'lawyer.empresas.cadastro',
     'lawyer.empresas.edicao',
     'lawyer.empresas.listar',
+    'lawyer.atividades',
+    'lawyer.atividades.cadastro',
+    'lawyer.atividades.edicao',
+    'lawyer.atividades.listar',
     'lawyer.pessoas',
     'lawyer.pessoas.listar',
     'lawyer.pessoas.cadastro',
@@ -34,5 +38,6 @@ angular.module('lawyer.controllers', [
     'lawyer.advogados.cadastro',
     'lawyer.advogados.edicao',
     'lawyer.configuracoes.advocacia',
-    'lawyer.configuracoes.conta'
+    'lawyer.configuracoes.conta',
+
 ]);

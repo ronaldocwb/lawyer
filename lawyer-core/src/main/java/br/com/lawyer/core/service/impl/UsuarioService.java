@@ -123,4 +123,6 @@ public class UsuarioService extends BaseService<String, Usuario, IUsuarioReposit
 
         return auth.getUsuario();
     }
+
+
 }

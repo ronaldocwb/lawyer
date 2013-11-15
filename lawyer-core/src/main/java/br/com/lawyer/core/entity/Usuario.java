@@ -16,7 +16,10 @@ public class Usuario extends AbstractBaseEntity {
     private String senha;
 
     @ManyToOne
-    private Advocacia advocacia;
+    private Cliente cliente;
+
+    @OneToOne
+    private Pessoa pessoa;
 
     @ElementCollection (fetch = FetchType.EAGER, targetClass = Permissao.class)
     @Enumerated (value = EnumType.STRING)
@@ -47,11 +50,19 @@ public class Usuario extends AbstractBaseEntity {
         this.permissoes = permissoes;
     }
 
-    public Advocacia getAdvocacia () {
-        return advocacia;
+    public Cliente getCliente () {
+        return cliente;
     }
 
-    public void setAdvocacia (Advocacia advocacia) {
-        this.advocacia = advocacia;
+    public void setCliente (Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Pessoa getPessoa () {
+        return pessoa;
+    }
+
+    public void setPessoa (Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

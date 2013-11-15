@@ -22,8 +22,21 @@ angular.module('lawyer.pessoas', [
         });
     }])
 
-    .controller('PessoaController', ['$scope', 'pessoas', '$rootScope', function ($scope, pessoas, $rootScope) {
+    .controller('PessoaController', ['$scope', 'pessoas', '$http', function ($scope, pessoas, $http) {
         $scope.pessoas = pessoas;
+
+        $scope.getMunicipios = function (value) {
+            return $http.get('/lawyer/api/municipios?q='+value)
+                .then(function(results){
+                    return results.data;
+                });
+        };
+        $scope.getEmpresas = function (value) {
+            return $http.get('/lawyer/api/empresas?q='+value+'&page=0&limit:5')
+                .then(function(results){
+                    return results.data.content;
+                });
+        };
 
     }])
 

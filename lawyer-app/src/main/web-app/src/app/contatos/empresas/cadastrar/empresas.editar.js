@@ -10,8 +10,8 @@ angular.module('lawyer.empresas.edicao', [
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http', 'Pessoa', '$modal', 'Setor',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http, Pessoa, $modal, Setor) {
+    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', 'Pessoa', '$modal', 'Setor',
+        function ($scope, notifications, $log, Empresa, $state, $stateParams, Pessoa, $modal, Setor) {
             $scope.tela = {
                 cadastro : false,
                 edicao : true
@@ -51,13 +51,6 @@ angular.module('lawyer.empresas.edicao', [
 
             $scope.voltar = function () {
                 angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
-            };
-
-            $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q='+value)
-                    .then(function(result){
-                        return result.data;
-                    });
             };
 
             $scope.addPessoa = function (name, $index) {
@@ -107,20 +100,6 @@ angular.module('lawyer.empresas.edicao', [
                     $scope.empresa.responsaveis[index].pessoa = pessoaAtualizada;
                     notifications.pushForCurrentRoute('pessoa.alterada', 'success', { nome: pessoaAtualizada.nome});
                 });
-            };
-
-            $scope.getPessoas = function (value) {
-                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
-            };
-
-            $scope.getSetores = function () {
-                return $http.get('/lawyer/api/setores')
-                    .then(function (result) {
-                        return result.data;
-                    });
             };
 
             $scope.addSetor = function (name, $index) {

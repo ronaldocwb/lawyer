@@ -11,8 +11,8 @@ angular.module('lawyer.areasAtuacao.listar', [
 .controller('AreaAtuacaoListarController', ['$scope', 'notifications', '$state', '$modal', '$log', 'AreaAtuacao',
         function ($scope, notifications, $state, $modal, $log, AreaAtuacao) {
 
-            $scope.editAreaAtuacao = function (areaAtuacao) {
-                event.preventDefault();
+            $scope.editAreaAtuacao = function (areaAtuacao, $event) {
+                $event.preventDefault();
                 $state.data = areaAtuacao;
                 $state.transitionTo('areasAtuacao.edicao');
             };

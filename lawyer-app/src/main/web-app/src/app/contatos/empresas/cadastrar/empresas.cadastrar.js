@@ -55,27 +55,6 @@ angular.module('lawyer.empresas.cadastro', [
                 $scope.empresa[key].splice($index, 1);
             };
 
-            $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q=' + value)
-                    .then(function (result) {
-                        return result.data;
-                    });
-            };
-
-            $scope.getPessoas = function (value) {
-                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
-            };
-
-            $scope.getSetores = function () {
-                return $http.get('/lawyer/api/setores')
-                    .then(function (result) {
-                        return result.data;
-                    });
-            };
-
             $scope.addSetor = function (name, $index) {
                 var setor = {
                     nome : name

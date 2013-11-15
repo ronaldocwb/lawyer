@@ -23,7 +23,7 @@ public class UsuarioVO extends BaseVO<Usuario> {
     @IgnoreVOParser
     private String novaSenha;
 
-    private AdvocaciaVO advocacia;
+    private ClienteVO advocacia;
 
     public UsuarioVO() {}
 
@@ -75,11 +75,11 @@ public class UsuarioVO extends BaseVO<Usuario> {
         this.novaSenha = novaSenha;
     }
 
-    public AdvocaciaVO getAdvocacia () {
+    public ClienteVO getAdvocacia () {
         return advocacia;
     }
 
-    public void setAdvocacia (AdvocaciaVO advocacia) {
+    public void setAdvocacia (ClienteVO advocacia) {
         this.advocacia = advocacia;
     }
 }

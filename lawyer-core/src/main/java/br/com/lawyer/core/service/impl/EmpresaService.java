@@ -4,6 +4,7 @@ import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Empresa;
 import br.com.lawyer.core.repository.IEmpresaRepository;
 import br.com.lawyer.core.service.IEmpresaService;
+import br.com.lawyer.core.service.IPessoaService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmpresaService extends BaseService<String, Empresa, IEmpresaRepository> implements IEmpresaService {
+
+    @Autowired
+    private IPessoaService pessoaService;
 
     /**
      * Construtor
@@ -45,5 +49,11 @@ public class EmpresaService extends BaseService<String, Empresa, IEmpresaReposit
             empresas = getRepository().findAll(pageRequest);
         }
         return empresas;
+    }
+
+    @Override
+    public void deletarEmpresa(String uid) {
+        pessoaService.removerReferenciaDaEmpresa(uid);
+        getRepository().delete(uid);
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * @author Deividi
  * @since 10/10/2013
@@ -31,4 +33,7 @@ public interface IPessoaRepository extends IJPABaseRepository<String, Pessoa> {
      * @return
      */
     Page<Pessoa> findByNomeContaining(String query, Pageable page);
+
+    List<Pessoa> findByEmpresaUid (String uid);
+
 }

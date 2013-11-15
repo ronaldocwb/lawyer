@@ -1,6 +1,8 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -11,11 +13,12 @@ import java.util.List;
  * @since 31/10/2013
  */
 @Entity
-public class Advocacia extends AbstractBaseEntity {
+public class Cliente extends AbstractBaseEntity {
 
     private String nome;
 
-    @OneToMany(orphanRemoval = false)
+    @OneToMany
+    @LazyCollection (LazyCollectionOption.FALSE)
     private List<Usuario> usuarios;
 
     public String getNome () {

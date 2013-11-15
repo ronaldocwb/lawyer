@@ -14,4 +14,5 @@ public interface IPessoaService extends IBaseService<String, Pessoa, IPessoaRepo
 
     Page<Pessoa> buscarPorNomeLike(String query, PageRequest pageRequest);
 
+    void removerReferenciaDaEmpresa (String uid);
 }

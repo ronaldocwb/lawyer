@@ -1,14 +1,15 @@
 package br.com.lawyer.core.repository;
 
 import br.com.lawyer.core.base.IJPABaseRepository;
-import br.com.lawyer.core.entity.Advocacia;
+import br.com.lawyer.core.entity.Atividade;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author Deividi
- * @since 31/10/2013
+ * @since 11/11/2013
  */
 @Repository
-public interface IAdvocaciaRepository extends IJPABaseRepository<String, Advocacia> {
+public interface IAtividadeRepository extends IJPABaseRepository<String, Atividade> {
+
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.Query;
  * @author Deividi Cavarzan
  * @since 20/09/2013
  *        <p/>
- *        Essa implementa��o n�o � necess�ria at� que algum m�todo seja implementado.
+ *        Essa implementa��o n�o � necessária at� que algum método seja implementado.
  *        Deixada aqui como exemplo.
  */
 @Service

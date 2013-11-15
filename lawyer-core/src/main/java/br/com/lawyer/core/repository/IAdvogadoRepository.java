@@ -5,11 +5,13 @@ import br.com.lawyer.core.entity.Advogado;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Ronaldo
  * @since 23/10/2013
  */
+@Repository
 public interface IAdvogadoRepository  extends IJPABaseRepository<String, Advogado> {
 
     /**

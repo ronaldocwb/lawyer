@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 //@EnableGlobalMethodSecurity (prePostEnabled=true)
 public class LawyerSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
     @Override
     public void configure (WebSecurity web) throws Exception {
         web
@@ -21,6 +22,7 @@ public class LawyerSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/**", "/errors/js/**", "/assets-login/**");
 
     }
+
 
 //    @Override
 //    protected void configure (HttpSecurity http) throws Exception {

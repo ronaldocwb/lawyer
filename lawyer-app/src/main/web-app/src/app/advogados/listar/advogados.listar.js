@@ -16,9 +16,8 @@ angular.module('lawyer.advogados.listar', [
                 inUse: false,
                 hasUsed: false
             };
-            $scope.editar = function (advogado) {
-                // interrompe a propagacaoo. nao funcionou sem essa parada
-                event.preventDefault();
+            $scope.editar = function (advogado,$event) {
+                $event.preventDefault();
                 $state.data = advogado;
                 $state.go('advogados.editar');
             };

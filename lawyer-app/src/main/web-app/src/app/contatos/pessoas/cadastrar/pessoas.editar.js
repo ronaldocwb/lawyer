@@ -9,8 +9,8 @@ angular.module('lawyer.pessoas.edicao', [
         });
     }])
 
-    .controller('PessoaEdicaoController', ['$scope', 'notifications', '$log', 'Pessoa', '$state', '$stateParams', '$http', 'Empresa', '$modal',
-        function ($scope, notifications, $log, Pessoa, $state, $stateParams, $http, Empresa, $modal) {
+    .controller('PessoaEdicaoController', ['$scope', 'notifications', '$log', 'Pessoa', '$state', '$stateParams', 'Empresa', '$modal',
+        function ($scope, notifications, $log, Pessoa, $state, $stateParams, Empresa, $modal) {
 
             $scope.tela = {
                 cadastro : false,
@@ -51,20 +51,6 @@ angular.module('lawyer.pessoas.edicao', [
 
             $scope.remove = function (key, $index) {
                 $scope.pessoa[key].splice($index, 1);
-            };
-
-            $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q='+value)
-                    .then(function(result){
-                        return result.data;
-                    });
-            };
-
-            $scope.getEmpresas = function (value) {
-                return $http.get('/lawyer/api/empresas?q='+value+'&page=0&limit:5')
-                    .then(function(results){
-                        return results.data.content;
-                    });
             };
 
             $scope.addEmpresa= function (name) {

@@ -36,8 +36,9 @@ public class EmpresaDelegate extends BaseDelegate<Empresa, EmpresaVO> implements
     }
 
     @Override
+    @Transactional
     public void deletar (String uid) {
-        empresaService.delete(uid);
+        empresaService.deletarEmpresa(uid);
     }
 
     @Transactional

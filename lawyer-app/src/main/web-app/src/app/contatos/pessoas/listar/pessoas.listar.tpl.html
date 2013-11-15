@@ -23,6 +23,7 @@
             <thead>
             <tr>
                 <th>Nome</th>
+                <th>Empresa</th>
                 <th>Email</th>
                 <th>Telefone</th>
                 <th></th>
@@ -31,12 +32,13 @@
             <tbody>
             <tr data-ng-repeat="pessoa in pessoas.content">
                 <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.nome"></span></td>
-                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.email"></span></td>
+                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.empresa.nomeFantasia"></span></td>
+                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.emails[0].value"></span></td>
                 <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.telefones[0].numero"></span></td>
                 <td>
                     <a href><span tooltip="Ver Detalhes"><i class="icon-search"
                                                             ng-click="visualizar(pessoa)"></i></span></a>
-                    <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(pessoa)"></i></span></a>
+                    <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(pessoa, $event)"></i></span></a>
                     <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(pessoa)"></i></span></a>
                 </td>
             </tr>

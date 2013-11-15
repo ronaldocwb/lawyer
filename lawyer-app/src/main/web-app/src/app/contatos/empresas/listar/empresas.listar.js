@@ -16,9 +16,8 @@ angular.module('lawyer.empresas.listar', [
                 inUse: false,
                 hasUsed: false
             };
-            $scope.editar = function (empresa) {
-                // interrompe a propagacaoo. nao funcionou sem essa parada
-                event.preventDefault();
+            $scope.editar = function (empresa, $event) {
+                $event.preventDefault();
                 $state.data = empresa;
                 $state.go('empresas.editar');
             };

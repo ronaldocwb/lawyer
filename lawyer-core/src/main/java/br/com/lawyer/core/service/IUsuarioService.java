@@ -14,4 +14,5 @@ public interface IUsuarioService extends IBaseService<String, Usuario, IUsuarioR
     Usuario atualizarUsuario (Usuario parse, String uid) throws BusinessException;
 
     Usuario atualizarSenhaUsuario (Usuario usuario, String uid, String novaSenha) throws AuthenticationException, BusinessException;
+
 }

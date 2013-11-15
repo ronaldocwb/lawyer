@@ -42,7 +42,7 @@ angular.module('lawyer', [
 
         $httpProvider.interceptors.push(['$q', '$location', 'notifications', function ($q, $location, notifications) {
             return {
-                'responseError': function(rejection) {
+                'responseError': function (rejection) {
                     if (rejection.status === 401 || rejection.status === 403) {
                         $location.path('/login');
                         return $q.reject(rejection);
@@ -60,7 +60,7 @@ angular.module('lawyer', [
         auth.set();
     }])
 
-    .controller('AppController', ['$scope', '$modal', 'connectionStatus',  function ($scope, $modal, connectionStatus) {
+    .controller('AppController', ['$scope', '$modal', 'connectionStatus', '$parse', function ($scope, $modal, connectionStatus, $parse) {
 
         // Tratamento de usuario sem conexao ativa.
         connectionStatus.handle();
@@ -70,9 +70,9 @@ angular.module('lawyer', [
             $scope.$apply(function () {
                 if (status === false && !offlineDialog) {
                     offlineDialog = $modal.open({
-                        keyboard : false,
+                        keyboard: false,
                         backdrop: 'static',
-                        templateUrl : 'templates/modalOffline/modalOffline.tpl.html'
+                        templateUrl: 'templates/modalOffline/modalOffline.tpl.html'
                     });
                 } else if (status === true && offlineDialog) {
                     offlineDialog.close();
