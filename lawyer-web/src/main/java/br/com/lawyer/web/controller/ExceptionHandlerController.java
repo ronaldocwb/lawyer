@@ -4,6 +4,7 @@ import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.exception.RestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,7 +45,7 @@ public class ExceptionHandlerController {
      * @return JSON para a requisição.
      */
     @ExceptionHandler(BusinessException.class)
-    public @ResponseBody RestException handleBusinessException(BusinessException e) {
+    public ResponseEntity<RestException> handleBusinessException(BusinessException e) {
 
         RestException restException = new RestException();
 
@@ -55,7 +56,7 @@ public class ExceptionHandlerController {
 
         e.printStackTrace();
 
-        return restException;
+        return new ResponseEntity<>(restException, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
@@ -130,7 +131,22 @@ public class ExceptionHandlerController {
 
         e.printStackTrace();
 
-        return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(restException, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<RestException> handleUnrecognizedPropertyException(HttpMessageNotReadableException e) {
+
+        RestException restException = new RestException();
+
+        restException.setClazz(e.getClass().getSimpleName());
+        restException.setCause(e.getCause().toString());
+        restException.setInfo("A entidade não possue o campo informado.");
+        restException.setMessage(e.getMessage());
+
+        e.printStackTrace();
+
+        return new ResponseEntity<>(restException, HttpStatus.NOT_ACCEPTABLE);
 
     }
 

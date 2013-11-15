@@ -8,8 +8,8 @@ angular.module('lawyer.atividades.listar', [
             templateUrl: 'atividades/listar/atividades.listar.tpl.html'
         });
     }])
-    .controller('ListarAtividadesController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Empresa',
-        function ($scope, notifications, $state, $modal, $log, Empresa) {
+    .controller('ListarAtividadesController', ['$scope', 'notifications', '$state', '$modal', '$log', 'Atividade',
+        function ($scope, notifications, $state, $modal, $log, Atividade) {
 
             $scope.pesquisa = {
                 query: '',
@@ -32,7 +32,7 @@ angular.module('lawyer.atividades.listar', [
                 if ($scope.pesquisa.query === '') {
                     $scope.pesquisa.inUse = false;
                 }
-                $scope.atividades = Empresa.get({q: $scope.pesquisa.query});
+                $scope.atividades = Atividade.get({q: $scope.pesquisa.query});
             };
 
             $scope.limparBusca = function () {
@@ -44,7 +44,7 @@ angular.module('lawyer.atividades.listar', [
             $scope.deletar = function (atividades) {
                 var modalInstance = $modal.open({
                     templateUrl: 'contatos/atividades/remover/atividades.remover.tpl.html',
-                    controller: 'RemoverEmpresaController',
+                    controller: 'RemoverAtividadeController',
                     resolve: {
                         atividades: function () {
                             return atividades;
@@ -53,7 +53,7 @@ angular.module('lawyer.atividades.listar', [
                 });
 
                 modalInstance.result.then(function () {
-                    Empresa.remove(atividades, function () {
+                    Atividade.remove(atividades, function () {
                         notifications.pushForCurrentRoute('atividades.apagada', 'success', {nome : atividades.nomeFantasia});
                         $scope.atividades.content.splice($scope.atividades.content.indexOf(atividades), 1);
                         if ($scope.originalResultSet) {
@@ -71,7 +71,7 @@ angular.module('lawyer.atividades.listar', [
             $scope.visualizar = function (atividades) {
                 var modalInstance = $modal.open({
                     templateUrl: 'atividades/visualizar/atividades.visualizar.tpl.html',
-                    controller: 'VisualizarEmpresaController',
+                    controller: 'VisualizarAtividadeController',
                     resolve: {
                         atividades: function () {
                             return atividades;
@@ -89,13 +89,13 @@ angular.module('lawyer.atividades.listar', [
 
             $scope.atividades.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.atividades = Empresa.get({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
+                $scope.atividades = Atividade.get({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
                     $scope.atividades.current = page;
                 });
             };
         }])
 
-    .controller('RemoverEmpresaController', ['$scope', '$modalInstance', 'atividades', function ($scope, $modalInstance, atividades) {
+    .controller('RemoverAtividadeController', ['$scope', '$modalInstance', 'atividades', function ($scope, $modalInstance, atividades) {
         $scope.atividades = atividades;
         $scope.ok = function () {
             $modalInstance.close();
@@ -106,7 +106,7 @@ angular.module('lawyer.atividades.listar', [
         };
     }])
 
-    .controller('VisualizarEmpresaController', ['$scope', '$modalInstance', 'atividades', function ($scope, $modalInstance, atividades) {
+    .controller('VisualizarAtividadeController', ['$scope', '$modalInstance', 'atividades', function ($scope, $modalInstance, atividades) {
         $scope.atividades = atividades;
         $scope.ok = function () {
             $modalInstance.close(false);

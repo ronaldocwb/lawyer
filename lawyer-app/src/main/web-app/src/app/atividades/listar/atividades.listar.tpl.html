@@ -1,7 +1,7 @@
 <div ng-if="true" class="fadeInUp">
 <div class="row-fluid" ng-cloak>
     <div class="span4">
-        <button ui-sref="empresas.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> Cadastrar Nova Empresa</button>
+        <button ui-sref="atividades.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> Cadastrar Nova Atividade</button>
     </div>
     <div class="pull-right">
         <form data-ng-submit="buscar()">
@@ -18,27 +18,27 @@
 <table class="table table-hover table-bordered center-table " ng-cloak>
     <thead>
     <tr>
-        <th>Nome Fantasia</th>
-        <th>Razão Social</th>
-        <th>CNPJ</th>
+        <th>Data</th>
+        <th>Horas</th>
+        <th>$</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr data-ng-repeat="empresa in empresas.content" class="fadeInUp" >
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.nomeFantasia"></span></td>
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.razaoSocial"></span></td>
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.cnpj"></span></td>
+    <tr data-ng-repeat="atividade in atividades.content" class="fadeInUp" >
+        <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.dataReferencia"></span></td>
+        <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.duracao"></span></td>
+        <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.valorTotal"></span></td>
         <td>
-            <a href ><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(empresa)"></i></span></a>
-            <a href ><span tooltip="Editar"><i class="icon-edit" ng-click="editar(empresa, $event)"></i></span></a>
-            <a href ><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(empresa)"></i></span></a>
+            <a href ><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(atividade)"></i></span></a>
+            <a href ><span tooltip="Editar"><i class="icon-edit" ng-click="editar(atividade, $event)"></i></span></a>
+            <a href ><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(atividade)"></i></span></a>
         </td>
     </tr>
     </tbody>
 </table>
 <div>
-    <pagination num-pages="empresas.totalPages" page="empresas.current"  total-items="empresas.totalElements"
-                previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="empresas.size" on-select-page="pageChanged(page)"></pagination>
+    <pagination num-pages="atividades.totalPages" page="atividades.current"  total-items="atividades.totalElements"
+                previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="atividades.size" on-select-page="pageChanged(page)"></pagination>
 </div>
 </div>

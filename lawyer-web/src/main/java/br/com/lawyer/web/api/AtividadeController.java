@@ -29,7 +29,7 @@ public class AtividadeController {
     return atividadeDelegate.findAtividadePorPagina(q, page, limit);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/atividades", method = RequestMethod.POST)
     @ResponseBody
     public AtividadeVO cadastrarAtividade (@RequestBody AtividadeVO atividadeVO) {
         return atividadeDelegate.salvar(atividadeVO);

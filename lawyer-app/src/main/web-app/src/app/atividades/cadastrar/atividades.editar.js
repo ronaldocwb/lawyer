@@ -9,8 +9,8 @@ angular.module('lawyer.atividades.edicao', [
         });
     }])
 
-    .controller('EditarAtividadeController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', '$http', 'Pessoa', '$modal', 'Setor',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams, $http, Pessoa, $modal, Setor) {
+    .controller('EditarAtividadeController', ['$scope', 'notifications', '$log', 'Atividade', '$state', '$stateParams', '$http', 'Pessoa', '$modal', 'Setor',
+        function ($scope, notifications, $log, Atividade, $state, $stateParams, $http, Pessoa, $modal, Setor) {
             $scope.tela = {
                 cadastro : false,
                 edicao : true
@@ -23,7 +23,7 @@ angular.module('lawyer.atividades.edicao', [
 
             if (!$state.data && !$state.atividade) {
                 if ($stateParams.uid) {
-                    $scope.atividade = Empresa.get({uid : $stateParams.uid});
+                    $scope.atividade = Atividade.get({uid : $stateParams.uid});
                 } else {
                     $state.go('atividades.listar');
                 }
@@ -31,7 +31,7 @@ angular.module('lawyer.atividades.edicao', [
 
             $scope.salvar = function () {
                 console.log($scope.atividade);
-                $scope.atividade = Empresa.update($scope.atividade, function () {
+                $scope.atividade = Atividade.update($scope.atividade, function () {
                     notifications.pushForCurrentRoute('atividade.alterada', 'success', {nome : $scope.atividade.nomeFantasia});
                     angular.noop($scope.modal ? $scope.modal.close($scope.atividade) : $state.go('atividades.listar'));
                 });

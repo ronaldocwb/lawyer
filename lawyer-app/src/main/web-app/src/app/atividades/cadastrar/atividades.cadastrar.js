@@ -9,8 +9,8 @@ angular.module('lawyer.atividades.cadastro', [
         });
     }])
 
-    .controller('CadastrarAtividadeController', ['$scope', '$state', '$log', 'Empresa', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal', 'Setor',
-        function ($scope, $state, $log, Empresa, Municipio, notifications, $http, Pessoa, $modal, Setor) {
+    .controller('CadastrarAtividadeController', ['$scope', '$state', '$log', 'Atividade', 'Municipio', 'notifications', '$http', 'Pessoa', '$modal', 'Setor',
+        function ($scope, $state, $log, Atividade, Municipio, notifications, $http, Pessoa, $modal, Setor) {
             $scope.tela = {
                 cadastro : true,
                 edicao : false
@@ -21,24 +21,24 @@ angular.module('lawyer.atividades.cadastro', [
                 enderecos: []
             };
 
-            $scope.pushEmpresaListagem = function () {
+            $scope.pushAtividadeListagem = function () {
                 if ($scope.atividades) {
                     $scope.atividades.content.push($scope.atividade);
                 }
             };
 
             $scope.salvar = function () {
-                $scope.atividade = Empresa.save($scope.atividade, function () {
+                $scope.atividade = Atividade.save($scope.atividade, function () {
                     notifications.pushForCurrentRoute('atividade.salva', 'success', {nome: $scope.atividade.nomeFantasia});
-                    $scope.pushEmpresaListagem();
+                    $scope.pushAtividadeListagem();
                     $state.go('atividades.listar');
                 });
             };
 
             $scope.salvarContinuar = function () {
-                $scope.atividade = Empresa.save($scope.atividade, function () {
+                $scope.atividade = Atividade.save($scope.atividade, function () {
                     notifications.pushForCurrentRoute('atividade.salva', 'success', {nome: $scope.atividade.nomeFantasia});
-                    $scope.pushEmpresaListagem();
+                    $scope.pushAtividadeListagem();
                     $scope.atividade = {
                         telefones: [],
                         responsaveis: [],
@@ -53,27 +53,6 @@ angular.module('lawyer.atividades.cadastro', [
 
             $scope.remove = function (key, $index) {
                 $scope.atividade[key].splice($index, 1);
-            };
-
-            $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q=' + value)
-                    .then(function (result) {
-                        return result.data;
-                    });
-            };
-
-            $scope.getPessoas = function (value) {
-                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
-            };
-
-            $scope.getSetores = function () {
-                return $http.get('/lawyer/api/setores')
-                    .then(function (result) {
-                        return result.data;
-                    });
             };
 
             $scope.addSetor = function (name, $index) {

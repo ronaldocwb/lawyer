@@ -1,14 +1,16 @@
 <div ng-if="true" class="fadeInUp">
     <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
-            <legend data-ng-show="tela.cadastro === true">Nova Empresa</legend>
-            <legend data-ng-show="tela.edicao === true">Editar Empresa</legend>
+            <legend data-ng-show="tela.cadastro === true">Nova Atividade</legend>
+            <legend data-ng-show="tela.edicao === true">Editar Atividade</legend>
             <div class="control-group">
-                <label class="control-label" for="nome">Nome:*</label>
+                <label class="control-label" for="assunto">Assunto:*</label>
 
                 <div class="controls">
-                    <input id="nome" class="text x-large" type="text" ng-required="true"
-                           data-ng-model="atividade.nomeFantasia"/>
+                    <input name="assunto" id="assunto" class="x-large" type="text"
+                           ng-model="atividade.assunto"
+                           typeahead-editable="false"
+                           typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue)"/>
                 </div>
             </div>
             <div class="control-group">
@@ -58,12 +60,7 @@
                      class="controls">
                     <br>
                     <label for="responsavel">Nome:</label>
-                    <input name="responsavel" id="responsavel" class="x-large" type="text"
-                           ng-model="responsavel.pessoa"
-                           typeahead-on-add="addPessoa($item, $index, responsavel)"
-                           typeahead-editable="false"
-                           typeahead-on-select="onSelectPessoa(responsavel.pessoa, $index)"
-                           typeahead-lawyer="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>
+
 
                     <label for="setor">Setor:</label>
                     <input name="setor" id="setor" class="x-large" type="text"

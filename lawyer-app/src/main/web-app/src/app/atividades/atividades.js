@@ -15,16 +15,36 @@ angular.module('lawyer.atividades', [
             },
             resolve: {
                 atividades: function (Atividade) {
-                    console.log('LOL');
                     return Atividade.get();
                 }
             }
         });
     }])
 
-    .controller('AtividadesController', ['$scope', 'atividades',
-        function ($scope, atividades) {
+    .controller('AtividadesController', ['$scope', 'atividades', '$http',
+        function ($scope, atividades, $http) {
             $scope.atividades = atividades;
+
+            $scope.getAssuntos = function (value) {
+                return $http.get('/lawyer/api/assuntos?q=' + value +'&page=0&limit:8')
+                    .then(function (result) {
+                        return result.data;
+                    });
+            };
+
+            $scope.getUsuarios = function (value) {
+                return $http.get('/lawyer/api/usuarios?q=' + value + '&page=0&limit:8')
+                    .then(function (result) {
+                        return result.data.content;
+                    });
+            };
+
+            $scope.getSetores = function () {
+                return $http.get('/lawyer/api/setores')
+                    .then(function (result) {
+                        return result.data;
+                    });
+            };
 
         }])
 
