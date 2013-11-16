@@ -28,7 +28,7 @@ angular.module('lawyer.pessoas', [
         $scope.getMunicipios = function (value) {
             return $http.get('/lawyer/api/municipios?q='+value)
                 .then(function(results){
-                    return results.data;
+                    return results.data.content;
                 });
         };
         $scope.getEmpresas = function (value) {

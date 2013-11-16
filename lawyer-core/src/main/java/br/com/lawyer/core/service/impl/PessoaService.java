@@ -3,8 +3,8 @@ package br.com.lawyer.core.service.impl;
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.repository.IPessoaRepository;
+import br.com.lawyer.core.repository.predicates.PessoaPredicate;
 import br.com.lawyer.core.service.IPessoaService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,13 +38,7 @@ public class PessoaService extends BaseService<String, Pessoa, IPessoaRepository
      */
     @Override
     public Page<Pessoa> buscarPorNomeLike (String query, PageRequest pageRequest) {
-        Page<Pessoa> pessoas;
-        if (StringUtils.isNotBlank(query)) {
-            pessoas = getRepository().findByNomeContaining(query, pageRequest);
-        } else {
-            pessoas = getRepository().findAll(pageRequest);
-        }
-        return pessoas;
+        return getRepository().findAll(PessoaPredicate.nomeIsLike(query), pageRequest);
     }
 
     @Override

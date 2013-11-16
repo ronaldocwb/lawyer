@@ -62,6 +62,7 @@
                            ng-model="responsavel.pessoa"
                            typeahead-on-add="addPessoa($item, $index, responsavel)"
                            typeahead-editable="false"
+                           typeahead-min-length="3"
                            typeahead-on-select="onSelectPessoa(responsavel.pessoa, $index)"
                            typeahead-lawyer="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>
 
@@ -70,6 +71,7 @@
                            ng-model="responsavel.setor"
                            typeahead-on-add="addSetor($item, $index, responsavel)"
                            typeahead-editable="false"
+                           typeahead-min-length="2"
                            typeahead-on-select="onSelectSetor(responsavel.setor, $index)"
                            typeahead-lawyer="setor as setor.nome for setor in getSetores($viewValue)"/>
                         <button type="button" class="btn btn-info" data-ng-click="remove('responsaveis', $index)"><i
@@ -109,6 +111,7 @@
                             <input name="municipio" id="municipio" class="x-large" type="text"
                                    ng-model="endereco.municipio"
                                    typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                                   typeahead-min-length="3"
                                    typeahead-editable="false"
                                    typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
                             <button id="remover" type="button" class="btn btn-info"

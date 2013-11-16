@@ -10,6 +10,7 @@
                     <input name="assunto" id="assunto" class="x-large" type="text"
                            ng-model="atividade.assunto"
                            typeahead-editable="false"
+                           typeahead-min-length="3"
                            typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue)"/>
                 </div>
             </div>
@@ -59,7 +60,7 @@
                 <div data-ng-repeat="responsavel in atividade.responsaveis" data-ng-hide="atividade.responsaveis.length == 0"
                      class="controls">
                     <br>
-                    <label for="responsavel">Nome:</label>
+                    <label for="setor">Nome:</label>
 
 
                     <label for="setor">Setor:</label>

@@ -14,6 +14,8 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AtividadeVO extends BaseVO<Atividade> {
 
+    private String uid;
+
     private UsuarioVO usuario;
 
     private AssuntoVO assunto;
@@ -118,5 +120,13 @@ public class AtividadeVO extends BaseVO<Atividade> {
 
     public void setValorTotal (BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getUid () {
+        return uid;
+    }
+
+    public void setUid (String uid) {
+        this.uid = uid;
     }
 }

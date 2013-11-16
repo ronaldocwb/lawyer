@@ -24,5 +24,8 @@ angular.module('i18n.Constants', [])
         'advogado.apagada': "O advogado com nome <strong>{{nome}}</strong> foi apagado",
         'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>...",
         'setor.criado' : "O setor <strong>{{nome}}</strong> foi criado.",
-        'tretas' : "Erro no servidor niggaz... TRETAS!"
+        'tretas' : "Erro no servidor niggaz... TRETAS!",
+        'atividade.salva' : "A atividade foi criada.",
+        'atividade.erro.apagar' : 'Oooopa... ocorreu um erro ao deletar uma atividade.',
+        'atividade.apagada' : 'Atividade apagada!.'
     });

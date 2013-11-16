@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 22/10/2013
  */
 @ApiController
+@Secured ({"ROLE_LAWYER", "ROLE_MANAGER"})
 public class ResponsavelController {
 
     @Autowired
@@ -25,27 +26,23 @@ public class ResponsavelController {
     public @ResponseBody
     Page list(
             @RequestParam (value = "q", required = false) String query,
-            @RequestParam (value = "field", required = false, defaultValue = "pessoa") String field,
             @RequestParam (value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "limit", defaultValue = "25", required = false) int limit) throws BusinessException {
-        return responsavelDelegate.findResponsavelPorPagina(query, field, page, limit);
+        return responsavelDelegate.findResponsavelPorPagina(query, page, limit);
     }
 
-    @Secured ({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/responsaveis", method = RequestMethod.POST)
     public @ResponseBody
     ResponsavelVO salvarUsuario(@RequestBody ResponsavelVO pessoaVO) {
         return responsavelDelegate.salvar(pessoaVO);
     }
 
-    @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/responsaveis/{uid}", method = RequestMethod.DELETE)
     public ResponseEntity excluir(@PathVariable ("uid") String uid) {
         responsavelDelegate.deletar(uid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/responsaveis/{uid}", method = RequestMethod.PUT)
     public @ResponseBody ResponsavelVO update(@PathVariable("uid") String uid, @RequestBody ResponsavelVO pessoaVO) throws BusinessException {
         return responsavelDelegate.atualizar(pessoaVO, uid);

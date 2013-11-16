@@ -4,12 +4,8 @@ import br.com.lawyer.web.annotation.ApiController;
 import br.com.lawyer.web.delegate.ISetorDelegate;
 import br.com.lawyer.web.vo.SetorVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Deividi
@@ -22,12 +18,17 @@ public class SetorController {
     private ISetorDelegate setorDelegate;
 
     @RequestMapping (value = "/setores", method = RequestMethod.GET)
-    public @ResponseBody List<SetorVO> findAll() {
-        return setorDelegate.findAll();
+    @ResponseBody
+    public Page<SetorVO> findAll (
+            @RequestParam (value = "q", required = false) String query,
+            @RequestParam (value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam (value = "limit", defaultValue = "25", required = false) int limit) {
+        return setorDelegate.findAllByNome(query, page, limit);
     }
 
     @RequestMapping (value = "/setores", method = RequestMethod.POST)
-    public @ResponseBody SetorVO salvar(@RequestBody SetorVO setorVO) {
+    @ResponseBody
+    public SetorVO salvar(@RequestBody SetorVO setorVO) {
         return setorDelegate.salvar(setorVO);
     }
 }

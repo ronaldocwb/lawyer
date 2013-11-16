@@ -3,12 +3,12 @@ package br.com.lawyer.core.service.impl;
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.common.Municipio;
 import br.com.lawyer.core.repository.IMunicipioRepository;
+import br.com.lawyer.core.repository.predicates.MunicipioPredicate;
 import br.com.lawyer.core.service.IMunicipioService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author Deividi
@@ -27,10 +27,7 @@ public class MunicipioService extends BaseService<Long, Municipio, IMunicipioRep
     }
 
     @Override
-    public List<Municipio> buscaPorNomeContendo (String query) {
-        if (StringUtils.isBlank(query)) {
-            return null;
-        }
-        return getRepository().findByNmMunicipioContaining(query.toUpperCase());
+    public Page<Municipio> buscaPorNomeContendo (String query, PageRequest pageRequest) {
+        return getRepository().findAll(MunicipioPredicate.nomeIsLike(query), pageRequest);
     }
 }

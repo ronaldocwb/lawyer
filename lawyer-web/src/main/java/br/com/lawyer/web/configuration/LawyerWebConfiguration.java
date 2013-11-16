@@ -27,13 +27,13 @@ public class LawyerWebConfiguration extends WebMvcConfigurerAdapter {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix( "/" );
         viewResolver.setSuffix( ".html" );
+
         return viewResolver;
     }
 
     @Bean
     public RequestMappingHandlerMapping mapping() {
-        RequestMappingHandlerMapping m = new RequestMappingHandlerMapping();
-        return m;
+        return new RequestMappingHandlerMapping();
     }
 
 
@@ -54,6 +54,7 @@ public class LawyerWebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public MappingJacksonHttpMessageConverter jacksonMessageConverter() {
         MappingJacksonHttpMessageConverter mappingJacksonHttpMessageConverter = new MappingJacksonHttpMessageConverter();
+        mappingJacksonHttpMessageConverter.setJsonPrefix(")]}',\n");
         return mappingJacksonHttpMessageConverter;
     }
 

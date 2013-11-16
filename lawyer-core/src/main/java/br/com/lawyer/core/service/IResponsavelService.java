@@ -12,6 +12,6 @@ import org.springframework.data.domain.Pageable;
  * @since 22/10/2013
  */
 public interface IResponsavelService extends IBaseService<String, Responsavel, IResponsavelRepository> {
-    Page<Responsavel> buscarPorCampoLike (String query, String field, Pageable pageRequest) throws BusinessException;
+    Page<Responsavel> buscarPorCampoLike (String query, Pageable pageRequest) throws BusinessException;
 
 }

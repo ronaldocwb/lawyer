@@ -4,8 +4,8 @@ import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Responsavel;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.IResponsavelRepository;
+import br.com.lawyer.core.repository.predicates.ResponsavelPredicate;
 import br.com.lawyer.core.service.IResponsavelService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,16 +28,8 @@ public class ResponsavelService extends BaseService<String, Responsavel, IRespon
     }
 
     @Override
-    public Page<Responsavel> buscarPorCampoLike (String query, String field, Pageable pageRequest) throws BusinessException {
-        Page<Responsavel> result = null;
-        if (StringUtils.isBlank(field)) {
-            throw new BusinessException("Busca deve informar o tipo: pessoa ou empresa");
-        }
-        if (StringUtils.isNotBlank(field)) {
-        } else {
-            result = getRepository().findAll(pageRequest);
-        }
-        return result;
+    public Page<Responsavel> buscarPorCampoLike (String query, Pageable pageRequest) throws BusinessException {
+        return getRepository().findAll(ResponsavelPredicate.isNomePessoaLike(query), pageRequest);
     }
 
 }

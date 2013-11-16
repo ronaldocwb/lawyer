@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
  * @since 22/10/2013
  */
 public interface IResponsavelDelegate {
-    Page<ResponsavelVO> findResponsavelPorPagina (String query, String field, int page, int limit) throws BusinessException;
+    Page<ResponsavelVO> findResponsavelPorPagina (String query, int page, int limit) throws BusinessException;
 
     ResponsavelVO salvar (ResponsavelVO pessoaVO);
 

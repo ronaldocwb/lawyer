@@ -3,9 +3,9 @@ package br.com.lawyer.core.service.impl;
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Empresa;
 import br.com.lawyer.core.repository.IEmpresaRepository;
+import br.com.lawyer.core.repository.predicates.EmpresaPredicate;
 import br.com.lawyer.core.service.IEmpresaService;
 import br.com.lawyer.core.service.IPessoaService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,13 +42,7 @@ public class EmpresaService extends BaseService<String, Empresa, IEmpresaReposit
      */
     @Override
     public Page<Empresa> buscarPorRazaoSocialOuNomeFantasiaLike (String query, PageRequest pageRequest) {
-        Page<Empresa> empresas;
-        if (StringUtils.isNotBlank(query)) {
-            empresas = getRepository().findByRazaoSocialContainingOrNomeFantasiaContaining(query, query, pageRequest);
-        } else {
-            empresas = getRepository().findAll(pageRequest);
-        }
-        return empresas;
+        return getRepository().findAll(EmpresaPredicate.nomeIsLike(query), pageRequest);
     }
 
     @Override

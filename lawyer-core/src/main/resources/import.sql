@@ -38,6 +38,8 @@ INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'USER');
 -- Áreas do Direito
 
 
+INSERT INTO public.advogado (uid, numerooab, pessoa_uid) VALUES ('4fd0c6e0-fc04-4253-a2c9-7495fb088a04', '123456789', '9c62e0d9-51b2-47d9-b8c1-033e7d8a4012');
+INSERT INTO public.advogado (uid, numerooab, pessoa_uid) VALUES ('d6dc1fbe-a21c-43b9-b9bf-9456451ea838', '98765432', '2861cb04-a8a7-4d60-b9af-665aa8db618b');
 
 
 

@@ -6,9 +6,9 @@ import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.ISetorDelegate;
 import br.com.lawyer.web.vo.SetorVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author Deividi
@@ -21,9 +21,10 @@ public class SetorDelegate extends BaseDelegate<Setor, SetorVO> implements ISeto
     private ISetorService setorService;
 
     @Override
-    public List<SetorVO> findAll () {
-        List<Setor> setors = setorService.findAll();
-        return getVO(setors);
+    public Page<SetorVO> findAllByNome (String query, int page, int limit) {
+        PageRequest pageRequest = new PageRequest(page, limit);
+        Page<Setor> setors = setorService.findByNome(query, pageRequest);
+        return getVO(setors, pageRequest);
     }
 
     @Override

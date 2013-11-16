@@ -1,8 +1,7 @@
 package br.com.lawyer.web.delegate;
 
 import br.com.lawyer.web.vo.MunicipioVO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Deividi
@@ -10,5 +9,5 @@ import java.util.List;
  */
 public interface IMunicipioDelegate {
 
-    public List<MunicipioVO> buscaPorNome (String query);
+    public Page<MunicipioVO> buscaPorNome (String query, int page, int limit);
 }

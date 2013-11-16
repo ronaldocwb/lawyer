@@ -23,9 +23,9 @@ public class ResponsavelDelegate extends BaseDelegate<Responsavel, ResponsavelVO
     private IResponsavelService responsavelService;
 
     @Override
-    public Page<ResponsavelVO> findResponsavelPorPagina (String query, String field, int page, int limit) throws BusinessException {
+    public Page<ResponsavelVO> findResponsavelPorPagina (String query, int page, int limit) throws BusinessException {
         Pageable pageRequest = new PageRequest(page, limit);
-        Page<Responsavel> pessoas = responsavelService.buscarPorCampoLike(query, field, pageRequest);
+        Page<Responsavel> pessoas = responsavelService.buscarPorCampoLike(query, pageRequest);
         return getVO(pessoas, pageRequest);
     }
 

@@ -28,17 +28,17 @@ angular.module('lawyer.empresas', [
         function ($scope, empresas, notifications, $state, $http) {
             $scope.empresas = empresas;
 
-            $scope.getSetores = function () {
-                return $http.get('/lawyer/api/setores')
+            $scope.getSetores = function (value) {
+                return $http.get('/lawyer/api/setores?q=' + value + '&page=0&limit:8')
                     .then(function (result) {
-                        return result.data;
+                        return result.data.content;
                     });
             };
 
             $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q=' + value)
+                return $http.get('/lawyer/api/municipios?q=' + value + '&page=0&limit:8')
                     .then(function (result) {
-                        return result.data;
+                        return result.data.content;
                     });
             };
 

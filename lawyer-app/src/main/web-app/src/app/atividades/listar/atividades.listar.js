@@ -28,10 +28,8 @@ angular.module('lawyer.atividades.listar', [
                     $scope.pesquisa.hasUsed = true;
                 }
 
-                $scope.pesquisa.inUse = true;
-                if ($scope.pesquisa.query === '') {
-                    $scope.pesquisa.inUse = false;
-                }
+
+                $scope.pesquisa.inUse = $scope.pesquisa.query !== '';
                 $scope.atividades = Atividade.get({q: $scope.pesquisa.query});
             };
 
@@ -43,7 +41,7 @@ angular.module('lawyer.atividades.listar', [
 
             $scope.deletar = function (atividades) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'contatos/atividades/remover/atividades.remover.tpl.html',
+                    templateUrl: 'atividades/remover/atividades.remover.tpl.html',
                     controller: 'RemoverAtividadeController',
                     resolve: {
                         atividades: function () {
@@ -54,17 +52,15 @@ angular.module('lawyer.atividades.listar', [
 
                 modalInstance.result.then(function () {
                     Atividade.remove(atividades, function () {
-                        notifications.pushForCurrentRoute('atividades.apagada', 'success', {nome : atividades.nomeFantasia});
+                        notifications.pushForCurrentRoute('atividade.apagada', 'success', {nome : atividades.nomeFantasia});
                         $scope.atividades.content.splice($scope.atividades.content.indexOf(atividades), 1);
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(atividades), 1);
                         }
                     }, function error() {
-                        notifications.pushForCurrentRoute('atividades.erro.apagar', 'error', {nome : atividades.nomeFantasia});
+                        notifications.pushForCurrentRoute('atividade.erro.apagar', 'error', {nome : atividades.nomeFantasia});
                     });
 
-                }, function () {
-                    $log.info('Modal fechada sem dar OK.');
                 });
             };
 
