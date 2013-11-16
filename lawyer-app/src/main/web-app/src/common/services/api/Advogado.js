@@ -3,8 +3,9 @@ angular.module('lawyer.Advogado', [
     ])
 
     .factory('Advogado', function ($resource) {
-        return $resource('/lawyer/api/advogados/:uid', {uid: '@uid'}, {
-            update  : { method: 'PUT' }
+        return $resource('/lawyer/api/advogados/:uid/:pessoas/:pessoaUid', {uid: '@uid'}, {
+            update  : { method: 'PUT' },
+            buscarPorPessoaUid : {method: 'GET', params : {pessoas : 'pessoas', pessoaUid : '@pessoa.uid'} }
         });
     })
 ;

@@ -23,6 +23,7 @@ angular.module('i18n.Constants', [])
         'advogado.alterada': "O advogado com nome <strong>{{nome}}</strong> foi alterado!",
         'advogado.apagada': "O advogado com nome <strong>{{nome}}</strong> foi apagado",
         'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>...",
+        'advogado.ja.existe': "O Advogado <strong>{{nome}}</strong> já está cadastrado.",
         'setor.criado' : "O setor <strong>{{nome}}</strong> foi criado.",
         'tretas' : "Erro no servidor niggaz... TRETAS!",
         'atividade.salva' : "A atividade foi criada.",

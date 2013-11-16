@@ -9,15 +9,52 @@ angular.module('lawyer.advogados.cadastro', [
         });
     }])
 
-    .controller('AdvogadoCadastroController', ['$scope', '$state', '$log', 'Advogado', 'Municipio', 'notifications', '$http', 'Empresa', '$modal',
-        function ($scope, $state, $log, Advogado, Municipio, notifications, $http, Empresa, $modal) {
+    .controller('AdvogadoCadastroController', ['$scope', '$state', '$log', 'Advogado', 'Municipio', 'notifications', 'Empresa', '$modal',
+        function ($scope, $state, $log, Advogado, Municipio, notifications, Empresa, $modal) {
 
             $scope.advogado = {};
+            $scope.novaPessoa = 'true';
 
             $scope.advogado.pessoa = {
+                nome : '',
                 telefones : [],
                 emails : [],
                 enderecos : []
+            };
+
+            $scope.changeNovaPessoa = function (value) {
+                $scope.novaPessoa = value;
+                if ($scope.novaPessoa === true) {
+                    $scope.advogado.pessoa = {
+                        nome : '',
+                        telefones : [],
+                        emails : [],
+                        enderecos : []
+                    };
+                    $scope.esconderInfoPessoa = false;
+                } else {
+                    $scope.esconderInfoPessoa = true;
+                }
+
+            };
+
+            $scope.onSelectPessoa = function () {
+                Advogado.buscarPorPessoaUid({}, $scope.advogado, function (result) {
+                    if (result.uid != null) {
+                        notifications.pushForCurrentRoute('advogado.ja.existe', 'warning', { nome : result.pessoa.nome});
+                        $scope.esconderInfoPessoa = true;
+                        $scope.advogado.pessoa = {
+                            nome : '',
+                            telefones : [],
+                            emails : [],
+                            enderecos : []
+                        };
+                    } else {
+                        $scope.esconderInfoPessoa = false;
+                    }
+                }, function () {
+                    $scope.esconderInfoPessoa = false;
+                });
             };
 
             $scope.pushAdvogadoListagem = function () {
@@ -60,20 +97,6 @@ angular.module('lawyer.advogados.cadastro', [
                 $scope.advogado.pessoa[key].splice($index, 1);
             };
 
-
-            $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q='+value)
-                    .then(function(results){
-                        return results.data;
-                    });
-            };
-            $scope.getEmpresas = function (value) {
-                return $http.get('/lawyer/api/empresas?q='+value+'&page=0&limit:5')
-                    .then(function(results){
-                        return results.data.content;
-                    });
-            };
-
             $scope.notification = {};
             $scope.addEmpresa = function ($item) {
                 $scope.advogado.pessoa.empresa = {
@@ -107,6 +130,10 @@ angular.module('lawyer.advogados.cadastro', [
                 });
             };
 
+            $scope.advogadoViaPessoa = false;
+            $scope.trocarParaPessoaCadastrada = function () {
+                $scope.advogadoViaPessoa = !$scope.advogadoViaPessoa;
+            };
 
     }])
 

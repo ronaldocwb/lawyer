@@ -53,4 +53,9 @@ public class AdvogadoController {
         return advogadoDelegate.buscarPorUid(uid);
     }
 
+    @RequestMapping(value = "/advogados/pessoas/{uid}", method = RequestMethod.GET)
+    public @ResponseBody AdvogadoVO findAdvogadoPorPessoaUid(@PathVariable("uid") String pessoaUid) {
+        return advogadoDelegate.buscarAdvogadoPorPessoaUid(pessoaUid);
+    }
+
 }

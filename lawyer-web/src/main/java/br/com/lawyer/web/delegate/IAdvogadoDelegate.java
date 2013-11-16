@@ -1,8 +1,7 @@
 package br.com.lawyer.web.delegate;
 
-import org.springframework.data.domain.Page;
-
 import br.com.lawyer.web.vo.AdvogadoVO;
+import org.springframework.data.domain.Page;
 
 /**
  * @author Ronaldo
@@ -18,4 +17,6 @@ public interface IAdvogadoDelegate {
     AdvogadoVO atualizar (AdvogadoVO advogadoVO, String uid);
 
     AdvogadoVO buscarPorUid (String uid);
+
+    AdvogadoVO buscarAdvogadoPorPessoaUid (String pessoaUid);
 }

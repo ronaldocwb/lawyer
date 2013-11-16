@@ -1,11 +1,10 @@
 package br.com.lawyer.core.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import br.com.lawyer.core.base.IBaseService;
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.repository.IAdvogadoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  * @author Ronaldo
@@ -15,4 +14,7 @@ public interface IAdvogadoService extends IBaseService<String, Advogado, IAdvoga
 
     Page<Advogado> buscarPorNomeLike(String query, PageRequest pageRequest);
 
+    Advogado salvarAdvogado (Advogado parse);
+
+    Advogado buscarAdvogadoPorPessoaUid (String pessoaUid);
 }

@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Entity
 public class Advogado extends AbstractBaseEntity {
 
-    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @JoinColumn(unique = true, nullable = false)
     private Pessoa pessoa;
 
     @Column (length = 20)

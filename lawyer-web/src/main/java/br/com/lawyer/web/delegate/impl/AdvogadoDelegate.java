@@ -1,16 +1,15 @@
 package br.com.lawyer.web.delegate.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.service.IAdvogadoService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.IAdvogadoDelegate;
 import br.com.lawyer.web.vo.AdvogadoVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Ronaldo
@@ -26,14 +25,15 @@ public class AdvogadoDelegate extends BaseDelegate<Advogado, AdvogadoVO> impleme
     @Override
     public Page<AdvogadoVO> findAdvogadoPorPagina (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
-        Page<Advogado> pessoas = advogadoService.buscarPorNomeLike(query, pageRequest);
-        return getVO(pessoas, pageRequest);
+        Page<Advogado> advogados = advogadoService.buscarPorNomeLike(query, pageRequest);
+        return getVO(advogados, pageRequest);
     }
 
+    @Transactional
     @Override
     public AdvogadoVO salvar (AdvogadoVO advogadoVO) {
-        Advogado pessoa = advogadoService.save(advogadoVO.parse());
-        return getVO(pessoa);
+        Advogado advogado = advogadoService.salvarAdvogado(advogadoVO.parse());
+        return getVO(advogado);
     }
 
     @Override
@@ -43,13 +43,19 @@ public class AdvogadoDelegate extends BaseDelegate<Advogado, AdvogadoVO> impleme
 
     @Override
     public AdvogadoVO atualizar (AdvogadoVO advogadoVO, String uid) {
-        Advogado pessoa = advogadoService.save(advogadoVO.parse());
-        return getVO(pessoa);
+        Advogado advogado = advogadoService.save(advogadoVO.parse());
+        return getVO(advogado);
     }
 
     @Override
     public AdvogadoVO buscarPorUid (String uid) {
-        Advogado pessoa = advogadoService.findOne(uid);
-        return getVO(pessoa);
+        Advogado advogado = advogadoService.findOne(uid);
+        return getVO(advogado);
+    }
+
+    @Override
+    public AdvogadoVO buscarAdvogadoPorPessoaUid (String pessoaUid) {
+        Advogado advogado = advogadoService.buscarAdvogadoPorPessoaUid(pessoaUid);
+        return getVO(advogado);
     }
 }
