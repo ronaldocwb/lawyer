@@ -4,15 +4,16 @@ import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.repository.IAdvogadoRepository;
-import br.com.lawyer.core.repository.predicates.AdvogadoPredicate;
 import br.com.lawyer.core.service.IAdvogadoService;
 import br.com.lawyer.core.service.IPessoaService;
 import br.com.lawyer.core.util.LawyerStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.buscaSePossuirNome;
+import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.possuiPessoaUid;
 
 /**
  * @author Deividi
@@ -46,15 +47,14 @@ public class AdvogadoService extends BaseService<String, Advogado, IAdvogadoRepo
      */
     @Override
     public Page<Advogado> buscarPorNomeLike (String query, PageRequest pageRequest) {
-        Page<Advogado> advogados;
-        if (StringUtils.isNotBlank(query)) {
-            advogados = getRepository().findByNameContaining(query, pageRequest);
-        } else {
-            advogados = getRepository().findAll(pageRequest);
-        }
-        return advogados;
+        return getRepository().findAll(buscaSePossuirNome(query), pageRequest);
     }
 
+    /**
+     * Salva umAdvogado nome. Caso a pessoa já exista, faz o merge da pessoa antes de salvar.
+     * @param advogado
+     * @return Advogado
+     */
     @Override
     public Advogado salvarAdvogado (Advogado advogado) {
         if (advogado.getPessoa() != null && LawyerStringUtils.isNotBlank(advogado.getPessoa().getUid())) {
@@ -65,8 +65,13 @@ public class AdvogadoService extends BaseService<String, Advogado, IAdvogadoRepo
 
     }
 
+    /**
+     * Busca um advogado pelo nome da pessoa. Se não for um nome, retorna null.
+     * @param pessoaUid
+     * @return Advogado
+     */
     @Override
     public Advogado buscarAdvogadoPorPessoaUid (String pessoaUid) {
-        return getRepository().findOne(AdvogadoPredicate.possuiPessoaUid(pessoaUid));
+        return getRepository().findOne(possuiPessoaUid(pessoaUid));
     }
 }
