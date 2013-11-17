@@ -33,6 +33,7 @@ angular.module('lawyer.advogados.cadastro', [
                     };
                     $scope.esconderInfoPessoa = false;
                 } else {
+                    $scope.advogado.pessoa.nome = '';
                     $scope.esconderInfoPessoa = true;
                 }
 
@@ -52,7 +53,7 @@ angular.module('lawyer.advogados.cadastro', [
                     } else {
                         $scope.esconderInfoPessoa = false;
                     }
-                }, function () {
+                }, function error() {
                     $scope.esconderInfoPessoa = false;
                 });
             };
@@ -130,9 +131,16 @@ angular.module('lawyer.advogados.cadastro', [
                 });
             };
 
-            $scope.advogadoViaPessoa = false;
-            $scope.trocarParaPessoaCadastrada = function () {
-                $scope.advogadoViaPessoa = !$scope.advogadoViaPessoa;
+            $scope.blur = function () {
+                if (!$scope.advogado.pessoa || !$scope.advogado.pessoa.uid) {
+                    $scope.novaPessoa = 'true';
+                    $scope.changeNovaPessoa('true');
+                }
+            };
+            $scope.keyup = function () {
+                if ($scope.novaPessoa === false && (!$scope.advogado.pessoa || !$scope.advogado.pessoa.uid)) {
+                    $scope.esconderInfoPessoa = true;
+                }
             };
 
     }])

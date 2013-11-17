@@ -1,20 +1,94 @@
 <div class="navbar" >
     <div class="navbar-inner">
-        <a class="brand" ng-click="home()">Lawyer</a>
+        <ul class="nav ">
+            <li ng-class="{true : 'active'}[abas.painel]">
+                <a href="#/painel">Painel</a>
+            </li>
+            <li ng-class="{true : 'dropdown active', false : 'dropdown'}[abas.contatos]" >
+                <a href="#"  data-toggle="dropdown" class="dropdown-toggle">Contatos</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#/empresas/">Listar Empresas</a>
+                    </li>
+                    <li>
+                        <a href="#/empresas/cadastro">Cadastrar uma Empresa</a>
+                    </li>
+                    <li class="divider">
+                    <li>
+                        <a href="#/pessoas/">Listar Pessoas</a>
+                    </li>
+                    <li>
+                        <a href="#/pessoas/cadastro">Cadastrar uma Pessoa</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-class="{true : 'dropdown active', false : 'dropdown'}[abas.advogados]" >
+                <a href="#"  data-toggle="dropdown" class="dropdown-toggle">Advogados</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#/advogados/">Listar Advogados</a>
+                    </li>
+                    <li>
+                        <a href="#/advogados/cadastro">Cadastrar um Advogado</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-class="{true : 'active'}[abas.areasAtuacao]">
+                <a href="#/areasAtuacao/">Áreas de Atuação</a>
+            </li>
+            <li ng-class="{true : 'active'}[abas.assuntos]">
+                <a href="#/assuntos/">Assuntos</a>
+            </li>
+            <li ng-class="{true : 'active'}[abas.agenda]">
+                <a href="#/agendas/">Agenda</a>
+            </li>
+            <li ng-class="{true : 'active'}[abas.financeiro]">
+                <a href="#/financeiro">Financeiro</a>
+            </li>
+            <li ng-class="{true : 'active'}[abas.atividades]">
+                <a href="#/atividades/">Atividades</a>
+            </li>
+            <li class="dropdown pull-right">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Configurações<strong
+                        class="caret"></strong></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#/marca">Sua Marca</a>
+                    </li>
+                    <li class="divider">
+                    <li>
+                        <a href="#/conta">Conta</a>
+                    </li>
+                    <li>
+                        <a href="#/usuarios">Usuários e Permissões</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#/cliente">Dados da Advocacia</a>
+                    </li>
+                    <li>
+                        <a href="#">Dados de Pagamento</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
         <ul class="nav pull-right" ng-show="hasPendingRequests()">
             <li class="divider-vertical"></li>
             <li><a href="#"><img src="/lawyer/assets/img/spinner.gif"></a></li>
         </ul>
     </div>
-    <div>
-        <ul class="breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
-                <span class="divider">/</span>
-                <ng-switch on="$last">
-                    <span ng-switch-when="true">{{breadcrumb.name}}</span>
-                    <span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>
-                </ng-switch>
-            </li>
-        </ul>
-    </div>
+    <!--Ver se vamos usar o breadcrumbs mesmo...-->
+    <!--<div>-->
+        <!--<ul class="breadcrumb">-->
+            <!--<li ng-repeat="breadcrumb in breadcrumbs.getAll()">-->
+                <!--<span class="divider">/</span>-->
+                <!--<ng-switch on="$last">-->
+                    <!--<span ng-switch-when="true">{{breadcrumb.name}}</span>-->
+                    <!--<span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>-->
+                <!--</ng-switch>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
 </div>

@@ -11,8 +11,10 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <input type="radio" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(true)" value="true" >Criar uma nova pessoa
-                <input type="radio" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(false)" value="false">Criar a partir de uma pessoa cadastrada
+                <div class="btn-group">
+                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(true)" value="true" btn-radio="'true'">Nova pessoa</button>
+                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(false)" value="false"  btn-radio="'false'">Utilizar uma pessoa cadastrada</button>
+                </div>
             </div>
         </div>
 
@@ -20,7 +22,7 @@
             <label class="control-label" for="nome">Nome:*</label>
 
             <div class="controls">
-                <input id="nome" class="text x-large" type="text"
+                <input id="nome" class="text x-large" type="text" ng-required="novaPessoa"
                        data-ng-model="advogado.pessoa.nome" data-ng-show="!advogadoViaPessoa"/>
             </div>
         </div>
@@ -29,8 +31,10 @@
 
             <div class="controls">
                 <input name="pessoa" id="pessoa" class="x-large" type="text"
+                       ng-blur="blur()"
                        ng-model="advogado.pessoa"
-                       typeahead-editable="false"
+                       ng-keyup="keyup()"
+                       typeahead-editable="novaPessoa"
                        typeahead-min-length="3"
                        typeahead-on-select="onSelectPessoa(pessoa)"
                        typeahead="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>

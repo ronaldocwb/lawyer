@@ -4,7 +4,7 @@
         <button ui-sref="empresas.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> Cadastrar Nova Empresa</button>
     </div>
     <div class="pull-right">
-        <form data-ng-submit="buscar()">
+        <form data-ng-submit="buscar()" data-ng-show="empresas.content.length > 0" >
             <div class="input-append">
                 <input class="" type="text" data-ng-model="pesquisa.query" />
                 <button class="btn" type="submit">Buscar</button>
