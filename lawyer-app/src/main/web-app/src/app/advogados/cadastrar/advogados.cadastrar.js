@@ -25,8 +25,9 @@ angular.module('lawyer.advogados.cadastro', [
             $scope.changeNovaPessoa = function (value) {
                 $scope.novaPessoa = value;
                 if ($scope.novaPessoa === true) {
+                    var nome = $scope.advogado.pessoa;
                     $scope.advogado.pessoa = {
-                        nome : '',
+                        nome : nome instanceof Object ? '' : nome,
                         telefones : [],
                         emails : [],
                         enderecos : []

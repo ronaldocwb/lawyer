@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "angular": "1.2.1",
-    "angular-animate": "1.2.0",
+    "angular-animate": "1.2.1",
     "angular-mocks": "1.2.1",
     "angular-cookies": "1.2.1",
     "angular-i18n": "1.2.1",

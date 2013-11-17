@@ -224,6 +224,10 @@ public class Assunto extends AbstractBaseEntity {
         advogadosEnvolvidos.remove(a);
     }
 
+    public void setAdvogadosEnvolvidos(List<Advogado> advogadosEnvolvidos) {
+        this.advogadosEnvolvidos = advogadosEnvolvidos;
+    }
+
     public List<Assunto> getAssuntosRelacionados () {
         return assuntosRelacionados;
     }

@@ -15,7 +15,7 @@ angular.module('lawyer.atividades.edicao', [
                 cadastro : false,
                 edicao : true
             };
-            $scope.atividades = $state.data;
+            $scope.atividade = $state.data;
 
             if ($state.data && $state.data.modal) {
                 $scope.modal = $state.data.modal;
@@ -28,7 +28,7 @@ angular.module('lawyer.atividades.edicao', [
                     $state.go('atividades.listar');
                 }
             }
-
+            console.log($scope.atividade);
             $scope.salvar = function () {
                 console.log($scope.atividade);
                 $scope.atividade = Atividade.update($scope.atividade, function () {

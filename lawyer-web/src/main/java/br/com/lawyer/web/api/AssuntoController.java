@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 /**
  * @author Deividi
  * @since 15/11/2013
@@ -52,6 +54,14 @@ public class AssuntoController {
     @RequestMapping(value = "/assuntos/{uid}", method = RequestMethod.GET)
     public @ResponseBody AssuntoVO findOne(@PathVariable("uid") String uid) {
         return assuntoDelegate.findOne(uid);
+    }
+
+    @RequestMapping(value = "/assuntos/fake", method = RequestMethod.GET)
+    public @ResponseBody AssuntoVO salvar() {
+        AssuntoVO assuntoVO = new AssuntoVO();
+        assuntoVO.setNumeroProcesso(String.valueOf(new Date().getTime()));
+        assuntoVO.setNome("Assunto " + assuntoVO.getNumeroProcesso());
+        return assuntoDelegate.salvar(assuntoVO);
     }
 
 }

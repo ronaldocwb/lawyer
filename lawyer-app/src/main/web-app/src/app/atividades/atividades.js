@@ -28,7 +28,7 @@ angular.module('lawyer.atividades', [
             $scope.getAssuntos = function (value) {
                 return $http.get('/lawyer/api/assuntos?q=' + value +'&page=0&limit:8')
                     .then(function (result) {
-                        return result.data;
+                        return result.data.content;
                     });
             };
 
@@ -36,13 +36,6 @@ angular.module('lawyer.atividades', [
                 return $http.get('/lawyer/api/usuarios?q=' + value + '&page=0&limit:8')
                     .then(function (result) {
                         return result.data.content;
-                    });
-            };
-
-            $scope.getSetores = function () {
-                return $http.get('/lawyer/api/setores')
-                    .then(function (result) {
-                        return result.data;
                     });
             };
 

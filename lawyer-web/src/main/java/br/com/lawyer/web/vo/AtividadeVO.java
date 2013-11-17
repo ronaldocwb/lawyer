@@ -3,6 +3,7 @@ package br.com.lawyer.web.vo;
 import br.com.lawyer.core.entity.Atividade;
 import br.com.lawyer.web.base.BaseVO;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @since 11/11/2013
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize (include = JsonSerialize.Inclusion.NON_NULL)
 public class AtividadeVO extends BaseVO<Atividade> {
 
     private String uid;
