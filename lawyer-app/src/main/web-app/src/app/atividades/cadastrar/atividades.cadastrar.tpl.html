@@ -5,13 +5,43 @@
             <legend data-ng-show="tela.edicao === true">Editar Atividade</legend>
             <div class="control-group">
                 <label class="control-label" for="assunto">Assunto:*</label>
-
                 <div class="controls">
                     <input name="assunto" id="assunto" class="x-large" type="text"
                            ng-model="atividade.assunto"
                            typeahead-editable="false"
                            typeahead-min-length="3"
                            typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue)"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="data">Data:</label>
+                <div class="controls">
+                    <input type="text" id="data" show-weeks="false" datepicker-popup="dd/MM/yyyy" ng-model="atividade.dataReferencia" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+                    <button class="btn" type="button" ng-click="open()"><i class="icon-calendar"></i></button>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="duracao">Duração:</label>
+                <div class="controls">
+                    <input id="duracao" class="text x-large" type="text" data-ng-model="atividade.duracao"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="valorTotal">Valor:</label>
+                <div class="controls">
+                    <input id="valorTotal" class="text x-large" type="text" data-ng-model="atividade.valorTotal"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="descricao">Descricao:</label>
+                <div class="controls">
+                    <textarea id="descricao" class="text x-large" type="text" data-ng-model="atividade.descricao"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="observacao">Observacao:</label>
+                <div class="controls">
+                    <input id="observacao" class="text x-large" type="text" data-ng-model="atividade.observacao"/>
                 </div>
             </div>
             <hr>
