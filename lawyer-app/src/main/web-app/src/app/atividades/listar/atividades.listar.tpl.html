@@ -24,15 +24,15 @@
         <tr>
             <th>Data</th>
             <th>Horas</th>
-            <th>$</th>
+            <th>Valor (R$)</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="atividade in atividades.content" class="fadeInUp">
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.dataReferencia"></span></td>
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.duracao"></span></td>
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.valorTotal"></span></td>
+            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.dataReferencia | date:'dd/MM/yyyy'"></span></td>
+            <td data-ng-click="visualizar(atividade)"><formata-hora duracao="atividade.duracao"></formata-hora></td>
+            <td data-ng-click="visualizar(atividade)"><formata-reais valor="atividade.valorTotal"></formata-reais></td>
             <td>
                 <a href><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(atividade)"></i></span></a>
                 <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(atividade, $event)"></i></span></a>

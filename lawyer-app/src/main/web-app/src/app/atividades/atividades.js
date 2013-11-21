@@ -1,6 +1,9 @@
 angular.module('lawyer.atividades', [
         'lawyer.Atividade',
-        'lawyer.Assunto'
+        'lawyer.Assunto',
+        'formatCurrency',
+        'formataReais',
+        'formataHora'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
