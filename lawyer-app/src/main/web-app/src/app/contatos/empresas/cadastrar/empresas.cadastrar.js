@@ -18,7 +18,8 @@ angular.module('lawyer.empresas.cadastro', [
             $scope.empresa = {
                 telefones: [],
                 responsaveis: [],
-                enderecos: []
+                enderecos: [],
+                cliente : false
             };
 
             $scope.pushEmpresaListagem = function () {

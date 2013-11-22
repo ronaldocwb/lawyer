@@ -32,6 +32,8 @@ public class Pessoa extends AbstractBaseEntity {
     @ElementCollection
     private List<Endereco> enderecos;
 
+    private Boolean cliente = Boolean.FALSE;
+
     public String getNome () {
         return nome;
     }
@@ -86,5 +88,13 @@ public class Pessoa extends AbstractBaseEntity {
 
     public void setEmails (List<Email> emails) {
         this.emails = emails;
+    }
+
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
     }
 }

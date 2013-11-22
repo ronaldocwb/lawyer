@@ -1,5 +1,5 @@
-angular.module('formatCurrency', [])
-    .directive('formatCurrency', ['$filter', function ($filter) {
+angular.module('formataValorInput', [])
+    .directive('formataValorInput', [function () {
         var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\d,\d*)))\s*$/;
         function isUndefined(value) {
             return typeof value == 'undefined';

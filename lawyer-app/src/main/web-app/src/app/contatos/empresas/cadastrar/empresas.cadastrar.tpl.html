@@ -9,6 +9,8 @@
                 <div class="controls">
                     <input id="nome" class="text x-large" type="text" ng-required="true"
                            data-ng-model="empresa.nomeFantasia"/>
+                    <span class="help-inline">É um cliente?</span>
+                    <input class="checkbox" type="checkbox" data-ng-model="empresa.cliente"/>
                 </div>
             </div>
             <div class="control-group">
@@ -71,7 +73,7 @@
                            ng-model="responsavel.setor"
                            typeahead-on-add="addSetor($item, $index, responsavel)"
                            typeahead-editable="false"
-                           typeahead-min-length="2"
+                           typeahead-min-length="3"
                            typeahead-on-select="onSelectSetor(responsavel.setor, $index)"
                            typeahead-lawyer="setor as setor.nome for setor in getSetores($viewValue)"/>
                         <button type="button" class="btn btn-info" data-ng-click="remove('responsaveis', $index)"><i

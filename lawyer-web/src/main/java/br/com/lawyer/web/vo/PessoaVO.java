@@ -32,6 +32,8 @@ public class PessoaVO extends BaseVO<Pessoa>{
 
     private List<EmailVO> emails;
 
+    private Boolean cliente;
+
     public PessoaVO(Pessoa pessoa) {
         super(pessoa);
     }
@@ -140,4 +142,11 @@ public class PessoaVO extends BaseVO<Pessoa>{
         this.emails = emails;
     }
 
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
+    }
 }

@@ -3,7 +3,10 @@ angular.module('lawyer.empresas', [
         'lawyer.Municipio',
         'lawyer.Responsavel',
         'lawyer.Pessoa',
-        'lawyer.Setor'
+        'lawyer.Setor',
+        'municipioAutocomplete',
+        'setorAutocomplete',
+        'pessoaAutocomplete'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -24,29 +27,20 @@ angular.module('lawyer.empresas', [
         });
     }])
 
-    .controller('EmpresaController', ['$scope', 'empresas', 'notifications', '$state', '$http',
-        function ($scope, empresas, notifications, $state, $http) {
+    .controller('EmpresaController', ['$scope', 'empresas', '$state', 'municipioAutocomplete', 'pessoaAutocomplete', 'setorAutocomplete',
+        function ($scope, empresas, $state, municipioAutocomplete, pessoaAutocomplete, setorAutocomplete) {
             $scope.empresas = empresas;
 
             $scope.getSetores = function (value) {
-                return $http.get('/lawyer/api/setores?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
+                return setorAutocomplete.query(value);
             };
 
             $scope.getMunicipios = function (value) {
-                return $http.get('/lawyer/api/municipios?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
+                return municipioAutocomplete.query(value);
             };
 
             $scope.getPessoas = function (value) {
-                return $http.get('/lawyer/api/pessoas?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
+                return pessoaAutocomplete.query(value);
             };
 
         }])

@@ -1,7 +1,9 @@
 angular.module('lawyer.pessoas', [
         'lawyer.Pessoa',
         'lawyer.Municipio',
-        'lawyer.Empresa'
+        'lawyer.Empresa',
+        'municipioAutocomplete',
+        'empresaAutocomplete'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -22,22 +24,16 @@ angular.module('lawyer.pessoas', [
         });
     }])
 
-    .controller('PessoaController', ['$scope', 'pessoas', '$http', function ($scope, pessoas, $http) {
+    .controller('PessoaController', ['$scope', 'pessoas', 'municipioAutocomplete', 'empresaAutocomplete', function ($scope, pessoas, municipioAutocomplete, empresaAutocomplete) {
         $scope.pessoas = pessoas;
 
         $scope.getMunicipios = function (value) {
-            return $http.get('/lawyer/api/municipios?q='+value)
-                .then(function(results){
-                    return results.data.content;
-                });
+            return municipioAutocomplete.query(value);
         };
+
         $scope.getEmpresas = function (value) {
-            return $http.get('/lawyer/api/empresas?q='+value+'&page=0&limit:5')
-                .then(function(results){
-                    return results.data.content;
-                });
+            return empresaAutocomplete.query(value);
         };
 
     }])
-
 ;
