@@ -8,7 +8,6 @@ angular.module('formataReais', [])
                 valor : '='
             },
             link : function (scope) {
-                console.log(scope.valorFormatado);
                 scope.valorFormatado = scope.valor.toFixed(2).replace('.', ',');
             }
         };

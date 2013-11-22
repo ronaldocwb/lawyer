@@ -26,7 +26,7 @@ angular.module('lawyer.atividades', [
         });
     }])
 
-    .controller('AtividadesController', ['$scope', 'atividades', '$http', 'assuntoAutocomplete', 'usuarioAutocomplete',
+    .controller('AtividadesController', ['$scope', 'atividades', 'assuntoAutocomplete', 'usuarioAutocomplete',
         function ($scope, atividades, assuntoAutocomplete, usuarioAutocomplete) {
             $scope.atividades = atividades;
 

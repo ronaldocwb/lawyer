@@ -10,7 +10,7 @@ angular.module('assuntoAutocomplete', [])
                     return lastResult;
                 }
                 lastQuery = value.toLowerCase();
-                return $http.get('/lawyer/api/assuntos?q=' + value + '&page=0&limit:5')
+                return $http.get('/lawyer/api/assuntos?q=' + value + '&page=0&limit=8')
                     .then(function (results) {
                         lastResult = results.data.content;
                         return lastResult;
