@@ -1,7 +1,7 @@
 package br.com.lawyer.core.repository;
 
 import br.com.lawyer.core.base.IJPABaseRepository;
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Advocacia;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @since 31/10/2013
  */
 @Repository
-public interface IClienteRepository extends IJPABaseRepository<String, Cliente> {
+public interface IAdvocaciaRepository extends IJPABaseRepository<String, Advocacia> {
 
 }

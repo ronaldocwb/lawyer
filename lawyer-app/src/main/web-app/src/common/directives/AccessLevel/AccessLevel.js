@@ -1,4 +1,4 @@
-angular.module('lawyer.accessLevel', ['lawyer.auth'])
+angular.module('lawyer.accessLevel', ['auth'])
 
     /**
     * Directive para esconder elementos no HTML que sejam de alguma permissao especifica e que o usuario nao tenha ela.

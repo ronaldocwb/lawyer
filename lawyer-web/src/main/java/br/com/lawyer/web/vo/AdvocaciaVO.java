@@ -1,21 +1,21 @@
 package br.com.lawyer.web.vo;
 
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Advocacia;
 import br.com.lawyer.web.base.BaseVO;
 
 /**
  * @author Deividi
  * @since 31/10/2013
  */
-public class ClienteVO extends BaseVO<Cliente> {
+public class AdvocaciaVO extends BaseVO<Advocacia> {
 
     private String nome;
 
-    public ClienteVO (Cliente cliente) {
-        super(cliente);
+    public AdvocaciaVO (Advocacia advocacia) {
+        super(advocacia);
     }
 
-    public ClienteVO () { }
+    public AdvocaciaVO () { }
 
     public String getNome () {
         return nome;

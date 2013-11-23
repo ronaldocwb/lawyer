@@ -30,7 +30,7 @@ angular.module('lawyer.configuracoes.conta', [
                 confirmaNovaSenha : null
             };
 
-            $scope.alterar = function (alterarSenhaForm) {
+            $scope.alterar = function () {
                 $scope.mensagens = [];
                 if ($scope.user.novaSenha !== $scope.user.confirmaNovaSenha) {
                     $scope.mensagens.push("Senhas não conferem.");
