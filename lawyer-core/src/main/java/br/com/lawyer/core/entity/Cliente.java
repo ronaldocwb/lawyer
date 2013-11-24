@@ -2,7 +2,6 @@ package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -13,19 +12,19 @@ import javax.persistence.OneToOne;
 @Entity
 public class Cliente extends AbstractBaseEntity {
 
-    @OneToOne(orphanRemoval = false, optional = true, cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = false, optional = true)
     private Empresa empresa;
 
-    @OneToOne(orphanRemoval = false, optional = true, cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = false, optional = true)
     private Pessoa pessoa;
 
     public Cliente() {}
 
-    public Cliente(Pessoa pessoa) {
+    public Cliente (Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
-    public Cliente(Empresa empresa) {
+    public Cliente (Empresa empresa) {
         this.empresa = empresa;
     }
 

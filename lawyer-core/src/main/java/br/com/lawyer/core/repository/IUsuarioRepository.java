@@ -2,10 +2,10 @@ package br.com.lawyer.core.repository;
 
 import br.com.lawyer.core.base.IJPABaseRepository;
 import br.com.lawyer.core.entity.Usuario;
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
-@NoRepositoryBean
+@Repository
 public interface IUsuarioRepository extends IJPABaseRepository<String, Usuario> {
-    Usuario findByEmail (String email);
+    Usuario findByEmail(String email);
 
 }

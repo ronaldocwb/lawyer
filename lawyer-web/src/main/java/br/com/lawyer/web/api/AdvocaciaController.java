@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdvocaciaController {
 
     @Autowired
-    private IAdvocaciaDelegate clienteDelegate;
+    private IAdvocaciaDelegate advocaciaDelegate;
 
     @RequestMapping(value = "/advocacia", method = RequestMethod.GET)
     public @ResponseBody
     AdvocaciaVO getAdvocaciaUsuario() throws BusinessException {
-        return clienteDelegate.findAdvocaciaUsuario();
+        return advocaciaDelegate.findAdvocaciaUsuario();
     }
 
 }

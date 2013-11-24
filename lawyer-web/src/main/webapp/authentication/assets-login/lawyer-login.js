@@ -1,5 +1,5 @@
 /**
- * lawyer-login - v0.3.0 - 10-10-2013
+ * lawyer-login - v0.3.0 - 23-11-2013
  * 
  *
  * Copyright (c) 2013 Deividi Cavarzan

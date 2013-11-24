@@ -1,9 +1,11 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseService;
+import br.com.lawyer.core.entity.Cliente;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.repository.IPessoaRepository;
 import br.com.lawyer.core.repository.predicates.PessoaPredicate;
+import br.com.lawyer.core.service.IClienteService;
 import br.com.lawyer.core.service.IPessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,11 +20,10 @@ import java.util.List;
  */
 @Service
 public class PessoaService extends BaseService<String, Pessoa, IPessoaRepository> implements IPessoaService {
-    /**
-     * Construtor
-     *
-     * @param repository - DAO que será utilizado referente a entidade manipulada
-     */
+
+    @Autowired
+    private IClienteService clienteService;
+
     @Autowired
     public PessoaService (IPessoaRepository repository) {
         super(repository);
@@ -49,5 +50,30 @@ public class PessoaService extends BaseService<String, Pessoa, IPessoaRepository
             pessoa.setEmpresa(null);
         }
 
+    }
+
+    @Override
+    public Pessoa salvar (Pessoa pessoa) {
+        saveAndFlush(pessoa);
+        if (pessoa.getCliente().equals(Boolean.TRUE)) {
+            Cliente cliente = new Cliente();
+            cliente.setPessoa(pessoa);
+            clienteService.salvar(cliente);
+        }
+        return pessoa;
+    }
+
+    @Override
+    public Pessoa atualizar (Pessoa pessoa) {
+        Pessoa storedPessoa = findOne(pessoa.getUid());
+        if (storedPessoa != null && !storedPessoa.getCliente().equals(pessoa.getCliente())) {
+            if (pessoa.getCliente().equals(Boolean.TRUE)) {
+                clienteService.save(new Cliente(pessoa));
+            } else {
+                clienteService.removerPorReferenciaUid(storedPessoa.getUid(), Pessoa.class);
+            }
+        }
+        save(pessoa);
+        return pessoa;
     }
 }

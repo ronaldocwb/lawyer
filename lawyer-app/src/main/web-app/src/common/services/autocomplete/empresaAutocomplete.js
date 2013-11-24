@@ -6,7 +6,7 @@ angular.module('empresaAutocomplete', [])
         var lastQuery = null;
         return {
             query: function (value) {
-                if (value.toLowerCase().indexOf(lastQuery) !== -1 && lastResult.length <= 8) {
+                if (value.toLowerCase().indexOf(lastQuery) !== -1 && lastResult.length < 8) {
                     return lastResult;
                 }
                 lastQuery = value.toLowerCase();

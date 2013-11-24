@@ -33,10 +33,10 @@ public abstract class JPABaseRepository<ID extends Serializable, T extends IUID<
     /**
      * EntityManager - gerencia a entidade
      */
-    private final EntityManager manager;
-    private final EntityPath<T> path;
-    private final PathBuilder<T> builder;
-    private final Querydsl querydsl;
+    protected final EntityManager manager;
+    protected final EntityPath<T> path;
+    protected final PathBuilder<T> builder;
+    protected final Querydsl querydsl;
 
     /**
      * Construtor b�sico para classe de acesso a dados (DAO)

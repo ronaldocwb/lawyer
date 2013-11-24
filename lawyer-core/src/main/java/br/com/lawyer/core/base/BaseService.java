@@ -29,11 +29,6 @@ public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D
 
     private final D repository;
 
-    /**
-     * Construtor
-     *
-     * @param repository - DAO que ser� utilizado referente a entidade manipulada
-     */
     public BaseService (D repository) {
         this.repository = repository;
     }

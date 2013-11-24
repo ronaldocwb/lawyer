@@ -6,7 +6,7 @@ angular.module('pessoaAutocomplete', [])
         var lastQueryPessoas = null;
         return {
             query: function (value) {
-                if (value.toLowerCase().indexOf(lastQueryPessoas) !== -1 && lastPessoas.length <= 8) {
+                if (value.toLowerCase().indexOf(lastQueryPessoas) !== -1 && lastPessoas.length < 8) {
                     return lastPessoas;
                 }
                 lastQueryPessoas = value.toLowerCase();

@@ -1,12 +1,11 @@
 package br.com.lawyer.core.repository;
 
+import br.com.lawyer.core.base.IJPABaseRepository;
+import br.com.lawyer.core.entity.AreaAtuacao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import br.com.lawyer.core.base.IJPABaseRepository;
-import br.com.lawyer.core.entity.AreaAtuacao;
 
 /**
  * @author Ronaldo

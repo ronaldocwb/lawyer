@@ -30,8 +30,9 @@ public class PessoaDelegate extends BaseDelegate<Pessoa, PessoaVO> implements IP
     }
 
     @Override
+    @Transactional
     public PessoaVO salvar (PessoaVO pessoaVO) {
-        Pessoa pessoa = pessoaService.save(pessoaVO.parse());
+        Pessoa pessoa = pessoaService.salvar(pessoaVO.parse());
         return getVO(pessoa);
     }
 
@@ -41,8 +42,9 @@ public class PessoaDelegate extends BaseDelegate<Pessoa, PessoaVO> implements IP
     }
 
     @Override
+    @Transactional
     public PessoaVO atualizar (PessoaVO pessoaVO, String uid) {
-        Pessoa pessoa = pessoaService.save(pessoaVO.parse());
+        Pessoa pessoa = pessoaService.atualizar(pessoaVO.parse());
         return getVO(pessoa);
     }
 

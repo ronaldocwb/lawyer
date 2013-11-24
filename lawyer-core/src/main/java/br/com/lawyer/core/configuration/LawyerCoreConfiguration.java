@@ -7,7 +7,6 @@ import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.naming.Context;
@@ -22,7 +21,7 @@ import javax.sql.DataSource;
  * @since 07/11/2013
  */
 @Configuration
-@ComponentScan ({"br.com.lawyer.core.authentication", "br.com.lawyer.core.service", "br.com.lawyer.core.repository"})
+@ComponentScan ({"br.com.lawyer.core", "br.com.lawyer.core.service", "br.com.lawyer.core.repository.impl"})
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "br.com.lawyer.core.repository")
 @EnableLoadTimeWeaving
@@ -45,6 +44,7 @@ public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setShowSql(true);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
@@ -56,11 +56,10 @@ public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager() {
 
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory());
-        txManager.setDataSource(dataSource());
         return txManager;
     }
 
