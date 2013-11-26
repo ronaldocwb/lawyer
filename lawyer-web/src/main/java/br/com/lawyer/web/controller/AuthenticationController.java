@@ -2,7 +2,7 @@ package br.com.lawyer.web.controller;
 
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.web.delegate.IUsuarioDelegate;
+import br.com.lawyer.web.delegate.UsuarioDelegate;
 import br.com.lawyer.web.vo.UsuarioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +26,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private IUsuarioDelegate usuarioDelegate;
+    private UsuarioDelegate usuarioDelegate;
 
     /**
      * Esse é o mapeamento que o Spring Security redireciona quando o usuário acessa um contexto protegido por ele.

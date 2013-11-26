@@ -15,6 +15,6 @@ public class ResponsavelPredicate {
             return null;
         }
         QResponsavel responsavel = QResponsavel.responsavel;
-        return responsavel.pessoa.nome.containsIgnoreCase(nome);
+        return responsavel.pessoa.nome.containsIgnoreCase(nome).or(responsavel.setor.nome.containsIgnoreCase(nome));
     }
 }

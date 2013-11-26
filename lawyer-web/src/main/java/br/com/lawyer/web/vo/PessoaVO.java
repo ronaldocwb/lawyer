@@ -33,8 +33,10 @@ public class PessoaVO extends BaseVO<Pessoa>{
     private List<EmailVO> emails;
     
     private UsuarioVO usuario;
+	
+	private Boolean cliente;
 
-	public PessoaVO(Pessoa pessoa) {
+    public PessoaVO(Pessoa pessoa) {
         super(pessoa);
     }
 
@@ -142,4 +144,11 @@ public class PessoaVO extends BaseVO<Pessoa>{
 		this.usuario = usuario;
 	}
 
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
+    }
 }

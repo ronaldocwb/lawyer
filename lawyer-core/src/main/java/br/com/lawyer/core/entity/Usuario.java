@@ -30,7 +30,7 @@ public class Usuario extends AbstractBaseEntity {
     private String senha;
 
     @ManyToOne
-    private Cliente cliente;
+    private Advocacia advocacia;
 
     @OneToOne()
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -75,12 +75,12 @@ public class Usuario extends AbstractBaseEntity {
         this.permissoes = permissoes;
     }
 
-    public Cliente getCliente () {
-        return cliente;
+    public Advocacia getAdvocacia () {
+        return advocacia;
     }
 
-    public void setCliente (Cliente cliente) {
-        this.cliente = cliente;
+    public void setAdvocacia (Advocacia advocacia) {
+        this.advocacia = advocacia;
     }
 
     public Pessoa getPessoa () {

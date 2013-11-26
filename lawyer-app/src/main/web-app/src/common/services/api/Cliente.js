@@ -3,7 +3,7 @@ angular.module('lawyer.Cliente', [
     ])
 
     .factory('Cliente', function ($resource) {
-        return $resource('/lawyer/api/cliente/:uid', {uid: '@uid'}, {
+        return $resource('/lawyer/api/clientes/:uid', {uid: '@uid'}, {
             update  : { method: 'PUT' }
         });
     })

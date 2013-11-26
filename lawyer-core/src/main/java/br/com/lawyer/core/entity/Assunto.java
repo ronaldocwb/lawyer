@@ -29,7 +29,6 @@ public class Assunto extends AbstractBaseEntity {
     @ManyToOne
     private AreaAtuacao areaAtuacao;
 
-
     @ManyToOne
     @JoinColumn (name = "uuid_adv_responsavel")
     private Advogado responsavel;

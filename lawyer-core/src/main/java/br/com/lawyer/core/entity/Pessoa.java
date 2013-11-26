@@ -32,7 +32,9 @@ public class Pessoa extends AbstractBaseEntity {
     @OneToOne(mappedBy="pessoa", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
     private Usuario usuario;
 
-	public String getNome () {
+    private Boolean cliente = Boolean.FALSE;
+
+    public String getNome () {
         return nome;
     }
 
@@ -87,4 +89,12 @@ public class Pessoa extends AbstractBaseEntity {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
+    }
 }

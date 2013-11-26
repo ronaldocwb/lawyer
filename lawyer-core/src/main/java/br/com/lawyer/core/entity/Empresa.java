@@ -37,6 +37,8 @@ public class Empresa extends AbstractBaseEntity {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Responsavel> responsaveis;
 
+    private Boolean cliente = Boolean.FALSE;
+
     public String getRazaoSocial () {
         return razaoSocial;
     }
@@ -91,5 +93,13 @@ public class Empresa extends AbstractBaseEntity {
 
     public void setEmails (List<Email> emails) {
         this.emails = emails;
+    }
+
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
     }
 }

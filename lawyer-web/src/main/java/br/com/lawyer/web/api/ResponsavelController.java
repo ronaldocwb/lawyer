@@ -2,7 +2,7 @@ package br.com.lawyer.web.api;
 
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IResponsavelDelegate;
+import br.com.lawyer.web.delegate.ResponsavelDelegate;
 import br.com.lawyer.web.vo.ResponsavelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class ResponsavelController {
 
     @Autowired
-    private IResponsavelDelegate responsavelDelegate;
+    private ResponsavelDelegate responsavelDelegate;
 
     @RequestMapping (value = "/responsaveis", method = RequestMethod.GET)
     public @ResponseBody

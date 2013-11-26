@@ -16,9 +16,15 @@ angular.module('lawyer.atividades.cadastro', [
                 edicao : false
             };
             $scope.atividade = {
-                telefones: [],
-                responsaveis: [],
-                enderecos: []
+                assunto: null,
+                dataReferencia: new Date(),
+                descricao : null,
+                observacao : null,
+                tempo : {
+                    horas : 0,
+                    minutos : 0
+                },
+                valorTotal : '0'
             };
 
             $scope.pushAtividadeListagem = function () {
@@ -28,6 +34,7 @@ angular.module('lawyer.atividades.cadastro', [
             };
 
             $scope.salvar = function () {
+                $scope.atividade.duracao = $scope.atividade.tempo.horas * 60 + $scope.atividade.tempo.minutos;
                 $scope.atividade = Atividade.save($scope.atividade, function () {
                     notifications.pushForCurrentRoute('atividade.salva', 'success', {nome: $scope.atividade.nomeFantasia});
                     $scope.pushAtividadeListagem();

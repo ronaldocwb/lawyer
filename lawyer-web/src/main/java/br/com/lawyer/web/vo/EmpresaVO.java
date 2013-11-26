@@ -30,6 +30,8 @@ public class EmpresaVO extends BaseVO<Empresa> {
 
     private List<ResponsavelVO> responsaveis;
 
+    private boolean cliente;
+
     public EmpresaVO(Empresa empresa) {
         super(empresa);
     }
@@ -127,5 +129,13 @@ public class EmpresaVO extends BaseVO<Empresa> {
         }
         responsaveis.removeAll(empty);
         this.responsaveis = responsaveis;
+    }
+
+    public Boolean getCliente () {
+        return cliente;
+    }
+
+    public void setCliente (Boolean cliente) {
+        this.cliente = cliente;
     }
 }

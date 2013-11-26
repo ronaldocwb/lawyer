@@ -2,7 +2,7 @@ package br.com.lawyer.web.api;
 
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.ILembreteDelegate;
+import br.com.lawyer.web.delegate.LembreteDelegate;
 import br.com.lawyer.web.vo.LembreteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.List;
 public class LembreteController {
 
     @Autowired
-    private ILembreteDelegate lembreteDelegate;
+    private LembreteDelegate lembreteDelegate;
 
     @RequestMapping (value = "/lembretes", method = RequestMethod.GET)
     public @ResponseBody

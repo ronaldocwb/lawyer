@@ -1,35 +1,39 @@
-<div ng-if="true" class="fadeInUp">
+<div class="fadeInUp">
     <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
             <legend data-ng-show="tela.cadastro === true">Nova Atividade</legend>
             <legend data-ng-show="tela.edicao === true">Editar Atividade</legend>
-            <div class="control-group">
+            <div class="control-group" ng-class="{'error' : !cadastro.assunto.$valid && cadastro.assunto.$dirty, 'warning' : !cadastro.assunto.$dirty}">
                 <label class="control-label" for="assunto">Assunto:*</label>
                 <div class="controls">
-                    <input name="assunto" id="assunto" class="x-large" type="text"
+                    <input name="assunto" id="assunto"  class="x-large" type="text"
+                           required
                            ng-model="atividade.assunto"
                            typeahead-editable="false"
                            typeahead-min-length="3"
                            typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue)"/>
                 </div>
             </div>
-            <div class="control-group">
+            <div class="control-group ">
                 <label class="control-label" for="data">Data:</label>
                 <div class="controls">
                     <input type="text" id="data" show-weeks="false" datepicker-popup="dd/MM/yyyy" ng-model="atividade.dataReferencia" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
                     <button class="btn" type="button" ng-click="open()"><i class="icon-calendar"></i></button>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="duracao">Duração:</label>
+            <div class="control-group" ng-class="{'error' : !cadastro.tempoMinutos.$valid || !cadastro.tempoHoras.$valid}">
+                <label class="control-label" for="tempoMinutos">Duração:</label>
                 <div class="controls">
-                    <input id="duracao" class="text x-large" type="text" data-ng-model="atividade.duracao"/>
+                    <input id="tempoHoras" name="tempoHoras" class="text span1" type="number" min="0" data-ng-model="atividade.tempo.horas"/> Horas
+                    <input id="tempoMinutos" name="tempoMinutos" class="text span1" type="number" max="60" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
+                    <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid" >Informe um número entre 0 e 60 segundos.</span>
+                    <span class="help-inline" ng-show="!cadastro.tempoHoras.$valid" >Informe uma hora maior ou igual a 0.</span>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="valorTotal">Valor:</label>
+                <label class="control-label" for="valorTotal">Valor por Hora:</label>
                 <div class="controls">
-                    <input id="valorTotal" class="text x-large" type="text" data-ng-model="atividade.valorTotal"/>
+                    <input id="valorTotal" class="text x-large" type="text" formata-valor-input data-ng-model="atividade.valorTotal"/>
                 </div>
             </div>
             <div class="control-group">

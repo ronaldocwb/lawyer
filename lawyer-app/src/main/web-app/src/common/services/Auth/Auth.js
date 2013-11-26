@@ -5,7 +5,7 @@
  * Módulo de gerenciamento de credenciais
  *
  */
-angular.module('lawyer.auth', [
+angular.module('auth', [
         'ngCookies'
     ])
     .factory('auth', ['$cookieStore', function ($cookieStore) {

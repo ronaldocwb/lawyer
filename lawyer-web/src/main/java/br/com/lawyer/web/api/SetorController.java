@@ -1,7 +1,7 @@
 package br.com.lawyer.web.api;
 
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.ISetorDelegate;
+import br.com.lawyer.web.delegate.SetorDelegate;
 import br.com.lawyer.web.vo.SetorVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class SetorController {
 
     @Autowired
-    private ISetorDelegate setorDelegate;
+    private SetorDelegate setorDelegate;
 
     @RequestMapping (value = "/setores", method = RequestMethod.GET)
     @ResponseBody

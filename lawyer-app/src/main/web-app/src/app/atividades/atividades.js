@@ -1,6 +1,11 @@
 angular.module('lawyer.atividades', [
         'lawyer.Atividade',
-        'lawyer.Assunto'
+        'lawyer.Assunto',
+        'assuntoAutocomplete',
+        'usuarioAutocomplete',
+        'formataValorInput',
+        'formataReais',
+        'formataHora'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -21,25 +26,18 @@ angular.module('lawyer.atividades', [
         });
     }])
 
-    .controller('AtividadesController', ['$scope', 'atividades', '$http',
-        function ($scope, atividades, $http) {
+    .controller('AtividadesController', ['$scope', 'atividades', 'assuntoAutocomplete', 'usuarioAutocomplete',
+        function ($scope, atividades, assuntoAutocomplete, usuarioAutocomplete) {
             $scope.atividades = atividades;
 
             $scope.getAssuntos = function (value) {
-                return $http.get('/lawyer/api/assuntos?q=' + value +'&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
+                return assuntoAutocomplete.query(value);
             };
 
             $scope.getUsuarios = function (value) {
-                return $http.get('/lawyer/api/usuarios?q=' + value + '&page=0&limit:8')
-                    .then(function (result) {
-                        return result.data.content;
-                    });
+                return usuarioAutocomplete.query(value);
             };
 
         }])
-
 ;
 

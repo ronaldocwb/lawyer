@@ -1,39 +1,47 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 /**
  * @author Deividi
- * @since 31/10/2013
+ * @since 22/11/2013
  */
 @Entity
-public class Cliente extends AbstractBaseEntity {
+public class Cliente extends AbstractBaseEntity implements Serializable {
 
-    private String nome;
+    @OneToOne(orphanRemoval = false, optional = true)
+    private Empresa empresa;
 
-    @OneToMany
-    @LazyCollection (LazyCollectionOption.FALSE)
-    private List<Usuario> usuarios;
+    @OneToOne(orphanRemoval = false, optional = true)
+    private Pessoa pessoa;
 
-    public String getNome () {
-        return nome;
+    public Cliente() {}
+
+    public Cliente (Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public void setNome (String nome) {
-        this.nome = nome;
+    public Cliente (Empresa empresa) {
+        this.empresa = empresa;
     }
 
-    public List<Usuario> getUsuarios () {
-        return usuarios;
+    public Empresa getEmpresa () {
+        return empresa;
     }
 
-    public void setUsuarios (List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setEmpresa (Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Pessoa getPessoa () {
+        return pessoa;
+    }
+
+    public void setPessoa (Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

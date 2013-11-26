@@ -2,7 +2,7 @@ package br.com.lawyer.web.api;
 
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IPessoaDelegate;
+import br.com.lawyer.web.delegate.PessoaDelegate;
 import br.com.lawyer.web.vo.PessoaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class PessoaController {
 
     @Autowired
-    private IPessoaDelegate pessoaDelegate;
+    private PessoaDelegate pessoaDelegate;
 
     @RequestMapping (value = "/pessoas", method = RequestMethod.GET)
     public @ResponseBody Page list(
