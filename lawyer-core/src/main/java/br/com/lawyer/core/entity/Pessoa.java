@@ -20,9 +20,6 @@ public class Pessoa extends AbstractBaseEntity {
     @ManyToOne(optional = true)
     private Empresa empresa;
 
-    @Column (length = 200)
-    private String email;
-
     @ElementCollection
     private List<Telefone> telefones;
 
@@ -31,8 +28,11 @@ public class Pessoa extends AbstractBaseEntity {
 
     @ElementCollection
     private List<Endereco> enderecos;
+    
+    @OneToOne(mappedBy="pessoa", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+    private Usuario usuario;
 
-    public String getNome () {
+	public String getNome () {
         return nome;
     }
 
@@ -54,14 +54,6 @@ public class Pessoa extends AbstractBaseEntity {
 
     public void setEmpresa (Empresa empresa) {
         this.empresa = empresa;
-    }
-
-    public String getEmail () {
-        return email;
-    }
-
-    public void setEmail (String email) {
-        this.email = email;
     }
 
     public List<Telefone> getTelefones () {
@@ -87,4 +79,12 @@ public class Pessoa extends AbstractBaseEntity {
     public void setEmails (List<Email> emails) {
         this.emails = emails;
     }
+    
+    public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

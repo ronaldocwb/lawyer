@@ -16,7 +16,9 @@ import java.util.List;
 @JsonSerialize (include = JsonSerialize.Inclusion.NON_NULL)
 public class PessoaVO extends BaseVO<Pessoa>{
 
-    private String uid;
+	private static final long serialVersionUID = 1L;
+
+	private String uid;
 
     private String nome;
 
@@ -24,15 +26,15 @@ public class PessoaVO extends BaseVO<Pessoa>{
 
     private EmpresaVO empresa;
 
-    private String email;
-
     private List<TelefoneVO> telefones;
 
     private List<EnderecoVO> enderecos;
 
     private List<EmailVO> emails;
+    
+    private UsuarioVO usuario;
 
-    public PessoaVO(Pessoa pessoa) {
+	public PessoaVO(Pessoa pessoa) {
         super(pessoa);
     }
 
@@ -70,14 +72,6 @@ public class PessoaVO extends BaseVO<Pessoa>{
 
     public void setEmpresa (EmpresaVO empresa) {
         this.empresa = empresa;
-    }
-
-    public String getEmail () {
-        return email;
-    }
-
-    public void setEmail (String email) {
-        this.email = email;
     }
 
     public List<TelefoneVO> getTelefones () {
@@ -139,5 +133,13 @@ public class PessoaVO extends BaseVO<Pessoa>{
         emails.removeAll(empty);
         this.emails = emails;
     }
+    
+    public UsuarioVO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioVO usuario) {
+		this.usuario = usuario;
+	}
 
 }

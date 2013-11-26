@@ -1,10 +1,24 @@
 package br.com.lawyer.core.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
-
-import javax.persistence.*;
-import java.util.List;
+import br.com.lawyer.core.entity.enumerated.StatusUsuario;
 
 @Entity
 public class Usuario extends AbstractBaseEntity {
@@ -18,13 +32,24 @@ public class Usuario extends AbstractBaseEntity {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToOne
+    @OneToOne()
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Pessoa pessoa;
+    
+    @Enumerated(EnumType.ORDINAL)
+    private StatusUsuario ativo;
 
-    @ElementCollection (fetch = FetchType.EAGER, targetClass = Permissao.class)
+	@ElementCollection (fetch = FetchType.EAGER, targetClass = Permissao.class)
     @Enumerated (value = EnumType.STRING)
     @JoinColumn (columnDefinition = "Permissao")
     private List<Permissao> permissoes;
+	
+	@PrePersist
+	public void prePersist(){
+		if(getAtivo() == null){
+			setAtivo(StatusUsuario.SEM_ATIVACAO_INICIAL);
+		}
+	}
 
     public String getSenha () {
         return senha;
@@ -65,4 +90,12 @@ public class Usuario extends AbstractBaseEntity {
     public void setPessoa (Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+    
+    public StatusUsuario getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(StatusUsuario ativo) {
+		this.ativo = ativo;
+	}
 }
