@@ -2,7 +2,7 @@ package br.com.lawyer.web.api;
 
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IAssuntoDelegate;
+import br.com.lawyer.web.delegate.AssuntoDelegate;
 import br.com.lawyer.web.vo.AssuntoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import java.util.Date;
 public class AssuntoController {
 
     @Autowired
-    private IAssuntoDelegate assuntoDelegate;
+    private AssuntoDelegate assuntoDelegate;
 
     @RequestMapping (value = "/assuntos", method = RequestMethod.GET)
     @ResponseBody

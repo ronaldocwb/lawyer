@@ -5,192 +5,72 @@ import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.Predicate;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Estabelece os comportamentos b�sicos de neg�cio de uma entidade.
- *
- * @param <ID> tipo da chave prim�ria da entidade.
- * @param <T>  tipo da entidade.
- * @param <D>  tipo do DAO.
- * @author Deividi Cavarzan
- */
-public abstract class BaseService<ID extends Serializable, T extends IUID<ID>, D extends IJPABaseRepository<ID, T>> implements Serializable, IBaseService<ID, T, D> {
+public interface BaseService<ID extends Serializable, T extends IUID<ID>, D extends JPABaseRepository<ID, T>> {
 
-    private static final long serialVersionUID = 8080307118544118690L;
+    public List<T> findAll ();
 
-    private final D repository;
+    public List<T> findAll (Sort sort);
 
-    public BaseService (D repository) {
-        this.repository = repository;
-    }
+    public Page<T> findAll (Pageable pageable);
 
-    /**
-     * Retorna o repository para manipula��o da entidade
-     *
-     * @return
-     */
-    public D getRepository () {
-        return this.repository;
-    }
+    public void flush ();
 
-    public long count () {
-        return (int) this.getRepository().count();
-    }
+    public T saveAndFlush (T entity);
 
-    public List<T> findAll () {
-        return this.getRepository().findAll();
-    }
+    public void deleteInBatch (Iterable<T> entities);
 
-    @Override
-    public List<T> findAll (Sort sort) {
-        return getRepository().findAll(sort);
-    }
+    public void deleteAllInBatch ();
 
-    @Override
-    public Page<T> findAll (Pageable pageable) {
-        return getRepository().findAll(pageable);
-    }
+    public <S extends T> List<S> save (Iterable<S> entities);
 
-    @Override
-    public void flush () {
-        getRepository().flush();
-    }
+    public <S extends T> S save (S entity);
 
-    @Override
-    public T saveAndFlush (T entity) {
-        return getRepository().saveAndFlush(entity);
-    }
+    public T findOne (ID id);
 
-    @Override
-    public void deleteInBatch (Iterable<T> entities) {
-        getRepository().deleteInBatch(entities);
-    }
+    public boolean exists (ID id);
 
-    @Override
-    public void deleteAllInBatch () {
-        getRepository().deleteAllInBatch();
-    }
+    public Iterable<T> findAll (Iterable<ID> ids);
 
-    @Override
-    public <S extends T> List<S> save (Iterable<S> entities) {
-        return getRepository().save(entities);
-    }
+    public void delete (ID id);
 
-    @Override
-    public <S extends T> S save (S entity) {
-        return getRepository().save(entity);
-    }
+    public void delete (T entity);
 
-    @Override
-    public T findOne (ID id) {
-        return getRepository().findOne(id);
-    }
+    public void delete (Iterable<? extends T> entities);
 
-    @Override
-    public boolean exists (ID id) {
-        return getRepository().exists(id);
-    }
+    public void deleteAll ();
 
-    @Override
-    public Iterable<T> findAll (Iterable<ID> ids) {
-        return getRepository().findAll(ids);
-    }
+    public T findOne (Predicate spec);
 
-    @Override
-    public void delete (ID id) {
-        getRepository().delete(id);
-    }
+    public List<T> findAll (Predicate spec);
 
-    @Override
-    public void delete (T entity) {
-        getRepository().delete(entity);
-    }
+    public Page<T> findAll (Predicate spec, Pageable pageable);
 
-    @Override
-    public void delete (Iterable<? extends T> entities) {
-        getRepository().delete(entities);
-    }
+    public List<T> findAll (Predicate spec, OrderSpecifier sort);
 
-    @Override
-    public void deleteAll () {
-        getRepository().deleteAll();
-    }
+    public long count (Predicate spec);
 
-    @Override
-    public T findOne (Predicate spec) {
-        return getRepository().findOne(spec);
-    }
+    public long count ();
 
-    @Override
-    public List<T> findAll (Predicate spec) {
-        return (List<T>) getRepository().findAll(spec);
-    }
+    public T findOne (Specification<T> spec);
 
-    @Override
-    public Page<T> findAll (Predicate spec, Pageable pageable) {
-        return getRepository().findAll(spec, pageable);
-    }
+    public List<T> findAll (Specification<T> spec);
 
-    @Override
-    public List<T> findAll (Predicate spec, OrderSpecifier sort) {
-        return (List<T>) getRepository().findAll(spec, sort);
-    }
+    public Page<T> findAll (Specification<T> spec, Pageable pageable);
 
-    @Override
-    public long count (Predicate spec) {
-        return getRepository().count(spec);
-    }
+    public List<T> findAll (Specification<T> spec, Sort sort);
 
-    @Override
-    public T findOne (Specification<T> spec) {
-        return getRepository().findOne(spec);
-    }
+    public long count (Specification<T> spec);
 
-    @Override
-    public List<T> findAll (Specification<T> spec) {
-        return getRepository().findAll(spec);
-    }
+    public Usuario getUsuarioLogado() throws BusinessException;
 
-    @Override
-    public Page<T> findAll (Specification<T> spec, Pageable pageable) {
-        return getRepository().findAll(spec, pageable);
-    }
-
-    @Override
-    public List<T> findAll (Specification<T> spec, Sort sort) {
-        return getRepository().findAll(spec, sort);
-    }
-
-    @Override
-    public long count (Specification<T> spec) {
-        return getRepository().count(spec);
-    }
-
-    @Override
-    public Usuario getUsuarioLogado() throws BusinessException {
-        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        if (token.getUsuario() == null || StringUtils.isBlank(token.getUsuario().getUid())) {
-            throw new BusinessException("Usuario nao encontrado na autenticação.");
-        }
-        return token.getUsuario();
-    }
-
-    @Override
-    public LawyerAuthenticationToken getCredenciais() throws BusinessException {
-        LawyerAuthenticationToken token = (LawyerAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        if (token == null || token.getCredentials() == null) {
-            throw new BusinessException("Usuario nao encontrado na autenticação.");
-        }
-        return token;
-    }
+    public LawyerAuthenticationToken getCredenciais() throws BusinessException;
 
 }

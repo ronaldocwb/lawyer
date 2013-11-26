@@ -69,7 +69,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                     //expressions used by typeahead
                     var parserResult = typeaheadParserLawyer.parse(attrs.typeaheadLawyer);
 
-                    
+                    var hasFocus;
 
                     //pop-up element used to display matches
                     var popUpEl = angular.element('<typeahead-popup-lawyer></typeahead-popup-lawyer>');
@@ -256,6 +256,9 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                         originalScope.valor.text = modelCtrl.$viewValue;
 
                         if (scope.matches.length === 0 || HOT_KEYS.indexOf(evt.which) === -1) {
+                            if (evt.which === 13) {
+                                evt.preventDefault();
+                            }
                             return;
                         }
 

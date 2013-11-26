@@ -3,7 +3,7 @@ package br.com.lawyer.web.api;
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IUsuarioDelegate;
+import br.com.lawyer.web.delegate.UsuarioDelegate;
 import br.com.lawyer.web.vo.UsuarioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     @Autowired
-    private IUsuarioDelegate usuarioDelegate;
+    private UsuarioDelegate usuarioDelegate;
 
     @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
     public @ResponseBody Page list(@RequestParam(value = "page", defaultValue = "0") int page,

@@ -4,13 +4,14 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 /**
  * @author Deividi
  * @since 22/11/2013
  */
 @Entity
-public class Cliente extends AbstractBaseEntity {
+public class Cliente extends AbstractBaseEntity implements Serializable {
 
     @OneToOne(orphanRemoval = false, optional = true)
     private Empresa empresa;

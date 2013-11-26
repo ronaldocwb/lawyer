@@ -1,7 +1,7 @@
 package br.com.lawyer.web.api;
 
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IMunicipioDelegate;
+import br.com.lawyer.web.delegate.MunicipioDelegate;
 import br.com.lawyer.web.vo.MunicipioVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MunicipioController {
 
     @Autowired
-    private IMunicipioDelegate municipioDelegate;
+    private MunicipioDelegate municipioDelegate;
 
     @RequestMapping (value = "/municipios", method = RequestMethod.GET)
     @ResponseBody

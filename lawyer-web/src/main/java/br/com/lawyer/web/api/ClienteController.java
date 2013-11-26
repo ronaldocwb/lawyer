@@ -1,7 +1,7 @@
 package br.com.lawyer.web.api;
 
 import br.com.lawyer.web.annotation.ApiController;
-import br.com.lawyer.web.delegate.IClienteDelegate;
+import br.com.lawyer.web.delegate.ClienteDelegate;
 import br.com.lawyer.web.vo.ClienteVO;
 import br.com.lawyer.web.vo.PessoaVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ClienteController {
 
     @Autowired
-    private IClienteDelegate clienteDelegate;
+    private ClienteDelegate clienteDelegate;
 
     @RequestMapping (value = "/clientes", method = RequestMethod.GET)
     @ResponseBody
