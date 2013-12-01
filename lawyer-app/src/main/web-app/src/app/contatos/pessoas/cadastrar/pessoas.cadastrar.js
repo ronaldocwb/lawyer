@@ -61,9 +61,6 @@ angular.module('lawyer.pessoas.cadastro', [
                 $scope.pessoa[key].splice($index, 1);
             };
 
-
-
-
             $scope.addEmpresa= function (name) {
                 $scope.pessoa.empresa = {
                     nomeFantasia : name,

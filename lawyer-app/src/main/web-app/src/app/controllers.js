@@ -39,5 +39,6 @@ angular.module('lawyer.controllers', [
     'lawyer.advogados.edicao',
     'lawyer.configuracoes.advocacia',
     'lawyer.configuracoes.conta',
+    'lawyer.agenda'
 
 ]);

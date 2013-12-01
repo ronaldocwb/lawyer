@@ -16,7 +16,7 @@
     "noty": "latest",
     "angular-sanitize": "1.2.1",
     "animate.css": "~2.1.0",
-    "bootstrap3": "https://github.com/angular-ui/bootstrap/tree/bootstrap3"
+    "angular-ui-calendar": "~0.1.3"
   },
   "dependencies": {}
 }

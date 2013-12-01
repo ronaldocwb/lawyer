@@ -1,6 +1,6 @@
 angular.module('lawyer.header', [])
     .directive('header', [function () {
-        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'advogados', 'atividades'];
+        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'advogados', 'atividades', 'agenda'];
         return {
             restrict : 'E',
             replace : true,
@@ -25,7 +25,8 @@ angular.module('lawyer.header', [])
                         case 'pessoas' :        scope.abas.contatos = true; break;
                         case 'areasAtuacao' :   scope.abas.areasAtuacao = true; break;
                         case 'advogados' :      scope.abas.advogados = true; break;
-                        case 'atividades' :      scope.abas.atividades = true; break;
+                        case 'atividades' :     scope.abas.atividades = true; break;
+                        case 'agenda' :     scope.abas.agenda = true; break;
                     }
                 });
             }

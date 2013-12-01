@@ -26,6 +26,9 @@ module.exports = {
 
     vendor_files: {
         js: [
+            'vendor/jquery/jquery.min.js',
+            'vendor/jquery-ui/ui/jquery-ui.js',
+            'vendor/fullcalendar/fullcalendar.js',
             'vendor/angular/angular.js',
 			'vendor/angular-animate/angular-animate.js',
 			'vendor/angular-cookies/angular-cookies.js',
@@ -40,7 +43,7 @@ module.exports = {
             'vendor/angular-ui-utils/modules/route/route.js',
             'vendor/angular-ui-utils/modules/mask/mask.js',
             'vendor/angular-ui-utils/modules/validate/validate.js',
-            'vendor/jquery/jquery.min.js',
+            'vendor/angular-ui-calendar/src/calendar.js',
             'vendor/noty/js/noty/jquery.noty.js',
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/center.js',
@@ -50,7 +53,8 @@ module.exports = {
             'vendor/noty/js/noty/themes/default.js',
         ],
         css: [
-            'vendor/animate.css/animate.css'
+            'vendor/animate.css/animate.css',
+            'vendor/fullcalendar/fullcalendar.css'
         ]
     }
 };

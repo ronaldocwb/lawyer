@@ -19,11 +19,13 @@
                 <div class="controls">
                     <input name="assunto" id="assunto"  class="x-large" type="text"
                            required
+                           ng-blur="onBlurAssunto()"
                            data-ng-disabled="!atividade.cliente"
                            ng-model="atividade.assunto"
                            typeahead-editable="false"
                            typeahead-min-length="3"
                            typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue, atividade.cliente)"/>
+                    <span class="help-inline" ng-show="blur.error" >Informe um assunto relacionado.</span>
                 </div>
             </div>
             <div class="control-group ">
@@ -36,8 +38,8 @@
             <div class="control-group" ng-class="{'error' : !cadastro.tempoMinutos.$valid || !cadastro.tempoHoras.$valid}">
                 <label class="control-label" for="tempoMinutos">Duração:</label>
                 <div class="controls">
-                    <input id="tempoHoras" name="tempoHoras" class="text span2" type="number" min="0" data-ng-model="atividade.tempo.horas" /> Horas
-                    <input id="tempoMinutos" name="tempoMinutos" class="text span2" type="number" max="59" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
+                    <input id="tempoHoras" name="tempoHoras" class="input-mini" type="number" min="0" data-ng-model="atividade.tempo.horas" /> Horas
+                    <input id="tempoMinutos" name="tempoMinutos" class="input-mini" type="number" max="59" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
                     <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid" >Informe um número entre 0 e 59 minutos.</span>
                     <span class="help-inline" ng-show="!cadastro.tempoHoras.$valid" >Informe uma hora maior ou igual a 0.</span>
                 </div>
@@ -49,13 +51,13 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="descricao">Descricao:</label>
+                <label class="control-label" for="descricao">Descrição:</label>
                 <div class="controls">
                     <textarea id="descricao" class="text x-large" type="text" data-ng-model="atividade.descricao"></textarea>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="observacao">Observacao:</label>
+                <label class="control-label" for="observacao">Observação:</label>
                 <div class="controls">
                     <input id="observacao" class="text x-large" type="text" data-ng-model="atividade.observacao"/>
                 </div>
