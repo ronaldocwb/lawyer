@@ -9,7 +9,10 @@ import br.com.lawyer.web.base.BaseVO;
  */
 public class EmailVO extends BaseVO<Email> {
 
-    private String value;
+	private static final long serialVersionUID = 1L;
+	
+	private String value;
+    private boolean principal;
 
     public EmailVO (Email email) {
         super(email);
@@ -25,4 +28,12 @@ public class EmailVO extends BaseVO<Email> {
     public void setValue (String value) {
         this.value = value;
     }
+    
+    public boolean isPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(boolean principal) {
+		this.principal = principal;
+	}
 }

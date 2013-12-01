@@ -4,6 +4,7 @@ import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import br.com.lawyer.web.base.BaseVO;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -30,8 +31,13 @@ public class UsuarioVO extends BaseVO<Usuario> {
     public UsuarioVO(Usuario usuario) {
         super(usuario);
     }
+    
+    public UsuarioVO(String email) {
+		super();
+		this.email = email;
+	}
 
-    @JsonIgnore
+	@JsonIgnore
     public String getSenha () {
         return senha;
     }

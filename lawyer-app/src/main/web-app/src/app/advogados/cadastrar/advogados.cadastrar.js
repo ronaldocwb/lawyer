@@ -14,6 +14,7 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.advogado = {};
             $scope.novaPessoa = 'true';
+            $scope.geraUsuario = 'false';
 
             $scope.advogado.pessoa = {
                 nome : '',
