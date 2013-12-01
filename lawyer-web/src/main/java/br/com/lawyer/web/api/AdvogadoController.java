@@ -31,7 +31,7 @@ public class AdvogadoController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/advogados", method = RequestMethod.POST)
-    public @ResponseBody AdvogadoVO salvarUsuario(@RequestBody AdvogadoVO advogadoVO) {
+    public @ResponseBody AdvogadoVO salvarUsuario(@RequestBody AdvogadoVO advogadoVO) throws BusinessException {
         return advogadoDelegate.salvar(advogadoVO);
     }
 

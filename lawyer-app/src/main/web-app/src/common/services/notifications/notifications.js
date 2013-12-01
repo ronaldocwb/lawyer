@@ -24,6 +24,16 @@ angular.module('services.notifications', ['services.notificationsHandler', 'serv
                 return notificationsHandler.pushForCurrentRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },
 
+            pushLoginExpirou : function () {
+                var notification = {
+                    text : 'Sua sessão expirou, realize um novo login.',
+                    type : "information",
+                    modal : true,
+                    layout : "center"
+                };
+                return notificationsHandler.pushLoginExpirou(notification);
+            },
+
             pushForNextRoute : function (mensagem, type, interpolateParams, layout, timeout, otherProperties) {
                 return notificationsHandler.pushForNextRoute(prepareNotification(mensagem, type, layout, timeout, interpolateParams, otherProperties));
             },

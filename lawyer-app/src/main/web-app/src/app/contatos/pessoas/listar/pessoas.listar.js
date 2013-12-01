@@ -54,7 +54,7 @@ angular.module('lawyer.pessoas.listar', [
 
                 modalInstance.result.then(function () {
                     Pessoa.remove({id: pessoa.uid}, pessoa, function () {
-                        notifications.pushForCurrentRoute('pessoa.apagada', 'success', {nome : pessoa.nome});
+                        notifications.pushForCurrentRoute('pessoa.apagada', 'information', {nome : pessoa.nome});
                         $scope.pessoas.content.splice($scope.pessoas.content.indexOf(pessoa), 1);
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(pessoa), 1);

@@ -3,7 +3,7 @@ angular.module('lawyer.pessoas.edicao', [
 
     .config(['$stateProvider',  function config($stateProvider) {
         $stateProvider.state('pessoas.editar', {
-            url: '/editar/',
+            url: '/editar/:uid',
             controller: 'PessoaEdicaoController',
             templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html'
         });

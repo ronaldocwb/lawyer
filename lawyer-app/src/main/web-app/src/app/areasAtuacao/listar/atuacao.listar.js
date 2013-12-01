@@ -31,9 +31,9 @@ angular.module('lawyer.areasAtuacao.listar', [
                 modalInstance.result.then(function (areaAtuacao) {
                     AreaAtuacao.delete(areaAtuacao, function () {
                         $scope.areasAtuacao.content.splice($scope.areasAtuacao.content.indexOf(areaAtuacao), 1);
-
+                        notifications.pushForCurrentRoute('areaAtuacao.apagada', 'information', {nome : areaAtuacao.nome});
                     }, function error() {
-                        notifications.pushForNextRoute('areaAtuacao.erro.apagar', 'error');
+                        notifications.pushForCurrentRoute('areaAtuacao.erro.apagar', 'error');
                     });
 
                 });

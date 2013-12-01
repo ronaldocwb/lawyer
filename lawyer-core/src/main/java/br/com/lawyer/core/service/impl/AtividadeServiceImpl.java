@@ -3,8 +3,8 @@ package br.com.lawyer.core.service.impl;
 import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Atividade;
 import br.com.lawyer.core.repository.AtividadeRepository;
+import br.com.lawyer.core.repository.predicates.AtividadePredicate;
 import br.com.lawyer.core.service.AtividadeService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,12 +39,6 @@ public class AtividadeServiceImpl extends BaseServiceImpl<String, Atividade, Ati
      */
     @Override
     public Page<Atividade> buscarPorNomeLike (String query, PageRequest pageRequest) {
-        Page<Atividade> atividades = null;
-        if (StringUtils.isNotBlank(query)) {
-//            atividades = getRepository().findByNameContaining(query, pageRequest);
-        } else {
-            atividades = getRepository().findAll(pageRequest);
-        }
-        return atividades;
+        return getRepository().findAll(AtividadePredicate.possuiNomeAssuntoLike(query), pageRequest);
     }
 }

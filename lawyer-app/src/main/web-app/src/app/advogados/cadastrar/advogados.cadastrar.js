@@ -24,7 +24,7 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.changeNovaPessoa = function (value) {
                 $scope.novaPessoa = value;
-                if ($scope.novaPessoa === true) {
+                if ($scope.novaPessoa === 'true') {
                     var nome = $scope.advogado.pessoa;
                     $scope.advogado.pessoa = {
                         nome : nome instanceof Object ? '' : nome,
@@ -133,7 +133,7 @@ angular.module('lawyer.advogados.cadastro', [
             };
 
             $scope.blur = function () {
-                if (!$scope.advogado.pessoa || !$scope.advogado.pessoa.uid) {
+                if (!$scope.advogado.pessoa) {
                     $scope.novaPessoa = 'true';
                     $scope.changeNovaPessoa('true');
                 }

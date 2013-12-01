@@ -20,6 +20,11 @@ public class AdvocaciaServiceImpl extends BaseServiceImpl<String, Advocacia, Adv
         super(repository);
     }
 
+    /**
+     * Busca a {@link br.com.lawyer.core.entity.Advocacia} do usuário logado na sessão atual.
+     * @return {@link br.com.lawyer.core.entity.Advocacia}
+     * @throws BusinessException
+     */
     @Override
     public Advocacia findAdvocaciaUsuarioLogado () throws BusinessException {
         return findOne(getUsuarioLogado().getAdvocacia().getUid());

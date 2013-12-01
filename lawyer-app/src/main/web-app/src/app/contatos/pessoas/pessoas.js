@@ -27,6 +27,7 @@ angular.module('lawyer.pessoas', [
     .controller('PessoaController', ['$scope', 'pessoas', 'municipioAutocomplete', 'empresaAutocomplete', function ($scope, pessoas, municipioAutocomplete, empresaAutocomplete) {
         $scope.pessoas = pessoas;
 
+        console.log('sei');
         $scope.getMunicipios = function (value) {
             return municipioAutocomplete.query(value);
         };

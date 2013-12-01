@@ -24,7 +24,13 @@ angular.module('lawyer.atividades.cadastro', [
                     horas : 0,
                     minutos : 0
                 },
-                valorTotal : '0'
+                valorHora : '0'
+            };
+
+            $scope.dateOptions = {
+                'toggle-weeks-text' :'Semanas',
+                'close-text' : 'Fechar',
+                'starting-day': 1
             };
 
             $scope.pushAtividadeListagem = function () {

@@ -43,6 +43,7 @@ module.exports = {
             'vendor/jquery/jquery.min.js',
             'vendor/noty/js/noty/jquery.noty.js',
             'vendor/noty/js/noty/layouts/top.js',
+            'vendor/noty/js/noty/layouts/center.js',
             'vendor/noty/js/noty/layouts/topRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
             'vendor/noty/js/noty/layouts/inline.js',

@@ -31,6 +31,14 @@ public class AssuntoController {
         return assuntoDelegate.findAssuntoPorNomeOuPagina(query, page, limit);
     }
 
+    @RequestMapping (value = "/assuntos/clientes/{uid}", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<AssuntoVO> listarPorClienteUid( @PathVariable ("uid") String uid,
+                                                @RequestParam (value = "page", defaultValue = "0") int page,
+                                                @RequestParam(value = "limit", defaultValue = "25") int limit) throws BusinessException {
+        return assuntoDelegate.findAssuntosPorClienteUid(uid, page, limit);
+    }
+
     @Secured ({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/assuntos", method = RequestMethod.POST)
     public @ResponseBody AssuntoVO salvar(@RequestBody AssuntoVO assuntoVO) {

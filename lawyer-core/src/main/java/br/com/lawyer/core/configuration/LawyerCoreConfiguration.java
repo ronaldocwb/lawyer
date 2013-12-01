@@ -1,9 +1,11 @@
 package br.com.lawyer.core.configuration;
 
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
+import org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,16 +28,10 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "br.com.lawyer.core.repository")
 @EnableLoadTimeWeaving
+@PropertySource("classpath:system.properties")
 public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
 
-    private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
-    private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
-    private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
-    private static final String PROPERTY_NAME_LOOKUP_CLASS = "hibernate.transaction.manager_lookup_class";
-    private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_ARCHIVE_AUTODETECTION = "hibernate.archive.autodetection";
-    private static final String PROPERTY_BATCH_SIZE = "hibernate.jdbc.batch_size";
-    private static final String PROPERTY_IMPORT_FILE = "hibernate.hbm2ddl.import_files";
 
 
     @Bean
@@ -66,17 +62,17 @@ public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
 
         Properties jpaProterties = new Properties();
 
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_DIALECT, org.hibernate.dialect.PostgresPlusDialect.class);
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, true);
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, "create-drop");
+        jpaProterties.put(AvailableSettings.DIALECT, org.hibernate.dialect.PostgresPlusDialect.class);
+        jpaProterties.put(AvailableSettings.FORMAT_SQL, true);
+//        jpaProterties.put(AvailableSettings.HBM2DDL_AUTO, "update");
         jpaProterties.put(PROPERTY_ARCHIVE_AUTODETECTION, "class, hbm");
-        jpaProterties.put(PROPERTY_NAME_LOOKUP_CLASS, org.hibernate.transaction.TransactionManagerLookup.class);
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, true);
-        jpaProterties.put(PROPERTY_BATCH_SIZE, "20");
-        jpaProterties.put(PROPERTY_IMPORT_FILE, "import.sql");
+        jpaProterties.put(AvailableSettings.JTA_PLATFORM, org.hibernate.transaction.TransactionManagerLookup.class);
+        jpaProterties.put(AvailableSettings.SHOW_SQL, true);
+        jpaProterties.put(AvailableSettings.STATEMENT_BATCH_SIZE, "20");
+        jpaProterties.put(AvailableSettings.HBM2DDL_IMPORT_FILES, "import.sql");
+        factory.setPersistenceXmlLocation("META-IND/persistence.xml");
 
         factory.setJpaProperties(jpaProterties);
-
 
         return factory.getObject();
     }
@@ -95,13 +91,8 @@ public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
         return new HibernateExceptionTranslator();
     }
 
-//    @Bean
-//    public EntityManager entityManger() {
-//        return entityManagerFactory().createEntityManager();
-//    }
-
     @Override
     public LoadTimeWeaver getLoadTimeWeaver () {
-        return new org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver();
+        return new JBossLoadTimeWeaver();
     }
 }

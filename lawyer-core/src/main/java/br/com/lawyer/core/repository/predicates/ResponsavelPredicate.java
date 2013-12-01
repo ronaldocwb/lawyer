@@ -1,7 +1,7 @@
 package br.com.lawyer.core.repository.predicates;
 
 import br.com.lawyer.core.entity.QResponsavel;
-import br.com.lawyer.core.util.LawyerStringUtils;
+import br.com.lawyer.core.util.StringUtils;
 import com.mysema.query.types.Predicate;
 
 /**
@@ -11,7 +11,7 @@ import com.mysema.query.types.Predicate;
 public class ResponsavelPredicate {
 
     public static Predicate isNomePessoaLike(final String nome) {
-        if (LawyerStringUtils.isBlank(nome)) {
+        if (StringUtils.isBlank(nome)) {
             return null;
         }
         QResponsavel responsavel = QResponsavel.responsavel;

@@ -31,13 +31,13 @@ public class PessoaController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/pessoas", method = RequestMethod.POST)
-    public @ResponseBody PessoaVO salvarUsuario(@RequestBody PessoaVO pessoaVO) {
+    public @ResponseBody PessoaVO salvarUsuario(@RequestBody PessoaVO pessoaVO) throws BusinessException {
         return pessoaDelegate.salvar(pessoaVO);
     }
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/pessoas/{uid}", method = RequestMethod.DELETE)
-    public ResponseEntity excluir(@PathVariable ("uid") String uid) {
+    public ResponseEntity excluir(@PathVariable ("uid") String uid) throws BusinessException {
         pessoaDelegate.deletar(uid);
         return new ResponseEntity<>(HttpStatus.OK);
     }

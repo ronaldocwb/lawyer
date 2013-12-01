@@ -15,11 +15,12 @@ angular.module('lawyer.areasAtuacao.cadastro', [
 
             $scope.areaAtuacao = {};
             $scope.salvar = function () {
-                console.log($scope.areaAtuacao);
                 $scope.result = AreaAtuacao.save($scope.areaAtuacao, function () {
-                    notifications.pushForNextRoute('areaAtuacao.salva', 'success');
+                    notifications.pushForNextRoute('areaAtuacao.salva', 'success', {nome : $scope.areaAtuacao.nome});
                     $scope.areasAtuacao.content.push($scope.result);
                     $state.go('areasAtuacao.listar');
+                }, function () {
+                    notifications.pushForNextRoute('areaAtuacao.erro.salvar', 'error', {nome : $scope.areaAtuacao.nome});
                 });
 
             };

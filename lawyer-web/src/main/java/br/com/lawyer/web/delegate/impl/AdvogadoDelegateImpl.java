@@ -1,6 +1,7 @@
 package br.com.lawyer.web.delegate.impl;
 
 import br.com.lawyer.core.entity.Advogado;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.AdvogadoService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.AdvogadoDelegate;
@@ -31,7 +32,7 @@ public class AdvogadoDelegateImpl extends BaseDelegate<Advogado, AdvogadoVO> imp
 
     @Transactional
     @Override
-    public AdvogadoVO salvar (AdvogadoVO advogadoVO) {
+    public AdvogadoVO salvar (AdvogadoVO advogadoVO) throws BusinessException {
         Advogado advogado = advogadoService.salvarAdvogado(advogadoVO.parse());
         return getVO(advogado);
     }

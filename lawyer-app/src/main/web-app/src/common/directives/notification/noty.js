@@ -36,6 +36,10 @@ angular.module('lawyer.noty', [])
                     scope.add(angular.extend(notification));
                 });
 
+                scope.$on('noty.add.notification.login', function (event, notification) {
+                    scope.addLoginExpirouNotification(angular.extend(notification));
+                });
+
                 scope.$on('noty.add.error.notification', function (event, notification) {
                     notification.timeout = false;
                     scope.addError(angular.extend(notification));
@@ -60,6 +64,19 @@ angular.module('lawyer.noty', [])
                     $timeout(function () {
                         $.noty.close(box.options.id);
                     }, notification.timeout);
+                };
+
+                scope.addLoginExpirouNotification = function (notification) {
+                    var buttons = [
+                        {
+                            addClass: 'btn btn-success', text: 'OK', onClick: function () {
+                                window.location = "/lawyer/";
+                            }
+                        }
+                    ];
+                    notification.buttons = buttons;
+                    notification.modal = true;
+                    var box = noty(notification);
                 };
 
                 scope.emitCompletarCallback = function (notification) {

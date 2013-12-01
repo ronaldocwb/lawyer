@@ -1,10 +1,9 @@
 package br.com.lawyer.web.vo;
 
-import javax.persistence.Entity;
-
 import br.com.lawyer.core.entity.AreaAtuacao;
-import br.com.lawyer.core.entity.Empresa;
 import br.com.lawyer.web.base.BaseVO;
+
+import javax.persistence.Entity;
 
 @Entity
 public class AreaAtuacaoVO extends BaseVO<AreaAtuacao> {

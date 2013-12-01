@@ -1,5 +1,6 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.vo.EmpresaVO;
 import org.springframework.data.domain.Page;
 
@@ -10,11 +11,11 @@ import org.springframework.data.domain.Page;
 public interface EmpresaDelegate {
     Page<EmpresaVO> findEmpresaPorPagina (String q, int page, int limit);
 
-    EmpresaVO salvar (EmpresaVO empresaVO);
+    EmpresaVO salvar (EmpresaVO empresaVO) throws BusinessException;
 
-    void deletar (String uid);
+    void deletar (String uid) throws BusinessException;
 
-    EmpresaVO atualizar (EmpresaVO empresaVO, String uid);
+    EmpresaVO atualizar (EmpresaVO empresaVO, String uid) throws BusinessException;
 
     EmpresaVO buscarPorUid (String uid);
 }

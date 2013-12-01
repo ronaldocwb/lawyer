@@ -1,4 +1,4 @@
-<form data-ng-submit="cadastrar()" name="cadastro" class="form-horizontal fadeInUp" ng-if="true">
+<form data-ng-submit="cadastrar()" name="cadastro" class="form-horizontal fadeInUp" >
     <fieldset>
         <legend>Novo Advogado</legend>
         <div class="control-group">
@@ -12,8 +12,8 @@
         <div class="control-group">
             <div class="controls">
                 <div class="btn-group">
-                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(true)" value="true" btn-radio="'true'">Nova pessoa</button>
-                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa(false)" value="false"  btn-radio="'false'">Utilizar uma pessoa cadastrada</button>
+                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa('true')" value="true" btn-radio="'true'">Nova pessoa</button>
+                    <button type="button" class="btn" ng-model="novaPessoa" data-ng-change="changeNovaPessoa('false')" value="false"  btn-radio="'false'">Utilizar uma pessoa cadastrada</button>
                 </div>
             </div>
         </div>

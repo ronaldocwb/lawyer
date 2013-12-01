@@ -2,6 +2,7 @@ package br.com.lawyer.core.service;
 
 import br.com.lawyer.core.base.BaseService;
 import br.com.lawyer.core.entity.Empresa;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.EmpresaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,5 +15,9 @@ public interface EmpresaService extends BaseService<String, Empresa, EmpresaRepo
 
     Page<Empresa> buscarPorRazaoSocialOuNomeFantasiaLike (String query, PageRequest pageRequest);
 
-    void deletarEmpresa (String uid);
+    void deletarEmpresa (String uid) throws BusinessException;
+
+    Empresa salvar (Empresa empresa) throws BusinessException;
+
+    Empresa atualizar (Empresa empresa) throws BusinessException;
 }

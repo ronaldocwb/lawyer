@@ -1,6 +1,7 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.ValorHoraAtividade;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -35,7 +36,10 @@ public class Atividade extends AbstractBaseEntity {
     private Date dataFim;
 
     @Column(scale = 2, precision = 10)
-    private BigDecimal valorTotal;
+    private BigDecimal valorHora;
+
+    @Enumerated(value = EnumType.ORDINAL)
+    private ValorHoraAtividade valorHoraAtividade;
 
     public Usuario getUsuario () {
         return usuario;
@@ -101,12 +105,12 @@ public class Atividade extends AbstractBaseEntity {
         this.dataFim = dataFim;
     }
 
-    public BigDecimal getValorTotal () {
-        return valorTotal;
+    public BigDecimal getValorHora () {
+        return valorHora;
     }
 
-    public void setValorTotal (BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
+    public void setValorHora (BigDecimal valorTotal) {
+        this.valorHora = valorTotal;
     }
 
     public Assunto getAssunto () {
@@ -115,5 +119,13 @@ public class Atividade extends AbstractBaseEntity {
 
     public void setAssunto (Assunto assunto) {
         this.assunto = assunto;
+    }
+
+    public ValorHoraAtividade getValorHoraAtividade () {
+        return valorHoraAtividade;
+    }
+
+    public void setValorHoraAtividade (ValorHoraAtividade valorHoraAtividade) {
+        this.valorHoraAtividade = valorHoraAtividade;
     }
 }

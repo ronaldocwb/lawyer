@@ -6,8 +6,9 @@ import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.UsuarioRepository;
 import br.com.lawyer.core.service.UsuarioService;
-import br.com.lawyer.core.util.LawyerStringUtils;
 import br.com.lawyer.core.util.PasswordEncoder;
+import br.com.lawyer.core.util.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, UsuarioRepository> implements UsuarioService {
 
+    private static final Logger logger = Logger.getLogger(UsuarioService.class);
     /**
      * Construtor
      *
@@ -45,7 +47,9 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
     @Override
     public Usuario authenticate (Usuario user, AuthenticationManager manager) {
 
-        if (LawyerStringUtils.containStringBlank(user.getEmail(), user.getSenha())) {
+        logger.info("realizando autenticacao do usuario " + user.getEmail());
+
+        if (StringUtils.containStringBlank(user.getEmail(), user.getSenha())) {
             throw new IllegalArgumentException("Usuario / Senha nao informado.");
         }
 
@@ -70,13 +74,14 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
             throw new BadCredentialsException("Usuário não foi autenticado.");
         }
 
+        logger.info("Usuario autenticado: " + user.getEmail());
         return usuario;
     }
 
     @Override
     public Usuario atualizarUsuario (Usuario usuario, String uid) throws BusinessException {
 
-        if (LawyerStringUtils.isBlank(uid) || LawyerStringUtils.isBlank(usuario.getUid())) {
+        if (StringUtils.isBlank(uid) || StringUtils.isBlank(usuario.getUid())) {
             throw new IllegalArgumentException("Usuário deve ser informado!");
         }
 
@@ -93,9 +98,11 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
 
     @Override
     public Usuario atualizarSenhaUsuario (Usuario usuario, String token, String novaSenha) throws AuthenticationException, BusinessException {
+        logger.info(String.format("Alterando a senha do usuario de UID %s", usuario.getUid()));
+
         LawyerAuthenticationToken auth = getCredenciais();
 
-        if (LawyerStringUtils.isBlank(novaSenha)) {
+        if (StringUtils.isBlank(novaSenha)) {
             throw new IllegalArgumentException("Senha não pode ser em branco.");
         }
 
@@ -120,6 +127,8 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
 
         auth.getUsuario().setSenha(password);
         getRepository().save(auth.getUsuario());
+
+        logger.info(String.format("Senha do usuario de UID %s foi alterada.", usuario.getUid()));
 
         return auth.getUsuario();
     }

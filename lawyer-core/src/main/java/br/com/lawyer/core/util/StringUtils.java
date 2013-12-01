@@ -1,11 +1,9 @@
 package br.com.lawyer.core.util;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * Implementação da StringUtils com metodos adicionais proprios.
  */
-public class LawyerStringUtils extends StringUtils {
+public class StringUtils extends org.apache.commons.lang.StringUtils {
 
     /**
      * @param values

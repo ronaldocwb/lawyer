@@ -1,6 +1,5 @@
 package br.com.lawyer.core.base;
 
-import br.com.lawyer.core.entity.Usuario;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.types.EntityPath;
 import com.mysema.query.types.OrderSpecifier;
@@ -21,12 +20,13 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * @param <ID>
- * @param <T>
+ * @param <ID> Class do UID da classe
+ * @param <T> Entidade que implementa IUID<ID>
  * @author Deividi Cavarzan
  */
 @SuppressWarnings ("unchecked")
@@ -36,19 +36,19 @@ public class JPABaseRepositoryImpl<ID extends Serializable, T extends IUID<ID>> 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @PostConstruct
-    public void init() {
-        configure(Usuario.class, this.entityManager);
-    }
-
     private static final long serialVersionUID = -7951474930842466983L;
-
     private static final EntityPathResolver DEFAULT_ENTITY_PATH_RESOLVER = SimpleEntityPathResolver.INSTANCE;
+
     protected SimpleJpaRepository<T, ID> jpaRepository;
     protected EntityManager manager;
     protected EntityPath<T> path;
     protected PathBuilder<T> builder;
     protected Querydsl querydsl;
+
+    @PostConstruct
+    public void init() {
+        configure(this.entityManager);
+    }
 
     public JPABaseRepositoryImpl() {}
 
@@ -60,30 +60,36 @@ public class JPABaseRepositoryImpl<ID extends Serializable, T extends IUID<ID>> 
         this.jpaRepository = new SimpleJpaRepository<T, ID>(entityClass, em);
     }
 
-    protected void configure(Class entityClass, EntityManager em) {
+    protected void configure(EntityManager em) {
+        final ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
+        Class<T> entityClass = (Class<T>) (type).getActualTypeArguments()[1];
         this.manager = em;
         this.path = DEFAULT_ENTITY_PATH_RESOLVER.createPath(entityClass);
         this.builder = new PathBuilder<>(path.getType(), path.getMetadata());
         this.querydsl = new Querydsl(em, builder);
-        this.jpaRepository = new SimpleJpaRepository<T, ID>(entityClass, em);
+        this.jpaRepository = new SimpleJpaRepository<>(entityClass, em);
     }
 
     protected EntityManager getEntityManager() {
         return this.manager;
     }
 
+    @Override
     public T findOne(Predicate predicate) {
         return createQuery(predicate).uniqueResult(path);
     }
 
+    @Override
     public List<T> findAll(Predicate predicate) {
         return createQuery(predicate).list(path);
     }
 
+    @Override
     public List<T> findAll(Predicate predicate, OrderSpecifier<?>... orders) {
         return createQuery(predicate).orderBy(orders).list(path);
     }
 
+    @Override
     public Page<T> findAll(Predicate predicate, Pageable pageable) {
 
         JPQLQuery countQuery = createQuery(predicate);
@@ -105,6 +111,7 @@ public class JPABaseRepositoryImpl<ID extends Serializable, T extends IUID<ID>> 
         return new PageImpl<>(content, pageable, total);
     }
 
+    @Override
     public long count(Predicate predicate) {
         return createQuery(predicate).count();
     }

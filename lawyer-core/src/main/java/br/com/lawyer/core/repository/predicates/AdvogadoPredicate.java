@@ -1,7 +1,7 @@
 package br.com.lawyer.core.repository.predicates;
 
 import br.com.lawyer.core.entity.QAdvogado;
-import br.com.lawyer.core.util.LawyerStringUtils;
+import br.com.lawyer.core.util.StringUtils;
 import com.mysema.query.types.Predicate;
 
 /**
@@ -16,7 +16,7 @@ public class AdvogadoPredicate {
     }
 
     public static Predicate buscaSePossuirNome(final String nome) {
-        if (LawyerStringUtils.isBlank(nome)) {
+        if (StringUtils.isBlank(nome)) {
             return null;
         }
         QAdvogado advogado = QAdvogado.advogado;

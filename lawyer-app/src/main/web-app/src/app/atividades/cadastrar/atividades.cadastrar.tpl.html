@@ -3,37 +3,49 @@
         <fieldset>
             <legend data-ng-show="tela.cadastro === true">Nova Atividade</legend>
             <legend data-ng-show="tela.edicao === true">Editar Atividade</legend>
-            <div class="control-group" ng-class="{'error' : !cadastro.assunto.$valid && cadastro.assunto.$dirty, 'warning' : !cadastro.assunto.$dirty}">
+            <div class="control-group" ng-class="{'error' : !cadastro.cliente.$valid && cadastro.cliente.$dirty, 'warning' : !cadastro.cliente.$dirty}">
+                <label class="control-label" for="cliente">Cliente:*</label>
+                <div class="controls">
+                    <input name="cliente" id="cliente"  class="x-large" type="text"
+                           required
+                           ng-model="atividade.cliente"
+                           typeahead-editable="false"
+                           typeahead-min-length="3"
+                           typeahead="cliente as cliente.nome for cliente in getClientes($viewValue, atividade.cliente)"/>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{'error' : !cadastro.assunto.$valid && cadastro.assunto.$dirty, 'warning' : !cadastro.assunto.$dirty, 'none' : !atividade.cliente}">
                 <label class="control-label" for="assunto">Assunto:*</label>
                 <div class="controls">
                     <input name="assunto" id="assunto"  class="x-large" type="text"
                            required
+                           data-ng-disabled="!atividade.cliente"
                            ng-model="atividade.assunto"
                            typeahead-editable="false"
                            typeahead-min-length="3"
-                           typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue)"/>
+                           typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue, atividade.cliente)"/>
                 </div>
             </div>
             <div class="control-group ">
                 <label class="control-label" for="data">Data:</label>
                 <div class="controls">
                     <input type="text" id="data" show-weeks="false" datepicker-popup="dd/MM/yyyy" ng-model="atividade.dataReferencia" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                    <button class="btn" type="button" ng-click="open()"><i class="icon-calendar"></i></button>
+                    <!--<button class="btn" type="button" ng-click="open()"><i class="icon-calendar"></i></button>-->
                 </div>
             </div>
             <div class="control-group" ng-class="{'error' : !cadastro.tempoMinutos.$valid || !cadastro.tempoHoras.$valid}">
                 <label class="control-label" for="tempoMinutos">Duração:</label>
                 <div class="controls">
-                    <input id="tempoHoras" name="tempoHoras" class="text span1" type="number" min="0" data-ng-model="atividade.tempo.horas"/> Horas
-                    <input id="tempoMinutos" name="tempoMinutos" class="text span1" type="number" max="60" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
-                    <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid" >Informe um número entre 0 e 60 segundos.</span>
+                    <input id="tempoHoras" name="tempoHoras" class="text span2" type="number" min="0" data-ng-model="atividade.tempo.horas" /> Horas
+                    <input id="tempoMinutos" name="tempoMinutos" class="text span2" type="number" max="59" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
+                    <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid" >Informe um número entre 0 e 59 minutos.</span>
                     <span class="help-inline" ng-show="!cadastro.tempoHoras.$valid" >Informe uma hora maior ou igual a 0.</span>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="valorTotal">Valor por Hora:</label>
+                <label class="control-label" for="valorHora">Valor por Hora:</label>
                 <div class="controls">
-                    <input id="valorTotal" class="text x-large" type="text" formata-valor-input data-ng-model="atividade.valorTotal"/>
+                    <input id="valorHora" class="text x-large" type="text" formata-valor-input data-ng-model="atividade.valorHora"/>
                 </div>
             </div>
             <div class="control-group">

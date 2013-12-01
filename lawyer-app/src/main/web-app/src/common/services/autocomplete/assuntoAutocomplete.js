@@ -15,6 +15,17 @@ angular.module('assuntoAutocomplete', [])
                         lastResult = results.data.content;
                         return lastResult;
                     });
+            },
+            queryByClienteUid: function (value, uid) {
+                if (value.toLowerCase().indexOf(lastQuery) !== -1 && lastResult.length < 8) {
+                    return lastResult;
+                }
+                lastQuery = value.toLowerCase();
+                return $http.get('/lawyer/api/assuntos/clientes/' + uid + '?page=0&limit=8')
+                    .then(function (results) {
+                        lastResult = results.data.content;
+                        return lastResult;
+                    });
             }
         };
     }])

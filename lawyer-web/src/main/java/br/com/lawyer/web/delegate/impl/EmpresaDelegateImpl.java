@@ -1,6 +1,7 @@
 package br.com.lawyer.web.delegate.impl;
 
 import br.com.lawyer.core.entity.Empresa;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.EmpresaService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.EmpresaDelegate;
@@ -30,19 +31,22 @@ public class EmpresaDelegateImpl extends BaseDelegate<Empresa, EmpresaVO> implem
     }
 
     @Override
-    public EmpresaVO salvar (EmpresaVO empresaVO) {
-        Empresa empresa = empresaService.save(empresaVO.parse());
+    @Transactional
+    public EmpresaVO salvar (EmpresaVO empresaVO) throws BusinessException {
+        Empresa empresa = empresaService.salvar(empresaVO.parse());
         return getVO(empresa);
     }
 
     @Override
-    public void deletar (String uid) {
+    @Transactional
+    public void deletar (String uid) throws BusinessException {
         empresaService.deletarEmpresa(uid);
     }
 
     @Override
-    public EmpresaVO atualizar (EmpresaVO empresaVO, String uid) {
-        Empresa empresa = empresaService.save(empresaVO.parse());
+    @Transactional
+    public EmpresaVO atualizar (EmpresaVO empresaVO, String uid) throws BusinessException {
+        Empresa empresa = empresaService.atualizar(empresaVO.parse());
         return getVO(empresa);
     }
 

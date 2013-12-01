@@ -1,7 +1,7 @@
 package br.com.lawyer.core.repository.predicates;
 
 import br.com.lawyer.core.entity.QCliente;
-import br.com.lawyer.core.util.LawyerStringUtils;
+import br.com.lawyer.core.util.StringUtils;
 import com.mysema.query.types.Predicate;
 
 /**
@@ -11,7 +11,7 @@ import com.mysema.query.types.Predicate;
 public class ClientePredicate {
 
     public static Predicate buscarPorNomeEmpresa(String query) {
-        if (LawyerStringUtils.isBlank(query)) {
+        if (StringUtils.isBlank(query)) {
             return null;
         }
         QCliente cliente = QCliente.cliente;
@@ -20,7 +20,7 @@ public class ClientePredicate {
     }
 
     public static Predicate buscarPorNomePessoa(String query) {
-        if (LawyerStringUtils.isBlank(query)) {
+        if (StringUtils.isBlank(query)) {
             return null;
         }
         QCliente cliente = QCliente.cliente;

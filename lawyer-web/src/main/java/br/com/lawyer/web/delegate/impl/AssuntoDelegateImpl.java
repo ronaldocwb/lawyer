@@ -1,6 +1,7 @@
 package br.com.lawyer.web.delegate.impl;
 
 import br.com.lawyer.core.entity.Assunto;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.AssuntoService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.AssuntoDelegate;
@@ -48,5 +49,12 @@ public class AssuntoDelegateImpl extends BaseDelegate<Assunto, AssuntoVO> implem
     public AssuntoVO findOne (String uid) {
         Assunto assunto = assuntoService.findOne(uid);
         return getVO(assunto);
+    }
+
+    @Override
+    public Page<AssuntoVO> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException {
+        PageRequest pageRequest = new PageRequest(page, limit);
+        Page<Assunto> assuntos = assuntoService.findAssuntosPorClienteUid(uid, pageRequest);
+        return getVO(assuntos, pageRequest);
     }
 }

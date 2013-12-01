@@ -31,6 +31,10 @@ angular.module('services.notificationsHandler', [ ])
                 $rootScope.$broadcast('noty.add.notification', notification);
             },
 
+            pushLoginExpirou : function (notification) {
+                $rootScope.$broadcast('noty.add.notification.login', notification);
+            },
+
             pushError: function (notification) {
                 $rootScope.$broadcast('noty.add.error.notification', notification);
             },

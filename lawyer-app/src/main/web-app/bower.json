@@ -15,7 +15,8 @@
     "angular-route": "latest",
     "noty": "latest",
     "angular-sanitize": "1.2.1",
-    "animate.css": "~2.1.0"
+    "animate.css": "~2.1.0",
+    "bootstrap3": "https://github.com/angular-ui/bootstrap/tree/bootstrap3"
   },
   "dependencies": {}
 }

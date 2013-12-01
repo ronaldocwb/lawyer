@@ -1,11 +1,15 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseServiceImpl;
+import br.com.lawyer.core.entity.Cliente;
 import br.com.lawyer.core.entity.Empresa;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.EmpresaRepository;
 import br.com.lawyer.core.repository.predicates.EmpresaPredicate;
+import br.com.lawyer.core.service.ClienteService;
 import br.com.lawyer.core.service.EmpresaService;
 import br.com.lawyer.core.service.PessoaService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,8 +22,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, EmpresaRepository> implements EmpresaService {
 
+    private static final Logger logger = Logger.getLogger(EmpresaService.class);
+
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     /**
      * Construtor
@@ -46,8 +55,44 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
     }
 
     @Override
-    public void deletarEmpresa(String uid) {
-        pessoaService.removerReferenciaDaEmpresa(uid);
+    public void deletarEmpresa(String uid) throws BusinessException {
+        logger.info(String.format("Apagando a empresa de UID %s pelo usuário %s", uid, getUsuarioLogado().getEmail()));
+
+        pessoaService.removerReferenciaDaEmpresaPorUid(uid);
+        clienteService.removerPorReferenciaUid(uid, Empresa.class);
         getRepository().delete(uid);
+
+        logger.info(String.format("Empresa de UID %s foi apagada pelo usuário %s", uid, getUsuarioLogado().getEmail()));
+    }
+
+    @Override
+    public Empresa salvar (Empresa empresa) throws BusinessException {
+        logger.info(String.format("Salvando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
+
+        saveAndFlush(empresa);
+        if (empresa.getCliente().equals(Boolean.TRUE)) {
+            Cliente cliente = new Cliente(empresa);
+            clienteService.save(cliente);
+        }
+
+        logger.info(String.format("Empresa de UID %s foi salva pelo usuário %s", empresa.getUid(), getUsuarioLogado().getEmail()));
+        return empresa;
+    }
+
+    @Override
+    public Empresa atualizar (Empresa empresa) throws BusinessException {
+        logger.info(String.format("Atualizando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
+        Empresa stored = findOne(empresa.getUid());
+        if (stored != null && !stored.getCliente().equals(empresa.getCliente())) {
+            if (empresa.getCliente().equals(Boolean.TRUE)) {
+                clienteService.save(new Cliente(empresa));
+            } else {
+                clienteService.removerPorReferenciaUid(stored.getUid(), Empresa.class);
+            }
+        }
+        save(empresa);
+
+        logger.info(String.format("Empresa de UID %s foi atualizada pelo usuário %s", empresa.getUid(), getUsuarioLogado().getEmail()));
+        return empresa;
     }
 }

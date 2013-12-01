@@ -21,8 +21,10 @@ angular.module('lawyer.areasAtuacao.edicao', [
 
             $scope.salvar = function () {
                 $scope.result = AreaAtuacao.update($scope.areaAtuacao, function () {
-                    notifications.pushForNextRoute('areaAtuacao.salva', 'success');
+                    notifications.pushForNextRoute('areaAtuacao.salva', 'success', {nome : $scope.areaAtuacao.nome});
                     $state.transitionTo('areasAtuacao.listar');
+                }, function () {
+                    notifications.pushForCurrentRoute('areaAtuacao.erro.salvar', 'error', {nome : $scope.areaAtuacao.nome});
                 });
             };
 

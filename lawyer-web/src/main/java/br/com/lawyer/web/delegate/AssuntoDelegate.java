@@ -1,5 +1,6 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.vo.AssuntoVO;
 import org.springframework.data.domain.Page;
 
@@ -18,4 +19,5 @@ public interface AssuntoDelegate {
 
     AssuntoVO findOne (String uid);
 
+    Page<AssuntoVO> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException;
 }

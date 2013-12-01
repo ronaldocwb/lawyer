@@ -41,18 +41,18 @@ angular.module('lawyer', [
 
         $httpProvider.interceptors.push(['$q', '$location', 'notifications', function ($q, $location, notifications) {
             return {
-                'responseError': function (rejection) {
-                    if (rejection.status === 401 || rejection.status === 403) {
-                        $location.path('login');
+            'responseError': function (rejection) {
+                if (rejection.status === 401 || rejection.status === 403) {
+                        notifications.pushLoginExpirou();
                         return $q.reject(rejection);
                     }
                     else {
-                        notifications.pushForCurrentRoute('tretas', 'warning');
                         return $q.reject(rejection);
                     }
                 }
             };
         }]);
+//        $locationProvider.html5Mode(true).hashPrefix('!');
     }])
 
     .run(['auth', function run(auth) {

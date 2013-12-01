@@ -2,6 +2,7 @@ package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
@@ -13,10 +14,10 @@ import java.io.Serializable;
 @Entity
 public class Cliente extends AbstractBaseEntity implements Serializable {
 
-    @OneToOne(orphanRemoval = false, optional = true)
+    @OneToOne(optional = true, cascade = CascadeType.REMOVE)
     private Empresa empresa;
 
-    @OneToOne(orphanRemoval = false, optional = true)
+    @OneToOne(orphanRemoval = true, optional = true, cascade = CascadeType.REMOVE)
     private Pessoa pessoa;
 
     public Cliente() {}

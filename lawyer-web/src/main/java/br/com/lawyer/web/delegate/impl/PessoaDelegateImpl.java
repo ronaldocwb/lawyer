@@ -1,6 +1,7 @@
 package br.com.lawyer.web.delegate.impl;
 
 import br.com.lawyer.core.entity.Pessoa;
+import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.PessoaService;
 import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.PessoaDelegate;
@@ -31,19 +32,20 @@ public class PessoaDelegateImpl extends BaseDelegate<Pessoa, PessoaVO> implement
 
     @Override
     @Transactional
-    public PessoaVO salvar (PessoaVO pessoaVO) {
+    public PessoaVO salvar (PessoaVO pessoaVO) throws BusinessException {
         Pessoa pessoa = pessoaService.salvar(pessoaVO.parse());
         return getVO(pessoa);
     }
 
     @Override
-    public void deletar (String uid) {
-        pessoaService.delete(uid);
+    @Transactional
+    public void deletar (String uid) throws BusinessException {
+        pessoaService.deletar(uid);
     }
 
     @Override
     @Transactional
-    public PessoaVO atualizar (PessoaVO pessoaVO, String uid) {
+    public PessoaVO atualizar (PessoaVO pessoaVO, String uid) throws BusinessException {
         Pessoa pessoa = pessoaService.atualizar(pessoaVO.parse());
         return getVO(pessoa);
     }

@@ -2,9 +2,9 @@ package br.com.lawyer.core.repository;
 
 import br.com.lawyer.core.base.JPABaseRepository;
 import br.com.lawyer.core.entity.Advogado;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,14 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdvogadoRepository extends JPABaseRepository<String, Advogado> {
 
-    /**
-     * Esse metodo esta personalizando a query usando a anotacaoo @Query
-     * @link http://docs.spring.io/spring-data/jpa/docs/1.4.1.RELEASE/reference/html/jpa.repositories.html#jpa.query-methods.at-query
-     * @param query
-     * @param page
-     * @return
-     */
-    @Query ("SELECT o FROM Advogado o WHERE o.pessoa.nome LIKE '%' || :query || '%' ")
-    Page<Advogado> findByNameContaining(String query, Pageable page);
-
+    @Modifying
+    @Query("delete from Advogado o where o.pessoa.uid = :uid")
+    void deletarPorPessoaUid (@Param ("uid") String uid);
 }
