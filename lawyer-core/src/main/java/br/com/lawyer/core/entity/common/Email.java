@@ -1,9 +1,8 @@
 package br.com.lawyer.core.entity.common;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * @author Deividi
@@ -13,9 +12,12 @@ import javax.persistence.Embeddable;
 public class Email implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
+    @Column
 	private String value;
-    private boolean principal;
+
+    @Column
+    private Boolean principal;
     
     @Column(name="email")
 	public String getValue () {
@@ -25,12 +27,13 @@ public class Email implements Serializable{
     public void setValue (String value) {
         this.value = value;
     }
-    
-    public boolean isPrincipal() {
-		return principal;
-	}
 
-	public void setPrincipal(boolean principal) {
-		this.principal = principal;
-	}
+
+    public Boolean getPrincipal () {
+        return principal;
+    }
+
+    public void setPrincipal (Boolean principal) {
+        this.principal = principal;
+    }
 }

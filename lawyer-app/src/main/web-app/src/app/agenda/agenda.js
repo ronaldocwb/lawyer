@@ -13,7 +13,7 @@ angular.module('lawyer.agenda', ['ui.calendar'])
         });
     }])
 
-    .controller('AgendaController', ['$scope', '$log', function ($scope, $log) {
+    .controller('AgendaController', ['$scope', '$window', function ($scope, $window) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -26,12 +26,12 @@ angular.module('lawyer.agenda', ['ui.calendar'])
         };
         /* event source that contains custom events on the scope */
         $scope.events = [
-            {title: 'All Day Event', start: new Date(y, m, 1)},
-            {title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2)},
-            {id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false},
-            {id: 999, title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false},
-            {title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false},
-            {title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/'}
+            {title: 'LOL Day Event', start: new Date(y, m, 1)},
+            {title: 'LOL Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2)},
+            {id: 999, title: '1111 Event', start: new Date(y, m, d - 3, 16, 0), allDay: false},
+            {id: 999, title: '2222 Event', start: new Date(y, m, d + 4, 16, 0), allDay: false},
+            {title: 'Bir3333thday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false},
+            {title: '121212 for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/'}
         ];
         /* event source that calls a function on every view switch */
         $scope.eventsF = function (start, end, callback) {
@@ -91,10 +91,11 @@ angular.module('lawyer.agenda', ['ui.calendar'])
         $scope.changeView = function (view, calendar) {
             calendar.fullCalendar('changeView', view);
         };
+
         /* config object */
         $scope.uiConfig = {
             calendar: {
-                height: 450,
+                height: $window.innerHeight - 100,
                 editable: true,
                 header: {
                     left: 'month basicWeek basicDay agendaWeek agendaDay',

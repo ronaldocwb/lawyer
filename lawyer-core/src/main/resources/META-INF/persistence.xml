@@ -12,7 +12,7 @@
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgresPlusDialect"/>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.jdbc.batch_size" value="20"/>
             <property name="hibernate.transaction.manager_lookup_class"
