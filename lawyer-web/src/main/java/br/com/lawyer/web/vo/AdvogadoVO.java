@@ -37,6 +37,7 @@ public class AdvogadoVO extends BaseVO<Advogado>{
     @Override
     public Advogado parse() {
     	if(isGeraUsuario()){
+    		//TODOAvaliar se usa o primeiro ou cria um flag
     		if(getPessoa().getEmails() != null 
     				&& getPessoa().getEmails().size() > 0){
     		
