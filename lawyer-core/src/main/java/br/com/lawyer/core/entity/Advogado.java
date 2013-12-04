@@ -25,6 +25,10 @@ public class Advogado extends AbstractBaseEntity {
     public Advogado (Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+    
+    public boolean hasUsuario(){
+    	return getPessoa().getUsuario() != null;
+    }
 
     public Pessoa getPessoa () {
         return pessoa;
@@ -42,4 +46,12 @@ public class Advogado extends AbstractBaseEntity {
     public void setPessoa (Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+
+	public String getNome() {
+		return getPessoa().getNome();
+	}
+
+	public String getEmailLogin() {
+		return getPessoa().getUsuario().getEmail();
+	}
 }
