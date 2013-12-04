@@ -1,7 +1,12 @@
 package br.com.lawyer.core.repository.impl;
 
 import br.com.lawyer.core.base.JPABaseRepositoryImpl;
-import br.com.lawyer.core.entity.*;
+import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Empresa;
+import br.com.lawyer.core.entity.Pessoa;
+import br.com.lawyer.core.entity.QCliente;
+import br.com.lawyer.core.entity.QEmpresa;
+import br.com.lawyer.core.entity.QPessoa;
 import br.com.lawyer.core.repository.ClienteRepository;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.JPQLQuery;

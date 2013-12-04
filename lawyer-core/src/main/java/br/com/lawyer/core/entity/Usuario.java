@@ -1,6 +1,10 @@
 package br.com.lawyer.core.entity;
 
-import java.util.List;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.Permissao;
+import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,13 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import br.com.lawyer.core.entity.base.AbstractBaseEntity;
-import br.com.lawyer.core.entity.enumerated.Permissao;
-import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import java.util.List;
 
 @Entity
 public class Usuario extends AbstractBaseEntity {

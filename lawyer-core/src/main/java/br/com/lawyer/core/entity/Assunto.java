@@ -5,7 +5,17 @@ import br.com.lawyer.core.entity.common.Periodo;
 import br.com.lawyer.core.entity.enumerated.TipoAcesso;
 import br.com.lawyer.core.entity.enumerated.TipoProcesso;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
