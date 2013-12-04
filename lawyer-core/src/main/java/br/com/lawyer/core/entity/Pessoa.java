@@ -33,7 +33,11 @@ public class Pessoa extends AbstractBaseEntity {
     private Usuario usuario;
 
     private Boolean cliente = Boolean.FALSE;
-
+    
+    public void associaUsuario() {
+		getUsuario().setPessoa(this);
+	}
+    
     public String getNome () {
         return nome;
     }

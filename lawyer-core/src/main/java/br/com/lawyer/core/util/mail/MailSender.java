@@ -1,7 +1,8 @@
-package br.com.lawyer.core.mail;
+package br.com.lawyer.core.util.mail;
 
 import java.io.Serializable;
 
+import javax.enterprise.event.Observes;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -20,7 +21,7 @@ public class MailSender implements Serializable {
 	
 	private static final Logger logger = Logger.getLogger(MailSender.class);
 	
-	public void sendMail(MailMessage email){
+	public static void sendMail(@Observes MailMessage email){
 		try    {
 			Session mailSession = InitialContext.doLookup("java:/LawyerMail");
 			

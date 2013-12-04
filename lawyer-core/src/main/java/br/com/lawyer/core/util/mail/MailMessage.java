@@ -1,4 +1,4 @@
-package br.com.lawyer.core.mail;
+package br.com.lawyer.core.util.mail;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
