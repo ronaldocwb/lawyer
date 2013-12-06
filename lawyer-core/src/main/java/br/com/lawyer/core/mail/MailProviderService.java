@@ -1,12 +1,14 @@
 package br.com.lawyer.core.mail;
 
 import java.net.URL;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.stereotype.Service;
 
 import br.com.lawyer.core.util.mail.MailMessage;
-import br.com.lawyer.core.util.mail.MailSender;
 
 import com.google.common.io.Resources;
 
@@ -15,10 +17,9 @@ public class MailProviderService {
 	
 	private static final String TEMPLATE_DIR = "br/com/lawyer/core/mail/template/";
 	
-	//TODO verificar como o Spring substitui os eventos CDI
-	//@Autowired
-	//private Event<MailMessage> mailMessageEvent;
-	
+	@Autowired
+	private SimpleApplicationEventMulticaster eventMulticaster;
+
 	public void enviarEmailCadastro(String nome, String emailLogin) {
 		MailMessage m = new MailMessage();
 		
@@ -26,8 +27,11 @@ public class MailProviderService {
 		m.setAssunto("Bem vindo ao sistema Lawyer!");
 		m.setMensagem(montaMensagemCadastro(nome, emailLogin));
 		
-		//mailMessageEvent.fire(m);
-		MailSender.sendMail(m);
+		eventMulticaster.setTaskExecutor(Executors.newCachedThreadPool());
+		eventMulticaster.multicastEvent(new MailEvent(this, m));
+		
+		//appContext.publishEvent(new MailEvent(this, m));
+		//MailSender.sendMail(m);
 	}
     
 	public String montaMensagemCadastro(String nome, String emailLogin){
@@ -48,5 +52,6 @@ public class MailProviderService {
 		} catch (Exception e) {
 			throw new RuntimeException("Não foi Possivel ler o arquivo de template para envio de email!");
 		}
-	} 
+	}
+
 }

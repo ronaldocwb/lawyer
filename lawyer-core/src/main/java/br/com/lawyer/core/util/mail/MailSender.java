@@ -2,7 +2,6 @@ package br.com.lawyer.core.util.mail;
 
 import java.io.Serializable;
 
-import javax.enterprise.event.Observes;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -12,16 +11,24 @@ import javax.mail.internet.MimeMessage;
 import javax.naming.InitialContext;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
-@Service
-public class MailSender implements Serializable {
+import br.com.lawyer.core.mail.MailEvent;
+
+@Component
+public class MailSender implements ApplicationListener<MailEvent>, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger logger = Logger.getLogger(MailSender.class);
 	
-	public static void sendMail(@Observes MailMessage email){
+	@Override
+	public void onApplicationEvent(MailEvent mailEvent) {
+		sendMail(mailEvent.getMailMessage());
+	}
+	
+	public void sendMail(MailMessage email){
 		try    {
 			Session mailSession = InitialContext.doLookup("java:/LawyerMail");
 			
@@ -42,5 +49,4 @@ public class MailSender implements Serializable {
 			throw new RuntimeException("Erro ao enviar email");
 		}
 	}
-	
 }
