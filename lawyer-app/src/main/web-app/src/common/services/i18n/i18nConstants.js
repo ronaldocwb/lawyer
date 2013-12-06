@@ -23,7 +23,7 @@ angular.module('i18n.Constants', [])
         'empresa.erro.apagar': "Putz....Erro ao deletar a empresa com nome fantasia <strong>{{nome}}</strong>...",
         'advogado.salva': "O advogado com nome <strong>{{nome}}</strong> foi criado!",
         'advogado.salva.erro': "Ocorreu um erro ao salvar o advogado <strong>{{nome}}</strong>. =(",
-        'advogado.alterada': "O advogado com nome <strong>{{nome}}</strong> foi alterado!",
+        'advogado.alterado': "O advogado com nome <strong>{{nome}}</strong> foi alterado!",
         'advogado.apagada': "O advogado com nome <strong>{{nome}}</strong> foi apagado",
         'advogado.erro.apagar': "Putz....Erro ao deletar o advogado com nome <strong>{{nome}}</strong>...",
         'advogado.ja.existe': "O Advogado <strong>{{nome}}</strong> já está cadastrado.",

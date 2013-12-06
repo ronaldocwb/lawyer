@@ -1,18 +1,22 @@
 package br.com.lawyer.web.vo;
 
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import br.com.lawyer.web.base.BaseVO;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-
-import java.util.List;
-
 public class UsuarioVO extends BaseVO<Usuario> {
 
-    private String email;
+	private static final long serialVersionUID = 1L;
+
+	private String uid;
+	
+	private String email;
 
     @IgnoreVOParser
     private String token;
@@ -36,6 +40,14 @@ public class UsuarioVO extends BaseVO<Usuario> {
 		super();
 		this.email = email;
 	}
+    
+    public String getUid () {
+        return uid;
+    }
+
+    public void setUid (String uid) {
+        this.uid = uid;
+    }
 
 	@JsonIgnore
     public String getSenha () {
