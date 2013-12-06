@@ -71,12 +71,17 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
     @Override
     public Advogado salvarAdvogado (Advogado advogado) throws BusinessException {
     	logger.info(String.format("Salvando o advogado de UID %s pelo usuário %s", advogado.getNumeroOAB(), getUsuarioLogado().getEmail()));
-        if (advogado.getPessoa() != null && StringUtils.isNotBlank(advogado.getPessoa().getUid())) {
-            Pessoa pessoa = pessoaService.salvar(advogado.getPessoa());
+        if (advogado.getPessoa() != null) {
+        	Pessoa pessoa;
+        	if(StringUtils.isNotBlank(advogado.getPessoa().getUid())){
+        		pessoa = pessoaService.atualizar(advogado.getPessoa());
+        	}else{
+        		pessoa = pessoaService.salvar(advogado.getPessoa());
+        	}
             advogado.setPessoa(pessoa);
         }
-        logger.info(String.format("Advogado de UID %s foi salva pelo usuário %s", advogado.getUid(), getUsuarioLogado().getEmail()));
         Advogado retorno =  getRepository().save(advogado);
+        logger.info(String.format("Advogado de UID %s foi salva pelo usuário %s", advogado.getUid(), getUsuarioLogado().getEmail()));
         
         if(advogado.hasUsuario()){
         	//TODO injetar a advocacia do usuario logado e setar no usuario que está sendo criado
