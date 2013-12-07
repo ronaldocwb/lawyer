@@ -54,13 +54,13 @@ angular.module('lawyer.advogados.listar', [
 
                 modalInstance.result.then(function () {
                     Advogado.remove({id: advogado.uid}, advogado, function () {
-                        notifications.pushForCurrentRoute('advogado.apagada', 'success', {nome : advogado.nome});
+                        notifications.pushForCurrentRoute('advogado.apagada', 'success', {nome : advogado.pessoa.nome});
                         $scope.advogados.content.splice($scope.advogados.content.indexOf(advogado), 1);
                         if ($scope.originalResultSet) {
                             $scope.originalResultSet.content.splice($scope.originalResultSet.content.indexOf(advogado), 1);
                         }
                     }, function error() {
-                        notifications.pushForCurrentRoute('advogado.erro.apagar', 'error', {nome : advogado.nome});
+                        notifications.pushForCurrentRoute('advogado.erro.apagar', 'error', {nome : advogado.pessoa.nome});
                     });
 
                 }, function () {

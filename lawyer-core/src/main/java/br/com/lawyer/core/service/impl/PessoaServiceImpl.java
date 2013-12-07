@@ -1,5 +1,13 @@
 package br.com.lawyer.core.service.impl;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
 import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Cliente;
 import br.com.lawyer.core.entity.Pessoa;
@@ -9,13 +17,7 @@ import br.com.lawyer.core.repository.predicates.PessoaPredicate;
 import br.com.lawyer.core.service.AdvogadoService;
 import br.com.lawyer.core.service.ClienteService;
 import br.com.lawyer.core.service.PessoaService;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import br.com.lawyer.core.service.UsuarioService;
 
 /**
  * @author Deividi
@@ -24,7 +26,9 @@ import java.util.List;
 @Service
 public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRepository> implements PessoaService {
 
-    private static final Logger logger = Logger.getLogger(PessoaService.class);
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = Logger.getLogger(PessoaService.class);
 
     @Autowired
     private ClienteService clienteService;
@@ -38,7 +42,7 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     }
 
     /**
-     * Busca os resultados das empresas por paginação informada.
+     * Busca os resultados das empresas por paginaï¿½ï¿½o informada.
      * Se o parametro <code>query</code> for informado, faz um <code>like</code> com {@link br.com.lawyer.core.entity.Pessoa#nome}
      * Se o parametro <code>query</code> nao for informado, retorna todas.
      *
@@ -53,8 +57,8 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
 
     /**
      * Remove as referencias de uma empresa com UID informado para poder apagar essa empresa.
-     * As pessoas permanecem na base mas como orfãs
-     * Precisa de um contexto transacional que faça uma operação de commit na transação pra fazer efeito.
+     * As pessoas permanecem na base mas como orfï¿½s
+     * Precisa de um contexto transacional que faï¿½a uma operaï¿½ï¿½o de commit na transaï¿½ï¿½o pra fazer efeito.
      *
      * @param uid
      */
@@ -75,14 +79,14 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
      */
     @Override
     public Pessoa salvar (Pessoa pessoa) throws BusinessException {
-        logger.info(String.format("Salvando a pessoa %s pelo usuário %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Salvando a pessoa %s pelo usuï¿½rio %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
         saveAndFlush(pessoa);
         if (pessoa.getCliente().equals(Boolean.TRUE)) {
             Cliente cliente = new Cliente();
             cliente.setPessoa(pessoa);
             clienteService.save(cliente);
         }
-        logger.info(String.format("Pessoa de UID %s salva pelo usuário %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s salva pelo usuï¿½rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }
 
@@ -96,7 +100,7 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
      */
     @Override
     public Pessoa atualizar (Pessoa pessoa) throws BusinessException {
-        logger.info(String.format("Atualizando a pessoa de UID %s pelo usuário %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Atualizando a pessoa de UID %s pelo usuï¿½rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         Pessoa storedPessoa = findOne(pessoa.getUid());
         if (storedPessoa != null && !storedPessoa.getCliente().equals(pessoa.getCliente())) {
             if (pessoa.getCliente().equals(Boolean.TRUE)) {
@@ -106,16 +110,16 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
             }
         }
         save(pessoa);
-        logger.info(String.format("Pessoa de UID %s atualizada pelo usuário %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s atualizada pelo usuï¿½rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }
 
     @Override
     public void deletar (String uid) throws BusinessException {
-        logger.info(String.format("Deletando a pessoa de UID %s pelo usuário %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Deletando a pessoa de UID %s pelo usuï¿½rio %s", uid, getUsuarioLogado().getEmail()));
         clienteService.removerPorReferenciaUid(uid, Pessoa.class);
         advogadoService.removerPorPessoaUid(uid);
         delete(uid);
-        logger.info(String.format("Pessoa de UID %s apagada usuário %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s apagada usuï¿½rio %s", uid, getUsuarioLogado().getEmail()));
     }
 }

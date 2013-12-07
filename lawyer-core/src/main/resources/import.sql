@@ -29,6 +29,7 @@ INSERT INTO public.pessoa_emails (pessoa_uid, value, principal) VALUES ('42117a7
 INSERT INTO advocacia (uid, nome) VALUES ('1', 'Saul Law Corp.');
 
 INSERT INTO usuario (uid, email, senha, advocacia_uid, pessoa_uid) VALUES ('1', 'developer@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723', '1', '42117a72-fee2-46fc-ab2a-fc624b0c3ffb');
+INSERT INTO usuario (uid, email, senha, advocacia_uid, pessoa_uid) VALUES ('2', 'developer2@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723', '1', '22807067-9770-4ab6-b631-40d08eacfbac');
 
 
 

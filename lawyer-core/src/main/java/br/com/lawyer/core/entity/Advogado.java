@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Advogado extends AbstractBaseEntity {
 
-    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinColumn(unique = true, nullable = false)
     private Pessoa pessoa;
 

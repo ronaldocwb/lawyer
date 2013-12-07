@@ -14,7 +14,7 @@ angular.module('lawyer.advogados.cadastro', [
 
             $scope.advogado = {};
             $scope.novaPessoa = 'true';
-            $scope.geraUsuario = 'false';
+            $scope.advogado.geraUsuario = 'true';
 
             $scope.advogado.pessoa = {
                 nome : '',
@@ -100,36 +100,46 @@ angular.module('lawyer.advogados.cadastro', [
                 $scope.advogado.pessoa[key].splice($index, 1);
             };
 
-            $scope.notification = {};
-            $scope.addEmpresa = function ($item) {
+            $scope.addEmpresa= function (name) {
                 $scope.advogado.pessoa.empresa = {
-                    nomeFantasia : $item,
+                    nomeFantasia : name,
                     telefones : [],
                     enderecos : []
                 };
-                $scope.advogado.pessoa.empresa = Empresa.save($scope.advogado.empresa, function () {
-                    $scope.notification = {
-                        text : 'A empresa <b>' + $item + '</b> foi criada!'
-                    };
+                Empresa.save($scope.advogado.pessoa.empresa, function (empresa) {
+                    $scope.advogado.pessoa.empresa = empresa;
+                    // emite a notificação para completar cadastro: i18n, nome, callback e objeto
+                    notifications.pushCompletarCadastro('empresa.completar.cadastro', { nome: name} , 'pessoa.cadastrar.empresa.callback', empresa);
                 });
             };
 
-            $scope.completarEmpresa = function () {
-                $state.data = $scope.advogado.empresa;
+            $scope.$on('pessoa.cadastrar.empresa.callback', function ($event, empresa) {
+                $scope.completarEmpresa(empresa);
+            });
+
+            $scope.onSelectEmpresa = function (empresa) {
+                $scope.advogado.pessoa.empresa = empresa;
+            };
+
+            $scope.completarEmpresa = function (empresa) {
+                //envia o objeto de retorno no OK do modal para a popup de edicao, copia ele pra nao fazer bind automatico e aparecer alterando na tela de fundo.
+                $state.data = angular.copy(empresa);
                 $state.data.modal = $modal.open({
-                    templateUrl: 'empresas/editar/empresas.editar.tpl.html',
+                    templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html',
                     controller: 'EmpresaEdicaoController',
                     resolve: {
                         empresa: function () {
-                            return $scope.advogado.pessoa.empresa;
+                            return empresa;
                         }
                     }
                 });
 
-                $state.data.modal.result.then(function (editar) {
-                    if (editar === true) {
-                        $state.data = $scope.advogado.pessoa.empresa;
+                $state.data.modal.result.then(function (empresaAtualizada) {
+                    if (!empresaAtualizada) {
+                        return;
                     }
+                    // se atualizou a pessoa, ela existe e vamos substituir no array de responsaveis para a alteração ficar visivel na tela, e mostramos uma notificação de OK.
+                    $scope.advogado.pessoa.empresa = empresaAtualizada;
                 });
             };
 

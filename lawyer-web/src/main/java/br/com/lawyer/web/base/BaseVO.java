@@ -30,10 +30,10 @@ public abstract class BaseVO<T> implements Serializable {
     /**
      * Popula os campos do VO com os valores da entidade.<br>
      * Todos os campos da entidade que no VO correspondem a um campo de um tipo
-     * que estende {@link BaseVO} também serão convertidos para o VO
+     * que estende {@link BaseVO} tambï¿½m serï¿½o convertidos para o VO
      * correspondente.
      *
-     * @param object a entidade cujos valores serão copiados para o VO.
+     * @param object a entidade cujos valores serï¿½o copiados para o VO.
      */
     public BaseVO(T object) {
         if (object == null) {
@@ -57,10 +57,10 @@ public abstract class BaseVO<T> implements Serializable {
             } catch (InvocationTargetException e) {
                 throw new ParseEntityToVOException(e);
             } catch (NoSuchMethodException e) {
-                // Se a entidade não possui o campo correspondente então não tenta copiar
+                // Se a entidade nï¿½o possui o campo correspondente entï¿½o nï¿½o tenta copiar
                 continue;
             }
-            // todo lazy
+            //TODO lazy
             try {
                 if (field.getType().getGenericSuperclass() instanceof ParameterizedType) {
                     Type type = ((ParameterizedType) field.getType().getGenericSuperclass()).getRawType();
@@ -98,7 +98,7 @@ public abstract class BaseVO<T> implements Serializable {
     /**
      * Converte o VO para uma entidade.<br>
      * Todos os campos do VO que forem de um tipo que estende {@link BaseVO}
-     * também serão convertidos para a entidade correspondente, inclusive
+     * tambï¿½m serï¿½o convertidos para a entidade correspondente, inclusive
      * quando o campo for uma lista de VOs.
      *
      * @return a entidade representada pelo VO.
@@ -123,7 +123,7 @@ public abstract class BaseVO<T> implements Serializable {
                 continue;
             }
 
-            // Ignora campos que não devem ir para a entidade ou que não existem na entidade
+            // Ignora campos que nï¿½o devem ir para a entidade ou que nï¿½o existem na entidade
             if (field.isAnnotationPresent(IgnoreVOParser.class)) {
                 continue;
             }
@@ -153,8 +153,8 @@ public abstract class BaseVO<T> implements Serializable {
                 } catch (InvocationTargetException e) {
                     throw new ParseVOToEntityException(e);
                 } catch (NoSuchMethodException e) {
-                    String error = (String.format("Entidade %s não possui o campo %s para parse. " +
-                            "Considere usar a anotação %s no campos para descartá-la ou verifique " +
+                    String error = (String.format("Entidade %s nï¿½o possui o campo %s para parse. " +
+                            "Considere usar a anotaï¿½ï¿½o %s no campos para descartï¿½-la ou verifique " +
                             "se ela bate com o campo na entidade.",
                             object.getClass().toString(), field.getName(), IgnoreVOParser.class.toString()));
                     throw new ParseVOToEntityException(error, e);
@@ -167,7 +167,7 @@ public abstract class BaseVO<T> implements Serializable {
 
     /**
      * Converte uma lista de VOs para uma lista de entidades.
-     * Se o parâmetro for nulo, será retornada uma lista vazia.
+     * Se o parï¿½metro for nulo, serï¿½ retornada uma lista vazia.
      *
      * @param value a lista de VOs.
      * @return a lista de entidades.
@@ -205,15 +205,15 @@ public abstract class BaseVO<T> implements Serializable {
 
     /**
      * Converte uma lista de entidades para uma lista de VOs.
-     * Se o tipo da lista no VO não estende {@link BaseVO} será retornada a lista passada por parâmetro.
+     * Se o tipo da lista no VO nï¿½o estende {@link BaseVO} serï¿½ retornada a lista passada por parï¿½metro.
      *
      * @param field o campo que representa a lista no VO.
      * @param list a lista de entidades a serem convertidas para VOs.
      * @return a lista de entidades de VOs.
-     * @throws NoSuchMethodException caso não seja possível instanciar um VO.
-     * @throws IllegalAccessException caso não seja possível instanciar um VO.
-     * @throws java.lang.reflect.InvocationTargetException caso não seja possível instanciar um VO.
-     * @throws InstantiationException caso não seja possível instanciar um VO.
+     * @throws NoSuchMethodException caso nï¿½o seja possï¿½vel instanciar um VO.
+     * @throws IllegalAccessException caso nï¿½o seja possï¿½vel instanciar um VO.
+     * @throws java.lang.reflect.InvocationTargetException caso nï¿½o seja possï¿½vel instanciar um VO.
+     * @throws InstantiationException caso nï¿½o seja possï¿½vel instanciar um VO.
      */
     private List<?> parseEntityList(Field field, List<?> list) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         try {
@@ -221,7 +221,7 @@ public abstract class BaseVO<T> implements Serializable {
                 return list;
             }
         } catch (LazyInitializationException e) {
-            // Se não estiver mapeado ou sem @Transaction no metodo pode ocorrer essa exceção.
+            // Se nï¿½o estiver mapeado ou sem @Transaction no metodo pode ocorrer essa exceï¿½ï¿½o.
             // retorna null nesse caso.
             e.printStackTrace();
             return null;
@@ -239,14 +239,14 @@ public abstract class BaseVO<T> implements Serializable {
 
         Class<?> clazz = (Class<?>) typeArguments[0]; // O tipo da lista no VO
 
-        if (!BaseVO.class.isAssignableFrom(clazz)) { // A lista não é de um tipo que estende BaseVO
+        if (!BaseVO.class.isAssignableFrom(clazz)) { // A lista nï¿½o ï¿½ de um tipo que estende BaseVO
             return list;
         }
 
         List<Object> result = new ArrayList<>();
 
         for (Object entity : list) {
-            Object vo = ConstructorUtils.invokeConstructor(clazz, entity); // Constrói o VO passando a entidade como parâmetro
+            Object vo = ConstructorUtils.invokeConstructor(clazz, entity); // Constrï¿½i o VO passando a entidade como parï¿½metro
             result.add(vo);
         }
 
@@ -257,7 +257,7 @@ public abstract class BaseVO<T> implements Serializable {
      * Retorna a classe que representa o VO.
      *
      * @return a classe que representa o VO.
-     * @throws ClassNotFoundException caso a classe do VO não seja encontrada.
+     * @throws ClassNotFoundException caso a classe do VO nï¿½o seja encontrada.
      */
     @SuppressWarnings("unchecked")
     private Class<T> getClassVO() {
