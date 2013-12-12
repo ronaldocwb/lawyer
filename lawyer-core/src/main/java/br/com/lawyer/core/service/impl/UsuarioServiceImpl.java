@@ -1,5 +1,13 @@
 package br.com.lawyer.core.service.impl;
 
+import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
+import br.com.lawyer.core.base.BaseServiceImpl;
+import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.exception.BusinessException;
+import br.com.lawyer.core.repository.UsuarioRepository;
+import br.com.lawyer.core.service.UsuarioService;
+import br.com.lawyer.core.util.PasswordEncoder;
+import br.com.lawyer.core.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,16 +15,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
-import br.com.lawyer.core.base.BaseServiceImpl;
-import br.com.lawyer.core.entity.Usuario;
-import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.core.repository.UsuarioRepository;
-import br.com.lawyer.core.service.AdvocaciaService;
-import br.com.lawyer.core.service.UsuarioService;
-import br.com.lawyer.core.util.PasswordEncoder;
-import br.com.lawyer.core.util.StringUtils;
 
 /**
  * @author Deividi Cavarzan
@@ -26,10 +24,6 @@ import br.com.lawyer.core.util.StringUtils;
 public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, UsuarioRepository> implements UsuarioService {
 
     private static final Logger logger = Logger.getLogger(UsuarioService.class);
-    
-    @Autowired
-    private AdvocaciaService advocaciaService;
-    
     
     /**
      * Construtor
@@ -142,9 +136,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
 
     @Override
     public Usuario salvar(Usuario usuario) throws BusinessException {
-    	
-    	usuario.setAdvocacia(advocaciaService.findAdvocaciaUsuarioLogado());
-    	
+    	usuario.setAdvocacia(getUsuarioLogado().getAdvocacia());
     	return super.save(usuario);
     }
 }

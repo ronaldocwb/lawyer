@@ -1,6 +1,6 @@
 package br.com.lawyer.web.delegate;
 
-import br.com.lawyer.web.vo.SetorVO;
+import br.com.lawyer.core.entity.Setor;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
  * @since 03/11/2013
  */
 public interface SetorDelegate {
-    Page<SetorVO> findAllByNome (String query, int page, int limit);
+    Page<Setor> findAllByNome (String query, int page, int limit);
 
-    SetorVO salvar (SetorVO setorVO);
+    Setor salvar (Setor setorVO);
 
 }

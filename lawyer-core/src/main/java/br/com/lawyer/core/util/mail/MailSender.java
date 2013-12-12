@@ -1,6 +1,9 @@
 package br.com.lawyer.core.util.mail;
 
-import java.io.Serializable;
+import br.com.lawyer.core.mail.MailEvent;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -9,12 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.InitialContext;
-
-import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
-
-import br.com.lawyer.core.mail.MailEvent;
+import java.io.Serializable;
 
 @Component
 public class MailSender implements ApplicationListener<MailEvent>, Serializable {

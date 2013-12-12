@@ -1,13 +1,5 @@
 package br.com.lawyer.core.service.impl;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
 import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Cliente;
 import br.com.lawyer.core.entity.Pessoa;
@@ -17,7 +9,14 @@ import br.com.lawyer.core.repository.predicates.PessoaPredicate;
 import br.com.lawyer.core.service.AdvogadoService;
 import br.com.lawyer.core.service.ClienteService;
 import br.com.lawyer.core.service.PessoaService;
-import br.com.lawyer.core.service.UsuarioService;
+import br.com.lawyer.core.util.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Deividi
@@ -121,5 +120,19 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
         advogadoService.removerPorPessoaUid(uid);
         delete(uid);
         logger.info(String.format("Pessoa de UID %s apagada usu�rio %s", uid, getUsuarioLogado().getEmail()));
+    }
+
+    @Override
+    public Pessoa salvarOuAtualizar(Pessoa pessoa) {
+        try {
+            if (StringUtils.isBlank(pessoa.getUid())) {
+                return this.salvar(pessoa);
+            } else {
+                return this.atualizar(pessoa);
+            }
+        } catch (BusinessException e) {
+            logger.error("Erro ao salvar / atualizar pessoa: ", e);
+            return null;
+        }
     }
 }

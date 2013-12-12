@@ -3,6 +3,7 @@ package br.com.lawyer.core.entity;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -32,6 +33,7 @@ public class Usuario extends AbstractBaseEntity {
 
     @OneToOne()
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonBackReference
     private Pessoa pessoa;
     
     @Enumerated(EnumType.ORDINAL)
@@ -41,8 +43,15 @@ public class Usuario extends AbstractBaseEntity {
     @Enumerated (value = EnumType.STRING)
     @JoinColumn (columnDefinition = "Permissao")
     private List<Permissao> permissoes;
-	
-	@PrePersist
+
+    public Usuario () {}
+
+    public Usuario (String value) {
+        super();
+        this.email = value;
+    }
+
+    @PrePersist
 	public void prePersist(){
 		if(getAtivo() == null){
 			setAtivo(StatusUsuario.SEM_ATIVACAO_INICIAL);

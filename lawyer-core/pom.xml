@@ -18,14 +18,13 @@
         <!--<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>-->
         <org.springframework.data.jpa.version>1.4.1.RELEASE</org.springframework.data.jpa.version>
         <com.mysema.querydsl.version>3.2.4</com.mysema.querydsl.version>
-        <org.codehaus.jackson.version>1.9.13</org.codehaus.jackson.version>
+        <org.codehaus.jackson.version>2.2.2</org.codehaus.jackson.version>
         <org.hibernate.version>4.2.3.Final</org.hibernate.version>
         <postgres.version>9.1-901-1.jdbc4</postgres.version>
     </properties>
 
     <dependencies>
         <!-- Java EE 6 -->
-
 
         <dependency>
             <groupId>org.jboss.spec</groupId>
@@ -164,14 +163,20 @@
         <!-- Fim Dependencias do Spring3 -->
 
         <!-- Jackson para JSON Responses -->
+
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
             <version>${org.codehaus.jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${org.codehaus.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
             <version>${org.codehaus.jackson.version}</version>
         </dependency>
         <!-- Fim Jackson para JSON Responses -->

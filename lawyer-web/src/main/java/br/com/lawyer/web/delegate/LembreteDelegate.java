@@ -1,7 +1,7 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.entity.Lembrete;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.web.vo.LembreteVO;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface LembreteDelegate {
 
-    LembreteVO salvar (LembreteVO lembreteVO) throws BusinessException;
+    Lembrete salvar (Lembrete lembreteVO) throws BusinessException;
 
-    void deletar (LembreteVO lembrete);
+    void deletar (Lembrete lembrete);
 
-    List<LembreteVO> findAll () throws BusinessException;
+    List<Lembrete> findAll () throws BusinessException;
 
-    LembreteVO atualizar (LembreteVO lembrete) throws BusinessException;
+    Lembrete atualizar (Lembrete lembrete) throws BusinessException;
 
     void deletarTodos () throws BusinessException;
 

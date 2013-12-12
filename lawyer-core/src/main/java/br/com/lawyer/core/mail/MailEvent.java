@@ -1,8 +1,7 @@
 package br.com.lawyer.core.mail;
 
-import org.springframework.context.ApplicationEvent;
-
 import br.com.lawyer.core.util.mail.MailMessage;
+import org.springframework.context.ApplicationEvent;
 
 public class MailEvent extends ApplicationEvent {
 

@@ -3,9 +3,7 @@ package br.com.lawyer.web.delegate.impl;
 import br.com.lawyer.core.entity.Lembrete;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.LembreteService;
-import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.LembreteDelegate;
-import br.com.lawyer.web.vo.LembreteVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,33 +15,33 @@ import java.util.List;
  * @since 22/10/2013
  */
 @Service
-public class LembreteDelegateImpl extends BaseDelegate<Lembrete, LembreteVO> implements LembreteDelegate {
+public class LembreteDelegateImpl implements LembreteDelegate {
 
     @Autowired
     private LembreteService lembreteService;
 
     @Override
     @Transactional
-    public LembreteVO salvar (LembreteVO lembreteVO) throws BusinessException {
-        Lembrete lembrete = lembreteService.salvar(lembreteVO.parse());
-        return getVO(lembrete);
+    public Lembrete salvar (Lembrete lembreteVO) throws BusinessException {
+        Lembrete lembrete = lembreteService.salvar(lembreteVO);
+        return lembrete;
     }
 
     @Override
-    public void deletar (LembreteVO lembretesVO) {
-        lembreteService.delete(lembretesVO.parse());
+    public void deletar (Lembrete lembretesVO) {
+        lembreteService.delete(lembretesVO);
     }
 
     @Override
-    public List<LembreteVO> findAll () throws BusinessException {
+    public List<Lembrete> findAll () throws BusinessException {
         List<Lembrete> lembretes = lembreteService.findAllByCurrentUser();
-        return getVO(lembretes);
+        return lembretes;
     }
 
     @Override
-    public LembreteVO atualizar (LembreteVO lembreteVO) throws BusinessException {
-        Lembrete lembrete = lembreteService.salvar(lembreteVO.parse());
-        return getVO(lembrete);
+    public Lembrete atualizar (Lembrete lembreteVO) throws BusinessException {
+        Lembrete lembrete = lembreteService.salvar(lembreteVO);
+        return lembrete;
     }
 
     @Override

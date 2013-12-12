@@ -35,6 +35,7 @@ public class Empresa extends AbstractBaseEntity {
     private List<Endereco> enderecos;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Email> emails;
 
     @OneToMany(cascade={CascadeType.ALL})

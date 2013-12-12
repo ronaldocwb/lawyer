@@ -1,15 +1,20 @@
 package br.com.lawyer.web.api;
 
+import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
 import br.com.lawyer.web.delegate.PessoaDelegate;
-import br.com.lawyer.web.vo.PessoaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Deividi
@@ -31,8 +36,8 @@ public class PessoaController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/pessoas", method = RequestMethod.POST)
-    public @ResponseBody PessoaVO salvarUsuario(@RequestBody PessoaVO pessoaVO) throws BusinessException {
-        return pessoaDelegate.salvar(pessoaVO);
+    public @ResponseBody Pessoa salvarUsuario(@RequestBody Pessoa pessoa) throws BusinessException {
+        return pessoaDelegate.salvar(pessoa);
     }
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
@@ -44,12 +49,13 @@ public class PessoaController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/pessoas/{uid}", method = RequestMethod.PUT)
-    public @ResponseBody PessoaVO update(@PathVariable("uid") String uid, @RequestBody PessoaVO pessoaVO) throws BusinessException {
-        return pessoaDelegate.atualizar(pessoaVO, uid);
+    public @ResponseBody Pessoa update(@PathVariable("uid") String uid, @RequestBody Pessoa pessoa) throws BusinessException {
+        return pessoaDelegate.atualizar(pessoa, uid);
     }
 
     @RequestMapping(value = "/pessoas/{uid}", method = RequestMethod.GET)
-    public @ResponseBody PessoaVO findOne(@PathVariable("uid") String uid) {
+    public @ResponseBody
+    Pessoa findOne(@PathVariable("uid") String uid) {
         return pessoaDelegate.buscarPorUid(uid);
     }
 

@@ -1,15 +1,20 @@
 package br.com.lawyer.web.api;
 
+import br.com.lawyer.core.entity.Empresa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
 import br.com.lawyer.web.delegate.EmpresaDelegate;
-import br.com.lawyer.web.vo.EmpresaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Deividi
@@ -31,8 +36,9 @@ public class EmpresaController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/empresas", method = RequestMethod.POST)
-    public @ResponseBody EmpresaVO salvarUsuario(@RequestBody EmpresaVO empresaVO) throws BusinessException {
-        return empresaDelegate.salvar(empresaVO);
+    public @ResponseBody
+    Empresa salvarUsuario(@RequestBody Empresa empresa) throws BusinessException {
+        return empresaDelegate.salvar(empresa);
     }
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
@@ -44,12 +50,12 @@ public class EmpresaController {
 
     @Secured({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/empresas/{uid}", method = RequestMethod.PUT)
-    public @ResponseBody EmpresaVO update(@PathVariable("uid") String uid, @RequestBody EmpresaVO EmpresaVO) throws BusinessException {
-        return empresaDelegate.atualizar(EmpresaVO, uid);
+    public @ResponseBody Empresa update(@PathVariable("uid") String uid, @RequestBody Empresa Empresa) throws BusinessException {
+        return empresaDelegate.atualizar(Empresa, uid);
     }
 
     @RequestMapping(value = "/empresas/{uid}", method = RequestMethod.GET)
-    public @ResponseBody EmpresaVO findOne(@PathVariable("uid") String uid) {
+    public @ResponseBody Empresa findOne(@PathVariable("uid") String uid) {
         return empresaDelegate.buscarPorUid(uid);
     }
 

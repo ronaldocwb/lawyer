@@ -3,9 +3,7 @@ package br.com.lawyer.web.delegate.impl;
 import br.com.lawyer.core.entity.Assunto;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.AssuntoService;
-import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.AssuntoDelegate;
-import br.com.lawyer.web.vo.AssuntoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,22 +14,21 @@ import org.springframework.stereotype.Service;
  * @since 15/11/2013
  */
 @Service
-public class AssuntoDelegateImpl extends BaseDelegate<Assunto, AssuntoVO> implements AssuntoDelegate {
+public class AssuntoDelegateImpl implements AssuntoDelegate {
 
     @Autowired
     private AssuntoService assuntoService;
 
     @Override
-    public Page<AssuntoVO> findAssuntoPorNomeOuPagina (String nome, int page, int limit) {
+    public Page<Assunto> findAssuntoPorNomeOuPagina (String nome, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<Assunto> assuntos = assuntoService.findAssuntoPorNomeOuPagina(nome, pageRequest);
-        return getVO(assuntos, pageRequest);
+        return assuntos;
     }
 
     @Override
-    public AssuntoVO salvar (AssuntoVO assuntoVO) {
-        Assunto assunto = assuntoService.save(assuntoVO.parse());
-        return getVO(assunto);
+    public Assunto salvar (Assunto assunto) {
+        return assuntoService.save(assunto);
     }
 
     @Override
@@ -40,21 +37,20 @@ public class AssuntoDelegateImpl extends BaseDelegate<Assunto, AssuntoVO> implem
     }
 
     @Override
-    public AssuntoVO update (AssuntoVO assuntoVO, String uid) {
-        Assunto assunto = assuntoService.save(assuntoVO.parse());
-        return getVO(assunto);
+    public Assunto update (Assunto assunto, String uid) {
+        return assuntoService.save(assunto);
     }
 
     @Override
-    public AssuntoVO findOne (String uid) {
+    public Assunto findOne (String uid) {
         Assunto assunto = assuntoService.findOne(uid);
-        return getVO(assunto);
+        return assunto;
     }
 
     @Override
-    public Page<AssuntoVO> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException {
+    public Page<Assunto> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<Assunto> assuntos = assuntoService.findAssuntosPorClienteUid(uid, pageRequest);
-        return getVO(assuntos, pageRequest);
+        return assuntos;
     }
 }

@@ -1,15 +1,20 @@
 package br.com.lawyer.web.api;
 
+import br.com.lawyer.core.entity.Responsavel;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
 import br.com.lawyer.web.delegate.ResponsavelDelegate;
-import br.com.lawyer.web.vo.ResponsavelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Deividi
@@ -33,8 +38,8 @@ public class ResponsavelController {
 
     @RequestMapping(value = "/responsaveis", method = RequestMethod.POST)
     public @ResponseBody
-    ResponsavelVO salvarUsuario(@RequestBody ResponsavelVO pessoaVO) {
-        return responsavelDelegate.salvar(pessoaVO);
+    Responsavel salvarUsuario(@RequestBody Responsavel pessoa) {
+        return responsavelDelegate.salvar(pessoa);
     }
 
     @RequestMapping(value = "/responsaveis/{uid}", method = RequestMethod.DELETE)
@@ -44,12 +49,13 @@ public class ResponsavelController {
     }
 
     @RequestMapping(value = "/responsaveis/{uid}", method = RequestMethod.PUT)
-    public @ResponseBody ResponsavelVO update(@PathVariable("uid") String uid, @RequestBody ResponsavelVO pessoaVO) throws BusinessException {
-        return responsavelDelegate.atualizar(pessoaVO, uid);
+    public @ResponseBody Responsavel update(@PathVariable("uid") String uid, @RequestBody Responsavel pessoa) throws BusinessException {
+        return responsavelDelegate.atualizar(pessoa, uid);
     }
 
     @RequestMapping(value = "/responsaveis/{uid}", method = RequestMethod.GET)
-    public @ResponseBody ResponsavelVO findOne(@PathVariable("uid") String uid) {
+    public @ResponseBody
+    Responsavel findOne(@PathVariable("uid") String uid) {
         return responsavelDelegate.buscarPorUid(uid);
     }
 

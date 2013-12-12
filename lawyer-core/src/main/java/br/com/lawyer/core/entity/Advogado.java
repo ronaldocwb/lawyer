@@ -25,7 +25,7 @@ public class Advogado extends AbstractBaseEntity {
     public Advogado (Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-    
+
     public boolean hasUsuario(){
     	return getPessoa().getUsuario() != null;
     }

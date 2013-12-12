@@ -1,14 +1,14 @@
 package br.com.lawyer.web.vo;
 
-import java.util.List;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import br.com.lawyer.core.entity.Advocacia;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import br.com.lawyer.web.base.BaseVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class UsuarioVO extends BaseVO<Usuario> {
 
@@ -28,7 +28,7 @@ public class UsuarioVO extends BaseVO<Usuario> {
     @IgnoreVOParser
     private String novaSenha;
 
-    private AdvocaciaVO advocacia;
+    private Advocacia advocacia;
 
     public UsuarioVO() {}
 
@@ -93,11 +93,11 @@ public class UsuarioVO extends BaseVO<Usuario> {
         this.novaSenha = novaSenha;
     }
 
-    public AdvocaciaVO getAdvocacia () {
+    public Advocacia getAdvocacia () {
         return advocacia;
     }
 
-    public void setAdvocacia (AdvocaciaVO advocacia) {
+    public void setAdvocacia (Advocacia advocacia) {
         this.advocacia = advocacia;
     }
 }

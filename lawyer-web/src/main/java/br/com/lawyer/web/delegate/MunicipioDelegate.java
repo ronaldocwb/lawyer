@@ -1,6 +1,6 @@
 package br.com.lawyer.web.delegate;
 
-import br.com.lawyer.web.vo.MunicipioVO;
+import br.com.lawyer.core.entity.common.Municipio;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.data.domain.Page;
  */
 public interface MunicipioDelegate {
 
-    public Page<MunicipioVO> buscaPorNome (String query, int page, int limit);
+    public Page<Municipio> buscaPorNome (String query, int page, int limit);
 }

@@ -1,16 +1,14 @@
 package br.com.lawyer.core.mail;
 
-import java.net.URL;
-import java.util.concurrent.Executors;
-
+import br.com.lawyer.core.util.mail.MailMessage;
+import com.google.common.io.Resources;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.stereotype.Service;
 
-import br.com.lawyer.core.util.mail.MailMessage;
-
-import com.google.common.io.Resources;
+import java.net.URL;
+import java.util.concurrent.Executors;
 
 @Service
 public class MailProviderService {

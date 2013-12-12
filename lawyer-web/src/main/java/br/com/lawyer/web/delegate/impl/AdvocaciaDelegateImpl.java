@@ -3,9 +3,7 @@ package br.com.lawyer.web.delegate.impl;
 import br.com.lawyer.core.entity.Advocacia;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.AdvocaciaService;
-import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.AdvocaciaDelegate;
-import br.com.lawyer.web.vo.AdvocaciaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +12,14 @@ import org.springframework.stereotype.Service;
  * @since 31/10/2013
  */
 @Service
-public class AdvocaciaDelegateImpl extends BaseDelegate<Advocacia, AdvocaciaVO> implements AdvocaciaDelegate {
+public class AdvocaciaDelegateImpl implements AdvocaciaDelegate {
 
     @Autowired
     private AdvocaciaService clienteService;
 
     @Override
-    public AdvocaciaVO findAdvocaciaUsuario () throws BusinessException {
+    public Advocacia findAdvocaciaUsuario () throws BusinessException {
         Advocacia advocacia = clienteService.findAdvocaciaUsuarioLogado();
-        return getVO(advocacia);
+        return advocacia;
     }
 }

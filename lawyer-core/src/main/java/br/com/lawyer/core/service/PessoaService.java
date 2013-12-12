@@ -22,4 +22,6 @@ public interface PessoaService extends BaseService<String, Pessoa, PessoaReposit
     Pessoa atualizar (Pessoa parse) throws BusinessException;
 
     void deletar (String uid) throws BusinessException;
+
+    Pessoa salvarOuAtualizar (Pessoa pessoa);
 }

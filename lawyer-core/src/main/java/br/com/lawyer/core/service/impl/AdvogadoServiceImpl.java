@@ -1,14 +1,5 @@
 package br.com.lawyer.core.service.impl;
 
-import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.buscaSePossuirNome;
-import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.possuiPessoaUid;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
 import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.entity.Pessoa;
@@ -18,7 +9,14 @@ import br.com.lawyer.core.repository.AdvogadoRepository;
 import br.com.lawyer.core.service.AdvogadoService;
 import br.com.lawyer.core.service.PessoaService;
 import br.com.lawyer.core.service.UsuarioService;
-import br.com.lawyer.core.util.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.buscaSePossuirNome;
+import static br.com.lawyer.core.repository.predicates.AdvogadoPredicate.possuiPessoaUid;
 
 /**
  * @author Deividi
@@ -72,12 +70,7 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
     public Advogado salvarAdvogado (Advogado advogado) throws BusinessException {
     	logger.info(String.format("Salvando o advogado de UID %s pelo usuário %s", advogado.getNumeroOAB(), getUsuarioLogado().getEmail()));
         if (advogado.getPessoa() != null) {
-        	Pessoa pessoa;
-        	if(StringUtils.isNotBlank(advogado.getPessoa().getUid())){
-        		pessoa = pessoaService.atualizar(advogado.getPessoa());
-        	}else{
-        		pessoa = pessoaService.salvar(advogado.getPessoa());
-        	}
+        	Pessoa pessoa = pessoaService.salvarOuAtualizar(advogado.getPessoa());
             advogado.setPessoa(pessoa);
         }
         Advogado retorno =  getRepository().save(advogado);
@@ -87,10 +80,8 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
         	//TODO injetar a advocacia do usuario logado e setar no usuario que está sendo criado
             advogado.getPessoa().associaUsuario();
             usuarioService.salvar(advogado.getPessoa().getUsuario());
-        	
         	mailProviderService.enviarEmailCadastro(advogado.getNome(), advogado.getEmailLogin());
         }
-        
         return retorno;
     }
 

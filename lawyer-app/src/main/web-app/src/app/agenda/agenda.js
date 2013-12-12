@@ -105,27 +105,27 @@ angular.module('lawyer.agenda', ['ui.calendar'])
                 dayClick: $scope.alertEventOnClick,
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize,
-                monthNames : $locale.DATETIME_FORMATS.MONTH,
-                monthNamesShort : $locale.DATETIME_FORMATS.SHORTMONTH,
-                dayNames : $locale.DATETIME_FORMATS.DAY,
-                dayNamesShort : $locale.DATETIME_FORMATS.SHORTDAY,
-                columnFormat : {
-                    month: 'ddd',    // Mon
-                    week: 'ddd dd/MM', // Mon 9/7
-                    day: 'dddd dd/MM'  // Monday 9/7
+                monthNames: $locale.DATETIME_FORMATS.MONTH,
+                monthNamesShort: $locale.DATETIME_FORMATS.SHORTMONTH,
+                dayNames: $locale.DATETIME_FORMATS.DAY,
+                dayNamesShort: $locale.DATETIME_FORMATS.SHORTDAY,
+                columnFormat: {
+                    month: 'ddd',
+                    week: 'ddd dd/MM',
+                    day: 'dddd dd/MM'
                 },
-                buttonText : {
-                    prev:     '&lsaquo;', // <
-                    next:     '&rsaquo;', // >
-                    prevYear: '&laquo;',  // < <
-                    nextYear: '&raquo;',  // > >
-                    today:    'Hoje',
-                    month:    'Mês',
-                    week:     'Semana',
-                    day:      'Dia'
+                buttonText: {
+                    prev: '&lsaquo;',
+                    next: '&rsaquo;',
+                    prevYear: '&laquo;',
+                    nextYear: '&raquo;',
+                    today: 'Hoje',
+                    month: 'Mês',
+                    week: 'Semana',
+                    day: 'Dia'
                 },
                 timeFormat: 'H(:mm)',
-                weekNumberTitle : 'S'
+                weekNumberTitle: 'S'
 
 
 

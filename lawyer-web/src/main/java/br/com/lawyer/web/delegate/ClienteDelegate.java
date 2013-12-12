@@ -1,6 +1,6 @@
 package br.com.lawyer.web.delegate;
 
-import br.com.lawyer.web.vo.ClienteVO;
+import br.com.lawyer.core.entity.Cliente;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,13 +9,13 @@ import org.springframework.data.domain.Page;
  */
 public interface ClienteDelegate {
 
-    Page<ClienteVO> findClientes (String query, int page, int limit);
+    Page<Cliente> findClientes (String query, int page, int limit);
 
-    ClienteVO salvar (ClienteVO clienteVO);
+    Cliente salvar (Cliente clienteVO);
 
     void deletar (String uid);
 
-    ClienteVO atualizar (ClienteVO clienteVO, String uid);
+    Cliente atualizar (Cliente clienteVO, String uid);
 
-    ClienteVO buscarPorUid (String uid);
+    Cliente buscarPorUid (String uid);
 }
