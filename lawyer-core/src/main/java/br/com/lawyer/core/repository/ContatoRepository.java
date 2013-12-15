@@ -1,7 +1,7 @@
 package br.com.lawyer.core.repository;
 
 import br.com.lawyer.core.base.JPABaseRepository;
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Contato;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +12,9 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @since 22/11/2013
  */
 @NoRepositoryBean
-public interface ClienteRepository extends JpaRepository<Cliente, String>,JPABaseRepository<String,Cliente> {
+public interface ContatoRepository extends JpaRepository<Contato, String>,JPABaseRepository<String,Contato> {
 
-    Page<Cliente> findClientes (String query, Pageable pageRequest);
+    Page<Contato> findClientes (String query, String tipo, Pageable pageRequest);
 
     void remover (String uid, Class<?> klazz);
 }

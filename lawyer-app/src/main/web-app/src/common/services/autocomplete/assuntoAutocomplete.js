@@ -16,7 +16,7 @@ angular.module('assuntoAutocomplete', [])
                         return lastResult;
                     });
             },
-            queryByClienteUid: function (value, uid) {
+            queryByContatoUid: function (value, uid) {
                 if (value.toLowerCase().indexOf(lastQuery) !== -1 && lastResult.length < 8) {
                     return lastResult;
                 }

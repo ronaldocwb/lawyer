@@ -1,10 +1,11 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseServiceImpl;
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Contato;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.core.repository.ClienteRepository;
-import br.com.lawyer.core.service.ClienteService;
+import br.com.lawyer.core.repository.ContatoRepository;
+import br.com.lawyer.core.repository.predicates.ContatoPredicate;
+import br.com.lawyer.core.service.ContatoService;
 import br.com.lawyer.core.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,22 @@ import org.springframework.stereotype.Service;
  * @since 22/11/2013
  */
 @Service
-public class ClienteServiceImpl extends BaseServiceImpl<String, Cliente, ClienteRepository> implements ClienteService {
+public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, ContatoRepository> implements ContatoService {
 
-    private static final Logger logger = Logger.getLogger(ClienteService.class);
+    private static final Logger logger = Logger.getLogger(ContatoService.class);
 
     @Autowired
-    public ClienteServiceImpl (ClienteRepository repository) {
+    public ContatoServiceImpl (ContatoRepository repository) {
         super(repository);
     }
 
     @Override
-    public Page<Cliente> findClientes (String query, PageRequest pageRequest) {
-        Page<Cliente> clientes;
+    public Page<Contato> findContatos (String query, String tipo, PageRequest pageRequest) {
+        Page<Contato> clientes;
         if (StringUtils.isBlank(query)) {
-            clientes = getRepository().findAll(pageRequest);
+            clientes = getRepository().findAll(ContatoPredicate.buscaPorTipo(tipo), pageRequest);
         } else {
-            clientes = getRepository().findClientes(query, pageRequest);
+            clientes = getRepository().findClientes(query, tipo, pageRequest);
         }
         return clientes;
     }
@@ -47,6 +48,16 @@ public class ClienteServiceImpl extends BaseServiceImpl<String, Cliente, Cliente
         }
         logger.info(String.format("Apagando o Cliente do tipo %s, da classe %s, pelo usuário %s", uid, klazz.getSimpleName(), getUsuarioLogado().getEmail()));
         getRepository().remover(uid, klazz);
+    }
+
+    @Override
+    public Page<Contato> findContatosPessoas (String query, PageRequest pageRequest) {
+        return getRepository().findAll(ContatoPredicate.buscarPorPessoasLike(query), pageRequest);
+    }
+
+    @Override
+    public Page<Contato> findContatosEmpresas (String query, PageRequest pageRequest) {
+        return getRepository().findAll(ContatoPredicate.buscarPorEmpresasLike(query), pageRequest);
     }
 
 

@@ -10,7 +10,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
         var TYPEAHEAD_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+(.*)$/;
 
         return {
-            parse:function (input) {
+            parse: function (input) {
                 var match = input.match(TYPEAHEAD_REGEXP), modelMapper, viewMapper, source;
                 if (!match) {
                     throw new Error(
@@ -19,10 +19,10 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                 }
 
                 return {
-                    itemName:match[3],
-                    source:$parse(match[4]),
-                    viewMapper:$parse(match[2] || match[1]),
-                    modelMapper:$parse(match[1])
+                    itemName: match[3],
+                    source: $parse(match[4]),
+                    viewMapper: $parse(match[2] || match[1]),
+                    modelMapper: $parse(match[1])
                 };
             }
         };
@@ -34,14 +34,15 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
             var HOT_KEYS = [9, 13, 27, 38, 40];
 
             return {
-                require:'ngModel',
-                link:function (originalScope, element, attrs, modelCtrl) {
+                require: 'ngModel',
+                link: function (originalScope, element, attrs, modelCtrl) {
 
                     //SUPPORTED ATTRIBUTES (OPTIONS)
                     originalScope.valor = {
-                        text : null,
-                        used : false
+                        text: null,
+                        used: false
                     };
+
                     //minimal no of characters that needs to be entered before typeahead kicks-in
                     var minSearch = originalScope.$eval(attrs.typeaheadMinLength) || 1;
 
@@ -56,6 +57,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
 
                     //a callback executed when a match is selected
                     var onSelectCallback = $parse(attrs.typeaheadOnSelect);
+                    var onBlurCallback = $parse(attrs.typeaheadOnBlur);
 
                     var onAddCallback = $parse(attrs.typeaheadOnAdd);
 
@@ -81,7 +83,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                         position: 'position',
                         valor: 'valor',
                         add: 'add()',
-                        fokus : 'fokus'
+                        fokus: 'fokus'
                     });
                     //custom item template
                     if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
@@ -91,25 +93,25 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                     //create a child scope for the typeahead directive so we are not polluting original scope
                     //with typeahead-specific data (matches, query etc.)
                     var scope = originalScope.$new();
-                    originalScope.$on('$destroy', function(){
+                    originalScope.$on('$destroy', function () {
                         scope.$destroy();
                     });
 
                     scope.fokus = {
-                        hasFocus : false,
-                        id : null
+                        hasFocus: false,
+                        id: null
                     };
                     scope.fokus.id = scope.$id;
 
-                    var resetMatches = function() {
+                    var resetMatches = function () {
                         scope.matches = [];
                         scope.activeIdx = -1;
                     };
 
-                    var getMatchesAsync = function(inputValue) {
+                    var getMatchesAsync = function (inputValue) {
                         var locals = {$viewValue: inputValue};
-                        isLoadingSetter(originalScope, true);
-                        $q.when(parserResult.source(scope, locals)).then(function(matches) {
+                        isLoadingSetter(scope, true);
+                        $q.when(parserResult.source(scope, locals)).then(function (matches) {
                             //it might happen that several async queries were in progress if a user were typing fast
                             //but we are interested only in responses that correspond to the current view value
                             if (inputValue === modelCtrl.$viewValue && scope.fokus.hasFocus) {
@@ -119,7 +121,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                                     scope.matches.length = 0;
 
                                     //transform labels
-                                    for(var i=0; i<matches.length; i++) {
+                                    for (var i = 0; i < matches.length; i++) {
                                         locals[parserResult.itemName] = matches[i];
                                         scope.matches.push({
                                             label: parserResult.viewMapper(scope, locals),
@@ -138,7 +140,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                                 scope.position.top = scope.position.top + element.prop('offsetHeight');
                                 isLoadingSetter(originalScope, false);
                             }
-                        }, function(){
+                        }, function () {
                             resetMatches();
                             isLoadingSetter(originalScope, false);
                         });
@@ -181,8 +183,11 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                             if (!inputValue) {
                                 // Reset in case user had typed something previously.
                                 modelCtrl.$setValidity('editable', true);
+                                originalScope.blur.warning = false;
+                                originalScope.blur.error = false;
                                 return inputValue;
                             } else {
+                                originalScope.blur.warning = true;
                                 modelCtrl.$setValidity('editable', false);
                                 return undefined;
                             }
@@ -208,7 +213,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                             locals[parserResult.itemName] = undefined;
                             emptyViewValue = parserResult.viewMapper(originalScope, locals);
 
-                            return candidateViewValue!== emptyViewValue ? candidateViewValue : modelValue;
+                            return candidateViewValue !== emptyViewValue ? candidateViewValue : modelValue;
                         }
                     });
 
@@ -216,7 +221,8 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                         //called from within the $digest() cycle
                         var locals = {};
                         var model, item;
-
+                        originalScope.blur.error = false;
+                        originalScope.blur.warning = false;
                         originalScope.valor.used = true;
 
                         locals[parserResult.itemName] = item = scope.matches[activeIdx].model;
@@ -236,6 +242,8 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                     };
 
                     scope.add = function () {
+                        originalScope.blur.error = false;
+                        originalScope.blur.warning = false;
                         onAddCallback(originalScope, {
                             $item: modelCtrl.$viewValue
                         });
@@ -246,7 +254,6 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                         //return focus to the input element if a mach was selected via a mouse click event
                         element[0].focus();
                     };
-
 
 
                     //bind keyboard events: arrows up(38) / down(40), enter(13) and tab(9), esc(27)
@@ -291,6 +298,12 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
 
                     // Keep reference to click handler to unbind it.
                     var dismissClickHandler = function (evt) {
+                        if (!originalScope.valor.used && originalScope.valor.text && originalScope.valor.text !== '') {
+                            originalScope.blur.error = true;
+                        } else {
+                            originalScope.blur.error = false;
+                        }
+                        scope.$apply();
                         if (element[0] !== evt.target) {
                             resetMatches();
                             scope.$digest();
@@ -299,7 +312,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
 
                     $document.bind('click', dismissClickHandler);
 
-                    originalScope.$on('$destroy', function(){
+                    originalScope.$on('$destroy', function () {
                         $document.unbind('click', dismissClickHandler);
                     });
 
@@ -311,21 +324,21 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
 
     .directive('typeaheadPopupLawyer', function () {
         return {
-            restrict:'E',
-            scope:{
-                matches:'=',
-                query:'=',
-                active:'=',
-                position:'=',
-                select:'&',
-                add:'&',
-                valor:'=',
-                hasAddNewValue : '=',
-                fokus : '='
+            restrict: 'E',
+            scope: {
+                matches: '=',
+                query: '=',
+                active: '=',
+                position: '=',
+                select: '&',
+                add: '&',
+                valor: '=',
+                hasAddNewValue: '=',
+                fokus: '='
             },
-            replace:true,
-            templateUrl:'directives/typeaheadLawyer/typeahead-popup.tpl.html',
-            link:function (scope, element, attrs) {
+            replace: true,
+            templateUrl: 'directives/typeaheadLawyer/typeahead-popup.tpl.html',
+            link: function (scope, element, attrs) {
 
                 scope.templateUrl = attrs.templateUrl;
 
@@ -333,7 +346,7 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                     return scope.matches.length > 0 || (scope.valor.text !== null && scope.valor.text !== '' && scope.valor.used === false);
                 };
 
-                scope.isActive = function (matchIdx){
+                scope.isActive = function (matchIdx) {
                     return scope.active == matchIdx;
                 };
 
@@ -342,14 +355,14 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
                 };
 
                 scope.selectMatch = function (activeIdx) {
-                    scope.select({activeIdx:activeIdx});
+                    scope.select({activeIdx: activeIdx});
                 };
 
                 scope.addNew = function () {
                     scope.valor.used = true;
                     scope.add();
                 };
-                
+
                 scope.showAdd = function () {
                     var show = !scope.valor.used;
                     angular.forEach(scope.matches, function (match) {
@@ -369,29 +382,29 @@ angular.module('lawyer.typeahead', ['ui.bootstrap.position', 'ui.bootstrap.bindH
 
     .directive('typeaheadMatchLawyer', ['$http', '$templateCache', '$compile', '$parse', function ($http, $templateCache, $compile, $parse) {
         return {
-            restrict:'E',
-            scope:{
-                index:'=',
-                match:'=',
-                query:'=',
-                valor:'='
+            restrict: 'E',
+            scope: {
+                index: '=',
+                match: '=',
+                query: '=',
+                valor: '='
             },
-            link:function (scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'directives/typeaheadLawyer/typeahead-match.tpl.html';
-                $http.get(tplUrl, {cache: $templateCache}).success(function(tplContent){
+                $http.get(tplUrl, {cache: $templateCache}).success(function (tplContent) {
                     element.replaceWith($compile(tplContent.trim())(scope));
                 });
             }
         };
     }])
 
-    .filter('typeaheadHighlightLawyer', function() {
+    .filter('typeaheadHighlightLawyer', function () {
 
         function escapeRegexp(queryToEscape) {
             return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
         }
 
-        return function(matchItem, query) {
+        return function (matchItem, query) {
             return query ? matchItem.replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem;
         };
     });

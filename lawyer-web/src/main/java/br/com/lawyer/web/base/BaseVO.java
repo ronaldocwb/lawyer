@@ -6,8 +6,8 @@ import br.com.lawyer.core.exception.ParseVOToEntityException;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.log4j.Logger;
 import org.hibernate.LazyInitializationException;
-import org.jboss.logging.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;

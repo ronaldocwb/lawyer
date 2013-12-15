@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Deividi
@@ -19,6 +20,7 @@ public class AssuntoDelegateImpl implements AssuntoDelegate {
     @Autowired
     private AssuntoService assuntoService;
 
+    @Transactional
     @Override
     public Page<Assunto> findAssuntoPorNomeOuPagina (String nome, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
@@ -47,6 +49,7 @@ public class AssuntoDelegateImpl implements AssuntoDelegate {
         return assunto;
     }
 
+    @Transactional
     @Override
     public Page<Assunto> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException {
         PageRequest pageRequest = new PageRequest(page, limit);

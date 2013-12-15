@@ -3,7 +3,7 @@ angular.module('lawyer.atividades', [
         'lawyer.Assunto',
         'assuntoAutocomplete',
         'usuarioAutocomplete',
-        'clienteAutocomplete',
+        'contatoAutocomplete',
         'formataValorInput',
         'formataReais',
         'formataHora'
@@ -27,12 +27,12 @@ angular.module('lawyer.atividades', [
         });
     }])
 
-    .controller('AtividadesController', ['$scope', 'atividades', 'assuntoAutocomplete', 'usuarioAutocomplete', 'clienteAutocomplete',
-        function ($scope, atividades, assuntoAutocomplete, usuarioAutocomplete, clienteAutocomplete) {
+    .controller('AtividadesController', ['$scope', 'atividades', 'assuntoAutocomplete', 'usuarioAutocomplete', 'contatoAutocomplete',
+        function ($scope, atividades, assuntoAutocomplete, usuarioAutocomplete, contatoAutocomplete) {
             $scope.atividades = atividades;
 
-            $scope.getAssuntos = function (value, cliente) {
-                return assuntoAutocomplete.queryByClienteUid(value, cliente.uid);
+            $scope.getAssuntos = function (value, contato) {
+                return assuntoAutocomplete.queryByContatoUid(value, contato.uid);
             };
 
             $scope.getUsuarios = function (value) {
@@ -40,7 +40,7 @@ angular.module('lawyer.atividades', [
             };
 
             $scope.getClientes = function (value) {
-                return clienteAutocomplete.query(value);
+                return contatoAutocomplete.queryClientes(value);
             };
 
         }])

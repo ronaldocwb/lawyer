@@ -31,7 +31,7 @@ public class Usuario extends AbstractBaseEntity {
     @ManyToOne
     private Advocacia advocacia;
 
-    @OneToOne()
+    @OneToOne
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonBackReference
     private Pessoa pessoa;

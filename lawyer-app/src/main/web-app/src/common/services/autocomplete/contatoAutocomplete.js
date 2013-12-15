@@ -1,16 +1,16 @@
-angular.module('clienteAutocomplete', [])
+angular.module('contatoAutocomplete', [])
 
-    .factory('clienteAutocomplete', ['$http', function ($http) {
+    .factory('contatoAutocomplete', ['$http', function ($http) {
 
         var lastResult = [];
         var lastQuery = null;
         return {
-            query: function (value) {
+            queryClientes: function (value) {
                 if (value.toLowerCase().indexOf(lastQuery) !== -1 && lastResult.length < 8) {
                     return lastResult;
                 }
                 lastQuery = value.toLowerCase();
-                return $http.get('/lawyer/api/clientes?q=' + value + '&page=0&limit=8')
+                return $http.get('/lawyer/api/contatos?q=' + value + '&page=0&limit=8&tipo=cliente')
                     .then(function (results) {
                         var clientes = [];
                         angular.forEach(results.data.content, function (value) {
@@ -20,7 +20,6 @@ angular.module('clienteAutocomplete', [])
                             clientes.push(value.pessoa ? value.pessoa : value.empresa);
                         });
                         lastResult = clientes;
-                        console.log(lastResult);
                         return lastResult;
                     });
             }

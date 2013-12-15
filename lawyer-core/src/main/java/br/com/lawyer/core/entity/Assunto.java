@@ -4,6 +4,8 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Periodo;
 import br.com.lawyer.core.entity.enumerated.TipoAcesso;
 import br.com.lawyer.core.entity.enumerated.TipoProcesso;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -75,11 +77,13 @@ public class Assunto extends AbstractBaseEntity {
     private Pessoa reu;
 
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable (name = "assunto_adv_envolvido")
     private List<Advogado> advogadosEnvolvidos;
 
     @OneToMany
     @JoinTable (name = "assunto_relacionado")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Assunto> assuntosRelacionados;
 
     @Enumerated (EnumType.ORDINAL)

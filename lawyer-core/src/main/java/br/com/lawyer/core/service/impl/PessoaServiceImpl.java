@@ -1,13 +1,13 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseServiceImpl;
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Contato;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.PessoaRepository;
 import br.com.lawyer.core.repository.predicates.PessoaPredicate;
 import br.com.lawyer.core.service.AdvogadoService;
-import br.com.lawyer.core.service.ClienteService;
+import br.com.lawyer.core.service.ContatoService;
 import br.com.lawyer.core.service.PessoaService;
 import br.com.lawyer.core.util.StringUtils;
 import org.apache.log4j.Logger;
@@ -25,12 +25,12 @@ import java.util.List;
 @Service
 public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRepository> implements PessoaService {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = Logger.getLogger(PessoaService.class);
+    private static final Logger logger = Logger.getLogger(PessoaService.class);
 
     @Autowired
-    private ClienteService clienteService;
+    private ContatoService contatoService;
 
     @Autowired
     private AdvogadoService advogadoService;
@@ -71,7 +71,7 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
 
     /**
      * Salva uma {@link br.com.lawyer.core.entity.Pessoa}
-     * Insere um {@link br.com.lawyer.core.entity.Cliente} se essa pessoa estiver marcada como cliente.
+     * Insere um {@link br.com.lawyer.core.entity.Contato} se essa pessoa estiver marcada como cliente.
      *
      * @param pessoa
      * @return {@link br.com.lawyer.core.entity.Pessoa}
@@ -80,18 +80,15 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     public Pessoa salvar (Pessoa pessoa) throws BusinessException {
         logger.info(String.format("Salvando a pessoa %s pelo usu�rio %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
         saveAndFlush(pessoa);
-        if (pessoa.getCliente().equals(Boolean.TRUE)) {
-            Cliente cliente = new Cliente();
-            cliente.setPessoa(pessoa);
-            clienteService.save(cliente);
-        }
+        Contato contato = new Contato(pessoa);
+        contatoService.save(contato);
         logger.info(String.format("Pessoa de UID %s salva pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }
 
     /**
      * Atualiza uma {@link br.com.lawyer.core.entity.Pessoa}
-     * Atualiza ou insere um {@link br.com.lawyer.core.entity.Cliente} se essa pessoa estiver marcada como cliente.
+     * Atualiza ou insere um {@link br.com.lawyer.core.entity.Contato} se essa pessoa estiver marcada como cliente.
      *
      * @param pessoa
      * @return {@link br.com.lawyer.core.entity.Pessoa}
@@ -100,14 +97,6 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     @Override
     public Pessoa atualizar (Pessoa pessoa) throws BusinessException {
         logger.info(String.format("Atualizando a pessoa de UID %s pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
-        Pessoa storedPessoa = findOne(pessoa.getUid());
-        if (storedPessoa != null && !storedPessoa.getCliente().equals(pessoa.getCliente())) {
-            if (pessoa.getCliente().equals(Boolean.TRUE)) {
-                clienteService.save(new Cliente(pessoa));
-            } else {
-                clienteService.removerPorReferenciaUid(storedPessoa.getUid(), Pessoa.class);
-            }
-        }
         save(pessoa);
         logger.info(String.format("Pessoa de UID %s atualizada pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
@@ -116,14 +105,14 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     @Override
     public void deletar (String uid) throws BusinessException {
         logger.info(String.format("Deletando a pessoa de UID %s pelo usu�rio %s", uid, getUsuarioLogado().getEmail()));
-        clienteService.removerPorReferenciaUid(uid, Pessoa.class);
+        contatoService.removerPorReferenciaUid(uid, Pessoa.class);
         advogadoService.removerPorPessoaUid(uid);
         delete(uid);
         logger.info(String.format("Pessoa de UID %s apagada usu�rio %s", uid, getUsuarioLogado().getEmail()));
     }
 
     @Override
-    public Pessoa salvarOuAtualizar(Pessoa pessoa) {
+    public Pessoa salvarOuAtualizar (Pessoa pessoa) {
         try {
             if (StringUtils.isBlank(pessoa.getUid())) {
                 return this.salvar(pessoa);
