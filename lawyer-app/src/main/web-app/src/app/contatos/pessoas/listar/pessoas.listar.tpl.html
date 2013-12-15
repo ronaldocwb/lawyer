@@ -1,56 +1,50 @@
-<div class="fadeInUp">
-    <div class="row-fluid" ng-cloak>
-        <div class="span4">
-            <button ui-sref="pessoas.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>
-                Cadastrar Nova Pessoa
-            </button>
-        </div>
-        <div class="pull-right" data-ng-show="pessoas.content.length > 0" >
-            <form data-ng-submit="buscar()">
-                <div class="input-append">
-                    <input class="" type="text" data-ng-model="pesquisa.query"/>
-                    <button class="btn" type="submit">Buscar</button>
-                </div>
-            </form>
-        </div>
+<div class="row" ng-cloak>
+    <div class="pull-right" data-ng-show="pessoas.content.length > 0">
+        <form data-ng-submit="buscar()">
+            <div class="input-append">
+                <input class="" type="text" data-ng-model="pesquisa.query"/>
+                <button class="btn" type="submit">Buscar</button>
+            </div>
+        </form>
     </div>
-    <div data-ng-show="pessoas.content.length > 0" >
-        <div>
-            <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
-            </button>
-        </div>
-        <table class="table table-hover table-bordered center-table" ng-cloak>
-            <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Empresa</th>
-                <th>Email</th>
-                <th>Telefone</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="pessoa in pessoas.content">
-                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.nome"></span></td>
-                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.empresa.nomeFantasia"></span></td>
-                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.emails[0].value"></span></td>
-                <td data-ng-click="visualizar(pessoa)"><span data-ng-bind="pessoa.telefones[0].numero"></span></td>
-                <td>
-                    <a href><span tooltip="Ver Detalhes"><i class="icon-search"
-                                                            ng-click="visualizar(pessoa)"></i></span></a>
-                    <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(pessoa, $event)"></i></span></a>
-                    <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(pessoa)"></i></span></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <pagination num-pages="pessoas.totalPages" page="pessoas.current" total-items="pessoas.totalElements"
-                        previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="pessoas.size"
-                        on-select-page="pageChanged(page)"></pagination>
-        </div>
+</div>
+<div>
+    <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
+    </button>
+</div>
+<div data-ng-show="pessoas.content.length > 0">
+    <table class="table table-hover table-bordered center-table" ng-cloak>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Empresa</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="contato in pessoas.content">
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="contato.pessoa.nome"></span></td>
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="contato.pessoa.empresa.nomeFantasia"></span>
+            </td>
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="contato.pessoa.emails[0].value"></span></td>
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="contato.pessoa.telefones[0].numero"></span></td>
+            <td>
+                <a href><span tooltip="Ver Detalhes"><i class="icon-search"
+                                                        ng-click="visualizar(contato)"></i></span></a>
+                <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(contato, $event)"></i></span></a>
+                <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(contato)"></i></span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination num-pages="pessoas.totalPages" page="pessoas.current" total-items="pessoas.totalElements"
+                    previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="pessoas.size"
+                    on-select-page="pageChanged(page)"></pagination>
     </div>
-    <div data-ng-show="pessoas.content.length === 0">
-        <p>Nenhuma pessoa cadastrada ainda... Cadastra uma, niggaz!</p>
-    </div>
+</div>
+<div data-ng-show="pessoas.content.length === 0 && !pesquisa.inUse">
+    <p>Nenhuma pessoa cadastrada ainda... Cadastra uma, niggaz!</p>
 </div>

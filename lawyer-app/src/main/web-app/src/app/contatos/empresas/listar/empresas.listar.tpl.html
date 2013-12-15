@@ -1,44 +1,51 @@
-<div class="fadeInUp">
-<div class="row-fluid" ng-cloak>
-    <div class="span4">
-        <button ui-sref="empresas.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> Cadastrar Nova Empresa</button>
-    </div>
-    <div class="pull-right">
-        <form data-ng-submit="buscar()" data-ng-show="empresas.content.length > 0" >
-            <div class="input-append">
-                <input class="" type="text" data-ng-model="pesquisa.query" />
-                <button class="btn" type="submit">Buscar</button>
-            </div>
-        </form>
-    </div>
-</div>
 <div>
-    <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca</button>
-</div>
-<table class="table table-hover table-bordered center-table " ng-cloak>
-    <thead>
-    <tr>
-        <th>Nome Fantasia</th>
-        <th>Razão Social</th>
-        <th>CNPJ</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr data-ng-repeat="empresa in empresas.content" class="fadeInUp" >
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.nomeFantasia"></span></td>
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.razaoSocial"></span></td>
-        <td data-ng-click="visualizar(empresa)"><span data-ng-bind="empresa.cnpj"></span></td>
-        <td>
-            <a href ><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(empresa)"></i></span></a>
-            <a href ><span tooltip="Editar"><i class="icon-edit" ng-click="editar(empresa, $event)"></i></span></a>
-            <a href ><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(empresa)"></i></span></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<div>
-    <pagination num-pages="empresas.totalPages" page="empresas.current"  total-items="empresas.totalElements"
-                previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="empresas.size" on-select-page="pageChanged(page)"></pagination>
-</div>
+    <div class="row-fluid" ng-cloak>
+        <div class="pull-right">
+            <form data-ng-submit="buscar()" data-ng-show="empresas.content.length > 0">
+                <div class="input-append">
+                    <input class="" type="text" data-ng-model="pesquisa.query"/>
+                    <button class="btn" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
+        </button>
+    </div>
+    <div data-ng-show="empresas.content.length > 0" >
+
+        <table class="table table-hover table-bordered center-table " ng-cloak>
+            <thead>
+            <tr>
+                <th>Nome Fantasia</th>
+                <th>Razão Social</th>
+                <th>CNPJ</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="contato in empresas.content">
+                <td data-ng-click="visualizar(contato)"><span data-ng-bind="contato.empresa.nomeFantasia"></span></td>
+                <td data-ng-click="visualizar(contato)"><span data-ng-bind="empresa.razaoSocial"></span></td>
+                <td data-ng-click="visualizar(contato)"><span data-ng-bind="empresa.cnpj"></span></td>
+                <td>
+                    <a href><span tooltip="Ver Detalhes"><i class="icon-search"
+                                                            ng-click="visualizar(contato)"></i></span></a>
+                    <a href><span tooltip="Editar"><i class="icon-edit"
+                                                      ng-click="editar(contato, $event)"></i></span></a>
+                    <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(contato)"></i></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <pagination num-pages="empresas.totalPages" page="empresas.current" total-items="empresas.totalElements"
+                        previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="empresas.size"
+                        on-select-page="pageChanged(page)"></pagination>
+        </div>
+    </div>
+    <div data-ng-show="empresas.content.length === 0 && !pesquisa.inUse">
+        <p>Nenhuma empresa cadastrada ainda... Cadastra uma, niggaz!</p>
+    </div>
 </div>

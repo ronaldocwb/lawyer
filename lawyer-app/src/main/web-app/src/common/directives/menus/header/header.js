@@ -1,5 +1,5 @@
 angular.module('lawyer.header', [])
-    .directive('header', [function () {
+    .directive('appHeader', [function () {
         var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'advogados', 'atividades', 'agenda'];
         return {
             restrict : 'E',

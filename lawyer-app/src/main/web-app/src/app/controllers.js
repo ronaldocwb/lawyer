@@ -17,7 +17,6 @@
 angular.module('lawyer.controllers', [
     'lawyer.painel',
     'lawyer.atividades.popup',
-    'lawyer.empresas',
     'lawyer.empresas.cadastro',
     'lawyer.empresas.edicao',
     'lawyer.empresas.listar',
@@ -25,7 +24,6 @@ angular.module('lawyer.controllers', [
     'lawyer.atividades.cadastro',
     'lawyer.atividades.edicao',
     'lawyer.atividades.listar',
-    'lawyer.pessoas',
     'lawyer.pessoas.listar',
     'lawyer.pessoas.cadastro',
     'lawyer.pessoas.edicao',
@@ -39,6 +37,8 @@ angular.module('lawyer.controllers', [
     'lawyer.advogados.edicao',
     'lawyer.configuracoes.advocacia',
     'lawyer.configuracoes.conta',
-    'lawyer.agenda'
+    'lawyer.agenda',
+    'lawyer.contatos',
+    'lawyer.contatos.listar'
 
 ]);

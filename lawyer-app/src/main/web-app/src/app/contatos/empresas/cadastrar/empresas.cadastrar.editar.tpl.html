@@ -1,4 +1,4 @@
-<div class="fadeInUp">
+<div >
     <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
             <legend data-ng-show="tela.cadastro === true">Nova Empresa</legend>
@@ -8,24 +8,33 @@
 
                 <div class="controls">
                     <input id="nome" class="text x-large" type="text" ng-required="true"
-                           data-ng-model="empresa.nomeFantasia"/>
-                    <span class="help-inline">É um cliente?</span>
-                    <input class="checkbox" type="checkbox" data-ng-model="empresa.cliente"/>
+                           data-ng-model="contato.empresa.nomeFantasia"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="razao">Razão Social:</label>
 
                 <div class="controls">
-                    <input id="razao" class="text x-large" type="text" data-ng-model="empresa.razaoSocial"/>
+                    <input id="razao" class="text x-large" type="text" data-ng-model="contato.empresa.razaoSocial"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="cnpj">CNPJ:</label>
 
                 <div class="controls">
-                    <input id="cnpj" name="cnpj" class="x-large" type="text" ng-model="empresa.cnpj"
+                    <input id="cnpj" name="cnpj" class="x-large" type="text" ng-model="contato.empresa.cnpj"
                            ui-mask="99.999.999/9999-99"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="tipoContato">Tipo:*</label>
+
+                <div class="controls">
+                    <select name="tipoContato" id="tipoContato"
+                            data-ng-model="contato.tipoContato" ng-init="contato.tipoContato = 'CLIENTE'">
+                        <option value="CLIENTE" >Cliente</option>
+                        <option value="CONTATO">Contato</option>
+                    </select>
                 </div>
             </div>
 
@@ -36,8 +45,8 @@
                     <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
-                <div data-ng-repeat="telefone in empresa.telefones" data-ng-hide="empresa.telefones.length == 0"
-                     class="controls fadeInLeft fadeOutRight">
+                <div data-ng-repeat="telefone in contato.empresa.telefones" data-ng-hide="contato.empresa.telefones.length == 0"
+                     class="controls">
                     <br>
 
                     <div class="input-append">
@@ -49,14 +58,14 @@
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group" ng-class="{'error' : blur.error, 'warning' : blur.warning}" >
                 <label class="control-label">Responsáveis:</label>
 
                 <div class="controls">
                     <button type="button" class="btn btn-info" data-ng-click="add('responsaveis')"><i
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
-                <div data-ng-repeat="responsavel in empresa.responsaveis" data-ng-hide="empresa.responsaveis.length == 0"
+                <div data-ng-repeat="responsavel in contato.empresa.responsaveis" data-ng-hide="contato.empresa.responsaveis.length == 0"
                      class="controls">
                     <br>
                     <label for="responsavel">Nome:</label>
@@ -67,6 +76,7 @@
                            typeahead-min-length="3"
                            typeahead-on-select="onSelectPessoa(responsavel.pessoa, $index)"
                            typeahead-lawyer="pessoa as pessoa.nome for pessoa in getPessoas($viewValue)"/>
+                    <span class="help-inline" ng-show="blur.error" >Informe uma pessoa válida.</span>
 
                     <label for="setor">Setor:</label>
                     <input name="setor" id="setor" class="x-large" type="text"
@@ -90,8 +100,8 @@
                     <button type="button" class="btn btn-info" data-ng-click="add('enderecos', $index)"><i
                             class="icon-plus-sign icon-white"></i></button>
                 </div>
-                <div data-ng-repeat="endereco in empresa.enderecos" data-ng-hide="empresa.enderecos.length == 0"
-                     class="controls fadeInLeft fadeOutRight">
+                <div data-ng-repeat="endereco in contato.empresa.enderecos" data-ng-hide="contato.empresa.enderecos.length == 0"
+                     class="controls ">
                     <ng-form name="formEndereco">
 
                         <div class="span5">

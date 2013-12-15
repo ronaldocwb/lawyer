@@ -75,7 +75,7 @@ angular.module('lawyer.atividades.cadastro', [
             $scope.blur = { error: false};
             $scope.onBlurAssunto = function () {
                 if (!$scope.atividade.assunto || !$scope.atividade.assunto.uid) {
-                    $scope.blur1.error = true;
+                    $scope.blur.error = true;
                 } else {
                     $scope.blur.error = false;
                 }

@@ -1,0 +1,34 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li class="divider-vertical">
+                <button ui-sref="contatos.listar-todos" class="btn btn-info">
+                    Todos os Contatos
+                </button>
+            </li>
+            <li class="divider-vertical">
+                <button ui-sref="contatos.listar-pessoas" class="btn btn-info">
+                    Listar Pessoas
+                </button>
+            </li>
+            <li class="divider-vertical">
+                <button ui-sref="contatos.listar-empresas" class="btn btn-info">
+                    Listar Empresas
+                </button>
+            </li>
+            <li class="divider-vertical">
+                <button ui-sref="contatos.cadastrar-pessoa" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>
+                    Nova Pessoa
+                </button>
+            </li>
+            <li class="divider-vertical">
+                <button ui-sref="contatos.cadastrar-empresa" class="btn btn-success"><i
+                        class="icon-plus-sign icon-white"></i>
+                    Nova Empresa
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ui-view></div>

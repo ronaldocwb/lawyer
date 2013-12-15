@@ -3,20 +3,23 @@ angular.module('lawyer.empresas.edicao', [
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {
-        $stateProvider.state('empresas.editar', {
-            url: '/editar/',
-            controller: 'EmpresaEdicaoController',
-            templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.tpl.html'
+        $stateProvider.state('contatos.editar-empresa', {
+            url: '/empresas/editar/',
+            controller: 'EditarEmpresaController',
+            templateUrl: 'contatos/empresas/cadastrar/empresas.cadastrar.editar.tpl.html'
         });
     }])
 
-    .controller('EmpresaEdicaoController', ['$scope', 'notifications', '$log', 'Empresa', '$state', '$stateParams', 'Pessoa', '$modal', 'Setor',
-        function ($scope, notifications, $log, Empresa, $state, $stateParams, Pessoa, $modal, Setor) {
+    .controller('EditarEmpresaController', ['$scope', 'notifications', '$log', 'Contato', '$state', '$stateParams', '$modal', 'Setor', 'municipioAutocomplete', 'pessoaAutocomplete', 'setorAutocomplete',
+        function ($scope, notifications, $log, Contato, $state, $stateParams, $modal, Setor, municipioAutocomplete, pessoaAutocomplete, setorAutocomplete) {
+
             $scope.tela = {
                 cadastro : false,
                 edicao : true
             };
-            $scope.empresa = $state.data;
+            $scope.blur = { error: false};
+            $scope.contato = $state.data;
+
 
             if ($state.data && $state.data.modal) {
                 $scope.modal = $state.data.modal;
@@ -24,81 +27,81 @@ angular.module('lawyer.empresas.edicao', [
 
             if (!$state.data && !$state.empresa) {
                 if ($stateParams.uid) {
-                    $scope.empresa = Empresa.get({uid : $stateParams.uid});
+                    $scope.contato.empresa = Contato.getEmpresaByUid({empresaUid : $stateParams.uid});
                 } else {
-                    $state.go('empresas.listar');
+                    $state.go('contatos.listar-empresas');
                 }
             }
 
             $scope.salvar = function () {
-                console.log($scope.empresa);
-                $scope.empresa = Empresa.update($scope.empresa, function () {
-                    notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.empresa.nomeFantasia});
-                    angular.noop($scope.modal ? $scope.modal.close($scope.empresa) : $state.go('empresas.listar'));
+                $scope.contato = Contato.update($scope.contato, function () {
+                    notifications.pushForCurrentRoute('empresa.alterada', 'success', {nome : $scope.contato.empresa.nomeFantasia});
+                    angular.noop($scope.modal ? $scope.modal.close($scope.contato) : $state.go('contatos.listar-empresas'));
                 });
             };
 
             $scope.add = function (key) {
-                if (!$scope.empresa[key]) {
-                    $scope.empresa[key] = [];
+                if (!$scope.contato.empresa[key]) {
+                    $scope.contato.empresa[key] = [];
                 }
-                $scope.empresa[key].push({});
+                $scope.contato.empresa[key].push({});
             };
 
             $scope.remove = function (key, $index) {
-                $scope.empresa[key].splice($index, 1);
+                $scope.contato.empresa[key].splice($index, 1);
             };
 
             $scope.voltar = function () {
-                angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('empresas.listar'));
+                angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('contatos.listar-empresas'));
             };
 
             $scope.addPessoa = function (name, $index) {
-                var pessoa = {
-                    nome : name
+                var contatoPessoa = {
+                    pessoa: {
+                        nome: name
+                    }
                 };
-                Pessoa.save(pessoa, function (pessoa) {
-                    $scope.empresa.responsaveis[$index].pessoa = pessoa;
+                Contato.save(contatoPessoa, function (contato) {
+                    $scope.contato.empresa.responsaveis[$index].pessoa = contato.pessoa;
                     // emite a notificação para completar cadastro: i18n, nome, callback e objeto
-                    notifications.pushCompletarCadastro('pessoa.completar.cadastro', { nome: name} , 'empresas.cadastrar.pessoa.callback', pessoa);
+                    notifications.pushCompletarCadastro('pessoa.completar.cadastro', { nome: name} , 'empresas.cadastrar.pessoa.callback', contato);
                 });
             };
 
-            $scope.$on('empresas.cadastrar.pessoa.callback', function ($event, pessoa) {
-                $scope.completarPessoa(pessoa);
+            $scope.$on('empresas.cadastrar.pessoa.callback', function ($event, contato) {
+                $scope.completarPessoa(contato);
             });
 
             $scope.onSelectPessoa = function (pessoa, $index) {
-                console.log(pessoa, $index);
-                $scope.empresa.responsaveis[$index].pessoa = pessoa;
+                $scope.contato.empresa.responsaveis[$index].pessoa = pessoa;
             };
 
-            $scope.completarPessoa = function (pessoa) {
+            $scope.completarPessoa = function (contato) {
                 //envia o objeto de retorno no OK do modal para a popup de edicao, copia ele pra nao fazer bind automatico e aparecer alterando na tela de fundo.
-                $state.data = angular.copy(pessoa);
+                $state.data = angular.copy(contato);
                 $state.data.modal = $modal.open({
                     templateUrl: 'contatos/pessoas/cadastrar/pessoas.cadastrar.tpl.html',
-                    controller: 'PessoaEdicaoController',
+                    controller: 'EditarPessoaController',
                     resolve: {
-                        pessoa: function () {
-                            return pessoa;
+                        contato: function () {
+                            return contato;
                         }
                     }
                 });
 
-                $state.data.modal.result.then(function (pessoaAtualizada) {
-                    if (!pessoaAtualizada) {
+                $state.data.modal.result.then(function (contato) {
+                    if (!contato) {
                         return;
                     }
                     // se atualizou a pessoa, ela existe e vamos substituir no array de responsaveis para a alteração ficar visivel na tela, e mostramos uma notificação de OK.
                     var index = null;
-                    angular.forEach($scope.empresa.responsaveis, function (responsavel) {
-                        if (responsavel.pessoa.uid === pessoaAtualizada.uid) {
-                            index = $scope.empresa.responsaveis.indexOf(responsavel);
+                    angular.forEach($scope.contato.empresa.responsaveis, function (responsavel) {
+                        if (responsavel.pessoa.uid === contato.pessoa.uid) {
+                            index = $scope.contato.empresa.responsaveis.indexOf(responsavel);
                         }
                     });
-                    $scope.empresa.responsaveis[index].pessoa = pessoaAtualizada;
-                    notifications.pushForCurrentRoute('pessoa.alterada', 'success', { nome: pessoaAtualizada.nome});
+                    $scope.contato.empresa.responsaveis[index].pessoa = contato.pessoa;
+                    notifications.pushForCurrentRoute('pessoa.alterada', 'success', { nome: contato.pessoa.nome});
                 });
             };
 
@@ -107,9 +110,21 @@ angular.module('lawyer.empresas.edicao', [
                     nome : name
                 };
                 Setor.save(setor, function (setor) {
-                    $scope.empresa.responsaveis[$index].setor = setor;
+                    $scope.contato.empresa.responsaveis[$index].setor = setor;
                     notifications.pushForCurrentRoute('setor.criado', 'success', { nome: name});
                 });
+            };
+
+            $scope.getSetores = function (value) {
+                return setorAutocomplete.query(value);
+            };
+
+            $scope.getMunicipios = function (value) {
+                return municipioAutocomplete.query(value);
+            };
+
+            $scope.getPessoas = function (value) {
+                return pessoaAutocomplete.query(value);
             };
         }])
 ;

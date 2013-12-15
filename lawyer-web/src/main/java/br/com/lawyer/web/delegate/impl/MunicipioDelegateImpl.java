@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Deividi
@@ -18,6 +19,7 @@ public class MunicipioDelegateImpl implements MunicipioDelegate {
     @Autowired
     private MunicipioService service;
 
+    @Transactional(readOnly = true)
     @Override
     public Page<Municipio> buscaPorNome (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);

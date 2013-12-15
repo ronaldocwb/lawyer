@@ -13,12 +13,12 @@
     <packaging>jar</packaging>
 
     <properties>
-        <org.springframework.version>3.2.5.RELEASE</org.springframework.version>
+        <org.springframework.version>4.0.0.RELEASE</org.springframework.version>
         <org.springframework.security.version>3.2.0.RC2</org.springframework.security.version>
         <!--<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>-->
-        <org.springframework.data.jpa.version>1.4.1.RELEASE</org.springframework.data.jpa.version>
+        <org.springframework.data.jpa.version>1.4.3.RELEASE</org.springframework.data.jpa.version>
         <com.mysema.querydsl.version>3.2.4</com.mysema.querydsl.version>
-        <org.codehaus.jackson.version>2.2.2</org.codehaus.jackson.version>
+        <org.codehaus.jackson.version>2.3.0</org.codehaus.jackson.version>
         <org.hibernate.version>4.2.3.Final</org.hibernate.version>
         <postgres.version>9.1-901-1.jdbc4</postgres.version>
     </properties>
@@ -247,6 +247,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

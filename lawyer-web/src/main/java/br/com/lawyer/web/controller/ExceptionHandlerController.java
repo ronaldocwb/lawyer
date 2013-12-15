@@ -115,7 +115,7 @@ public class ExceptionHandlerController {
 
         e.printStackTrace();
 
-        return new ResponseEntity<>(restException, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(restException, HttpStatus.NOT_ACCEPTABLE);
 
     }
 

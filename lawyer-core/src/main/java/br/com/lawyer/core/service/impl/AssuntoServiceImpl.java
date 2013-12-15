@@ -4,13 +4,13 @@ import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Assunto;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.AssuntoRepository;
-import br.com.lawyer.core.repository.predicates.AssuntoPredicate;
 import br.com.lawyer.core.service.AssuntoService;
 import br.com.lawyer.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static br.com.lawyer.core.repository.predicates.AssuntoPredicate.nomeIsLike;
 
@@ -47,6 +47,7 @@ public class AssuntoServiceImpl extends BaseServiceImpl<String, Assunto, Assunto
      * @throws BusinessException
      */
     @Override
+    @Transactional
     public Page<Assunto> findAssuntosPorClienteUid (String uid, PageRequest pageRequest) throws BusinessException {
 
         // TODO Verificar as permissões de acesso a esses assuntos pelo cliente logadao
@@ -55,6 +56,7 @@ public class AssuntoServiceImpl extends BaseServiceImpl<String, Assunto, Assunto
             throw new BusinessException("UID do assunto não pode ser nulo ou vazio.");
         }
         uid = "";
-        return getRepository().findAll(AssuntoPredicate.clienteUidEqualsTo(uid), pageRequest);
+//        return getRepository().findAll(AssuntoPredicate.clienteUidEqualsTo(uid), pageRequest);
+        return getRepository().findAll(pageRequest);
     }
 }
