@@ -39,6 +39,9 @@ angular.module('lawyer.controllers', [
     'lawyer.configuracoes.conta',
     'lawyer.agenda',
     'lawyer.contatos',
-    'lawyer.contatos.listar'
+    'lawyer.contatos.listar',
+    'lawyer.configuracoes',
+    'lawyer.usuarios',
+    'lawyer.usuarios.cadastro'
 
 ]);

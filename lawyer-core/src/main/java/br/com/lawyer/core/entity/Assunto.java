@@ -4,6 +4,8 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Periodo;
 import br.com.lawyer.core.entity.enumerated.TipoAcesso;
 import br.com.lawyer.core.entity.enumerated.TipoProcesso;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Assunto extends AbstractBaseEntity {
 
     @ManyToOne

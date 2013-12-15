@@ -1,0 +1,193 @@
+<ul class="nav nav-pills">
+    <li>
+        <a ui-sref="cadastrar-usuario({tipo: 'usuario'})">
+            Novo Usuário
+        </a>
+    </li>
+    <li>
+        <a ui-sref="cadastrar-usuario({tipo: 'advogado'})">
+            Novo Advogado
+        </a>
+    </li>
+</ul>
+
+<form data-ng-submit="cadastrar()" name="cadastro" class="form-horizontal" >
+    <fieldset ng-switch="usuario.tipoUsuario">
+        <legend>Novo Usuario</legend>
+
+        <div class="control-group" ng-class="{'error' : !cadastro.nome.$valid && cadastro.nome.$dirty}">
+            <label class="control-label" for="nome">Nome:*</label>
+
+            <div class="controls">
+                <input id="nome" name="nome" class="text x-large" type="text" required data-ng-model="usuario.pessoa.nome" />
+                <span class="help-inline" ng-show="cadastro.nome.$invalid && cadastro.nome.$dirty" >Informe um nome.</span>
+            </div>
+        </div>
+        <div class="control-group" ng-class="{'error' : !cadastro.email.$valid && cadastro.email.$dirty}">
+            <label class="control-label" for="email">E-mail:*</label>
+
+            <div class="controls">
+                <input id="email" name="email" required class="text x-large" type="email" data-ng-model="usuario.email" />
+                <span class="help-inline" ng-show="cadastro.email.$invalid && cadastro.email.$dirty" >Informe um e-mail válido.</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <div class="btn-group">
+                    <button type="button" class="btn" ng-model="usuario.tipoUsuario"  value="usuario" btn-radio="'usuario'">Usuário</button>
+                    <button type="button" class="btn" ng-model="usuario.tipoUsuario" value="advogado"  btn-radio="'advogado'">Advogado</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group"  ng-switch-when="advogado">
+            <label class="control-label" for="oab">OAB:</label>
+
+            <div class="controls">
+                <input id="oab" class="text x-large" type="text"
+                       data-ng-model="usuario.advogado.numeroOAB"/>
+            </div>
+        </div>
+        <div class="control-group" >
+            <label class="control-label" >Permisssões:</label>
+
+            <div class="controls">
+                <ul class="nav nav-list">
+                    <li data-ng-repeat="permissao in permissoes">
+                        <input
+                                type="checkbox"
+                                value="{{permissao.nome}}"
+                                ng-checked="permissao.selected"
+                                ng-click="toggleSelection(permissao)"
+                                > {{permissao.nome}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+            <div class="control-group">
+                <label class="control-label" for="documento">Documento:</label>
+
+                <div class="controls">
+                    <input id="documento" name="documento" class="x-large" type="text"
+                           ng-model="advogado.pessoa.documento.identificacao"/>
+                    <select ng-model="advogado.pessoa.documento.tipoIdentificacao" class="span2">
+                        <option value="RG">RG</option>
+                        <option value="CPF">CPF</option>
+                        <option value="RNE">RNE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Telefones:</label>
+                <ng-form name="formTelefone">
+                    <div class="controls">
+                        <button type="button" class="btn btn-info" data-ng-click="add('telefones')"><i
+                                class="icon-plus-sign icon-white"></i></button>
+                    </div>
+                    <div data-ng-repeat="telefone in advogado.pessoa.telefones"
+                         data-ng-hide="advogado.pessoa.telefones.length == 0"
+                         class="controls fadeInLeft">
+                        <br>
+
+                        <div class="input-append">
+                            <input name="telefone" class="x-large" type="text" ng-model="telefone.numero"/>
+                            <button type="button" class="btn btn-info" data-ng-click="remove('telefones',$index)"><i
+                                    class="icon-trash icon-white"></i></button>
+                        </div>
+                        <hr>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Emails:</label>
+
+                <div class="controls">
+                    <button type="button" class="btn btn-info" data-ng-click="add('emails')"><i
+                            class="icon-plus-sign icon-white"></i></button>
+                </div>
+                <div data-ng-repeat="email in advogado.pessoa.emails" data-ng-hide="advogado.pessoa.emails.length == 0"
+                     class="controls fadeInLeft">
+                    <br>
+                    <ng-form name="formEmail">
+                        <div class="input-append">
+
+                            <input name="email" class="x-large" type="email" ng-model="email.value"/>
+
+                            <button type="button" class="btn btn-info" data-ng-click="remove('emails', $index)"><i
+                                    class="icon-trash icon-white"></i></button>
+
+                        </div>
+                        <span ng-show="formEmail.email.$error.email">Digite um email válido</span>
+                    </ng-form>
+                    <hr>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Endereços:</label>
+
+                <div class="controls">
+                    <button type="button" class="btn btn-info" data-ng-click="add('enderecos')"><i
+                            class="icon-plus-sign icon-white"></i></button>
+                </div>
+                <div data-ng-repeat="endereco in advogado.pessoa.enderecos"
+                     data-ng-hide="advogado.pessoa.enderecos.length == 0"
+                     class="controls fadeInLeft">
+                    <ng-form name="formEndereco">
+                        <div class="span5">
+                            <label class="control-label" for="logradouro">Logradouro*:</label>
+                            <input name="logradouro" id="logradouro" class="x-large" type="text" required
+                                   ng-model="endereco.logradouro"/>
+                            <br>
+                            <span data-ng-show="formEndereco.logradouro.$error.required && formEndereco.$dirty"></span>
+                            <label class="control-label" for="numero">Número:</label>
+                            <input name="numero" id="numero" class="x-large" type="text"
+                                   ng-model="endereco.numero"/>
+                            <label class="control-label" for="complemento">Complemento:</label>
+                            <input name="complemento" id="complemento" class="x-large" type="text"
+                                   ng-model="endereco.complemento"/>
+                            <label class="control-label" for="cep">CEP:</label>
+                            <input name="cep" id="cep" class="x-large" type="text" ng-model="endereco.cep"/>
+
+                            <label class="control-label" for="bairro">Bairro:</label>
+                            <input name="bairro" id="bairro" class="x-large" type="text"
+                                   ng-model="endereco.bairro"/>
+
+                            <label class="control-label" for="municipio">Município*:</label>
+
+                            <input name="municipio" id="municipio" class="x-large" type="text" required
+                                   ng-model="endereco.municipio"
+                                   typeahead-template-url="templates/typeaheadMunicipio/municipio.tpl.html"
+                                   typeahead-editable="false"
+                                   typeahead="municipio as municipio.nmMunicipio for municipio in getMunicipios($viewValue)"/>
+                            <button id="remover" type="button" class="btn btn-info"
+                                    data-ng-click="remove('enderecos', $index)">
+                                <i
+                                        class="icon-trash icon-white"></i></button>
+                            <hr>
+                        </div>
+                    </ng-form>
+                </div>
+                <div>
+                    <label class="control-label" for="criarContato">Criar um contato para o usuario?</label>
+                    <div class="controls">
+                        <input id="criarContato" name="criarContato" type="checkbox"
+                               ng-model="usuario.criarContato" class="x-large">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid">Salvar</button>
+                <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid"
+                        data-ng-click="salvarContinuar(cadastro)">Salvar e cadastrar novo usuário
+                </button>
+                ou <a ui-sref="usuarios">Clique para voltar</a>
+            </div>
+        </div>
+        <hr>
+    </fieldset>
+</form>

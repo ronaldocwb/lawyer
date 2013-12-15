@@ -3,6 +3,7 @@ package br.com.lawyer.core.entity;
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import br.com.lawyer.core.entity.enumerated.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -30,6 +31,9 @@ public class Usuario extends AbstractBaseEntity {
 
     @ManyToOne
     private Advocacia advocacia;
+
+    @Enumerated
+    private TipoUsuario tipoUsuario = TipoUsuario.USUARIO;
 
     @OneToOne
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -105,4 +109,12 @@ public class Usuario extends AbstractBaseEntity {
 	public void setAtivo(StatusUsuario ativo) {
 		this.ativo = ativo;
 	}
+
+    public TipoUsuario getTipoUsuario () {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario (TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 }

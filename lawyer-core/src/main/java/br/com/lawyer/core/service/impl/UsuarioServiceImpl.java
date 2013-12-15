@@ -2,6 +2,7 @@ package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.base.BaseServiceImpl;
+import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.UsuarioRepository;
@@ -138,5 +139,10 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
     public Usuario salvar(Usuario usuario) throws BusinessException {
     	usuario.setAdvocacia(getUsuarioLogado().getAdvocacia());
     	return super.save(usuario);
+    }
+
+    @Override
+    public Usuario salvarUsuario (Usuario parse, boolean criarContato, Advogado advogado) {
+        return null;
     }
 }

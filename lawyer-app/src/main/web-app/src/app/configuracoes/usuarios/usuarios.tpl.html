@@ -1,0 +1,63 @@
+<ul class="nav nav-pills">
+    <li>
+        <a ui-sref="cadastrar-usuario({tipo: 'usuario'})">
+            Novo Usuário
+        </a>
+    </li>
+    <li>
+        <a ui-sref="cadastrar-usuario({tipo: 'advogado'})">
+            Novo Advogado
+        </a>
+    </li>
+    <div class="row" >
+        <div class="pull-right" >
+            <form data-ng-submit="buscar()">
+                <div class="input-append">
+                    <input class="" type="text" data-ng-model="pesquisa.query"/>
+                    <button class="btn" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ul>
+<div>
+    <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
+    </button>
+</div>
+<div >
+    <table class="table table-hover table-bordered center-table" >
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Permissões</th>
+            <th>Tipo</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="usuario in usuarios.content">
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="usuario.pessoa.nome"></span></td>
+            <td data-ng-click="visualizar(contato)"><span data-ng-bind="usuario.email"></span></td>
+            <td data-ng-click="visualizar(contato)">
+                <div data-ng-repeat="permissao in usuario.permissoes">
+                    <span data-ng-bind="permissao | capitalize"></span>
+                </div>
+
+            </td>
+            <td data-ng-click="visualizar(usuario)"><span data-ng-bind="usuario.tipoUsuario | capitalize"></span></td>
+            <td>
+                <a href><span tooltip="Ver Detalhes"><i class="icon-search"
+                                                        ng-click="visualizar(usuario)"></i></span></a>
+                <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(usuario, $event)"></i></span></a>
+                <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(usuario)"></i></span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination num-pages="usuarios.totalPages" page="usuarios.current" total-items="usuarios.totalElements"
+                    previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="usuarios.size"
+                    on-select-page="pageChanged(page)"></pagination>
+    </div>
+</div>

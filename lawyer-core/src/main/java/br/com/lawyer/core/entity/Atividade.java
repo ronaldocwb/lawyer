@@ -2,6 +2,8 @@ package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.ValorHoraAtividade;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +17,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
+@JsonSerialize (include = JsonSerialize.Inclusion.NON_NULL)
 public class Atividade extends AbstractBaseEntity {
 
     @ManyToOne
+    @JsonIgnoreProperties({"advocacia", "pessoa", "permissoes" })
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"cliente", "descricao", "duracao", "areaAtuacao", "responsavel", "contrato", "autor", "reu", "advogadosEnvolvidos", "assuntosRelacionados" })
     private Assunto assunto;
 
     @Temporal (TemporalType.DATE)

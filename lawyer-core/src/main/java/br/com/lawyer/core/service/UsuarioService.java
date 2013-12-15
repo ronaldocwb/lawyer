@@ -1,6 +1,7 @@
 package br.com.lawyer.core.service;
 
 import br.com.lawyer.core.base.BaseService;
+import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.UsuarioRepository;
@@ -17,4 +18,5 @@ public interface UsuarioService extends BaseService<String, Usuario, UsuarioRepo
     
     Usuario salvar (Usuario usuario) throws BusinessException;
 
+    Usuario salvarUsuario (Usuario parse, boolean criarContato, Advogado advogado);
 }
