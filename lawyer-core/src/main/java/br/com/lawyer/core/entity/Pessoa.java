@@ -4,11 +4,19 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
 import br.com.lawyer.core.entity.common.Telefone;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
 public class Pessoa extends AbstractBaseEntity {
 
     @Column (length = 120)
@@ -21,23 +29,17 @@ public class Pessoa extends AbstractBaseEntity {
     private Empresa empresa;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Telefone> telefones;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Email> emails;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Endereco> enderecos;
-    
-    @OneToOne(mappedBy="pessoa", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
-    private Usuario usuario;
 
-    private Boolean cliente = Boolean.FALSE;
-    
-    public void associaUsuario() {
-		getUsuario().setPessoa(this);
-	}
-    
     public String getNome () {
         return nome;
     }
@@ -86,19 +88,4 @@ public class Pessoa extends AbstractBaseEntity {
         this.emails = emails;
     }
     
-    public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-    public Boolean getCliente () {
-        return cliente;
-    }
-
-    public void setCliente (Boolean cliente) {
-        this.cliente = cliente;
-    }
 }

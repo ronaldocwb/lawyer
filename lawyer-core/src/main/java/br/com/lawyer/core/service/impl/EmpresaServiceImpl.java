@@ -1,12 +1,12 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseServiceImpl;
-import br.com.lawyer.core.entity.Cliente;
+import br.com.lawyer.core.entity.Contato;
 import br.com.lawyer.core.entity.Empresa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.EmpresaRepository;
 import br.com.lawyer.core.repository.predicates.EmpresaPredicate;
-import br.com.lawyer.core.service.ClienteService;
+import br.com.lawyer.core.service.ContatoService;
 import br.com.lawyer.core.service.EmpresaService;
 import br.com.lawyer.core.service.PessoaService;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
     private PessoaService pessoaService;
 
     @Autowired
-    private ClienteService clienteService;
+    private ContatoService contatoService;
 
     /**
      * Construtor
@@ -55,11 +55,11 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
     }
 
     @Override
-    public void deletarEmpresa(String uid) throws BusinessException {
+    public void deletarEmpresa (String uid) throws BusinessException {
         logger.info(String.format("Apagando a empresa de UID %s pelo usuário %s", uid, getUsuarioLogado().getEmail()));
 
         pessoaService.removerReferenciaDaEmpresaPorUid(uid);
-        clienteService.removerPorReferenciaUid(uid, Empresa.class);
+        contatoService.removerPorReferenciaUid(uid, Empresa.class);
         getRepository().delete(uid);
 
         logger.info(String.format("Empresa de UID %s foi apagada pelo usuário %s", uid, getUsuarioLogado().getEmail()));
@@ -70,10 +70,8 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
         logger.info(String.format("Salvando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
 
         saveAndFlush(empresa);
-        if (empresa.getCliente().equals(Boolean.TRUE)) {
-            Cliente cliente = new Cliente(empresa);
-            clienteService.save(cliente);
-        }
+        Contato contato = new Contato(empresa);
+        contatoService.save(contato);
 
         logger.info(String.format("Empresa de UID %s foi salva pelo usuário %s", empresa.getUid(), getUsuarioLogado().getEmail()));
         return empresa;
@@ -84,11 +82,7 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
         logger.info(String.format("Atualizando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
         Empresa stored = findOne(empresa.getUid());
         if (stored != null && !stored.getCliente().equals(empresa.getCliente())) {
-            if (empresa.getCliente().equals(Boolean.TRUE)) {
-                clienteService.save(new Cliente(empresa));
-            } else {
-                clienteService.removerPorReferenciaUid(stored.getUid(), Empresa.class);
-            }
+            contatoService.removerPorReferenciaUid(stored.getUid(), Empresa.class);
         }
         save(empresa);
 

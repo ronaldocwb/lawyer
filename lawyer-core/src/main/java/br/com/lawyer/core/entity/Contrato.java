@@ -1,8 +1,13 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +20,8 @@ public class Contrato extends AbstractBaseEntity {
     @ManyToOne
     private Empresa empresa;
 
-    @ElementCollection (fetch = FetchType.EAGER)
+    @OneToMany
+    @LazyCollection (LazyCollectionOption.FALSE)
     private List<ConvencaoHonorarios> convencaoHonorarios;
 
     public String getNome () {

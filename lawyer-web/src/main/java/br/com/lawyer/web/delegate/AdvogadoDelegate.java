@@ -1,7 +1,7 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.web.vo.AdvogadoVO;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,15 +9,15 @@ import org.springframework.data.domain.Page;
  * @since 10/10/2013
  */
 public interface AdvogadoDelegate {
-    Page<AdvogadoVO> findAdvogadoPorPagina (String query, int page, int limit);
+    Page<Advogado> findAdvogadoPorPagina (String query, int page, int limit);
 
-    AdvogadoVO salvar (AdvogadoVO advogadoVO) throws BusinessException;
+    Advogado salvar (Advogado advogadoVO) throws BusinessException;
 
     void deletar (String uid);
 
-    AdvogadoVO atualizar (AdvogadoVO advogadoVO, String uid);
+    Advogado atualizar (Advogado advogadoVO, String uid);
 
-    AdvogadoVO buscarPorUid (String uid);
+    Advogado buscarPorUid (String uid);
 
-    AdvogadoVO buscarAdvogadoPorPessoaUid (String pessoaUid);
+    Advogado buscarAdvogadoPorPessoaUid (String pessoaUid);
 }

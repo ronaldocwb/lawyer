@@ -4,14 +4,30 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Periodo;
 import br.com.lawyer.core.entity.enumerated.TipoAcesso;
 import br.com.lawyer.core.entity.enumerated.TipoProcesso;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Assunto extends AbstractBaseEntity {
 
     @ManyToOne
@@ -65,11 +81,13 @@ public class Assunto extends AbstractBaseEntity {
     private Pessoa reu;
 
     @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable (name = "assunto_adv_envolvido")
     private List<Advogado> advogadosEnvolvidos;
 
     @OneToMany
     @JoinTable (name = "assunto_relacionado")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Assunto> assuntosRelacionados;
 
     @Enumerated (EnumType.ORDINAL)

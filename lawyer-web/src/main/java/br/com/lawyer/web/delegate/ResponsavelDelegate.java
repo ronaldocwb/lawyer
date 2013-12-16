@@ -1,7 +1,7 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.entity.Responsavel;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.web.vo.ResponsavelVO;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,14 +9,14 @@ import org.springframework.data.domain.Page;
  * @since 22/10/2013
  */
 public interface ResponsavelDelegate {
-    Page<ResponsavelVO> findResponsavelPorPagina (String query, int page, int limit) throws BusinessException;
+    Page<Responsavel> findResponsavelPorPagina (String query, int page, int limit) throws BusinessException;
 
-    ResponsavelVO salvar (ResponsavelVO pessoaVO);
+    Responsavel salvar (Responsavel pessoaVO);
 
     void deletar (String uid);
 
-    ResponsavelVO atualizar (ResponsavelVO pessoaVO, String uid);
+    Responsavel atualizar (Responsavel pessoaVO, String uid);
 
-    ResponsavelVO buscarPorUid (String uid);
+    Responsavel buscarPorUid (String uid);
 
 }

@@ -1,7 +1,7 @@
 package br.com.lawyer.web.delegate;
 
+import br.com.lawyer.core.entity.Assunto;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.web.vo.AssuntoVO;
 import org.springframework.data.domain.Page;
 
 /**
@@ -9,15 +9,15 @@ import org.springframework.data.domain.Page;
  * @since 15/11/2013
  */
 public interface AssuntoDelegate {
-    Page<AssuntoVO> findAssuntoPorNomeOuPagina (String nome, int page, int limit);
+    Page<Assunto> findAssuntoPorNomeOuPagina (String nome, int page, int limit);
 
-    AssuntoVO salvar (AssuntoVO assuntoVO);
+    Assunto salvar (Assunto assunto);
 
     void deletar (String uid);
 
-    AssuntoVO update (AssuntoVO assuntoVO, String uid);
+    Assunto update (Assunto assunto, String uid);
 
-    AssuntoVO findOne (String uid);
+    Assunto findOne (String uid);
 
-    Page<AssuntoVO> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException;
+    Page<Assunto> findAssuntosPorClienteUid (String uid, int page, int limit) throws BusinessException;
 }

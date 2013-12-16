@@ -1,14 +1,18 @@
 package br.com.lawyer.web.vo;
 
-import java.util.List;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import br.com.lawyer.core.entity.Advocacia;
+import br.com.lawyer.core.entity.Advogado;
+import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.entity.Usuario;
 import br.com.lawyer.core.entity.enumerated.Permissao;
+import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import br.com.lawyer.core.entity.enumerated.TipoUsuario;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import br.com.lawyer.web.base.BaseVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class UsuarioVO extends BaseVO<Usuario> {
 
@@ -26,9 +30,21 @@ public class UsuarioVO extends BaseVO<Usuario> {
     private String senha;
 
     @IgnoreVOParser
+    private boolean criarContato;
+
+    @IgnoreVOParser
+    private Advogado advogado;
+
+    @IgnoreVOParser
     private String novaSenha;
 
-    private AdvocaciaVO advocacia;
+    private TipoUsuario tipoUsuario;
+
+    private Pessoa pessoa;
+
+    private StatusUsuario ativo;
+
+    private Advocacia advocacia;
 
     public UsuarioVO() {}
 
@@ -93,11 +109,57 @@ public class UsuarioVO extends BaseVO<Usuario> {
         this.novaSenha = novaSenha;
     }
 
-    public AdvocaciaVO getAdvocacia () {
+    public Advocacia getAdvocacia () {
         return advocacia;
     }
 
-    public void setAdvocacia (AdvocaciaVO advocacia) {
+    public void setAdvocacia (Advocacia advocacia) {
         this.advocacia = advocacia;
+    }
+
+    public static long getSerialVersionUID () {
+        return serialVersionUID;
+    }
+
+    public TipoUsuario getTipoUsuario () {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario (TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Pessoa getPessoa () {
+        return pessoa;
+    }
+
+    public void setPessoa (Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public StatusUsuario getAtivo () {
+        return ativo;
+    }
+
+    public void setAtivo (StatusUsuario ativo) {
+        this.ativo = ativo;
+    }
+
+    @JsonIgnore
+    public Advogado getAdvogado () {
+        return advogado;
+    }
+
+    @JsonProperty
+    public void setAdvogado (Advogado advogado) {
+        this.advogado = advogado;
+    }
+
+    public boolean isCriarContato () {
+        return criarContato;
+    }
+
+    public void setCriarContato (boolean criarContato) {
+        this.criarContato = criarContato;
     }
 }

@@ -1,8 +1,12 @@
 package br.com.lawyer.web.configuration;
 
 import br.com.lawyer.core.configuration.LawyerCoreConfiguration;
-import org.springframework.context.annotation.*;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -52,8 +56,8 @@ public class LawyerWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public MappingJacksonHttpMessageConverter jacksonMessageConverter() {
-        MappingJacksonHttpMessageConverter mappingJacksonHttpMessageConverter = new MappingJacksonHttpMessageConverter();
+    public MappingJackson2HttpMessageConverter jacksonMessageConverter() {
+        MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJacksonHttpMessageConverter.setJsonPrefix(")]}',\n");
         return mappingJacksonHttpMessageConverter;
     }

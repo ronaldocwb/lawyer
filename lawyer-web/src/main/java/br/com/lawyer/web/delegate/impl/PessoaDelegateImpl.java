@@ -3,9 +3,7 @@ package br.com.lawyer.web.delegate.impl;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.service.PessoaService;
-import br.com.lawyer.web.base.BaseDelegate;
 import br.com.lawyer.web.delegate.PessoaDelegate;
-import br.com.lawyer.web.vo.PessoaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,24 +15,24 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 10/10/2013
  */
 @Service
-public class PessoaDelegateImpl extends BaseDelegate<Pessoa, PessoaVO> implements PessoaDelegate {
+public class PessoaDelegateImpl implements PessoaDelegate {
 
     @Autowired
     private PessoaService pessoaService;
 
     @Transactional
     @Override
-    public Page<PessoaVO> findPessoaPorPagina (String query, int page, int limit) {
+    public Page<Pessoa> findPessoaPorPagina (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<Pessoa> pessoas = pessoaService.buscarPorNomeLike(query, pageRequest);
-        return getVO(pessoas, pageRequest);
+        return pessoas;
     }
 
     @Override
     @Transactional
-    public PessoaVO salvar (PessoaVO pessoaVO) throws BusinessException {
-        Pessoa pessoa = pessoaService.salvar(pessoaVO.parse());
-        return getVO(pessoa);
+    public Pessoa salvar (Pessoa pessoaVO) throws BusinessException {
+        Pessoa pessoa = pessoaService.salvar(pessoaVO);
+        return pessoa;
     }
 
     @Override
@@ -45,14 +43,14 @@ public class PessoaDelegateImpl extends BaseDelegate<Pessoa, PessoaVO> implement
 
     @Override
     @Transactional
-    public PessoaVO atualizar (PessoaVO pessoaVO, String uid) throws BusinessException {
-        Pessoa pessoa = pessoaService.atualizar(pessoaVO.parse());
-        return getVO(pessoa);
+    public Pessoa atualizar (Pessoa pessoaVO, String uid) throws BusinessException {
+        Pessoa pessoa = pessoaService.atualizar(pessoaVO);
+        return pessoa;
     }
 
     @Override
-    public PessoaVO buscarPorUid (String uid) {
+    public Pessoa buscarPorUid (String uid) {
         Pessoa pessoa = pessoaService.findOne(uid);
-        return getVO(pessoa);
+        return pessoa;
     }
 }

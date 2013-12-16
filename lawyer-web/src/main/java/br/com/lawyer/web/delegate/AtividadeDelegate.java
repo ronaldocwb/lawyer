@@ -1,6 +1,6 @@
 package br.com.lawyer.web.delegate;
 
-import br.com.lawyer.web.vo.AtividadeVO;
+import br.com.lawyer.core.entity.Atividade;
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,13 +8,13 @@ import org.springframework.data.domain.Page;
  * @since 11/11/2013
  */
 public interface AtividadeDelegate {
-    Page<AtividadeVO> findAtividadePorPagina (String query, int page, int limit);
+    Page<Atividade> findAtividadePorPagina (String query, int page, int limit);
 
-    AtividadeVO salvar (AtividadeVO advogadoVO);
+    Atividade salvar (Atividade advogadoVO);
 
     void deletar (String uid);
 
-    AtividadeVO atualizar (AtividadeVO advogadoVO, String uid);
+    Atividade atualizar (Atividade advogadoVO, String uid);
 
-    AtividadeVO buscarPorUid (String uid);
+    Atividade buscarPorUid (String uid);
 }

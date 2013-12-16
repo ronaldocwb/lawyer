@@ -4,13 +4,19 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.common.Email;
 import br.com.lawyer.core.entity.common.Endereco;
 import br.com.lawyer.core.entity.common.Telefone;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Empresa extends AbstractBaseEntity {
 
     @Column (length = 120)
@@ -31,6 +37,7 @@ public class Empresa extends AbstractBaseEntity {
     private List<Endereco> enderecos;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Email> emails;
 
     @OneToMany(cascade={CascadeType.ALL})

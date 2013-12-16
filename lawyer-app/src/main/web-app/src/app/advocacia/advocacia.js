@@ -1,5 +1,5 @@
 angular.module('lawyer.configuracoes.advocacia', [
-    'lawyer.Cliente'
+    'lawyer.Advocacia'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -12,8 +12,8 @@ angular.module('lawyer.configuracoes.advocacia', [
                 }
             },
             resolve: {
-                advocacia: function (Cliente) {
-                    return Cliente.get();
+                advocacia: function (Advocacia) {
+                    return Advocacia.get();
                 }
             }
         });

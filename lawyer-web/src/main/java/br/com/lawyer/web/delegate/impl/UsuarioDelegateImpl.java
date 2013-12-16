@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsuarioDelegateImpl extends BaseDelegate<Usuario, UsuarioVO> implements UsuarioDelegate {
@@ -42,9 +43,10 @@ public class UsuarioDelegateImpl extends BaseDelegate<Usuario, UsuarioVO> implem
         return getVO(result, page);
     }
 
+    @Transactional
     @Override
-    public UsuarioVO salvar (UsuarioVO usuarioVO) {
-        Usuario usuario = usuarioService.saveAndFlush(usuarioVO.parse());
+    public UsuarioVO salvar (UsuarioVO usuarioVO) throws BusinessException {
+        Usuario usuario = usuarioService.salvarUsuario(usuarioVO.parse(), usuarioVO.isCriarContato(), usuarioVO.getAdvogado());
         return getVO(usuario);
     }
 

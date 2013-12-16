@@ -2,7 +2,12 @@ package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Advogado extends AbstractBaseEntity {
@@ -14,15 +19,15 @@ public class Advogado extends AbstractBaseEntity {
     @Column (length = 20)
     private String numeroOAB;
 
+    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @JoinColumn(unique = true, nullable = false)
+    private Usuario usuario;
+
     public Advogado () {
     }
 
     public Advogado (Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-    
-    public boolean hasUsuario(){
-    	return getPessoa().getUsuario() != null;
     }
 
     public Pessoa getPessoa () {
@@ -47,6 +52,14 @@ public class Advogado extends AbstractBaseEntity {
 	}
 
 	public String getEmailLogin() {
-		return getPessoa().getUsuario().getEmail();
+		return getUsuario().getEmail();
 	}
+
+    public Usuario getUsuario () {
+        return usuario;
+    }
+
+    public void setUsuario (Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

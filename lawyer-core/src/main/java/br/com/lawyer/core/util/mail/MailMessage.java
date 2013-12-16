@@ -1,12 +1,11 @@
 package br.com.lawyer.core.util.mail;
 
+import javax.mail.internet.InternetAddress;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.mail.internet.InternetAddress;
 
 public class MailMessage implements Serializable {
 	

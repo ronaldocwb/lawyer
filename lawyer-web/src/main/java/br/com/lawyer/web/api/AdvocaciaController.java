@@ -1,9 +1,9 @@
 package br.com.lawyer.web.api;
 
+import br.com.lawyer.core.entity.Advocacia;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.web.annotation.ApiController;
 import br.com.lawyer.web.delegate.AdvocaciaDelegate;
-import br.com.lawyer.web.vo.AdvocaciaVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +21,7 @@ public class AdvocaciaController {
 
     @RequestMapping(value = "/advocacia", method = RequestMethod.GET)
     public @ResponseBody
-    AdvocaciaVO getAdvocaciaUsuario() throws BusinessException {
+    Advocacia getAdvocaciaUsuario() throws BusinessException {
         return advocaciaDelegate.findAdvocaciaUsuario();
     }
 

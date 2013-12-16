@@ -1,6 +1,12 @@
 package br.com.lawyer.core.entity;
 
-import java.util.List;
+import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.Permissao;
+import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import br.com.lawyer.core.entity.enumerated.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,13 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import br.com.lawyer.core.entity.base.AbstractBaseEntity;
-import br.com.lawyer.core.entity.enumerated.Permissao;
-import br.com.lawyer.core.entity.enumerated.StatusUsuario;
+import java.util.List;
 
 @Entity
 public class Usuario extends AbstractBaseEntity {
@@ -32,8 +32,12 @@ public class Usuario extends AbstractBaseEntity {
     @ManyToOne
     private Advocacia advocacia;
 
-    @OneToOne()
+    @Enumerated
+    private TipoUsuario tipoUsuario;
+
+    @OneToOne
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonBackReference
     private Pessoa pessoa;
     
     @Enumerated(EnumType.ORDINAL)
@@ -43,8 +47,15 @@ public class Usuario extends AbstractBaseEntity {
     @Enumerated (value = EnumType.STRING)
     @JoinColumn (columnDefinition = "Permissao")
     private List<Permissao> permissoes;
-	
-	@PrePersist
+
+    public Usuario () {}
+
+    public Usuario (String value) {
+        super();
+        this.email = value;
+    }
+
+    @PrePersist
 	public void prePersist(){
 		if(getAtivo() == null){
 			setAtivo(StatusUsuario.SEM_ATIVACAO_INICIAL);
@@ -98,4 +109,12 @@ public class Usuario extends AbstractBaseEntity {
 	public void setAtivo(StatusUsuario ativo) {
 		this.ativo = ativo;
 	}
+
+    public TipoUsuario getTipoUsuario () {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario (TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 }
