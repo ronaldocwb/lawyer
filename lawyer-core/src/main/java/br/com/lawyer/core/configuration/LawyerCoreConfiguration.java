@@ -39,7 +39,7 @@ public class LawyerCoreConfiguration implements LoadTimeWeavingConfigurer {
         DataSource dataSource = null;
         try {
             Context ctx = new InitialContext();
-            dataSource = (DataSource) ctx.lookup("java:jboss/postgresDS");
+            dataSource = (DataSource) ctx.lookup("java:jboss/datasources/PostgreSQLDS");
         } catch (NamingException e) {
             e.printStackTrace();
         }
