@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 @Service
 public class MailProviderService {
 	
-	private static final String TEMPLATE_DIR = "br/com/lawyer/core/mail/template/";
+	private static final String TEMPLATE_DIR = "templates/";
 	
 	@Autowired
 	private SimpleApplicationEventMulticaster eventMulticaster;
@@ -28,8 +28,6 @@ public class MailProviderService {
 		eventMulticaster.setTaskExecutor(Executors.newCachedThreadPool());
 		eventMulticaster.multicastEvent(new MailEvent(this, m));
 		
-		//appContext.publishEvent(new MailEvent(this, m));
-		//MailSender.sendMail(m);
 	}
     
 	public String montaMensagemCadastro(String nome, String emailLogin){

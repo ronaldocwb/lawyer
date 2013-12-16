@@ -26,6 +26,9 @@ public class Contato extends AbstractBaseEntity implements Serializable {
     @OneToOne(orphanRemoval = false, optional = true, cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
+    @OneToOne(orphanRemoval = false, optional = true, cascade = CascadeType.ALL)
+    private Usuario usuario;
+
     @Enumerated
     private TipoContato tipoContato = TipoContato.CONTATO;
 
@@ -37,6 +40,10 @@ public class Contato extends AbstractBaseEntity implements Serializable {
 
     public Contato (Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public Contato (Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Empresa getEmpresa () {
@@ -61,5 +68,13 @@ public class Contato extends AbstractBaseEntity implements Serializable {
 
     public void setTipoContato (TipoContato tipoContato) {
         this.tipoContato = tipoContato;
+    }
+
+    public Usuario getUsuario () {
+        return usuario;
+    }
+
+    public void setUsuario (Usuario usuario) {
+        this.usuario = usuario;
     }
 }

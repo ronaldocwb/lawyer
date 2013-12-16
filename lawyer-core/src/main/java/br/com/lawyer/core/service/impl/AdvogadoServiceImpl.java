@@ -4,11 +4,9 @@ import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Advogado;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.exception.BusinessException;
-import br.com.lawyer.core.mail.MailProviderService;
 import br.com.lawyer.core.repository.AdvogadoRepository;
 import br.com.lawyer.core.service.AdvogadoService;
 import br.com.lawyer.core.service.PessoaService;
-import br.com.lawyer.core.service.UsuarioService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,12 +29,6 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
 
     @Autowired
     private PessoaService pessoaService;
-    
-    @Autowired
-    private MailProviderService mailProviderService;
-    
-    @Autowired
-    private UsuarioService usuarioService;
     
 	/**
      * Construtor
@@ -73,16 +65,9 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
         	Pessoa pessoa = pessoaService.salvarOuAtualizar(advogado.getPessoa());
             advogado.setPessoa(pessoa);
         }
-        Advogado retorno =  getRepository().save(advogado);
         logger.info(String.format("Advogado de UID %s foi salva pelo usuário %s", advogado.getUid(), getUsuarioLogado().getEmail()));
         
-        if(advogado.getUsuario() != null){
-            advogado.getUsuario().setPessoa(advogado.getPessoa());
-            advogado.getUsuario().setAdvocacia(getUsuarioLogado().getAdvocacia());
-            usuarioService.salvar(advogado.getUsuario());
-        	mailProviderService.enviarEmailCadastro(advogado.getNome(), advogado.getEmailLogin());
-        }
-        return retorno;
+        return getRepository().save(advogado);
     }
 
 	/**

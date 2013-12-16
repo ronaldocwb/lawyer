@@ -9,7 +9,6 @@ import br.com.lawyer.core.entity.enumerated.StatusUsuario;
 import br.com.lawyer.core.entity.enumerated.TipoUsuario;
 import br.com.lawyer.web.annotation.IgnoreVOParser;
 import br.com.lawyer.web.base.BaseVO;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -41,7 +40,6 @@ public class UsuarioVO extends BaseVO<Usuario> {
 
     private TipoUsuario tipoUsuario = TipoUsuario.USUARIO;
 
-    @JsonBackReference
     private Pessoa pessoa;
 
     private StatusUsuario ativo;

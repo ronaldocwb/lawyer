@@ -3,9 +3,15 @@ package br.com.lawyer.core.service.impl;
 import br.com.lawyer.core.authentication.LawyerAuthenticationToken;
 import br.com.lawyer.core.base.BaseServiceImpl;
 import br.com.lawyer.core.entity.Advogado;
+import br.com.lawyer.core.entity.Contato;
 import br.com.lawyer.core.entity.Usuario;
+import br.com.lawyer.core.entity.enumerated.TipoUsuario;
 import br.com.lawyer.core.exception.BusinessException;
+import br.com.lawyer.core.mail.MailProviderService;
 import br.com.lawyer.core.repository.UsuarioRepository;
+import br.com.lawyer.core.service.AdvogadoService;
+import br.com.lawyer.core.service.ContatoService;
+import br.com.lawyer.core.service.PessoaService;
 import br.com.lawyer.core.service.UsuarioService;
 import br.com.lawyer.core.util.PasswordEncoder;
 import br.com.lawyer.core.util.StringUtils;
@@ -25,7 +31,19 @@ import org.springframework.stereotype.Service;
 public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, UsuarioRepository> implements UsuarioService {
 
     private static final Logger logger = Logger.getLogger(UsuarioService.class);
-    
+
+    @Autowired
+    private AdvogadoService advogadoService;
+
+    @Autowired
+    private ContatoService contatoService;
+
+    @Autowired
+    private PessoaService pessoaService;
+
+    @Autowired
+    private MailProviderService mailProviderService;
+
     /**
      * Construtor
      *
@@ -142,7 +160,25 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
     }
 
     @Override
-    public Usuario salvarUsuario (Usuario parse, boolean criarContato, Advogado advogado) {
-        return null;
+    public Usuario salvarUsuario (Usuario usuario, boolean criarContato, Advogado advogado) throws BusinessException {
+
+        pessoaService.save(usuario.getPessoa());
+        usuario.setAdvocacia(getUsuarioLogado().getAdvocacia());
+        save(usuario);
+
+        if (criarContato == true) {
+            Contato contato = new Contato(usuario);
+            contatoService.save(contato);
+        }
+
+        if (usuario.getTipoUsuario().equals(TipoUsuario.ADVOGADO) &&  advogado != null) {
+            advogado.setPessoa(usuario.getPessoa());
+            advogado.setUsuario(usuario);
+            advogadoService.save(advogado);
+        }
+
+        mailProviderService.enviarEmailCadastro(usuario.getPessoa().getNome(), usuario.getEmail());
+
+        return usuario;
     }
 }

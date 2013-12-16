@@ -18,5 +18,5 @@ public interface UsuarioService extends BaseService<String, Usuario, UsuarioRepo
     
     Usuario salvar (Usuario usuario) throws BusinessException;
 
-    Usuario salvarUsuario (Usuario parse, boolean criarContato, Advogado advogado);
+    Usuario salvarUsuario (Usuario parse, boolean criarContato, Advogado advogado) throws BusinessException;
 }

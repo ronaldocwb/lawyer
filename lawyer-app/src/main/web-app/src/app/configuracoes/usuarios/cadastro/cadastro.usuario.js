@@ -50,8 +50,8 @@ angular.module('lawyer.usuarios.cadastro', [
 
             $scope.cadastrar = function () {
                 $scope.usuario.tipoUsuario = $scope.usuario.tipoUsuario.toUpperCase();
-                $scope.usuario = Usuario.save($scope.usuario, function () {
-                    notifications.pushForNextRoute('advogado.salva', 'success', {nome: $scope.usuario.pessoa.nome});
+                $scope.usuario = Usuario.save($scope.usuario, function (usuario) {
+                    notifications.pushForNextRoute('advogado.salva', 'success', {nome: usuario.pessoa.nome});
                     $scope.pushAdvogadoListagem();
                     $state.go('usuarios');
                 }, function () {

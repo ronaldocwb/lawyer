@@ -1,7 +1,6 @@
 package br.com.lawyer.core.service.impl;
 
 import br.com.lawyer.core.base.BaseServiceImpl;
-import br.com.lawyer.core.entity.Contato;
 import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.exception.BusinessException;
 import br.com.lawyer.core.repository.PessoaRepository;
@@ -80,8 +79,6 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     public Pessoa salvar (Pessoa pessoa) throws BusinessException {
         logger.info(String.format("Salvando a pessoa %s pelo usu�rio %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
         saveAndFlush(pessoa);
-        Contato contato = new Contato(pessoa);
-        contatoService.save(contato);
         logger.info(String.format("Pessoa de UID %s salva pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }

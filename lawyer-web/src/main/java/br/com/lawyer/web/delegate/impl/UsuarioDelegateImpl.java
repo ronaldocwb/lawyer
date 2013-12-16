@@ -45,7 +45,7 @@ public class UsuarioDelegateImpl extends BaseDelegate<Usuario, UsuarioVO> implem
 
     @Transactional
     @Override
-    public UsuarioVO salvar (UsuarioVO usuarioVO) {
+    public UsuarioVO salvar (UsuarioVO usuarioVO) throws BusinessException {
         Usuario usuario = usuarioService.salvarUsuario(usuarioVO.parse(), usuarioVO.isCriarContato(), usuarioVO.getAdvogado());
         return getVO(usuario);
     }

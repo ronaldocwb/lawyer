@@ -12,7 +12,7 @@ public interface UsuarioDelegate {
 
     Page<UsuarioVO> findUserByPage (PageRequest page);
 
-    UsuarioVO salvar (UsuarioVO usuarioVO);
+    UsuarioVO salvar (UsuarioVO usuarioVO) throws BusinessException;
 
     void deletar (String uid);
 
