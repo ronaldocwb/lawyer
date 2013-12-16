@@ -33,7 +33,7 @@ public class Usuario extends AbstractBaseEntity {
     private Advocacia advocacia;
 
     @Enumerated
-    private TipoUsuario tipoUsuario = TipoUsuario.USUARIO;
+    private TipoUsuario tipoUsuario;
 
     @OneToOne
     @LazyCollection(LazyCollectionOption.FALSE)

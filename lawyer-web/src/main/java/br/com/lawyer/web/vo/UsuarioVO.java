@@ -38,7 +38,7 @@ public class UsuarioVO extends BaseVO<Usuario> {
     @IgnoreVOParser
     private String novaSenha;
 
-    private TipoUsuario tipoUsuario = TipoUsuario.USUARIO;
+    private TipoUsuario tipoUsuario;
 
     private Pessoa pessoa;
 
