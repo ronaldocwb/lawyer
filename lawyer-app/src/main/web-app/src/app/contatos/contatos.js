@@ -7,7 +7,8 @@ angular.module('lawyer.contatos', [
         'lawyer.Setor',
         'municipioAutocomplete',
         'setorAutocomplete',
-        'pessoaAutocomplete'
+        'pessoaAutocomplete',
+        'empresaAutocomplete'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {

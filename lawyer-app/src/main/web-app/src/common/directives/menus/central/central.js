@@ -2,7 +2,7 @@ angular.module('lawyer.menu.central', [
         'lawyer.dropdown.hover'
     ])
     .directive('menuCentral', [function () {
-        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'advogados', 'atividades'];
+        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'atividades'];
         return {
             restrict: 'E',
             replace: true,
@@ -25,7 +25,6 @@ angular.module('lawyer.menu.central', [
                         case 'empresas' :       scope.abas.contatos = true; break;
                         case 'pessoas' :        scope.abas.contatos = true; break;
                         case 'areasAtuacao' :   scope.abas.areasAtuacao = true; break;
-                        case 'advogados' :      scope.abas.advogados = true; break;
                         case 'atividades' :      scope.abas.atividades = true; break;
                     }
                 });
