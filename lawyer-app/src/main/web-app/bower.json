@@ -2,14 +2,14 @@
   "name": "lawyer-app",
   "version": "1.0.0",
   "devDependencies": {
-    "angular": "1.2.4",
-    "angular-animate": "1.2.4",
-    "angular-mocks": "1.2.4",
-    "angular-cookies": "1.2.4",
-    "angular-i18n": "1.2.4",
-    "angular-resource": "1.2.4",
-    "angular-sanitize": "1.2.4",
-    "angular-route": "1.2.4",
+    "angular": "1.2.5",
+    "angular-animate": "1.2.5",
+    "angular-mocks": "1.2.5",
+    "angular-cookies": "1.2.5",
+    "angular-i18n": "1.2.5",
+    "angular-resource": "1.2.5",
+    "angular-sanitize": "1.2.5",
+    "angular-route": "1.2.5",
     "bootstrap": "2.3.2",
     "angular-bootstrap": "0.7.0",
     "angular-ui-router": "0.2.7",
@@ -17,7 +17,8 @@
     "noty": "2.2.0",
     "animate.css": "~2.1.0",
     "angular-ui-calendar": "~0.1.3",
-    "magicsuggest": "*"
+    "magicsuggest": "*",
+    "angular-loading-bar": "~0.1.1"
   },
   "dependencies": {}
 }

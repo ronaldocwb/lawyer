@@ -2,14 +2,13 @@ angular.module('lawyer.header', [])
     .directive('appHeader', [function () {
         var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'atividades', 'agenda'];
         return {
-            restrict : 'E',
-            replace : true,
-            controller : 'HeaderController',
-            templateUrl : 'directives/menus/header/header.tpl.html',
-            link : function (scope, element, attrs) {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'directives/menus/header/header.tpl.html',
+            link: function (scope, element, attrs) {
                 scope.abas = {};
 
-                angular.forEach(itens, function(field) {
+                angular.forEach(itens, function (field) {
                     scope.abas[field] = false;
                 });
 
@@ -20,32 +19,26 @@ angular.module('lawyer.header', [])
                     }
                     var parentState = toState.name.split('.');
                     switch (parentState[0]) {
-                        case 'painel' :         scope.abas.painel   = true; break;
-                        case 'empresas' :       scope.abas.contatos = true; break;
-                        case 'pessoas' :        scope.abas.contatos = true; break;
-                        case 'areasAtuacao' :   scope.abas.areasAtuacao = true; break;
-                        case 'atividades' :     scope.abas.atividades = true; break;
-                        case 'agenda' :     scope.abas.agenda = true; break;
+                        case 'painel' :
+                            scope.abas.painel = true;
+                            break;
+                        case 'empresas' :
+                            scope.abas.contatos = true;
+                            break;
+                        case 'pessoas' :
+                            scope.abas.contatos = true;
+                            break;
+                        case 'areasAtuacao' :
+                            scope.abas.areasAtuacao = true;
+                            break;
+                        case 'atividades' :
+                            scope.abas.atividades = true;
+                            break;
+                        case 'agenda' :
+                            scope.abas.agenda = true;
+                            break;
                     }
                 });
             }
         };
-    }])
-
-    .controller('HeaderController', ['$scope', '$location', 'breadcrumbs', 'notifications', 'httpRequestTracker',
-        function ($scope, $location, breadcrumbs, notifications, httpRequestTracker) {
-            $scope.location = $location;
-            $scope.breadcrumbs = breadcrumbs;
-
-            $scope.home = function () {
-                $location.path('/painel');
-            };
-
-            $scope.isNavbarActive = function (navBarPath) {
-                return navBarPath === breadcrumbs.getFirst().name;
-            };
-
-            $scope.hasPendingRequests = function () {
-                return httpRequestTracker.hasPendingRequests();
-            };
-        }]);
+    }]);

@@ -1,11 +1,11 @@
 angular.module('lawyer.noty', [])
     .directive("noty", ['$rootScope', '$timeout', function ($rootScope, $timeout) {
 
-        $.noty.defaults.layout = "top";
+        $.noty.defaults.layout = 'bottomRight';
         $.noty.defaults.timeout = 3000;
         $.noty.defaults.maxVisible = 5;
         $.noty.defaults.modal = false;
-        $.noty.defaults.closeWith = ["click"];
+        $.noty.defaults.closeWith = ['click'];
         var doNotCloseNotifications = [];
         var canCloseNotifications = [];
 
@@ -70,7 +70,7 @@ angular.module('lawyer.noty', [])
                     var buttons = [
                         {
                             addClass: 'btn btn-success', text: 'OK', onClick: function () {
-                                window.location = "/lawyer/";
+                                window.location = '/lawyer/';
                             }
                         }
                     ];
@@ -84,8 +84,8 @@ angular.module('lawyer.noty', [])
                 };
 
                 scope.addError = function (notification) {
-                    notification.layout = "bottom";
-                    notification.type = "information";
+                    notification.layout = 'bottom';
+                    notification.type = 'information';
                     var box = noty(notification);
                     angular.noop(box.options.timeout === false ? doNotCloseNotifications.push(box.options.id) : canCloseNotifications.push(box.options.id));
                 };

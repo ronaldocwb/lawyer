@@ -63,6 +63,10 @@ angular.module('lawyer.contatos', [
             $scope.fetchContatos = function () {
                 $scope.contatos = Contato.get();
             };
+
+            $scope.fetchUsuarios = function () {
+                $scope.usuarios = Contato.getUsuarios();
+            };
         }])
 ;
 

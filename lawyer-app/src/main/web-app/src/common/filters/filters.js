@@ -6,6 +6,9 @@ angular.module('filters', [])
     })
     .filter('hora', function () {
         return function (input) {
+            if (!input) {
+                return null;
+            }
             var horas = input % 60;
             if (horas < 10) {
                 horas = '0' + horas;

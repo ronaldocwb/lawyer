@@ -1,4 +1,4 @@
-<div class="row" ng-cloak>
+<div class="row" ng-if="true" ng-cloak>
     <div class="pull-right" data-ng-show="contatos.content.length > 0">
         <form data-ng-submit="buscar()">
             <div class="input-append">
@@ -12,7 +12,7 @@
     <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
     </button>
 </div>
-<div data-ng-show="contatos.content.length > 0">
+<div data-ng-show="contatos.content.length > 0" >
     <table class="table table-hover table-bordered center-table" ng-cloak>
         <thead>
         <tr>
@@ -23,23 +23,29 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="contato in contatos.content track by contato.uid" >
+
             <td data-ng-show="contato.pessoa" data-ng-click="visualizar(contato)"><span data-ng-bind="contato.pessoa.nome"></span></td>
-            <td data-ng-show="contato.empresa" data-ng-click="visualizar(contato)"><span data-ng-bind="contato.empresa.nomeFantasia"></span></td>
-
             <td data-ng-show="contato.pessoa" >Pessoa  <span class="label label-info" data-ng-bind="contato.tipoContato | lowercase"></span></td>
-            <td data-ng-show="contato.empresa" >Empresa   <span class="label label-info" data-ng-bind="contato.tipoContato | lowercase"></span></td>
-
-
             <td data-ng-show="contato.pessoa" >
                 <a href><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizarPessoa(contato)"></i></span></a>
                 <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editarPessoa(contato, $event)"></i></span></a>
                 <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletarPessoa(contato)"></i></span></a>
             </td>
+
+            <td data-ng-show="contato.empresa" data-ng-click="visualizar(contato)"><span data-ng-bind="contato.empresa.nomeFantasia"></span></td>
+            <td data-ng-show="contato.empresa" >Empresa   <span class="label label-info" data-ng-bind="contato.tipoContato | lowercase"></span></td>
             <td data-ng-show="contato.empresa" >
                 <a href><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizarEmpresa(contato)"></i></span></a>
                 <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editarEmpresa(contato, $event)"></i></span></a>
                 <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletarEmpresa(contato)"></i></span></a>
             </td>
+
+            <td data-ng-show="contato.usuario" data-ng-click="visualizar(contato)"><span data-ng-bind="contato.usuario.pessoa.nome"></span></td>
+            <td data-ng-show="contato.usuario" >Usuario
+                <span class="label label-info" data-ng-bind="contato.usuario.tipoUsuario | lowercase"></span>
+            </td>
+            <td data-ng-show="contato.usuario" > </td>
+
         </tr>
         </tbody>
     </table>

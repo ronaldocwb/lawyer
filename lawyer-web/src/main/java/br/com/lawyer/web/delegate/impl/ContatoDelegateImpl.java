@@ -46,6 +46,7 @@ public class ContatoDelegateImpl implements ContatoDelegate {
         return contato;
     }
 
+
     @Transactional(readOnly = true)
     @Override
     public Contato buscarPorUid (String uid) {
@@ -65,5 +66,12 @@ public class ContatoDelegateImpl implements ContatoDelegate {
         PageRequest pageRequest = new PageRequest(page, limit);
         Page<Contato> clientes = contatoService.findContatosPessoas(q, pageRequest);
         return clientes;
+    }
+
+    @Override
+    public Page<Contato> findContatosUsuarios (String q, int page, int limit) {
+        PageRequest pageRequest = new PageRequest(page, limit);
+        Page<Contato> usuarios = contatoService.findContatosUsuarios(q, pageRequest);
+        return usuarios;
     }
 }

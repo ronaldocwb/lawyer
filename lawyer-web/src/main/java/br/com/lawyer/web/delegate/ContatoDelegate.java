@@ -22,4 +22,6 @@ public interface ContatoDelegate {
     Page<Contato> findContatosEmpresas (String q, int page, int limit);
 
     Page<Contato> findContatosPessoas (String q, int page, int limit);
+
+    Page<Contato> findContatosUsuarios (String q, int page, int limit);
 }

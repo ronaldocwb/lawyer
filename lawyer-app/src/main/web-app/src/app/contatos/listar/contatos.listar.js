@@ -42,7 +42,7 @@ angular.module('lawyer.contatos.listar', [
                 if ($scope.pesquisa.query === '') {
                     $scope.pesquisa.inUse = false;
                 }
-                $scope.contatos = Contato.getPessoas({q: $scope.pesquisa.query});
+                $scope.contatos = Contato.get({q: $scope.pesquisa.query});
             };
 
             $scope.limparBusca = function () {
@@ -53,7 +53,7 @@ angular.module('lawyer.contatos.listar', [
 
             $scope.contatos.current = 1;
             $scope.pageChanged = function (page) {
-                $scope.contatos = Contato.getPessoas({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
+                $scope.contatos = Contato.get({q: $scope.pesquisa.inUse ? $scope.pesquisa.query : '', page: page - 1}, function () {
                     $scope.contatos.current = page;
                 });
             };

@@ -30,6 +30,16 @@ public class ContatoPredicate {
 
     }
 
+    public static Predicate buscarPorNomeUsuarioLike (String query) {
+        QContato contato = QContato.contato;
+
+        if (StringUtils.isBlank(query)) {
+            return contato.usuario.isNotNull();
+        }
+        return contato.usuario.pessoa.nome.containsIgnoreCase(query).or(contato.usuario.email.containsIgnoreCase(query));
+
+    }
+
     public static Predicate buscarPorPessoasLike (String query) {
         QContato contato = QContato.contato;
 

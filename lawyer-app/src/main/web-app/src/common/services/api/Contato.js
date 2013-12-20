@@ -7,6 +7,7 @@ angular.module('lawyer.Contato', [
             update: { method: 'PUT' },
             getEmpresas: { params: { tipoContato: 'empresas' }, method: 'GET' },
             getPessoas: { params: { tipoContato: 'pessoas' }, method: 'GET' },
+            getUsuarios: { params: { tipoContato: 'usuarios' }, method: 'GET' },
             getPessoaByUid: { params: { tipoContato: 'pessoas', contatoUid: '@pessoaUid' }, method: 'GET' },
             getEmpresaByUid: { params: { tipoContato: 'pessoas', contatoUid: '@empresaUid' }, method: 'GET' }
         });

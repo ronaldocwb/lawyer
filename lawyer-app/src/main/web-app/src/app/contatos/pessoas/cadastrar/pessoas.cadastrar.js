@@ -38,7 +38,7 @@ angular.module('lawyer.pessoas.cadastro', [
                     notifications.pushForNextRoute('pessoa.salva', 'success', {nome: $scope.contato.pessoa.nome});
                     $scope.pushPessoaListagem();
                     angular.noop($scope.modal ? $scope.modal.close(true) : $state.go('contatos.listar-pessoas'));
-                }, function () {
+                }, function (error) {
                     notifications.pushForCurrentRoute('pessoa.salva.erro', 'error', {nome: $scope.contato.pessoa.nome});
                 });
             };
