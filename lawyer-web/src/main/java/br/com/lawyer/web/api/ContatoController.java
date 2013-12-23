@@ -51,6 +51,14 @@ public class ContatoController {
         return contatoDelegate.findContatosPessoas(q, page, limit);
     }
 
+    @RequestMapping (value = "/contatos/usuarios", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Contato> findContatosUsuarios(@RequestParam (value = "q", required = false) String q,
+                                           @RequestParam (value = "page", defaultValue = "0", required = false) int page,
+                                           @RequestParam (value = "limit", defaultValue = "25", required = false) int limit) {
+        return contatoDelegate.findContatosUsuarios(q, page, limit);
+    }
+
     @Secured ({"ROLE_LAWYER", "ROLE_MANAGER"})
     @RequestMapping(value = "/contatos", method = RequestMethod.POST)
     public @ResponseBody Contato salvar(@RequestBody Contato contato) throws BusinessException {

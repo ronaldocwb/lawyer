@@ -1,24 +1,3 @@
-/**
- * This is the main application stylesheet. It should include or import all
- * stylesheets used throughout the application as this is the only stylesheet in
- * the Grunt configuration that is automatically processed.
- */
-
-
-/**
- * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
- * project should be imported as the rest are just wasting space.
- */
-
-//@import '../../vendor/bootstrap/less/bootstrap.less';
-
-
-/**
- * This is our main variables file. It in turn imports the `variables` file from
- * Twitter Bootstrap. We must include it last so we can overwrite any variable
- * definitions in our imported stylesheets.
- */
-
 @import 'variables.less';
 
 @import '../app/painel/painel.less';
@@ -31,34 +10,17 @@
   display: none !important;
 }
 
-.fadeInUp.ng-enter  {
-  -webkit-animation: fadeInUp 0.5s;
-  -moz-animation: fadeInUp 0.5s;
-  -ms-animation: fadeInUp 0.5s;
-  animation: fadeInUp 0.5s;
-}
-.fadeOutRight.ng-leave {
-  -webkit-animation: fadeOutRight 0.5s;
-  -moz-animation: fadeOutRight 0.5s;
-  -ms-animation: fadeOutRight 0.5s;
-  animation: fadeOutRight 0.5s;
-}
-.fadeInLeft.ng-enter {
-  -webkit-animation: fadeInLeft 0.5s;
-  -moz-animation: fadeInLeft 0.5s;
-  -ms-animation: fadeInLeft 0.5s;
-  animation: fadeInLeft 0.5s;
-}
-.fadeInLeft.ng-leave {
-  -webkit-animation: fadeOutRight 0.5s;
-  -moz-animation: fadeOutRight 0.5s;
-  -ms-animation: fadeOutRight 0.5s;
-  animation: fadeOutRight 0.5s;
-}
-
 .modal {
   max-height: 70%;
   overflow-y: auto;
 }
+
+.top {
+  margin-left : 15px;
+  margin-right : 15px;
+  margin-top : 2px;
+}
+
+
 
 

@@ -6,7 +6,7 @@
             <div class="control-group" ng-class="{'error' : !cadastro.cliente.$valid && cadastro.cliente.$dirty, 'warning' : !cadastro.cliente.$dirty}">
                 <label class="control-label" for="cliente">Cliente:*</label>
                 <div class="controls">
-                    <input name="cliente" id="cliente"  class="x-large" type="text"
+                    <input name="cliente" id="cliente"  class="x-large" type="text" autofocus
                            required
                            ng-model="atividade.cliente"
                            typeahead-editable="false"

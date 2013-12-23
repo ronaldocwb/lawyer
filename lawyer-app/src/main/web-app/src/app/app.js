@@ -15,6 +15,7 @@
 angular.module('lawyer', [
         'ngAnimate',
         'ngLocale',
+        'chieffancypants.loadingBar',
         'ngSanitize',
         'templates-app',
         'templates-common',
@@ -24,8 +25,6 @@ angular.module('lawyer', [
         'lawyer.connectionStatus',
         'lawyer.accessLevel',
         'services.notifications',
-        'services.httpRequestTracker',
-        'services.breadcrumbs',
         'i18n.Constants',
         'services.exceptionHandler',
         'lawyer.menus',
@@ -33,7 +32,9 @@ angular.module('lawyer', [
         'lawyer.log',
         'lawyer.lembretes',
         'lawyer.typeahead',
-        'filters'
+        'filters',
+        'focus'
+
     ])
 
 

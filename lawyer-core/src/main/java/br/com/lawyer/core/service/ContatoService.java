@@ -16,7 +16,10 @@ public interface ContatoService extends BaseService<String, Contato, ContatoRepo
 
     void removerPorReferenciaUid (String uid, Class<?> klazz) throws BusinessException;
 
-    Page<Contato> findContatosPessoas (String q, PageRequest pageRequest);
+    Page<Contato> findContatosPessoas (String query, PageRequest pageRequest);
 
-    Page<Contato> findContatosEmpresas (String q, PageRequest pageRequest);
+    Page<Contato> findContatosEmpresas (String query, PageRequest pageRequest);
+
+    Page<Contato> findContatosUsuarios (String query, PageRequest pageRequest);
+
 }

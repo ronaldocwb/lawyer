@@ -4,7 +4,6 @@ import br.com.lawyer.core.entity.base.AbstractBaseEntity;
 import br.com.lawyer.core.entity.enumerated.Permissao;
 import br.com.lawyer.core.entity.enumerated.StatusUsuario;
 import br.com.lawyer.core.entity.enumerated.TipoUsuario;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -37,7 +36,6 @@ public class Usuario extends AbstractBaseEntity {
 
     @OneToOne
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonBackReference
     private Pessoa pessoa;
     
     @Enumerated(EnumType.ORDINAL)

@@ -27,6 +27,15 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
         super(repository);
     }
 
+    /**
+     * Busca todos os contatos, que podem ser filtrados por tipo dinamicamente.
+     *
+     * Contatos que já preveem uma query por empresa, por exemplo, é recoemndado que usem o metodo especifico, pois a query tem uma melhor performance.
+     * @param query
+     * @param tipo
+     * @param pageRequest
+     * @return Page<Contato> dos resultados
+     */
     @Override
     public Page<Contato> findContatos (String query, String tipo, PageRequest pageRequest) {
         Page<Contato> clientes;
@@ -38,6 +47,12 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
         return clientes;
     }
 
+    /**
+     * Remove um contato após deletar um usuario, empresa ou pessoa.
+     * @param uid
+     * @param klazz
+     * @throws BusinessException
+     */
     @Override
     public void removerPorReferenciaUid (String uid, Class<?> klazz) throws BusinessException {
         if (StringUtils.isBlank(uid)) {
@@ -50,14 +65,37 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
         getRepository().remover(uid, klazz);
     }
 
+    /**
+     * Busca os contatos do tipo {@link br.com.lawyer.core.entity.enumerated.TipoContato} EMPRESA
+     * @param query query por nome fantasia ou razao social. Opcional
+     * @param pageRequest
+     * @return
+     */
     @Override
     public Page<Contato> findContatosPessoas (String query, PageRequest pageRequest) {
         return getRepository().findAll(ContatoPredicate.buscarPorPessoasLike(query), pageRequest);
     }
 
+    /**
+     * Busca os contatos do tipo {@link br.com.lawyer.core.entity.enumerated.TipoContato} PESSOA
+     * @param query query por nome (opcional)
+     * @param pageRequest
+     * @return
+     */
     @Override
     public Page<Contato> findContatosEmpresas (String query, PageRequest pageRequest) {
         return getRepository().findAll(ContatoPredicate.buscarPorEmpresasLike(query), pageRequest);
+    }
+
+    /**
+     * Busca os contatos do tipo {@link br.com.lawyer.core.entity.enumerated.TipoContato} USUARIO
+     * @param query query do nome ou email do usuário. Campo opcional
+     * @param pageRequest
+     * @return
+     */
+    @Override
+    public Page<Contato> findContatosUsuarios (String query, PageRequest pageRequest) {
+        return getRepository().findAll(ContatoPredicate.buscarPorNomeUsuarioLike(query), pageRequest);
     }
 
 

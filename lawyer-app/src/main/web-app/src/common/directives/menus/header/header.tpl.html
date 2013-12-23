@@ -1,28 +1,32 @@
-<div class="navbar" >
+<div class="navbar top" >
     <div class="navbar-inner">
         <ul class="nav ">
             <li ui-sref-active="active">
                 <a ui-sref="painel">Painel</a>
             </li>
             <li ng-class="{true : 'dropdown active', false : 'dropdown'}[abas.contatos]" >
-                <a href="#"  data-toggle="dropdown" class="dropdown-toggle">Contatos<strong class="caret"></strong></a></a>
+                <a ui-sref="contatos.listar-todos" data-toggle="dropdown" class="dropdown-toggle">Contatos<strong class="caret"></strong></a></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#/contatos/">Todos os contatos</a>
+                        <a ui-sref="contatos.listar-todos" >Todos os contatos</a>
                     </li>
                     <li class="divider">
                     <li>
-                        <a href="#/contatos/empresas/">Listar Empresas</a>
+                        <a ui-sref="contatos.listar-empresas">Listar Empresas</a>
                     </li>
                     <li>
-                        <a href="#/contatos/empresas/cadastro">Cadastrar uma Empresa</a>
+                        <a ui-sref="contatos.cadastrar-empresa">Cadastrar uma Empresa</a>
                     </li>
                     <li class="divider">
                     <li>
-                        <a href="#/contatos/pessoas/">Listar Pessoas</a>
+                    <a ui-sref="contatos.listar-pessoas">Listar Pessoas</a>
                     </li>
                     <li>
-                        <a href="#/contatos/pessoas/cadastro">Cadastrar uma Pessoa</a>
+                        <a ui-sref="contatos.cadastrar-pessoa">Cadastrar uma Pessoa</a>
+                    </li>
+                    <li class="divider">
+                    <li>
+                    <a ui-sref="contatos.listar-usuarios">Listar Usuários</a>
                     </li>
                 </ul>
             </li>
@@ -71,16 +75,4 @@
             <li><a href="#"><img src="/lawyer/assets/img/spinner.gif"></a></li>
         </ul>
     </div>
-    <!--Ver se vamos usar o breadcrumbs mesmo...-->
-    <!--<div>-->
-        <!--<ul class="breadcrumb">-->
-            <!--<li ng-repeat="breadcrumb in breadcrumbs.getAll()">-->
-                <!--<span class="divider">/</span>-->
-                <!--<ng-switch on="$last">-->
-                    <!--<span ng-switch-when="true">{{breadcrumb.name}}</span>-->
-                    <!--<span ng-switch-default><a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a></span>-->
-                <!--</ng-switch>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
 </div>

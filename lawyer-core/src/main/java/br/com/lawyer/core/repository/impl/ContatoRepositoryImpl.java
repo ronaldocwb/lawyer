@@ -7,6 +7,7 @@ import br.com.lawyer.core.entity.Pessoa;
 import br.com.lawyer.core.entity.QContato;
 import br.com.lawyer.core.entity.QEmpresa;
 import br.com.lawyer.core.entity.QPessoa;
+import br.com.lawyer.core.entity.QUsuario;
 import br.com.lawyer.core.entity.enumerated.TipoContato;
 import br.com.lawyer.core.repository.ContatoRepository;
 import br.com.lawyer.core.util.StringUtils;
@@ -29,10 +30,13 @@ public class ContatoRepositoryImpl extends JPABaseRepositoryImpl<String, Contato
         QContato contato = QContato.contato;
         QPessoa pessoa = QPessoa.pessoa;
         QEmpresa empresa = QEmpresa.empresa;
+        QUsuario usuario = QUsuario.usuario;
 
         BooleanBuilder builder = new BooleanBuilder();
         builder.or(pessoa.nome.containsIgnoreCase(query));
         builder.or(empresa.nomeFantasia.containsIgnoreCase(query));
+        builder.or(usuario.pessoa.nome.containsIgnoreCase(query));
+
         if (StringUtils.isNotBlank(tipo)) {
             builder.and(contato.tipoContato.eq(TipoContato.valueOf(tipo.toUpperCase())));
         }
@@ -40,10 +44,10 @@ public class ContatoRepositoryImpl extends JPABaseRepositoryImpl<String, Contato
         JPQLQuery jpqlQuery = querydsl.createQuery(contato)
                 .leftJoin(contato.pessoa, pessoa)
                 .leftJoin(contato.empresa, empresa)
+                .leftJoin(contato.usuario, usuario)
                 .where(builder);
 
         return findAll(jpqlQuery, pageRequest);
-
     }
 
     @Override

@@ -29,6 +29,7 @@ module.exports = {
             'vendor/angular/angular.js',
 			'vendor/angular-animate/angular-animate.js',
 			'vendor/angular-cookies/angular-cookies.js',
+            'vendor/angular-loading-bar/src/loading-bar.js',
 			'vendor/angular-mocks/angular-mocks.js',
 			'vendor/angular-resource/angular-resource.js',
 			'vendor/angular-route/angular-route.js',
@@ -44,6 +45,7 @@ module.exports = {
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/center.js',
             'vendor/noty/js/noty/layouts/topRight.js',
+            'vendor/noty/js/noty/layouts/bottomRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
             'vendor/noty/js/noty/layouts/inline.js',
             'vendor/noty/js/noty/themes/default.js',
@@ -51,6 +53,7 @@ module.exports = {
         ],
         css: [
             'vendor/animate.css/animate.css',
+            'vendor/angular-loading-bar/src/loading-bar.css',
             'vendor/fullcalendar/fullcalendar.css',
             'vendor/magicsuggest/src/magicsuggest-1.3.1.css'
         ]

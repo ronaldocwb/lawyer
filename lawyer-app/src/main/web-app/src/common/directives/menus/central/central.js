@@ -1,6 +1,4 @@
-angular.module('lawyer.menu.central', [
-        'lawyer.dropdown.hover'
-    ])
+angular.module('lawyer.menu.central', [ ])
     .directive('menuCentral', [function () {
         var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'atividades'];
         return {
