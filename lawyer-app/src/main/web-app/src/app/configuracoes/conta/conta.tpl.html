@@ -5,18 +5,17 @@
                 Minha Conta
             </li>
             <li class="active">
-                <a href="#">Alterar Senha</a>
+                <a href="#">Meus Dados</a>
             </li>
-            <li>
-                <a href="#/empresas">Empresas</a>
-                <a href="#/areasAtuacao">Áreas de Atuação</a>
+            <li class="active">
+                <a href="#">Alterar Senha</a>
             </li>
         </ul>
     </div>
     <div class="span6">
         <span data-ng-bind="usuario.email"></span>
 
-        <h2>Alterar Senha</h2>
+        <h2>Alterar Senhas</h2>
 
         <form name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
             <label>Senha atual:</label>
@@ -27,6 +26,11 @@
             <input type="password" data-ng-model="user.confirmaNovaSenha" ng-required="true" name="confirmaNovaSenha"
                    ui-validate=" '$value===user.novaSenha' "
                    ui-validate-watch=" 'user.novaSenha' ">
+			<span data-ng-show="!!alterarSenhaForm.confirmaNovaSenha.$error.validator" class="icon-thumbs-down"
+					tooltip="Senhas nao conferem!">
+
+			</span>
+			<br>
             <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid">Alterar Senha
             </button>
         </form>

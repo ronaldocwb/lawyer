@@ -9,7 +9,7 @@ angular.module('lawyer.configuracoes.conta', [
             views: {
                 "main": {
                     controller: 'ContaController',
-                    templateUrl: 'conta/conta.tpl.html'
+                    templateUrl: 'configuracoes/conta/conta.tpl.html'
                 }
             },
             resolve: {
@@ -20,8 +20,8 @@ angular.module('lawyer.configuracoes.conta', [
         });
     }])
 
-    .controller('ContaController', ['$scope', 'Usuario', 'usuario', '$log',
-        function ($scope, Usuario, usuario, $log) {
+    .controller('ContaController', ['$scope', 'Usuario', 'usuario', 'notifications', '$log',
+        function ($scope, Usuario, usuario, notifications, $log) {
             console.log(usuario);
             $scope.usuario = usuario;
             $scope.user = {
@@ -34,17 +34,17 @@ angular.module('lawyer.configuracoes.conta', [
                 $scope.mensagens = [];
                 if ($scope.user.novaSenha !== $scope.user.confirmaNovaSenha) {
                     $scope.mensagens.push("Senhas não conferem.");
+                    notifications.pushForCurrentRoute('config.senha.diferentes', 'error');
                     $("#novaSenha").focus();
-                }
-                if ($scope.user.novaSenha === $scope.user.senha) {
-                    $scope.mensagens.push("Senhas devem ser diferentes.");
-                    $("#senha").focus();
                 }
                 if ($scope.mensagens.length === 0) {
                     $scope.usuario.senha = $scope.user.senha;
                     $scope.usuario.novaSenha = $scope.user.novaSenha;
                     Usuario.updateSenha($scope.usuario, function () {
                         $log.debug('usuario atualizado!');
+                        notifications.pushForCurrentRoute('config.senha.alterada.sucesso', 'success');
+                    }, function error(restException){
+                        notifications.pushForCurrentRoute('config.senha.alteracao.falha', 'error', {exception: restException.data.message});
                     });
                 }
             };

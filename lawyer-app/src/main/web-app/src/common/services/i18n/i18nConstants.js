@@ -31,5 +31,8 @@ angular.module('i18n.Constants', [])
         'tretas' : "Erro no servidor niggaz... TRETAS!",
         'atividade.salva' : "A atividade foi criada.",
         'atividade.erro.apagar' : 'Oooopa... ocorreu um erro ao deletar uma atividade.',
-        'atividade.apagada' : 'Atividade apagada!.'
+        'atividade.apagada' : 'Atividade apagada!.',
+        'config.senha.alterada.sucesso' : 'Sua senha foi alterada!',
+        'config.senha.diferentes' : 'A senha e sua confimaçao estão diferentes!',
+        'config.senha.alteracao.falha' : 'Falha na alteraçao da senha! {{exception}}'
     });

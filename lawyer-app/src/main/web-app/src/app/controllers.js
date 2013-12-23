@@ -38,6 +38,8 @@ angular.module('lawyer.controllers', [
     'lawyer.contatos.listar',
     'lawyer.configuracoes',
     'lawyer.usuarios',
-    'lawyer.usuarios.cadastro'
+    'lawyer.usuarios.cadastro',
+    'lawyer.configuracoes.conta'
+
 
 ]);
