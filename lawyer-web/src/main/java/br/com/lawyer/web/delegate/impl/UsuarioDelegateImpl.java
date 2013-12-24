@@ -33,7 +33,7 @@ public class UsuarioDelegateImpl extends BaseDelegate<Usuario, UsuarioVO> implem
     }
 
     /**
-     * Lista todos os usuarios que existem na página informada.
+     * Lista todos os usuarios que existem na pagina informada.
      * @param page
      * @return Page com a lista de resultados do UsuarioVO
      */

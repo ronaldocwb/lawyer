@@ -87,7 +87,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<String, Usuario, Usuario
 
         if (auth.isAuthenticated()) {
 
-            // Insere nosso token na sess�o para ficar disponpivel para consulta.
+            // Insere nosso token na sessao para ficar disponpivel para consulta.
             SecurityContextHolder.getContext().setAuthentication(auth);
 
         } else {

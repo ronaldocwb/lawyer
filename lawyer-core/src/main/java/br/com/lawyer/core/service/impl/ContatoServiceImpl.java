@@ -30,7 +30,7 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
     /**
      * Busca todos os contatos, que podem ser filtrados por tipo dinamicamente.
      *
-     * Contatos que já preveem uma query por empresa, por exemplo, é recoemndado que usem o metodo especifico, pois a query tem uma melhor performance.
+     * Contatos que ja preveem uma query por empresa, por exemplo, Ã© recoemndado que usem o metodo especifico, pois a query tem uma melhor performance.
      * @param query
      * @param tipo
      * @param pageRequest
@@ -48,7 +48,7 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
     }
 
     /**
-     * Remove um contato após deletar um usuario, empresa ou pessoa.
+     * Remove um contato apos deletar um usuario, empresa ou pessoa.
      * @param uid
      * @param klazz
      * @throws BusinessException
@@ -61,7 +61,7 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
         if (klazz.equals(null)) {
             throw new BusinessException("Classe de referencia deve ser informada para apagar um Cliente.");
         }
-        logger.info(String.format("Apagando o Cliente do tipo %s, da classe %s, pelo usuário %s", uid, klazz.getSimpleName(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Apagando o Cliente do tipo %s, da classe %s, pelo usuÃ¡rio %s", uid, klazz.getSimpleName(), getUsuarioLogado().getEmail()));
         getRepository().remover(uid, klazz);
     }
 
@@ -89,7 +89,7 @@ public class ContatoServiceImpl extends BaseServiceImpl<String, Contato, Contato
 
     /**
      * Busca os contatos do tipo {@link br.com.lawyer.core.entity.enumerated.TipoContato} USUARIO
-     * @param query query do nome ou email do usuário. Campo opcional
+     * @param query query do nome ou email do usuario. Campo opcional
      * @param pageRequest
      * @return
      */

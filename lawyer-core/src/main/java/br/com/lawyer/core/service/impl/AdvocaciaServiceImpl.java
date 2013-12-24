@@ -21,7 +21,7 @@ public class AdvocaciaServiceImpl extends BaseServiceImpl<String, Advocacia, Adv
     }
 
     /**
-     * Busca a {@link br.com.lawyer.core.entity.Advocacia} do usuário logado na sessão atual.
+     * Busca a {@link br.com.lawyer.core.entity.Advocacia} do usuario logado na sessao atual.
      * @return {@link br.com.lawyer.core.entity.Advocacia}
      * @throws BusinessException
      */

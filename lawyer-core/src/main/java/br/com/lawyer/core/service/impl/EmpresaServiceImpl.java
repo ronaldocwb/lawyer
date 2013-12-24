@@ -33,7 +33,7 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
     /**
      * Construtor
      *
-     * @param repository - DAO que será utilizado referente a entidade manipulada
+     * @param repository - DAO que sera utilizado referente a entidade manipulada
      */
     @Autowired
     public EmpresaServiceImpl (EmpresaRepository repository) {
@@ -41,7 +41,7 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
     }
 
     /**
-     * Busca os resultados das empresas por paginação informada.
+     * Busca os resultados das empresas por paginacao informada.
      * Se o parametro <code>query</code> for informado, faz um <code>like</code> com {@link Empresa#razaoSocial} ou {@link Empresa#nomeFantasia}
      * Se o parametro <code>query</code> nao for informado, retorna todas.
      *
@@ -56,37 +56,37 @@ public class EmpresaServiceImpl extends BaseServiceImpl<String, Empresa, Empresa
 
     @Override
     public void deletarEmpresa (String uid) throws BusinessException {
-        logger.info(String.format("Apagando a empresa de UID %s pelo usuário %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Apagando a empresa de UID %s pelo usuario %s", uid, getUsuarioLogado().getEmail()));
 
         pessoaService.removerReferenciaDaEmpresaPorUid(uid);
         contatoService.removerPorReferenciaUid(uid, Empresa.class);
         getRepository().delete(uid);
 
-        logger.info(String.format("Empresa de UID %s foi apagada pelo usuário %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Empresa de UID %s foi apagada pelo usuario %s", uid, getUsuarioLogado().getEmail()));
     }
 
     @Override
     public Empresa salvar (Empresa empresa) throws BusinessException {
-        logger.info(String.format("Salvando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Salvando a empresa de UID %s pelo usuario %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
 
         saveAndFlush(empresa);
         Contato contato = new Contato(empresa);
         contatoService.save(contato);
 
-        logger.info(String.format("Empresa de UID %s foi salva pelo usuário %s", empresa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Empresa de UID %s foi salva pelo usuario %s", empresa.getUid(), getUsuarioLogado().getEmail()));
         return empresa;
     }
 
     @Override
     public Empresa atualizar (Empresa empresa) throws BusinessException {
-        logger.info(String.format("Atualizando a empresa de UID %s pelo usuário %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Atualizando a empresa de UID %s pelo usuÃ¡rio %s", empresa.getNomeFantasia(), getUsuarioLogado().getEmail()));
         Empresa stored = findOne(empresa.getUid());
         if (stored != null && !stored.getCliente().equals(empresa.getCliente())) {
             contatoService.removerPorReferenciaUid(stored.getUid(), Empresa.class);
         }
         save(empresa);
 
-        logger.info(String.format("Empresa de UID %s foi atualizada pelo usuário %s", empresa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Empresa de UID %s foi atualizada pelo usuÃ¡rio %s", empresa.getUid(), getUsuarioLogado().getEmail()));
         return empresa;
     }
 }

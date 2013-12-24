@@ -39,8 +39,8 @@ public class AssuntoServiceImpl extends BaseServiceImpl<String, Assunto, Assunto
 
     /**
      * Lista os assuntos por um UID de cliente.
-     * Se o cliente n„o for informado, lanÁa uma {@link br.com.lawyer.core.exception.BusinessException}
-     * TODO Verificar as permissıes de acesso a esses assuntos pelo cliente logadao
+     * Se o cliente nao for informado, lanca uma {@link br.com.lawyer.core.exception.BusinessException}
+     * TODO Verificar as permissoses de acesso a esses assuntos pelo cliente logadao
      * @param uid
      * @param pageRequest
      * @return Page<Assunto>
@@ -50,10 +50,10 @@ public class AssuntoServiceImpl extends BaseServiceImpl<String, Assunto, Assunto
     @Transactional
     public Page<Assunto> findAssuntosPorClienteUid (String uid, PageRequest pageRequest) throws BusinessException {
 
-        // TODO Verificar as permissıes de acesso a esses assuntos pelo cliente logadao
+        // TODO Verificar as permissoes de acesso a esses assuntos pelo cliente logadao
 
         if (StringUtils.isBlank(uid)) {
-            throw new BusinessException("UID do assunto n„o pode ser nulo ou vazio.");
+            throw new BusinessException("UID do assunto n√£o pode ser nulo ou vazio.");
         }
         uid = "";
 //        return getRepository().findAll(AssuntoPredicate.clienteUidEqualsTo(uid), pageRequest);

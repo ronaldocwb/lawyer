@@ -157,8 +157,8 @@ public abstract class BaseVO<T> implements Serializable {
                 } catch (InvocationTargetException e) {
                     throw new ParseVOToEntityException(e);
                 } catch (NoSuchMethodException e) {
-                    String error = (String.format("Entidade %s n�o possui o campo %s para parse. " +
-                            "Considere usar a anota��o %s no campos para descart�-la ou verifique " +
+                    String error = (String.format("Entidade %s nao possui o campo %s para parse. " +
+                            "Considere usar a anotação %s no campos para descarta-la ou verifique " +
                             "se ela bate com o campo na entidade.",
                             object.getClass().toString(), field.getName(), IgnoreVOParser.class.toString()));
                     throw new ParseVOToEntityException(error, e);
@@ -250,7 +250,7 @@ public abstract class BaseVO<T> implements Serializable {
         List<Object> result = new ArrayList<>();
 
         for (Object entity : list) {
-            Object vo = ConstructorUtils.invokeConstructor(clazz, entity); // Constr�i o VO passando a entidade como par�metro
+            Object vo = ConstructorUtils.invokeConstructor(clazz, entity); // Constroi o VO passando a entidade como par�metro
             result.add(vo);
         }
 

@@ -71,7 +71,7 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
     }
 
 	/**
-     * Busca um advogado pelo nome da pessoa. Se n�o for um nome, retorna null.
+     * Busca um advogado pelo nome da pessoa. Se nao for um nome, retorna null.
      * @param pessoaUid
      * @return Advogado
      */
@@ -82,8 +82,8 @@ public class AdvogadoServiceImpl extends BaseServiceImpl<String, Advogado, Advog
 
     @Override
     public void removerPorPessoaUid (String uid) throws BusinessException {
-        logger.info(String.format("Apagando advogado pelo UID %s da pessoa pelo usu�rio %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Apagando advogado pelo UID %s da pessoa pelo usuário %s", uid, getUsuarioLogado().getEmail()));
         getRepository().deletarPorPessoaUid(uid);
-        logger.info(String.format("Advogado pelo UID %s da pessoa apagado pelo usu�rio %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Advogado pelo UID %s da pessoa apagado pelo usuário %s", uid, getUsuarioLogado().getEmail()));
     }
 }

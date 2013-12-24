@@ -16,9 +16,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Estabelece os comportamentos b�sicos de neg�cio de uma entidade.
+ * Estabelece os comportamentos basicos de negocio de uma entidade.
  *
- * @param <ID> tipo da chave prim�ria da entidade.
+ * @param <ID> tipo da chave primeria da entidade.
  * @param <T>  tipo da entidade.
  * @param <D>  tipo do DAO.
  * @author Deividi Cavarzan
@@ -34,7 +34,7 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends IUID<ID
     }
 
     /**
-     * Retorna o repository para manipula��o da entidade
+     * Retorna o repository para manipulacao da entidade
      *
      * @return
      */

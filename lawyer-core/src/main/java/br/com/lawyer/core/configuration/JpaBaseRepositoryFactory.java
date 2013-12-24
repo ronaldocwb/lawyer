@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  * @author Deividi
  * @since 25/11/2013
- * Se algum dia for necessário inserir um comportamento padrão para as interfaces do spring data, é só registrar essa class no @EnableJpaRepository
+ * Se algum dia for necessario inserir um comportamento padrao para as interfaces do spring data, se registrar essa class no @EnableJpaRepository
  */
 public class JpaBaseRepositoryFactory<R extends JpaRepository<T, I>, T, I extends Serializable>
         extends JpaRepositoryFactoryBean<R, T, I> {

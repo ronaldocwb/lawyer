@@ -40,7 +40,7 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
     }
 
     /**
-     * Busca os resultados das empresas por pagina��o informada.
+     * Busca os resultados das empresas por paginacao informada.
      * Se o parametro <code>query</code> for informado, faz um <code>like</code> com {@link br.com.lawyer.core.entity.Pessoa#nome}
      * Se o parametro <code>query</code> nao for informado, retorna todas.
      *
@@ -77,9 +77,9 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
      */
     @Override
     public Pessoa salvar (Pessoa pessoa) throws BusinessException {
-        logger.info(String.format("Salvando a pessoa %s pelo usu�rio %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Salvando a pessoa %s pelo usuario %s", pessoa.getNome(), getUsuarioLogado().getEmail()));
         saveAndFlush(pessoa);
-        logger.info(String.format("Pessoa de UID %s salva pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s salva pelo usuario %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }
 
@@ -93,19 +93,19 @@ public class PessoaServiceImpl extends BaseServiceImpl<String, Pessoa, PessoaRep
      */
     @Override
     public Pessoa atualizar (Pessoa pessoa) throws BusinessException {
-        logger.info(String.format("Atualizando a pessoa de UID %s pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Atualizando a pessoa de UID %s pelo usuario %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         save(pessoa);
-        logger.info(String.format("Pessoa de UID %s atualizada pelo usu�rio %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s atualizada pelo usuario %s", pessoa.getUid(), getUsuarioLogado().getEmail()));
         return pessoa;
     }
 
     @Override
     public void deletar (String uid) throws BusinessException {
-        logger.info(String.format("Deletando a pessoa de UID %s pelo usu�rio %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Deletando a pessoa de UID %s pelo usuario %s", uid, getUsuarioLogado().getEmail()));
         contatoService.removerPorReferenciaUid(uid, Pessoa.class);
         advogadoService.removerPorPessoaUid(uid);
         delete(uid);
-        logger.info(String.format("Pessoa de UID %s apagada usu�rio %s", uid, getUsuarioLogado().getEmail()));
+        logger.info(String.format("Pessoa de UID %s apagada usuario %s", uid, getUsuarioLogado().getEmail()));
     }
 
     @Override

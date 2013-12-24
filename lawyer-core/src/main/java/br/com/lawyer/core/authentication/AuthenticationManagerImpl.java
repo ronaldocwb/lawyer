@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Servico que realiza a autentica��o do Spring security e cria o {@link br.com.lawyer.core.authentication.LawyerAuthenticationToken} para armazenamento na sess�o - {SecurityContextHolder}.
+ * Servico que realiza a autenticacao do Spring security e cria o {@link br.com.lawyer.core.authentication.LawyerAuthenticationToken} para armazenamento na sessao - {SecurityContextHolder}.
  */
 @Service ("authenticationManager")
 public class AuthenticationManagerImpl implements AuthenticationManager {

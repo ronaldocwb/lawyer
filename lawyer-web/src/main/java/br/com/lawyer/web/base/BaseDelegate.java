@@ -23,7 +23,7 @@ public abstract class BaseDelegate<T extends IUID<?>, V extends BaseVO> {
      * Converte uma entidade para um VO.
      *
      * @param object a entidade a ser convertida.
-     * @return o VO da entidade ou <tt>null</tt> caso não seja possível converter.
+     * @return o VO da entidade ou <tt>null</tt> caso nao seja possivel converter.
      * @see {@link #getVO(List)}
      */
     protected V getVO(T object) {
@@ -37,7 +37,7 @@ public abstract class BaseDelegate<T extends IUID<?>, V extends BaseVO> {
             Class<V> clazz = getClassVO();
             vo = (V) ConstructorUtils.invokeConstructor(clazz, object);
         } catch (Exception e) {
-            e.printStackTrace(); //"Não foi possível converter o objeto " + object + " para VO.", e);
+            e.printStackTrace(); //"Nao foi possivel converter o objeto " + object + " para VO.", e);
         }
 
         return vo;
@@ -80,7 +80,7 @@ public abstract class BaseDelegate<T extends IUID<?>, V extends BaseVO> {
      * Retorna a classe que representa o VO.
      *
      * @return a classe que representa o VO.
-     * @throws ClassNotFoundException caso a classe do VO não seja encontrada.
+     * @throws ClassNotFoundException caso a classe do VO nao seja encontrada.
      */
     private Class<V> getClassVO() throws ClassNotFoundException {
         Type superclass = this.getClass().getGenericSuperclass();

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public interface EmpresaRepository extends JPABaseRepository<String, Empresa> {
 
     /**
-     * Esse metodo está personalizando a query usando a anotação @Query
+     * Esse metodo esta personalizando a query usando a anotacao @Query
      * @link http://docs.spring.io/spring-data/jpa/docs/1.4.1.RELEASE/reference/html/jpa.repositories.html#jpa.query-methods.at-query
      * @param query
      * @param page
