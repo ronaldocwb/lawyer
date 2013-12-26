@@ -19,7 +19,7 @@ import java.util.List;
 @JsonIgnoreProperties (ignoreUnknown = true)
 public class Pessoa extends AbstractBaseEntity {
 
-    @Column (length = 120)
+    @Column (length = 120, nullable = false)
     private String nome;
 
     @Embedded

@@ -34,7 +34,7 @@ angular.module('lawyer.pessoas.edicao', [
             $scope.salvar = function () {
                 $scope.contato = Contato.update($scope.contato, function () {
                     notifications.pushForNextRoute('pessoa.alterada', 'success', {nome : $scope.contato.pessoa.nome});
-                    angular.noop($scope.modal ? $scope.modal.close($scope.contato) : $state.go('pessoas.listar'));
+                    angular.noop($scope.modal ? $scope.modal.close($scope.contato) : $state.go('contatos.listar-pessoas'));
                 });
             };
 

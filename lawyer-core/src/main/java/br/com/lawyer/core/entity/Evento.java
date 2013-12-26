@@ -1,8 +1,10 @@
 package br.com.lawyer.core.entity;
 
 import br.com.lawyer.core.entity.base.AbstractBaseEntity;
+import br.com.lawyer.core.entity.enumerated.TipoRepeticao;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.Date;
@@ -27,14 +29,20 @@ public class Evento extends AbstractBaseEntity {
 
     private Boolean diaInteiro;
 
+    @ManyToOne
+    private Agenda owner;
+
     @ManyToMany
-    private List<Agenda> agendas;
+    private List<Agenda> participantes;
 
     @ManyToOne
     private Assunto assunto;
 
-//    private List<Advogado> advogados;
+    @ManyToMany
+    private List<Contato> contatos;
 
+    @Enumerated
+    private TipoRepeticao repeticao;
 
     public String getLocalizacao () {
         return localizacao;
@@ -92,11 +100,35 @@ public class Evento extends AbstractBaseEntity {
         this.diaInteiro = diaInteiro;
     }
 
-    public List<Agenda> getAgendas () {
-        return agendas;
+    public List<Contato> getContatos () {
+        return contatos;
     }
 
-    public void setAgendas (List<Agenda> agendas) {
-        this.agendas = agendas;
+    public void setContatos (List<Contato> contatos) {
+        this.contatos = contatos;
+    }
+
+    public List<Agenda> getParticipantes () {
+        return participantes;
+    }
+
+    public void setParticipantes (List<Agenda> convidados) {
+        this.participantes = convidados;
+    }
+
+    public Agenda getOwner () {
+        return owner;
+    }
+
+    public void setOwner (Agenda owner) {
+        this.owner = owner;
+    }
+
+    public TipoRepeticao getRepeticao () {
+        return repeticao;
+    }
+
+    public void setRepeticao (TipoRepeticao repeticao) {
+        this.repeticao = repeticao;
     }
 }

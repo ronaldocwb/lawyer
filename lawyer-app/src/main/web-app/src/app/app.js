@@ -32,8 +32,7 @@ angular.module('lawyer', [
         'lawyer.log',
         'lawyer.lembretes',
         'lawyer.typeahead',
-        'filters',
-        'focus'
+        'filters'
 
     ])
 

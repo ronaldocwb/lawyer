@@ -1,4 +1,8 @@
-angular.module('lawyer.agenda', ['ui.calendar'])
+angular.module('lawyer.agenda', [
+        'ui.calendar',
+        'lawyer.Agenda',
+        'lawyer.Evento'
+    ])
 
     .config(['$stateProvider', function config($stateProvider) {
         $stateProvider.state('agenda', {
@@ -18,12 +22,6 @@ angular.module('lawyer.agenda', ['ui.calendar'])
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        /* event source that pulls from google.com */
-        $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-        };
         /* event source that contains custom events on the scope */
         $scope.events = [
             {title: 'LOL Day Event', start: new Date(y, m, 1)},
@@ -132,6 +130,6 @@ angular.module('lawyer.agenda', ['ui.calendar'])
             }
         };
         /* event sources array*/
-        $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+        $scope.eventSources = [$scope.events, $scope.eventsF];
     }])
 ;

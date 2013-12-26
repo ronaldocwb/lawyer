@@ -25,7 +25,7 @@ public class Atividade extends AbstractBaseEntity {
     @JsonIgnoreProperties({"advocacia", "pessoa", "permissoes" })
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonIgnoreProperties({"cliente", "descricao", "duracao", "areaAtuacao", "responsavel", "contrato", "autor", "reu", "advogadosEnvolvidos", "assuntosRelacionados" })
     private Assunto assunto;
 
