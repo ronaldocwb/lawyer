@@ -22,13 +22,13 @@ import java.util.List;
 @Entity
 public class Usuario extends AbstractBaseEntity {
 
-    @Column (length = 200)
+    @Column (length = 200, nullable = false)
     private String email;
 
     @Column (length = 128)
     private String senha;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Advocacia advocacia;
 
     @Enumerated

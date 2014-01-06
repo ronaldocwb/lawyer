@@ -22,7 +22,7 @@ public class Empresa extends AbstractBaseEntity {
     @Column (length = 120)
     private String razaoSocial;
 
-    @Column (length = 120)
+    @Column (length = 120, nullable = false)
     private String nomeFantasia;
 
     @Column (length = 15)
