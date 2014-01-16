@@ -14,7 +14,7 @@ insert into municipio values (2855, 25, 'SÃO PAULO', 25);
 insert into areaatuacao values ('1', 'Ambiental');
 insert into areaatuacao values ('2', 'Cível');
 insert into areaatuacao values ('3', 'Consumidor');
-insert into areaatuacao values ('4', 'Importação e Exportação');
+insert into areaatuacao values ('4', 'Internacional');
 
 INSERT INTO public.setor (uid, nome) VALUES ('215cae92-a3eb-4a5d-a3a9-3b2b239700c1', 'Diretoria');
 INSERT INTO public.setor (uid, nome) VALUES ('f2b2c7fa-641c-43b3-9caa-3e01746af7c7', 'Financeiro');
@@ -31,14 +31,10 @@ INSERT INTO advocacia (uid, nome) VALUES ('1', 'Saul Law Corp.');
 INSERT INTO usuario (uid, email, senha, advocacia_uid, pessoa_uid) VALUES ('1', 'developer@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723', '1', '42117a72-fee2-46fc-ab2a-fc624b0c3ffb');
 INSERT INTO usuario (uid, email, senha, advocacia_uid, pessoa_uid) VALUES ('2', 'developer2@lawyer.com.br', '88653165aa4afc1571802bbfe61e27b2daa38c626ea01fbed35413aadb635723', '1', '22807067-9770-4ab6-b631-40d08eacfbac');
 
-
-
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'ADMIN');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'MANAGER');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'LAWYER');
 INSERT INTO usuario_permissoes (usuario_uid, permissoes) VALUES ('1', 'USER');
-
--- Áreas do Direito
 
 INSERT INTO advogado (uid, numerooab, pessoa_uid) VALUES ('4fd0c6e0-fc04-4253-a2c9-7495fb088a04', '123456789', '22807067-9770-4ab6-b631-40d08eacfbac');
 INSERT INTO advogado (uid, numerooab, pessoa_uid) VALUES ('d6dc1fbe-a21c-43b9-b9bf-9456451ea838', '98765432', '42117a72-fee2-46fc-ab2a-fc624b0c3ffb');
