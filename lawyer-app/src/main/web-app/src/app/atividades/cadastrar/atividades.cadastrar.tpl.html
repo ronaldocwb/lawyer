@@ -1,78 +1,83 @@
 <div class="fadeInUp">
-    <form data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
+    <form class="form-horizontal" data-ng-submit="salvar()" name="cadastro" class="form-horizontal">
         <fieldset>
             <legend data-ng-show="tela.cadastro === true">Nova Atividade</legend>
             <legend data-ng-show="tela.edicao === true">Editar Atividade</legend>
-            <div class="control-group" ng-class="{'error' : !cadastro.cliente.$valid && cadastro.cliente.$dirty, 'warning' : !cadastro.cliente.$dirty}">
-                <label class="control-label" for="cliente">Cliente:*</label>
-                <div class="controls">
-                    <input name="cliente" id="cliente"  class="x-large" type="text" autofocus
-                           required
-                           ng-model="atividade.cliente"
-                           typeahead-editable="false"
-                           typeahead-min-length="3"
-                           typeahead="cliente as cliente.nome for cliente in getClientes($viewValue, atividade.cliente)"/>
+            <div class="form-group" ng-class="{'error' : !cadastro.cliente.$valid && cadastro.cliente.$dirty, 'warning' : !cadastro.cliente.$dirty}">
+                <label  class="col-sm-2 control-label"
+                       for="cliente">Cliente:*</label>
+                <div class="col-sm-4">
+                    <input name="cliente" id="cliente" class="form-control"type="text" autofocus
+                           required ng-model="atividade.cliente" typeahead-editable="false"
+                           typeahead-min-length="3" typeahead="cliente as cliente.nome for cliente in getClientes($viewValue, atividade.cliente)"
+                            />
                 </div>
             </div>
-            <div class="control-group" ng-class="{'error' : !cadastro.assunto.$valid && cadastro.assunto.$dirty, 'warning' : !cadastro.assunto.$dirty, 'none' : !atividade.cliente}">
-                <label class="control-label" for="assunto">Assunto:*</label>
-                <div class="controls">
-                    <input name="assunto" id="assunto"  class="x-large" type="text"
-                           required
-                           ng-blur="onBlurAssunto()"
-                           data-ng-disabled="!atividade.cliente"
-                           ng-model="atividade.assunto"
-                           typeahead-editable="false"
-                           typeahead-min-length="3"
-                           typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue, atividade.cliente)"/>
-                    <span class="help-inline" ng-show="blur.error" >Informe um assunto relacionado.</span>
+            <div class="form-group" ng-class="{'error' : !cadastro.assunto.$valid && cadastro.assunto.$dirty, 'warning' : !cadastro.assunto.$dirty, 'none' : !atividade.cliente}">
+                <label  class="col-sm-2 control-label"
+                       for="assunto">Assunto:*</label>
+                <div class="col-sm-4">
+                    <input name="assunto" id="assunto" class="form-control"type="text" required
+                           ng-blur="onBlurAssunto()" data-ng-disabled="!atividade.cliente" ng-model="atividade.assunto"
+                           typeahead-editable="false" typeahead-min-length="3" typeahead="assunto as assunto.nome for assunto in getAssuntos($viewValue, atividade.cliente)"
+                            /> <span class="help-inline" ng-show="blur.error">Informe um assunto relacionado.</span>
                 </div>
             </div>
-            <div class="control-group ">
-                <label class="control-label" for="data">Data:</label>
-                <div class="controls">
-                    <input type="text" id="data" show-weeks="false" datepicker-popup="dd/MM/yyyy" ng-model="atividade.dataReferencia" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-                    <!--<button class="btn" type="button" ng-click="open()"><i class="icon-calendar"></i></button>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label"
+                       for="data">Data:</label>
+                <div class="col-sm-4">
+                    <input type="text" id="data" show-weeks="false" datepicker-popup="dd/MM/yyyy"
+                           class="form-control"
+                           ng-model="atividade.dataReferencia" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions"
+                           date-disabled="disabled(date, mode)" ng-required="true" />
+                    <button class="btn btn-default" type="button" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
                 </div>
             </div>
-            <div class="control-group" ng-class="{'error' : !cadastro.tempoMinutos.$valid || !cadastro.tempoHoras.$valid}">
-                <label class="control-label" for="tempoMinutos">Duração:</label>
-                <div class="controls">
-                    <input id="tempoHoras" name="tempoHoras" class="input-mini" type="number" min="0" data-ng-model="atividade.tempo.horas" /> Horas
-                    <input id="tempoMinutos" name="tempoMinutos" class="input-mini" type="number" max="59" min="0" data-ng-model="atividade.tempo.minutos"/> Minutos
-                    <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid" >Informe um número entre 0 e 59 minutos.</span>
-                    <span class="help-inline" ng-show="!cadastro.tempoHoras.$valid" >Informe uma hora maior ou igual a 0.</span>
+            <div class="form-group" ng-class="{'error' : !cadastro.tempoMinutos.$valid || !cadastro.tempoHoras.$valid}">
+                <label class="col-lg-2 control-label"
+                       for="tempoMinutos">Duração:</label>
+                <div class="col-lg-1">
+                    <input id="tempoHoras" name="tempoHoras" class="form-control col-lg-2" type="number"
+                           min="0" data-ng-model="atividade.tempo.horas" />Horas
+                    <input id="tempoMinutos" name="tempoMinutos" class="form-control" type="number"
+                           max="59" min="0" data-ng-model="atividade.tempo.minutos" />Minutos <span class="help-inline" ng-show="!cadastro.tempoMinutos.$valid">Informe um número entre 0 e 59 minutos.</span>
+                    <span
+                            class="help-inline" ng-show="!cadastro.tempoHoras.$valid">Informe uma hora maior ou igual a 0.</span>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="valorHora">Valor por Hora:</label>
-                <div class="controls">
-                    <input id="valorHora" class="text x-large" type="text" formata-valor-input data-ng-model="atividade.valorHora"/>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"
+                       for="valorHora">Valor por Hora:</label>
+                <div class="col-sm-4">
+                    <input id="valorHora" class="form-control"type="text" formata-valor-input="formata-valor-input"
+                           data-ng-model="atividade.valorHora" />
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="descricao">Descrição:</label>
-                <div class="controls">
-                    <textarea id="descricao" class="text x-large" type="text" data-ng-model="atividade.descricao"></textarea>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"
+                       for="descricao">Descrição:</label>
+                <div class="col-sm-4">
+                    <textarea id="descricao" class="form-control"type="text" data-ng-model="atividade.descricao"></textarea>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="observacao">Observação:</label>
-                <div class="controls">
-                    <input id="observacao" class="text x-large" type="text" data-ng-model="atividade.observacao"/>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"
+                       for="observacao">Observação:</label>
+                <div class="col-sm-4">
+                    <input id="observacao" class="form-control"type="text" data-ng-model="atividade.observacao"
+                            />
                 </div>
             </div>
-            <hr>
-            <div class="control-group">
-                <div class="controls">
+            <hr />
+            <div class="form-group">
+                <div class="col-lg-6">
                     <button class="btn btn-success" type="submit" ng-disabled="!cadastro.$valid">Salvar</button>
-                    <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid" data-ng-show="tela.cadastro === true"
-                            data-ng-click="salvarContinuar(cadastro)">Salvar e criar uma nova atividade
-                    </button>
-                    ou <a data-ng-click="voltar()">Clique para voltar</a>
+                    <button class="btn btn-info" type="button" ng-disabled="!cadastro.$valid"
+                            data-ng-show="tela.cadastro === true" data-ng-click="salvarContinuar(cadastro)">Salvar e criar uma nova atividade</button>ou <a data-ng-click="voltar()">Clique para voltar</a>
                 </div>
             </div>
-            <hr>
+            <hr />
         </fieldset>
     </form>
 </div>

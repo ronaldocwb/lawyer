@@ -4,7 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Lawyer</title>
     <!-- compiled CSS -->
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
     <% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>"/>
     <% }); %>
@@ -16,27 +17,21 @@
     <% }); %>
 
 
-
 </head>
 <body noty data-ng-controller="AppController">
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <app-header></app-header>
+<div class="row">
+    <div class="col-md-12">
+        <app-header></app-header>
+    </div>
+</div>
+<div class="col-md-12">
+    <menu-esquerda></menu-esquerda>
+    <div class="col-md-8">
+        <div class="row">
+            <div ui-view="main"></div>
         </div>
     </div>
-    <div class="row-fluid">
-        <menu-esquerda></menu-esquerda>
-        <div class="span8">
-            <!--<div class="row">-->
-                <!--<menu-central></menu-central>-->
-            <!--</div>-->
-            <div class="row">
-                <div ui-view="main"></div>
-            </div>
-        </div>
-        <lembretes></lembretes>
-    </div>
+    <lembretes></lembretes>
 </div>
 </body>
 </html>

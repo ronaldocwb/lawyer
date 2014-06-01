@@ -13,28 +13,28 @@
  * Mantém o listener para o {@link ConnectionStatus} que notifica o usuário caso ele esteja offline no momento.
  */
 angular.module('lawyer', [
-        'ngAnimate',
-        'ngLocale',
-        'chieffancypants.loadingBar',
-        'ngSanitize',
-        'templates-app',
-        'templates-common',
-        'ui.router',
-        'ui.bootstrap',
-        'lawyer.controllers',
-        'lawyer.connectionStatus',
-        'lawyer.accessLevel',
-        'services.notifications',
-        'i18n.Constants',
-        'services.exceptionHandler',
-        'lawyer.menus',
-        'lawyer.noty',
-        'lawyer.log',
-        'lawyer.lembretes',
-        'lawyer.typeahead',
-        'filters'
+    'ngAnimate',
+    'ngRoute',
+    'ngSanitize',
+    'chieffancypants.loadingBar',
+    'templates-app',
+    'templates-common',
+    'ui.router',
+    'ui.bootstrap',
+    'lawyer.controllers',
+    'lawyer.connectionStatus',
+    'lawyer.accessLevel',
+    'services.notifications',
+    'i18n.Constants',
+    'services.exceptionHandler',
+    'lawyer.menus',
+    'lawyer.noty',
+    'lawyer.log',
+    'lawyer.lembretes',
+    'lawyer.typeahead',
+    'filters'
 
-    ])
+])
 
 
     .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function ($urlRouterProvider, $locationProvider, $httpProvider) {
@@ -42,8 +42,8 @@ angular.module('lawyer', [
 
         $httpProvider.interceptors.push(['$q', '$location', 'notifications', function ($q, $location, notifications) {
             return {
-            'responseError': function (rejection) {
-                if (rejection.status === 401 || rejection.status === 403) {
+                'responseError': function (rejection) {
+                    if (rejection.status === 401 || rejection.status === 403) {
                         notifications.pushLoginExpirou();
                         return $q.reject(rejection);
                     }

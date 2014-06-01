@@ -22,15 +22,19 @@ angular.module('lawyer.lembretes', [
 
         $scope.addLembrete = function () {
             $scope.todo = angular.copy($scope.novoLembrete);
-            $scope.todo = Lembrete.save($scope.todo);
-            $scope.lembretes.push($scope.todo);
             $scope.novoLembrete = {
                 texto: ''
             };
+            $scope.todo = Lembrete.save($scope.todo, function () {
+                $scope.lembretes.push($scope.todo);
+            });
+
         };
 
         $scope.removeLembrete = function (index) {
+            var uid = $scope.lembretes[index].uid;
             $scope.lembretes.splice(index, 1);
+            Lembrete.remove(uid);
         };
 
         $scope.updateLembrete = function ($item) {
@@ -39,13 +43,7 @@ angular.module('lawyer.lembretes', [
         };
 
         $scope.clearAll = function () {
-            var interval = $interval(function () {
-                if ($scope.lembretes.length === 0) {
-                    $interval.cancel(interval);
-                    return;
-                }
-                $scope.lembretes.pop();
-            }, 50);
+            $scope.lembretes.length = 0;
             Lembrete.removeAll();
         };
 

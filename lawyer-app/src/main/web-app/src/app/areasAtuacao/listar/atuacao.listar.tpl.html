@@ -1,12 +1,12 @@
 <div class="fadeInUp">
-    <button ui-sref="areasAtuacao.cadastro" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> Cadastrar
-        Nova Área de Atuação
-    </button>
-
+    <button ui-sref="areasAtuacao.cadastro" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign icon-white"></i> Cadastrar Nova
+        Área de Atuação</button>
     <h2>
+
         Buscas:
+
     </h2>
-    <table class="table table-hover table-bordered center-table" >
+    <table class="table table-hover table-bordered center-table">
         <thead>
         <tr>
             <th>Nome</th>
@@ -15,19 +15,19 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="areaAtuacao in areasAtuacao.content">
-            <td><span data-ng-bind="areaAtuacao.nome"></span></td>
-            <td>
-                <a href=""><span tooltip="Editar"><i class="icon-edit icon-align-center"
-                                                     ng-click="editAreaAtuacao(areaAtuacao, $event)"></i></span></a>
-                <a href=""><span tooltip="Excluir"><i class="icon-trash" ng-click="deleteAreaAtuacao(areaAtuacao)"></i></span></a>
+            <td><span data-ng-bind="areaAtuacao.nome"></span>
+            </td>
+            <td> <a href=""><span tooltip="Editar"><i class="glyphicon glyphicon-edit icon-align-center" ng-click="editAreaAtuacao(areaAtuacao, $event)"></i></span></a>
+                <a
+                        href=""><span tooltip="Excluir"><i class="glyphicon glyphicon-trash" ng-click="deleteAreaAtuacao(areaAtuacao)"></i></span>
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <pagination num-pages="areasAtuacao.totalPages" page="areasAtuacao.current"
-                    total-items="areasAtuacao.totalElements"
-                    previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="areasAtuacao.size"
-                    on-select-page="pageChanged(page)"></pagination>
+        <pagination num-pages="areasAtuacao.totalPages" ng-model="areasAtuacao.current"
+                    total-items="areasAtuacao.totalElements" previous-text="Anterior" next-text="Próximo"
+                    items-per-page="areasAtuacao.size" ng-change="pageChanged(page)"></pagination>
     </div>
 </div>

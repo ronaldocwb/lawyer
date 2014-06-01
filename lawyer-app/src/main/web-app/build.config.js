@@ -21,24 +21,21 @@ module.exports = {
 
     vendor_files: {
         js: [
-            'vendor/jquery/jquery.min.js',
+            'vendor/jquery/dist/jquery.min.js',
             'vendor/jquery-ui/ui/jquery.ui.core.js',
-            'vendor/fullcalendar/fullcalendar.js',
             'vendor/angular/angular.js',
-			'vendor/angular-animate/angular-animate.js',
-			'vendor/angular-cookies/angular-cookies.js',
+            'vendor/angular-animate/angular-animate.js',
+            'vendor/angular-cookies/angular-cookies.js',
             'vendor/angular-loading-bar/src/loading-bar.js',
-			'vendor/angular-mocks/angular-mocks.js',
-			'vendor/angular-resource/angular-resource.js',
-			'vendor/angular-route/angular-route.js',
-			'vendor/angular-sanitize/angular-sanitize.js',
-			'vendor/angular-i18n/angular-locale_pt.js',
+            'vendor/angular-mocks/angular-mocks.js',
+            'vendor/angular-resource/angular-resource.js',
+            'vendor/angular-route/angular-route.js',
+            'vendor/angular-sanitize/angular-sanitize.js',
+            'vendor/angular-i18n/angular-locale_pt-br.js',
             'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
             'vendor/angular-ui-router/release/angular-ui-router.js',
             'vendor/angular-ui-utils/modules/route/route.js',
-            'vendor/angular-ui-utils/modules/mask/mask.js',
             'vendor/angular-ui-utils/modules/validate/validate.js',
-            'vendor/angular-ui-calendar/src/calendar.js',
             'vendor/noty/js/noty/jquery.noty.js',
             'vendor/noty/js/noty/layouts/top.js',
             'vendor/noty/js/noty/layouts/center.js',
@@ -46,14 +43,13 @@ module.exports = {
             'vendor/noty/js/noty/layouts/bottomRight.js',
             'vendor/noty/js/noty/layouts/bottom.js',
             'vendor/noty/js/noty/layouts/inline.js',
-            'vendor/noty/js/noty/themes/default.js',
-            'vendor/magicsuggest/src/magicsuggest-1.3.1.js'
+            'vendor/noty/js/noty/themes/default.js'
         ],
         css: [
+
+            'vendor/bootstrap/dist/css/bootstrap.min.css',
             'vendor/animate.css/animate.css',
             'vendor/angular-loading-bar/src/loading-bar.css',
-            'vendor/fullcalendar/fullcalendar.css',
-            'vendor/magicsuggest/src/magicsuggest-1.3.1.css'
         ]
     }
 };

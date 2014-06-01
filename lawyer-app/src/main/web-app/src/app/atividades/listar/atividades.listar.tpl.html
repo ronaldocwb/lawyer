@@ -1,51 +1,54 @@
 <div class="fadeInUp">
-    <div class="row-fluid" ng-cloak>
-        <div class="span4">
-            <button ui-sref="atividades.cadastrar" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>
-                Cadastrar Nova Atividade
-            </button>
+    <div class="row" ng-cloak="ng-cloak">
+        <div class="col-md-4">
+            <button ui-sref="atividades.cadastrar" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign icon-white"></i>
+                Cadastrar Nova
+                Atividade</button>
         </div>
-        <div class="pull-right" data-ng-show="atividades.content.length > 0">
-            <form data-ng-submit="buscar()">
-                <div class="input-append">
-                    <input class="" type="text" data-ng-model="pesquisa.query"/>
-                    <button class="btn" type="submit">Buscar</button>
+        <div class="pull-right" data-ng-show="data-ng-show" atividades.content.length="atividades.content.length">0"
+            <form class="form-horizontal" data-ng-submit="buscar()">
+                <div class="input-group">
+                    <input class="" type="text" data-ng-model="pesquisa.query" />
+                    <button class="btn btn-default" type="submit">Buscar</button>
                 </div>
             </form>
         </div>
     </div>
-    <div data-ng-show="atividades.content.length > 0" >
-    <div>
-        <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
-        </button>
-    </div>
-    <table class="table table-hover table-bordered center-table " ng-cloak>
-        <thead>
-        <tr>
-            <th>Data</th>
-            <th>Horas</th>
-            <th>Valor (R$)</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="atividade in atividades.content" class="fadeInUp">
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.dataReferencia | date:'dd/MM/yyyy'"></span></td>
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.duracao | hora"></span></td>
-            <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.valorTotal | reais"></span></td>
-            <td>
-                <a href><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(atividade)"></i></span></a>
-                <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(atividade, $event)"></i></span></a>
-                <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(atividade)"></i></span></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <pagination num-pages="atividades.totalPages" page="atividades.current" total-items="atividades.totalElements"
-                    previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="atividades.size"
-                    on-select-page="pageChanged(page)"></pagination>
-    </div>
+    <div data-ng-show="data-ng-show" atividades.content.length="atividades.content.length">0"
+        <div>
+            <button class="btn btn-default" type="button" data-ng-show="pesquisa.inUse"
+                    data-ng-click="limparBusca()">Limpar Busca</button>
+        </div>
+        <table class="table table-hover table-bordered center-table " ng-cloak="ng-cloak">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Horas</th>
+                <th>Valor (R$)</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="atividade in atividades.content" class="fadeInUp">
+                <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.dataReferencia | date:'dd/MM/yyyy'"></span>
+                </td>
+                <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.duracao | hora"></span>
+                </td>
+                <td data-ng-click="visualizar(atividade)"><span data-ng-bind="atividade.valorTotal | reais"></span>
+                </td>
+                <td> <a ><span tooltip="Ver Detalhes"><i class="glyphicon glyphicon-search" ng-click="visualizar(atividade)"></i></span></a>
+                    <a
+                            ><span tooltip="Editar"><i class="glyphicon glyphicon-edit" ng-click="editar(atividade, $event)"></i></span>
+                    </a> <a ><span tooltip="Excluir"><i class="glyphicon glyphicon-trash" ng-click="deletar(atividade)"></i></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <pagination num-pages="atividades.totalPages" ng-model="atividades.current"
+                        total-items="atividades.totalElements" previous-text="Anterior" next-text="Próximo"
+                        items-per-page="atividades.size" ng-change="pageChanged(page)"></pagination>
+        </div>
     </div>
     <div data-ng-show="atividades.content.length === 0">
         <p>Nenhuma atividade cadastrada até o momento...</p>

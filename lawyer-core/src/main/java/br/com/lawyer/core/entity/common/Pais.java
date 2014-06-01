@@ -1,6 +1,7 @@
 package br.com.lawyer.core.entity.common;
 
-import br.com.lawyer.core.base.IUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Pais implements Serializable, IUID<Long> {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,12 +31,12 @@ public class Pais implements Serializable, IUID<Long> {
     private String sgPais;
 
     @OneToMany (mappedBy = "pais", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Estado> estados;
 
     public Pais () {
     }
 
-    @Override
     public Long getUid () {
         return getCdPais();
     }

@@ -1,6 +1,8 @@
 package br.com.lawyer.core.entity.common;
 
 import br.com.lawyer.core.base.IUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
 public class Estado implements IUID<Long> {
 
     @Id
@@ -31,6 +33,7 @@ public class Estado implements IUID<Long> {
     private Pais pais;
 
     @OneToMany (mappedBy = "estado")
+    @JsonIgnore
     private List<Municipio> municipios;
 
     public Estado () {

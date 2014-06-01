@@ -11,6 +11,7 @@ angular.module('lawyer.empresas.cadastro', [
 
     .controller('CadastrarEmpresaController', ['$scope', '$state', '$log', 'Contato', 'Municipio', 'notifications', '$http', '$modal', 'Setor',
         function ($scope, $state, $log, Contato, Municipio, notifications, $http, $modal, Setor) {
+
             $scope.tela = {
                 cadastro: true,
                 edicao: false

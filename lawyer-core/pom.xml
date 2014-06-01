@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <org.springframework.version>4.0.0.RELEASE</org.springframework.version>
+        <org.springframework.version>4.0.4.RELEASE</org.springframework.version>
         <org.springframework.security.version>3.2.0.RC2</org.springframework.security.version>
         <!--<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>-->
         <org.springframework.data.jpa.version>1.4.3.RELEASE</org.springframework.data.jpa.version>
@@ -34,7 +34,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- Fim Java EE 6 -->
-
         <!-- Apache Commons -->
         <dependency>
             <groupId>commons-codec</groupId>

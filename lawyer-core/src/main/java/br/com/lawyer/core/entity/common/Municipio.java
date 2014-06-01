@@ -1,6 +1,7 @@
 package br.com.lawyer.core.entity.common;
 
 import br.com.lawyer.core.base.IUID;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 @Entity
+@JsonIgnoreProperties (ignoreUnknown = true)
 public class Municipio implements IUID<Long> {
 
     @Id

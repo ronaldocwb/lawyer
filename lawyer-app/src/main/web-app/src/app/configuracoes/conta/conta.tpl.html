@@ -1,39 +1,33 @@
-<div class="row-fluid">
-    <div class="span2">
-        <ul class="nav nav-list">
-            <li class="nav-header">
-                Minha Conta
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav ">
+            <li class="nav-header">Minha Conta</li>
+            <li class="active"> <a >Meus Dados</a>
             </li>
-            <li class="active">
-                <a href="#">Meus Dados</a>
-            </li>
-            <li class="active">
-                <a href="#">Alterar Senha</a>
+            <li class="active"> <a >Alterar Senha</a>
             </li>
         </ul>
     </div>
-    <div class="span6">
-        <span data-ng-bind="usuario.email"></span>
-
+    <div class="col-md-6"> <span data-ng-bind="usuario.email"></span>
         <h2>Alterar Senhas</h2>
-
-        <form name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
+        <form class="form-horizontal" name="alterarSenhaForm" ng-submit="alterar(alterarSenhaForm)">
             <label>Senha atual:</label>
-            <input type="password" ng-required="true" data-ng-model="user.senha" name="senha" id="senha">
+            <input type="password" ng-required="true" data-ng-model="user.senha"
+                   name="senha" id="senha" />
             <label>Nova senha:</label>
-            <input type="password" ng-required="true" data-ng-model="user.novaSenha" name="novaSenha" >
+            <input type="password" ng-required="true" data-ng-model="user.novaSenha"
+                   name="novaSenha" />
             <label>Confirme a nova senha:</label>
-            <input type="password" data-ng-model="user.confirmaNovaSenha" ng-required="true" name="confirmaNovaSenha"
-                   ui-validate=" '$value===user.novaSenha' "
-                   ui-validate-watch=" 'user.novaSenha' ">
-			<span data-ng-show="!!alterarSenhaForm.confirmaNovaSenha.$error.validator" class="icon-thumbs-down"
-					tooltip="Senhas nao conferem!">
+            <input type="password" data-ng-model="user.confirmaNovaSenha"
+                   ng-required="true" name="confirmaNovaSenha" ui-validate=" '$value===user.novaSenha' "
+                   ui-validate-watch=" 'user.novaSenha' " />	<span data-ng-show="!!alterarSenhaForm.confirmaNovaSenha.$error.validator"
+                                                                      class="glyphicon glyphicon-thumbs-down" tooltip="Senhas nao conferem!">
+
+
 
 			</span>
-			<br>
-            <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid">Alterar Senha
-            </button>
-        </form>
-        <span data-ng-repeat="mensagem in mensagens"> {{mensagem}} <br></span>
+            <br />
+            <button type="submit" class="btn btn-success" data-ng-disabled="!alterarSenhaForm.$valid">Alterar Senha</button>
+        </form> <span data-ng-repeat="mensagem in mensagens"> {{mensagem}} <br /></span>
     </div>
 </div>

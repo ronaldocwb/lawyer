@@ -1,5 +1,4 @@
 angular.module('lawyer.areasAtuacao.cadastro', [
-        'ui.mask'
     ])
 
     .config(['$stateProvider',  function config($stateProvider) {

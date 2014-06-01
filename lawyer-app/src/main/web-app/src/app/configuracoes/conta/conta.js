@@ -1,6 +1,5 @@
 angular.module('lawyer.configuracoes.conta', [
         'lawyer.Usuario',
-        'ui.validate'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {

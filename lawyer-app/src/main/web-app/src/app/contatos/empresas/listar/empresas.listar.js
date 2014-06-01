@@ -77,8 +77,8 @@ angular.module('lawyer.empresas.listar', [
                     templateUrl: 'contatos/empresas/visualizar/empresas.visualizar.tpl.html',
                     controller: 'VisualizarEmpresaController',
                     resolve: {
-                        empresa: function () {
-                            return contato.empresa;
+                        contato: function () {
+                            return contato;
                         }
                     }
                 });

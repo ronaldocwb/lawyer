@@ -9,15 +9,48 @@ angular.module('lawyer.pessoas.cadastro', [
         });
     }])
 
-    .controller('PessoaCadastroController', ['$scope', '$state', '$log', 'Contato', 'Municipio', 'notifications', '$modal',
-        function ($scope, $state, $log, Contato, Municipio, notifications, $modal) {
+    .controller('PessoaCadastroController', ['$scope', '$state', '$log', 'Contato', 'Municipio', 'notifications', '$modal', '$compile', '$http',
+        function ($scope, $state, $log, Contato, Municipio, notifications, $modal, $compile, $http) {
             $scope.tela = {
                 cadastro: true,
                 edicao: false
             };
 
+            $scope.remote = function (query) {
+                $http.get('/lawyer/api/empresas?q=' + query.term + '&page=0&limit=8')
+                    .then(function (res) {
+                        var empresas = { results: [] };
+
+                        angular.forEach(res.data.content, function (empresa) {
+                            empresas.results.push({
+                                text: empresa.nomeFantasia,
+                                id: angular.toJson(empresa)
+                            });
+                        });
+                        query.callback(empresas);
+                    });
+            };
+            $scope.initS = function (term, t) {
+                var uid = term[0].value;
+                console.log(term[0].obj);
+                console.log($scope.contato.pessoa.empresa2);
+                $scope.contato.pessoa.empresa = angular.fromJson(uid);
+
+            };
+
+            $scope.select2Options = {
+                formatNoMatches: function (term) {
+                    $scope.termo = term;
+                    var msg = '<p>Nenhum resultado encontrado para: ' + term + ' <button data-ng-click="addEmpresa(termo)" type="button" class="btn btn-mini btn-info ng-binding">Adicionar Novo</button></p>';
+                    return $.wrap(msg);
+                },
+                query: $scope.remote,
+                initSelection: $scope.initS
+
+            };
+
             $scope.contato = {
-                pessoa : {
+                pessoa: {
                     telefones: [],
                     emails: [],
                     enderecos: []
@@ -28,7 +61,7 @@ angular.module('lawyer.pessoas.cadastro', [
                 if (!angular.equals($scope.pessoas, {})) {
                     $scope.pessoas.content.push($scope.contato);
                 }
-                if (!angular.equals($scope.contatos , {})) {
+                if (!angular.equals($scope.contatos, {})) {
                     $scope.contatos.content.push($scope.contato);
                 }
             };
@@ -66,16 +99,21 @@ angular.module('lawyer.pessoas.cadastro', [
             };
 
             $scope.addEmpresa = function (name) {
+                $scope.$emit('close.select2');
                 $scope.contatoEmpresa = {
                     empresa: {
                         nomeFantasia: name,
                         telefones: [],
                         enderecos: []
                     },
-                    tipoContato : $scope.contato.tipoContato
+                    tipoContato: $scope.contato.tipoContato
                 };
                 Contato.save($scope.contatoEmpresa, function (contato) {
                     $scope.contato.pessoa.empresa = contato.empresa;
+                    $scope.contato.pessoa.empresa2 = {
+                        text: contato.empresa.nomeFantasia,
+                        id: angular.toJson(contato.empresa)
+                    };
                     // emite a notificação para completar cadastro: i18n, nome, callback e objeto
                     notifications.pushCompletarCadastro('empresa.completar.cadastro', { nome: name}, 'pessoa.cadastrar.empresa.callback', contato);
                 });

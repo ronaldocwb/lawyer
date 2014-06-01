@@ -19,7 +19,7 @@ public class MunicipioDelegateImpl implements MunicipioDelegate {
     @Autowired
     private MunicipioService service;
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public Page<Municipio> buscaPorNome (String query, int page, int limit) {
         PageRequest pageRequest = new PageRequest(page, limit);

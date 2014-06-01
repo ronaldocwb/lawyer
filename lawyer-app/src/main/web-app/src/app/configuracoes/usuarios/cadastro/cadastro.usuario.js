@@ -1,4 +1,5 @@
 angular.module('lawyer.usuarios.cadastro', [
+        'municipioAutocomplete'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {
@@ -14,8 +15,8 @@ angular.module('lawyer.usuarios.cadastro', [
         });
     }])
 
-    .controller('CadastrarUsuarioController', ['$scope', '$state', '$log', 'Usuario', 'Municipio', 'notifications', '$stateParams',
-        function ($scope, $state, $log, Usuario, Municipio, notifications, $stateParams) {
+    .controller('CadastrarUsuarioController', ['$scope', '$state', '$log', 'Usuario', 'Municipio', 'notifications', '$stateParams', 'municipioAutocomplete',
+        function ($scope, $state, $log, Usuario, Municipio, notifications, $stateParams, municipioAutocomplete) {
 
             $scope.usuario = {
                 criarContato: true,
@@ -88,6 +89,10 @@ angular.module('lawyer.usuarios.cadastro', [
 
             $scope.remove = function (key, $index) {
                 $scope.usuario.pessoa[key].splice($index, 1);
+            };
+
+            $scope.getMunicipios = function (value) {
+                return municipioAutocomplete.query(value);
             };
 
 

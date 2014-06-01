@@ -1,16 +1,17 @@
-<div class="span2" >
-    <form ng-submit="addLembrete()">
-        <input type="text" ng-model="novoLembrete.texto" class="input-block-level"
-               placeholder="Digite um lembrete." focus>
+<div class="col-md-2">
+    <form class="form-horizontal" ng-submit="addLembrete()">
+        <input type="text" ng-model="novoLembrete.texto" class="form-control"
+               placeholder="Digite um lembrete." focus/>
     </form>
     <div class="list-group">
-        <blockquote class="fadeInLeft" ng-repeat="item in lembretes" ng-class="{'todo-complete': item.finalizado}">
-            <span class="close" ng-click="removeLembrete($index)">&times;</span>
-            <label>
-                <input type="checkbox" ng-model="item.finalizado" data-ng-click="updateLembrete($index)">
-                <span ng-bind="item.texto"></span>
-            </label>
-        </blockquote>
+        <div class="checkbox">
+            <blockquote class="fadeInLeft" ng-repeat="item in lembretes" ng-class="{'todo-complete': item.finalizado}">
+                <button type="button" ng-click="removeLembrete($index)" class="close" aria-hidden="true">&times;</button>
+                <label>
+                    <input type="checkbox" ng-model="item.finalizado" data-ng-click="updateLembrete($index)"/> <span ng-bind="item.texto"></span>
+                </label>
+            </blockquote>
+        </div>
     </div>
     <div>
         <button class="btn btn-info btn-block" ng-click="clearAll()">Limpar</button>
