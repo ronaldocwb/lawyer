@@ -2,15 +2,15 @@
  * @ngdoc object
  * @name lawyer.app
  * @description
- * Esse é o modulo de entrada da aplicacao.
+ * Esse ï¿½ o modulo de entrada da aplicacao.
  *
- * Aqui estão registrados alguns mapeamentos iniciais e o carregamento dos módulos dependentes para o aplicativo funcionar.
+ * Aqui estï¿½o registrados alguns mapeamentos iniciais e o carregamento dos mï¿½dulos dependentes para o aplicativo funcionar.
  *
- * <strong>Serviços gerais do aplicativo devem ser carregados aqui, para evitar dependências cíclicas em múltiplos carregamento de módulos.</strong>
+ * <strong>Serviï¿½os gerais do aplicativo devem ser carregados aqui, para evitar dependï¿½ncias cï¿½clicas em mï¿½ltiplos carregamento de mï¿½dulos.</strong>
  *
- * Possui o registro para o `$urlRouterProvider` que intercepta as requisições não autorizadas retornadas do server.
- * Configura o {@link laywer.auth} para recuperar o usuário gravado no cookie.
- * Mantém o listener para o {@link ConnectionStatus} que notifica o usuário caso ele esteja offline no momento.
+ * Possui o registro para o `$urlRouterProvider` que intercepta as requisiï¿½ï¿½es nï¿½o autorizadas retornadas do server.
+ * Configura o {@link laywer.auth} para recuperar o usuï¿½rio gravado no cookie.
+ * Mantï¿½m o listener para o {@link ConnectionStatus} que notifica o usuï¿½rio caso ele esteja offline no momento.
  */
 angular.module('lawyer', [
     'ngAnimate',
