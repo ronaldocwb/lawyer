@@ -22,21 +22,21 @@ import java.util.List;
 @ApiController
 public class AgendaController {
 
-    @Autowired
-    private AgendaDelegate agendaDelegate;
+    //@Autowired
+    //private AgendaDelegate agendaDelegate;
 
-    @RequestMapping (value = "/agendas/usuario", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Agenda> list() {
-        return agendaDelegate.findAgendasPorUsuario();
-    }
+    //@RequestMapping (value = "/agendas/usuario", method = RequestMethod.GET)
+    //public @ResponseBody
+    //List<Agenda> list() {
+    //    return agendaDelegate.findAgendasPorUsuario();
+    //}
 
-    @RequestMapping(value = "/agendas", method = RequestMethod.POST)
-    public @ResponseBody Agenda salvarAgenda(@RequestBody Agenda agenda) throws BusinessException {
-        return agendaDelegate.salvar(agenda);
-    }
+    //@RequestMapping(value = "/agendas", method = RequestMethod.POST)
+    //public @ResponseBody Agenda salvarAgenda(@RequestBody Agenda agenda) throws BusinessException {
+    //    return agendaDelegate.salvar(agenda);
+    //}
 
-    @RequestMapping(value = "/agendas/{uid}", method = RequestMethod.DELETE)
+    /*@RequestMapping(value = "/agendas/{uid}", method = RequestMethod.DELETE)
     public ResponseEntity excluir(@PathVariable ("uid") String uid) {
         agendaDelegate.deletar(uid);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -45,5 +45,5 @@ public class AgendaController {
     @RequestMapping(value = "/agendas/{uid}", method = RequestMethod.PUT)
     public @ResponseBody Agenda update(@PathVariable("uid") String uid, @RequestBody Agenda agenda) throws BusinessException {
         return agendaDelegate.atualizar(agenda, uid);
-    }
+    }*/
 }

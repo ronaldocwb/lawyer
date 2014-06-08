@@ -1,6 +1,6 @@
 angular.module('lawyer.header', [])
     .directive('appHeader', [function () {
-        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'atividades', 'agenda'];
+        var itens = ['painel', 'contatos', 'assuntos', 'areasAtuacao', 'atividades', 'agenda', 'assuntos'];
         return {
             restrict: 'E',
             replace: true,
@@ -33,6 +33,9 @@ angular.module('lawyer.header', [])
                             break;
                         case 'atividades' :
                             scope.abas.atividades = true;
+                            break;
+                        case 'assuntos' :
+                            scope.abas.assuntos = true;
                             break;
                         case 'agenda' :
                             scope.abas.agenda = true;

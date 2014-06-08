@@ -1,5 +1,5 @@
 angular.module('lawyer.areasAtuacao', [
-        'lawyer.AreaAtuacao',
+        'lawyer.AreaAtuacao'
     ])
 
     .config(['$stateProvider', function config($stateProvider) {

@@ -32,6 +32,9 @@ angular.module('i18n.Constants', [])
         'atividade.salva' : "A atividade foi criada.",
         'atividade.erro.apagar' : 'Oooopa... ocorreu um erro ao deletar uma atividade.',
         'atividade.apagada' : 'Atividade apagada!.',
+        'assunto.salva' : "O assunto <strong>{{nome}}</strong> foi criado.",
+        'assunto.erro.apagar' : 'Oooopa... ocorreu um erro ao deletar um assunto <strong>{{nome}}</strong>.',
+        'assunto.apagada' : 'Assunto <strong>{{nome}}</strong> apagado!.',
         'config.senha.alterada.sucesso' : 'Sua senha foi alterada!',
         'config.senha.diferentes' : 'A senha e sua confimaçao estão diferentes!',
         'config.senha.alteracao.falha' : 'Falha na alteraçao da senha! {{exception}}'

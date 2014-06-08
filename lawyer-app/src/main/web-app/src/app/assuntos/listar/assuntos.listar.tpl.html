@@ -1,0 +1,49 @@
+<div class="fadeInUp">
+    <div class="row-fluid" ng-cloak>
+        <div class="span4">
+            <button ui-sref="assuntos.cadastro" class="btn btn-success"><i class="icon-plus-sign icon-white"></i>
+                Cadastrar Novo Assunto
+            </button>
+        </div>
+        <div class="pull-right" data-ng-show="assuntos.content.length > 0">
+            <form data-ng-submit="buscar()">
+                <div class="input-append">
+                    <input class="" type="text" data-ng-model="pesquisa.query"/>
+                    <button class="btn" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div data-ng-show="assuntos.content.length > 0" >
+    <div>
+        <button class="btn" type="button" data-ng-show="pesquisa.inUse" data-ng-click="limparBusca()">Limpar Busca
+        </button>
+    </div>
+    <table class="table table-hover table-bordered center-table " ng-cloak>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="assunto in assuntos.content" class="fadeInUp">
+            <td data-ng-click="visualizar(assunto)"><span data-ng-bind="assunto.nome"></span></td>
+            <td>
+                <a href><span tooltip="Ver Detalhes"><i class="icon-search" ng-click="visualizar(assunto)"></i></span></a>
+                <a href><span tooltip="Editar"><i class="icon-edit" ng-click="editar(assunto, $event)"></i></span></a>
+                <a href><span tooltip="Excluir"><i class="icon-trash" ng-click="deletar(assunto)"></i></span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination num-pages="assuntos.totalPages" page="assuntos.current" total-items="assuntos.totalElements"
+                    previous-text="Anterior" next-text="Pr&#243;ximo" items-per-page="assuntos.size"
+                    on-select-page="pageChanged(page)"></pagination>
+    </div>
+    </div>
+    <div data-ng-show="assuntos.content.length === 0">
+        <p>Nenhum assunto cadastrado até o momento...</p>
+    </div>
+</div>
